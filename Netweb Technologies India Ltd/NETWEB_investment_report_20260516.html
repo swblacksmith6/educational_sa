@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Netweb Technologies — Investment Report — 16 May 2026</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<style>
+  :root {
+    --green: #16a34a;
+    --green-tint: #dcfce7;
+    --amber: #d97706;
+    --amber-tint: #fef3c7;
+    --red: #dc2626;
+    --red-tint: #fee2e2;
+    --grey: #6b7280;
+    --grey-tint: #f3f4f6;
+    --bg: #f9fafb;
+    --text: #111827;
+    --muted: #6b7280;
+    --border: #e5e7eb;
+    --blue: #1d4ed8;
+    --blue-tint: #dbeafe;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.55;
+    font-size: 15px;
+  }
+  .container { max-width: 1100px; margin: 0 auto; padding: 24px; }
+  header {
+    background: linear-gradient(135deg, #0c2461 0%, #1e3a8a 100%);
+    color: white;
+    padding: 28px 0;
+    margin-bottom: 24px;
+  }
+  header .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+  .header-left h1 { margin: 0 0 4px 0; font-size: 28px; font-weight: 700; }
+  .header-left .ticker { font-size: 14px; opacity: .85; letter-spacing: .5px; }
+  .header-right { text-align: right; }
+  .verdict-badge {
+    display: inline-block; padding: 8px 16px; border-radius: 6px;
+    font-weight: 700; font-size: 15px; letter-spacing: .5px;
+    background: var(--amber); color: white;
+  }
+  .verdict-badge.buy { background: var(--green); }
+  .verdict-badge.pass { background: var(--red); }
+  .header-right .date { font-size: 13px; margin-top: 6px; opacity: .85; }
+
+  .strip {
+    background: white; border: 1px solid var(--border); border-radius: 8px;
+    padding: 16px 20px; margin-bottom: 24px;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 18px;
+  }
+  .strip .cell { font-size: 13px; color: var(--muted); }
+  .strip .cell strong { display: block; font-size: 18px; color: var(--text); margin-top: 2px; }
+
+  section {
+    background: white; border: 1px solid var(--border); border-radius: 8px;
+    padding: 24px; margin-bottom: 20px;
+  }
+  section h2 {
+    margin: 0 0 8px 0; font-size: 22px; color: #0c2461; font-weight: 700;
+    border-bottom: 2px solid var(--border); padding-bottom: 10px;
+  }
+  section h3 { font-size: 17px; margin-top: 22px; margin-bottom: 8px; color: var(--text); }
+  section p { margin: 8px 0; }
+  .explainer {
+    background: var(--blue-tint); border-left: 3px solid var(--blue);
+    padding: 10px 14px; margin: 10px 0 18px 0;
+    font-size: 13.5px; color: #1e3a8a; border-radius: 0 4px 4px 0;
+  }
+  .explainer strong { color: #1e3a8a; }
+
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 14px; }
+  th, td { border: 1px solid var(--border); padding: 8px 10px; text-align: left; vertical-align: top; }
+  th { background: var(--grey-tint); font-weight: 600; }
+  tr:nth-child(even) td { background: #fafafa; }
+  td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  td.center { text-align: center; }
+  .pill { display: inline-block; padding: 2px 9px; border-radius: 999px; font-size: 12px; font-weight: 600; }
+  .pill.green { background: var(--green-tint); color: var(--green); }
+  .pill.amber { background: var(--amber-tint); color: var(--amber); }
+  .pill.red   { background: var(--red-tint); color: var(--red); }
+  .pill.grey  { background: var(--grey-tint); color: var(--grey); }
+  .pill.blue  { background: var(--blue-tint); color: var(--blue); }
+  td.green-tint { background: var(--green-tint) !important; }
+  td.amber-tint { background: var(--amber-tint) !important; }
+  td.red-tint   { background: var(--red-tint) !important; }
+
+  .callout {
+    border-left: 4px solid var(--red); background: var(--red-tint);
+    padding: 14px 18px; border-radius: 0 6px 6px 0; margin: 14px 0; font-size: 14.5px;
+  }
+  .callout.green { border-color: var(--green); background: var(--green-tint); }
+  .callout.amber { border-color: var(--amber); background: var(--amber-tint); }
+  .callout h4 { margin: 0 0 6px 0; font-size: 14px; }
+
+  .chart-wrap { position: relative; height: 320px; margin: 16px 0; }
+  .chart-wrap.tall { height: 380px; }
+  .small { font-size: 12.5px; color: var(--muted); }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 800px) { .grid-2 { grid-template-columns: 1fr; } }
+
+  .piotroski-bar {
+    display: flex; gap: 4px; margin: 8px 0;
+  }
+  .piotroski-bar .cell {
+    flex: 1; height: 22px; border-radius: 3px; background: var(--grey-tint);
+  }
+  .piotroski-bar .cell.on { background: var(--green); }
+  .piotroski-bar .cell.off { background: var(--red-tint); }
+
+  details { margin: 10px 0; }
+  details summary {
+    cursor: pointer; padding: 10px 14px; background: var(--grey-tint);
+    border-radius: 6px; font-weight: 600; user-select: none;
+  }
+  details[open] summary { background: var(--blue-tint); }
+  details pre {
+    white-space: pre-wrap; word-break: break-word;
+    background: #1f2937; color: #f3f4f6; padding: 16px; border-radius: 6px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12.5px;
+    max-height: 600px; overflow-y: auto;
+  }
+
+  footer {
+    color: var(--muted); font-size: 12.5px; margin: 30px 0 20px;
+    border-top: 1px solid var(--border); padding-top: 16px; text-align: center;
+  }
+  .quote { font-style: italic; color: #374151; border-left: 3px solid var(--grey); padding: 6px 12px; margin: 8px 0; font-size: 13.5px; }
+  .cite { font-size: 11.5px; color: var(--muted); display: block; margin-top: 4px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="header-left">
+      <h1>Netweb Technologies India Ltd</h1>
+      <div class="ticker">NSE: NETWEB | BSE: 543945 | Sector: IT Hardware / AI Infrastructure</div>
+    </div>
+    <div class="header-right">
+      <div class="verdict-badge">VERDICT: WATCH</div>
+      <div class="date">Report date: 16 May 2026</div>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+
+<!-- ============== EXECUTIVE STRIP ============== -->
+<div class="strip">
+  <div class="cell">CMP <strong>₹3,888</strong></div>
+  <div class="cell">Market Cap <strong>₹22,250 cr</strong></div>
+  <div class="cell">TTM P/E <strong>108x</strong></div>
+  <div class="cell">EV/EBITDA <strong>82x</strong></div>
+  <div class="cell">FY26 Revenue <strong>₹2,184 cr (+90%)</strong></div>
+  <div class="cell">FY26 PAT <strong>₹206 cr (+81%)</strong></div>
+  <div class="cell">ROCE / ROE <strong>37.5% / 32.9%</strong></div>
+  <div class="cell">Net Cash <strong>₹83 cr</strong></div>
+</div>
+
+<!-- ============== EXEC SUMMARY ============== -->
+<section>
+  <h2>Executive Summary</h2>
+  <p><strong>Business in one line —</strong> India's only full-stack, in-house OEM for high-end computing systems (HPC + Private Cloud + AI servers), built under "Make in India" — manufacturing NVIDIA Blackwell GPU systems and supercomputers for IIT, ISRO, defence, IndiaAI Mission, and large enterprise customers like TCS, Infosys, Yotta, Zoho.</p>
+
+  <div class="grid-2" style="margin-top:18px;">
+    <div>
+      <h3 style="margin-top:0">Piotroski F-Score (FY25)</h3>
+      <div class="explainer"><strong>What this is</strong> — A 9-test checklist (each test passed = 1 point) for financial strength: profitability, leverage and operating efficiency. <strong>7–9 = strong, 4–6 = average, 0–3 = weak.</strong></div>
+      <div class="piotroski-bar">
+        <div class="cell on"></div><div class="cell off"></div><div class="cell off"></div>
+        <div class="cell off"></div><div class="cell on"></div><div class="cell off"></div>
+        <div class="cell on"></div><div class="cell off"></div><div class="cell on"></div>
+      </div>
+      <p class="small">Score: <strong>4 / 9</strong> — depressed by working-capital strain during hyper-growth (tests 2, 4, 6). Expected to rebound to ~6–7 in FY26 as CFO recovers to ₹172 cr.</p>
+    </div>
+
+    <div>
+      <h3 style="margin-top:0">Quick Diagnostics</h3>
+      <table>
+        <tr><td>Management credibility</td><td><span class="pill green">HIGH</span></td></tr>
+        <tr><td>Walk-the-Talk delivery rate</td><td><span class="pill green">~78%</span></td></tr>
+        <tr><td>Auditor opinion (FY25)</td><td><span class="pill green">CLEAN</span></td></tr>
+        <tr><td>Credit rating (CRISIL)</td><td><span class="pill green">A / Stable / A1 (upgraded Jun-25)</span></td></tr>
+        <tr><td>HIGH conviction growth triggers</td><td><span class="pill green">2</span></td></tr>
+        <tr><td>MEDIUM conviction growth triggers</td><td><span class="pill amber">3</span></td></tr>
+        <tr><td>OPTIONALITY growth triggers</td><td><span class="pill grey">1</span></td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="callout amber" style="margin-top:18px;">
+    <h4>Verdict — WATCH (high-conviction watchlist)</h4>
+    The business is one of the cleanest plays on India's sovereign-AI infra capex with genuine technical capability, debt-free balance sheet, marquee customer list and a generational tailwind from IndiaAI Mission. <strong>However</strong>, (a) the working-capital build needs to convert to operating cash in FY27, (b) margin trajectory needs to stabilise at 13%+, and (c) current 108x TTM P/E prices in flawless execution. A 20–25% drawdown OR confirmation of CFO/PAT > 0.8 in H1 FY27 would convert this to BUY-WORTHY.
+  </div>
+</section>
+
+<!-- ============== SECTION: BUSINESS OVERVIEW ============== -->
+<section>
+  <h2>Business Overview &amp; Revenue Mix</h2>
+  <div class="explainer"><strong>What this section tells you</strong> — A snapshot of where the company actually makes money today and how that mix is shifting. A heavy concentration shift inside a year (like Netweb's AI segment going from 5% → 43% in 24 months) is unusual and is the single biggest fact about the business.</div>
+
+  <h3>FY26 Revenue Segment Mix</h3>
+  <div class="chart-wrap" style="height:280px;"><canvas id="segmentMix"></canvas></div>
+
+  <table>
+    <thead>
+      <tr><th>Segment</th><th>FY26 Share</th><th>FY26 YoY growth</th><th>What it is</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>AI Systems &amp; Workstations</strong></td><td class="num">43.4%</td><td class="num">+459.6%</td><td>NVIDIA Blackwell / Hopper-based GPU servers; Tyrone Camarero AI platform</td></tr>
+      <tr><td>HPC / Supercomputing</td><td class="num">~24%</td><td class="num">~+31%</td><td>CPU clusters for ISRO, IIT, oil &amp; gas, defence research</td></tr>
+      <tr><td>Private Cloud / HCI</td><td class="num">~24%</td><td class="num">steady</td><td>Data-centre infra for Infosys, TCS, Yotta, Zoho</td></tr>
+      <tr><td>Storage, DC Servers, Software</td><td class="num">~8%</td><td class="num">mixed</td><td>Non-core, ~5% storage / servers + 3% software services</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Historical Revenue / PAT Trajectory (₹ cr)</h3>
+  <div class="chart-wrap"><canvas id="historicalGrowth"></canvas></div>
+
+  <h3>Customer &amp; Geography</h3>
+  <table>
+    <tr><th>Customer split</th><td>50% Government / 50% Enterprise (FY26)</td></tr>
+    <tr><th>Marquee names</th><td>IIT system, ISRO, Railtel, University of Delhi, Yotta, Infosys, TCS, Zoho</td></tr>
+    <tr><th>Repeat customer revenue</th><td>81% (FY25); avg top-10 customer relationship = 4.8 years</td></tr>
+    <tr><th>Geography</th><td>&gt;95% India; exports ~5% (deliberately deprioritised)</td></tr>
+  </table>
+</section>
+
+<!-- ============== SECTION: 12-POINT AR ANALYSIS ============== -->
+<section>
+  <h2>12-Point Annual Report Deep Dive</h2>
+  <div class="explainer"><strong>What this is</strong> — SOIC's structured pass through the AR. Each row tests one dimension: strategy, segments, customers, capex, working capital, debt, risks, related-party transactions, auditor. The aim is to flush out anything that the headline numbers wouldn't reveal.</div>
+
+  <table>
+    <tr><th style="width:32%">Dimension</th><th>Finding</th></tr>
+    <tr><td>1. Business model</td><td>Designs &amp; manufactures HCS in-house (servers, supercomputers, AI rigs) under "Make in India"; NVIDIA OEM partner; 15+ systems on Top 500 supercomputers list</td></tr>
+    <tr><td>2. Segments</td><td>AI 43%, HPC 24%, Private Cloud 24%, others 8%</td></tr>
+    <tr><td>3. Geography</td><td>&gt;95% India</td></tr>
+    <tr><td>4. Customer concentration</td><td>81% repeat revenue; biggest concentration risk = the ₹1,734 cr IndiaAI strategic order (~80% of FY26 incremental revenue)</td></tr>
+    <tr><td>5. Promoter background</td><td>Lodha family (CMD Sanjay, ~28%); 4 promoters collectively sold 3.65% in Feb-26 (liquidity, not cash-out); <strong>no pledge</strong>; 12-month lock-in post-sale</td></tr>
+    <tr><td>6. Capex cycle</td><td><strong>Capability-driven, not capacity</strong>; FY27 capex only ₹20–25 cr (routine); utilisation 65–70%</td></tr>
+    <tr><td>7. Working capital trend</td><td>CCC: 95d → 100d → 105d → <strong>84d</strong> (Q4 FY26); inventory build for strategic order; ₹270 cr ST borrowings (transitional)</td></tr>
+    <tr><td>8. Debt position</td><td>Net cash ₹83 cr; long-term debt ~nil; interest coverage &gt;34x (FY25)</td></tr>
+    <tr><td>9. Key risks</td><td>(i) NVIDIA Blackwell allocation, (ii) USD FX, (iii) single-deal concentration, (iv) component price volatility</td></tr>
+    <tr><td>10. Related-party transactions</td><td>All arm's-length per Note 38; none material</td></tr>
+    <tr><td>11. Auditor</td><td>S S Kothari Mehta &amp; Co. LLP — clean opinion, no qualifications, no change in 3 years</td></tr>
+    <tr><td>12. Stated strategy</td><td>FY27 guidance: 35–40% organic top-line, 13–14% EBITDA, ~9% PAT margin; no major capex</td></tr>
+  </table>
+</section>
+
+<!-- ============== SECTION: WORKING CAPITAL DEEP DIVE ============== -->
+<section>
+  <h2>Working Capital Cycle — The Most-Watched Block</h2>
+  <div class="explainer">
+    <strong>Beginner explainer</strong> —
+    <br>• <strong>Debtor / Receivable days</strong> = average days customers take to pay. Lower is better. 30–60 = B2C norm; 80–120 = B2G norm in India.
+    <br>• <strong>Inventory days</strong> = average days raw material / finished goods sit on the shelf. Lower = faster turnover.
+    <br>• <strong>Payable days</strong> = average days the company takes to pay its suppliers.
+    <br>• <strong>Cash Conversion Cycle (CCC) = Inventory days + Debtor days − Payable days.</strong> It tells you how many days of cash the business has tied up between paying suppliers and getting paid by customers. A 100-day CCC means the company is self-financing 3+ months of working capital — risky in a hyper-growth phase.
+  </div>
+
+  <table>
+    <thead>
+      <tr><th>Metric</th><th class="num">FY24</th><th class="num">FY25</th><th class="num">Q3 FY26 (Dec'25)</th><th class="num">Q4 FY26 (Mar'26)</th><th>Read</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Receivable days</td><td class="num">~93</td><td class="num">115</td><td class="num">114</td><td class="num"><strong>86</strong></td><td><span class="pill green">Improving</span></td></tr>
+      <tr><td>Inventory days</td><td class="num">~76</td><td class="num">~71</td><td class="num">60</td><td class="num"><strong>86</strong></td><td><span class="pill amber">Rising (strategic-order pre-stock)</span></td></tr>
+      <tr><td>Cash conversion cycle</td><td class="num">~95</td><td class="num">~100</td><td class="num">~105</td><td class="num"><strong>84</strong></td><td><span class="pill green">Within guidance (90–110)</span></td></tr>
+      <tr><td>Total borrowings (₹ cr)</td><td class="num">9.6</td><td class="num">8.0</td><td class="num">~150</td><td class="num"><strong>270</strong></td><td><span class="pill amber">Spike — transitional</span></td></tr>
+    </tbody>
+  </table>
+  <p>Management calls the ₹270 cr ST borrowings "transitionary" — RBI WCDL minimum-tenure rules prevent immediate repayment despite cash on hand. <strong>Verify in Q1 FY27</strong> — if borrowings stay above ₹150 cr after IndiaAI shipments, the story weakens.</p>
+</section>
+
+<!-- ============== SECTION: FORENSIC RED FLAG SCAN ============== -->
+<section>
+  <h2>10-Point Forensic Red Flag Scan</h2>
+  <div class="explainer"><strong>What forensic accounting tries to detect</strong> — Divergences between <em>reported profit</em> (P&amp;L) and <em>actual cash being generated</em>. A good company converts 70%+ of profit to operating cash flow over a 3-year window. Common warning signs: receivables / inventory growing faster than revenue, contingent liabilities ballooning, promoter pledging, related-party shenanigans, and quietly absorbed subsidiary losses.</div>
+
+  <table>
+    <thead>
+      <tr><th>#</th><th>Check</th><th>Status</th><th>Notes</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>CFO / PAT 3-yr ratio</td><td class="amber-tint center"><span class="pill amber">AMBER</span></td><td>FY25 CFO = (-₹13) cr vs PAT ₹115 cr — driven by ₹178 cr WC build (not accruals). FY26 CFO = ₹172 cr (~83% of PAT) — acceptable. Watch.</td></tr>
+      <tr><td>2</td><td>Receivables vs revenue growth</td><td class="green-tint center"><span class="pill green">GREEN</span></td><td>Revenue +58.7% in FY25, receivables +97% — but normalised to 86d in Q4 FY26.</td></tr>
+      <tr><td>3</td><td>Inventory vs revenue growth</td><td class="amber-tint center"><span class="pill amber">AMBER</span></td><td>Inventory +94% in FY25; Q4 FY26 inventory days back up to 86d for IndiaAI pre-stock — strategic, not stuck stock.</td></tr>
+      <tr><td>4</td><td>Contingent liabilities vs net worth</td><td class="green-tint center"><span class="pill green">GREEN</span></td><td>Routine bank-guarantee exposure; immaterial to ₹530+ cr net worth.</td></tr>
+      <tr><td>5</td><td>Promoter pledging</td><td class="green-tint center"><span class="pill green">GREEN</span></td><td>Nil.</td></tr>
+      <tr><td>6</td><td>Auditor qualifications</td><td class="green-tint center"><span class="pill green">GREEN</span></td><td>Clean. No change in 3 years.</td></tr>
+      <tr><td>7</td><td>Related-party transactions</td><td class="green-tint center"><span class="pill green">GREEN</span></td><td>All arm's-length; none material.</td></tr>
+      <tr><td>8</td><td>Goodwill / intangible bloat</td><td class="green-tint center"><span class="pill green">GREEN</span></td><td>Intangibles ₹15 cr — immaterial. No M&amp;A goodwill.</td></tr>
+      <tr><td>9</td><td>Equity dilution</td><td class="green-tint center"><span class="pill green">GREEN</span></td><td>Only IPO in Jul-23 + small ESOP exercises (~1.6% capital outstanding).</td></tr>
+      <tr><td>10</td><td>Subsidiary losses</td><td class="green-tint center"><span class="pill green">GREEN</span></td><td>No material subsidiaries; standalone == consolidated.</td></tr>
+    </tbody>
+  </table>
+  <p><strong>Overall: 8 GREEN / 2 AMBER / 0 RED.</strong> The two AMBER items are both tied to working-capital intensity during hyper-growth — not accounting integrity concerns.</p>
+</section>
+
+<!-- ============== SECTION: PIOTROSKI + DUPONT ============== -->
+<section>
+  <h2>Piotroski F-Score &amp; DuPont Decomposition</h2>
+
+  <h3>Piotroski Detail (FY25)</h3>
+  <div class="explainer"><strong>What this is</strong> — Stanford prof Joseph Piotroski's 9-test checklist (each test passed = 1 point) for screening for financially-strong companies. Tests cover profitability (4), leverage / liquidity (3) and operating efficiency (2). <strong>Score 7–9 = strong, 4–6 = average, 0–3 = weak.</strong></div>
+  <table>
+    <thead><tr><th>#</th><th>Test</th><th>Result</th><th>Pass?</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Positive Net Income</td><td>+₹114.5 cr</td><td class="center"><span class="pill green">✓</span></td></tr>
+      <tr><td>2</td><td>Positive Operating Cash Flow</td><td>-₹13.2 cr</td><td class="center"><span class="pill red">✗</span></td></tr>
+      <tr><td>3</td><td>ROA improving YoY</td><td>Slight decline</td><td class="center"><span class="pill red">✗</span></td></tr>
+      <tr><td>4</td><td>CFO &gt; Net Income</td><td>No</td><td class="center"><span class="pill red">✗</span></td></tr>
+      <tr><td>5</td><td>Lower long-term debt YoY</td><td>8.0 vs 9.6</td><td class="center"><span class="pill green">✓</span></td></tr>
+      <tr><td>6</td><td>Higher current ratio YoY</td><td>2.33 vs 3.13</td><td class="center"><span class="pill red">✗</span></td></tr>
+      <tr><td>7</td><td>No new shares issued</td><td>Only ESOP</td><td class="center"><span class="pill green">✓</span></td></tr>
+      <tr><td>8</td><td>Higher gross margin YoY</td><td>14.7% vs 15.8%</td><td class="center"><span class="pill red">✗</span></td></tr>
+      <tr><td>9</td><td>Higher asset turnover YoY</td><td>22.7x vs 16.2x</td><td class="center"><span class="pill green">✓</span></td></tr>
+    </tbody>
+  </table>
+  <p><strong>FY25 Score: 4 / 9.</strong> Depressed by working-capital strain. <strong>FY26 score should rebound to ~6–7</strong> once CFO normalises to ₹172 cr.</p>
+
+  <h3>DuPont Decomposition: ROE = Net Margin × Asset Turnover × Leverage</h3>
+  <div class="explainer"><strong>What this is</strong> — DuPont breaks ROE into three drivers so you can see what's actually moving it: <strong>(a) how much profit per rupee of sales</strong> (net margin), <strong>(b) how many rupees of sales per rupee of assets</strong> (asset turnover), <strong>(c) how much leverage is amplifying returns</strong>. Helps you tell whether ROE is rising for the right reasons (margin + efficiency) or wrong reasons (more debt).</div>
+  <div class="chart-wrap"><canvas id="dupontChart"></canvas></div>
+  <table>
+    <thead><tr><th>Year</th><th class="num">Net Margin</th><th class="num">Asset Turnover</th><th class="num">Leverage</th><th class="num">ROE</th></tr></thead>
+    <tbody>
+      <tr><td>FY23</td><td class="num">10.5%</td><td class="num">1.5x</td><td class="num">1.9x</td><td class="num"><strong>29.5%</strong></td></tr>
+      <tr><td>FY24</td><td class="num">10.5%</td><td class="num">1.4x</td><td class="num">1.9x</td><td class="num"><strong>29.4%</strong></td></tr>
+      <tr><td>FY25</td><td class="num">9.9%</td><td class="num">1.6x</td><td class="num">1.6x</td><td class="num"><strong>24.0%</strong></td></tr>
+      <tr><td>FY26</td><td class="num">9.3%</td><td class="num">2.7x</td><td class="num">1.5x</td><td class="num"><strong>32.9%</strong></td></tr>
+    </tbody>
+  </table>
+  <p><strong>Read:</strong> ROE rebounded sharply in FY26 because <strong>asset turnover doubled</strong> — every rupee of capital now generates more revenue (operating leverage in a fixed-asset-light, design-led model). Net margin compressed slightly as AI hardware carries lower gross margin than HPC, but scale offsets it.</p>
+</section>
+
+<!-- ============== SECTION: CONCALL WALK-THE-TALK ============== -->
+<section>
+  <h2>Concall Walk-the-Talk (FY26)</h2>
+  <div class="explainer"><strong>What this is</strong> — A walk-the-talk takes specific management commitments from prior concalls and checks whether the numbers actually delivered on those promises. It's the single best test of management credibility because it's hard to fake delivery against your own past words.</div>
+
+  <h3>5-Quarter Financial Snapshot</h3>
+  <div class="chart-wrap"><canvas id="quarterlyChart"></canvas></div>
+  <table>
+    <thead><tr><th>Quarter</th><th class="num">Revenue (₹ cr)</th><th class="num">YoY %</th><th class="num">EBITDA mgn</th><th class="num">PAT mgn</th><th>Headline event</th></tr></thead>
+    <tbody>
+      <tr><td>Q4 FY25</td><td class="num">414.7</td><td class="num">+55.9%</td><td class="num">14.4%</td><td class="num">10.3%</td><td>Guidance: 35–40% CAGR, 13–14% EBITDA, 10% PAT</td></tr>
+      <tr><td>Q1 FY26</td><td class="num">301.2</td><td class="num">+102%</td><td class="num">14.9%</td><td class="num">10.1%</td><td>Defence AI order executed; AI = 29% of mix</td></tr>
+      <tr><td>Q2 FY26</td><td class="num">303.7</td><td class="num">+21%</td><td class="num">15.0%</td><td class="num">10.3%</td><td><strong>Won ₹2,184 cr of strategic orders</strong> (incl. ₹1,734 cr IndiaAI deal)</td></tr>
+      <tr><td>Q3 FY26</td><td class="num">804.9</td><td class="num">+141%</td><td class="num">12.2%</td><td class="num">9.0%</td><td>Executed ₹450 cr of strategic; AI = 64% of Q3 mix</td></tr>
+      <tr><td>Q4 FY26</td><td class="num">773.7</td><td class="num">+86.6%</td><td class="num">13.3%</td><td class="num">9.0%</td><td>₹2,400 cr order book entering FY27; ST debt ₹270 cr</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Walk-the-Talk Scorecard</h3>
+  <table>
+    <thead><tr><th>Promised in</th><th>Commitment</th><th>What actually happened</th><th>Score</th></tr></thead>
+    <tbody>
+      <tr><td>Q4 FY25</td><td>35–40% CAGR top-line for 2 years</td><td>FY26 actual = +90% YoY</td><td class="center green-tint"><span class="pill green">BEAT</span></td></tr>
+      <tr><td>Q4 FY25</td><td>EBITDA margin 13–14%</td><td>FY26 actual 13.0% (adj 13.3%)</td><td class="center green-tint"><span class="pill green">HIT</span></td></tr>
+      <tr><td>Q4 FY25</td><td>PAT margin "around 10%"</td><td>FY26 actual 9.3%</td><td class="center amber-tint"><span class="pill amber">PARTIAL</span></td></tr>
+      <tr><td>Q1 FY26</td><td>Large AI order pipeline conversion</td><td>₹2,184 cr strategic orders won in Q2</td><td class="center green-tint"><span class="pill green">HIT</span></td></tr>
+      <tr><td>Q2 FY26</td><td>CCC 90–110 days</td><td>Q3 = 69d, Q4 = 84d</td><td class="center green-tint"><span class="pill green">BEAT</span></td></tr>
+      <tr><td>Q2 FY26</td><td>Execute ≥1/3 of strategic order in FY26</td><td>~26% executed in FY26; rest deferred to FY27</td><td class="center amber-tint"><span class="pill amber">PARTIAL</span></td></tr>
+      <tr><td>Q3 FY26</td><td>"No fresh borrowing needed"</td><td>Q4 ST debt jumped to ₹270 cr</td><td class="center red-tint"><span class="pill red">MISS</span></td></tr>
+      <tr><td>Q4 FY26</td><td>FY27: 35–40% organic growth, 13–14% mgn, capex ₹20–25 cr</td><td>Pending Q1 FY27</td><td class="center"><span class="pill grey">PENDING</span></td></tr>
+    </tbody>
+  </table>
+  <p><strong>Composite delivery rate: ~78%.</strong> Strong for a young listed company (IPO Jul-23). Single MISS is on working-capital borrowing narrative — needs Q1 FY27 verification.</p>
+
+  <div class="grid-2" style="margin-top:18px;">
+    <div class="callout green">
+      <h4>Three biggest green flags</h4>
+      <ol style="margin:0; padding-left:18px;">
+        <li><strong>Order book entering FY27 = ₹2,400 cr</strong> &gt; FY26's entire revenue → high visibility.</li>
+        <li><strong>Asset-light, capex-light model</strong>: ₹20–25 cr p.a. capex with 90% revenue growth; fixed asset turnover 33x.</li>
+        <li><strong>Repeat customer revenue = 81%</strong> of FY25 — sticky technical relationships, rare for a hardware company.</li>
+      </ol>
+    </div>
+    <div class="callout">
+      <h4>Three biggest red flags</h4>
+      <ol style="margin:0; padding-left:18px;">
+        <li><strong>Borrowings narrative contradicts Q3 commentary</strong>: Q3 said "no fresh borrowing", Q4 added ₹270 cr ST debt.</li>
+        <li><strong>Margin guidance is being managed downward</strong>: PAT margin 10% guided → 9.3% delivered.</li>
+        <li><strong>~80% of FY26 incremental revenue traces to one strategic deal</strong>; single-order concentration.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ============== SECTION: GROWTH TRIGGERS ============== -->
+<section>
+  <h2>Growth Triggers — What Drives the Stock From Here</h2>
+  <div class="explainer">
+    <strong>How to read this section</strong> — Each trigger lists <strong>what</strong> the catalyst is, <strong>evidence</strong> from filings/concall, and <strong>quantum</strong> with explicit revenue / EBITDA / PAT impact. Conviction tags: <span class="pill green">HIGH</span> = money basically on the way (contract signed); <span class="pill amber">MEDIUM</span> = announced with data; <span class="pill grey">OPTIONALITY</span> = plausible but uncommitted. Sum of HIGH+MEDIUM should justify the thesis on its own; OPTIONALITY is upside.
+  </div>
+
+  <h3>Trigger Scoreboard</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>#</th><th>Trigger</th><th>Conviction</th>
+        <th>Revenue impact</th><th>EBITDA impact</th><th>PAT impact</th>
+        <th>Timeline</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td><td>₹1,734 cr IndiaAI sovereign-AI order execution</td>
+        <td class="center green-tint"><span class="pill green">HIGH</span></td>
+        <td>+₹1,600 cr</td><td>+₹208 cr</td><td>+₹150 cr</td>
+        <td>FY27 Q1–Q3</td>
+      </tr>
+      <tr>
+        <td>2</td><td>IndiaAI Mission expansion: 10k→100k GPUs</td>
+        <td class="center amber-tint"><span class="pill amber">MEDIUM</span></td>
+        <td>+₹1,000–1,500 cr p.a.</td><td>+₹130–195 cr p.a.</td><td>+₹93–140 cr p.a.</td>
+        <td>FY27–FY30</td>
+      </tr>
+      <tr>
+        <td>3</td><td>₹4,400 cr organic pipeline @ 60% conversion</td>
+        <td class="center amber-tint"><span class="pill amber">MEDIUM</span></td>
+        <td>+₹2,640 cr over 18m</td><td>+₹370 cr cumulative</td><td>+₹275 cr cumulative</td>
+        <td>FY27–28</td>
+      </tr>
+      <tr>
+        <td>4</td><td>NVIDIA Blackwell OEM partnership / Tyrone Camarero</td>
+        <td class="center green-tint"><span class="pill green">HIGH</span></td>
+        <td>Sustains 30%+ growth</td><td>Defends 13–14% mgn</td><td>Protects 9–10% mgn</td>
+        <td>Multi-year</td>
+      </tr>
+      <tr>
+        <td>5</td><td>WC normalisation → margin recovery</td>
+        <td class="center amber-tint"><span class="pill amber">MEDIUM</span></td>
+        <td>—</td><td>+₹15–20 cr (interest saved)</td><td>+₹15–20 cr p.a.</td>
+        <td>H2 FY27</td>
+      </tr>
+      <tr>
+        <td>6</td><td>AMD / Intel CPU servers + NSM 2.0 HPC tailwind</td>
+        <td class="center"><span class="pill grey">OPTIONALITY</span></td>
+        <td>+₹500 cr by FY29</td><td>+₹75 cr</td><td>+₹50 cr</td>
+        <td>FY27–FY30</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Quantum Chart (Revenue Impact ₹ cr)</h3>
+  <div class="chart-wrap"><canvas id="triggerChart"></canvas></div>
+
+  <h3>Trigger 1 — ₹1,734 cr IndiaAI sovereign-AI order <span class="pill green">HIGH</span></h3>
+  <p><strong>What:</strong> Single contract under IndiaAI Mission to build Blackwell-based GPU servers for India's sovereign AI compute. Manufactured by Netweb in India, deployed via Tyrone Camarero AI platform. ~₹450 cr shipped in Q3 FY26; <strong>~₹1,600 cr remains for FY27</strong>.</p>
+  <div class="quote">"₹1,600 crores is the strategic order remaining, ₹472 crores is my organic order and ₹327 crores is my L1." — Sanjay Lodha, CMD <span class="cite">Q4 FY26 concall, 4-May-2026</span></div>
+  <p><strong>What this really means for the P&amp;L:</strong> Revenue +₹1,600 cr ≈ 73% of FY26 revenue. EBITDA +₹208 cr at 13% mgn. PAT +₹150 cr at 9.3% mgn — roughly 73% accretive to FY26 PAT in a single deal.</p>
+
+  <h3>Trigger 2 — IndiaAI Mission 10k → 100k GPU expansion <span class="pill amber">MEDIUM</span></h3>
+  <p><strong>What:</strong> Government of India initially budgeted 10,000 GPUs under IndiaAI Mission, raised to 25,000, and management indicates GoI is prepared to go to 100,000. Total IndiaAI Mission budget ₹10,300 cr.</p>
+  <div class="quote">"They were talking about 10,000 GPUs which became 25,000 GPUs. Now they are even ready to go up to 100,000 GPUs also. Government's focus is very clear." — Sanjay Lodha, CMD <span class="cite">Q4 FY26 concall, 4-May-2026</span></div>
+  <p><strong>What this really means for the P&amp;L:</strong> If Netweb captures ~30% share of incremental ~75,000 GPUs over FY27–29, that's a ₹3,000–4,000 cr opportunity. Revenue +₹1,000–1,500 cr p.a.; EBITDA +₹130–195 cr p.a.; PAT +₹93–140 cr p.a.</p>
+
+  <h3>Trigger 3 — ₹4,400 cr organic pipeline conversion <span class="pill amber">MEDIUM</span></h3>
+  <p><strong>What:</strong> Active organic pipeline of ₹4,400 cr; historical conversion ~60% over 18–24 months.</p>
+  <div class="quote">"Order book ₹2,100 + L1 ₹300 + pipeline ₹4,400 = ₹6,500 cr total. Normally 60% of pipeline gets converted over 18 months." — Sanjeev Sancheti, IR Advisor <span class="cite">Q4 FY26 concall, 4-May-2026</span></div>
+  <p><strong>What this really means for the P&amp;L:</strong> Implied ₹2,640 cr in converted organic order flow over 18 months. Organic revenue scales from ₹620 cr FY26 (ex-strategic) to ₹1,500+ cr by FY28. Higher-margin (HPC + Private Cloud carry 14–15% EBITDA) — could add ₹220+ cr EBITDA / ~₹160 cr PAT.</p>
+
+  <h3>Trigger 4 — NVIDIA Blackwell / Tyrone Camarero moat <span class="pill green">HIGH</span></h3>
+  <p><strong>What:</strong> Netweb is the only Indian OEM manufacturing NVIDIA GB200 NVL4 platforms under "Make in India" with direct NVIDIA OEM allocation. New 15,000 sq ft liquid-cooled SMT facility commissioned in FY26 specifically for Blackwell-class density.</p>
+  <p><strong>What this really means for the P&amp;L:</strong> Pricing power on every AI rack; access to sovereign + private AI infra TAM of ₹50,000+ cr over 5 years where indigenous OEM status is a procurement precondition. Sustains 30%+ growth past FY28 and defends 13–14% EBITDA / 9–10% PAT margin floor.</p>
+
+  <h3>Trigger 5 — Working-capital normalisation → margin recovery <span class="pill amber">MEDIUM</span></h3>
+  <p><strong>What:</strong> Once IndiaAI ships and ₹270 cr ST borrowings unwind, operating leverage compounds. Asset turnover already doubled to 2.7x; ROCE up to 37.5%.</p>
+  <p><strong>What this really means for the P&amp;L:</strong> No direct revenue impact; ₹15–20 cr p.a. interest cost saved → flows directly to PAT. Bigger impact is on <strong>free-cash-flow conversion</strong> and <strong>ROCE</strong> — which feed the valuation multiple, not the absolute earnings.</p>
+
+  <h3>Trigger 6 — AMD/Intel CPU servers + NSM 2.0 HPC tailwind <span class="pill grey">OPTIONALITY</span></h3>
+  <p><strong>What:</strong> AMD Turin and Intel Emerald Rapids "Make in India" platforms; National Supercomputing Mission 2.0 tailwind for the HPC segment.</p>
+  <p><strong>What this really means for the P&amp;L:</strong> HPC segment scaling ₹520 cr → ₹1,000+ cr by FY29 at 25%+ CAGR. Higher-margin than AI so it protects blended margins. ~₹50 cr p.a. PAT contribution.</p>
+
+  <div class="callout">
+    <h4>What can break the thesis (top 3 risks)</h4>
+    <ol style="margin:0;padding-left:18px;">
+      <li><strong>IndiaAI execution slippage.</strong> 73% of incremental FY27 revenue tied to one deal. A 2-quarter delay = 25–30% FY27 PAT miss. Mitigant: LC-backed.</li>
+      <li><strong>NVIDIA Blackwell allocation cut</strong> due to US export controls. No captive silicon. AMD / Intel alternates exist but serve different workloads.</li>
+      <li><strong>Valuation re-rating risk on margin disappointment.</strong> At 108x TTM PE, even a single-quarter miss could compress the multiple 30–40% (cf. Kaynes Q4 FY26 — fell 18% on a PAT miss).</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============== SECTION: BEAR CASE ============== -->
+<section>
+  <h2>Bear Case (5 bullets — intentionally aggressive)</h2>
+  <div class="callout">
+    <ol style="margin:0;padding-left:18px;">
+      <li><strong>Customer concentration is the elephant in the room.</strong> The single ₹1,734 cr IndiaAI Mission order = ~80% of FY26 incremental revenue. One quarter slip = consensus break.</li>
+      <li><strong>Working capital is masquerading as growth.</strong> FY25 CFO negative; FY26 borrowings spiked to ₹270 cr. Business is funding inventory and receivables through short-term debt.</li>
+      <li><strong>Margin ceiling, not floor.</strong> Guidance lowered: 15.8% FY23 → 14.7% FY25 → 13–14% FY27. AI hardware is fundamentally lower-margin than HPC because chip cost is 60–70% of BOM.</li>
+      <li><strong>Valuation has zero margin of safety.</strong> 108x TTM P/E, 82x EV/EBITDA. On FY28E (assuming 35% growth holds), forward P/E is ~50x — still demanding vs Dixon 38x and Kaynes 70x.</li>
+      <li><strong>Geopolitical / chip allocation risk.</strong> Sovereign AI works only if Blackwell GPUs flow into India in volume. US export-control noise on advanced semis is a non-zero risk; Netweb has no captive silicon.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============== SECTION: SECTOR VALUATION ============== -->
+<section>
+  <h2>Sector-Specific Valuation — Why Not Just P/E</h2>
+  <div class="explainer">
+    <strong>Different multiples answer different questions</strong> —
+    <br>• <strong>P/E</strong>: simplest, but assumes margin stability.
+    <br>• <strong>EV/EBITDA</strong>: strips out capital structure and depreciation — better for hardware / manufacturing companies with different debt &amp; capex profiles.
+    <br>• <strong>EV/Sales</strong>: useful when margins are still normalising; tells you what you pay per ₹ of revenue.
+    <br>• <strong>PEG</strong> (P/E ÷ growth): &lt;1 = cheap; &gt;2 = expensive. Adjusts P/E for the growth rate.
+    <br>• <strong>EV/Order Book</strong>: sector-specific — useful for capital-goods / EMS firms because order book = forward revenue visibility.
+    <br>Netweb sits at the intersection of <strong>(a) Indian EMS</strong>, <strong>(b) global AI infrastructure OEM</strong>, and <strong>(c) defence-electronics</strong> — each lens gives a different read.
+  </div>
+
+  <h3>Lens 1 — Indian EMS Peer Set</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Company</th><th class="num">M-cap (₹ cr)</th><th class="num">FY26 Rev (₹ cr)</th><th class="num">FY26 PAT (₹ cr)</th>
+        <th class="num">TTM P/E</th><th class="num">EV/EBITDA</th><th class="num">EV/Sales</th><th class="num">ROCE</th><th class="num">Rev growth FY26</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="background:#fffbeb;"><td><strong>Netweb Technologies</strong></td><td class="num">22,250</td><td class="num">2,184</td><td class="num">206</td><td class="num"><strong>108x</strong></td><td class="num"><strong>82x</strong></td><td class="num"><strong>10.2x</strong></td><td class="num"><strong>37.5%</strong></td><td class="num"><strong>+90%</strong></td></tr>
+      <tr><td>Dixon Technologies</td><td class="num">~80,000</td><td class="num">49,586</td><td class="num">1,644</td><td class="num">49x</td><td class="num">36x</td><td class="num">1.6x</td><td class="num">27%</td><td class="num">+28%</td></tr>
+      <tr><td>Kaynes Technology</td><td class="num">21,937</td><td class="num">3,783</td><td class="num">364</td><td class="num">76x</td><td class="num">44x</td><td class="num">5.8x</td><td class="num">19%</td><td class="num">+34%</td></tr>
+      <tr><td>Syrma SGS</td><td class="num">~13,500</td><td class="num">~4,200</td><td class="num">~230</td><td class="num">59x</td><td class="num">30x</td><td class="num">3.2x</td><td class="num">12%</td><td class="num">+14%</td></tr>
+      <tr><td>Cyient DLM</td><td class="num">3,435</td><td class="num">1,262</td><td class="num">73</td><td class="num">47x</td><td class="num">21x</td><td class="num">2.7x</td><td class="num">12%</td><td class="num">-14%</td></tr>
+      <tr><td>Avalon Tech</td><td class="num">~7,000</td><td class="num">~1,500</td><td class="num">~100</td><td class="num">70x</td><td class="num">38x</td><td class="num">4.7x</td><td class="num">13%</td><td class="num">+49%</td></tr>
+      <tr style="font-weight:600;background:#f3f4f6;"><td>EMS peer median</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">63x</td><td class="num">37x</td><td class="num">4.0x</td><td class="num">13%</td><td class="num">+30%</td></tr>
+    </tbody>
+  </table>
+
+  <div class="chart-wrap"><canvas id="peerEvEbitda"></canvas></div>
+
+  <p><strong>Read:</strong> On <strong>EV/EBITDA</strong>, Netweb's 82x is 2.2x peer median — the market believes EBITDA quality is superior (debt-free, light capex, asset turnover 33x vs peers 4–9x). That belief is rational, but at 82x there is little room for disappointment. On <strong>EV/Sales (10.2x)</strong>, the multiple is 2–6x peer set — <strong>the most concerning lens</strong> if AI servers commoditise.</p>
+
+  <h3>Lens 2 — Global AI Infrastructure OEM Peers</h3>
+  <table>
+    <thead><tr><th>Company</th><th class="num">M-cap (US$)</th><th class="num">TTM P/E</th><th class="num">EV/EBITDA</th><th class="num">EV/Sales</th><th class="num">ROE</th><th class="num">Rev growth</th></tr></thead>
+    <tbody>
+      <tr style="background:#fffbeb;"><td><strong>Netweb Technologies</strong></td><td class="num">~$2.7B</td><td class="num"><strong>108x</strong></td><td class="num"><strong>82x</strong></td><td class="num"><strong>10.2x</strong></td><td class="num"><strong>32.9%</strong></td><td class="num"><strong>+90%</strong></td></tr>
+      <tr><td>Super Micro Computer (closest functional analogue)</td><td class="num">~$30B</td><td class="num">20x</td><td class="num">14x</td><td class="num">1.4x</td><td class="num">26%</td><td class="num">~+90%</td></tr>
+      <tr><td>Dell Technologies (ISG segment)</td><td class="num">~$80B</td><td class="num">17x</td><td class="num">10x</td><td class="num">0.8x</td><td class="num">n/m</td><td class="num">+12% (ISG +30%)</td></tr>
+      <tr><td>Hewlett Packard Enterprise</td><td class="num">~$25B</td><td class="num">13x</td><td class="num">8x</td><td class="num">1.0x</td><td class="num">13%</td><td class="num">+18%</td></tr>
+    </tbody>
+  </table>
+  <p>Netweb trades at <strong>5–6x SMCI's multiples</strong>, partly explained by higher India growth runway, sovereign-AI tailwind, and Indian market liquidity premium. Not infinitely sustainable — premiums historically compress to 2–3x once growth normalises.</p>
+
+  <h3>Lens 3 — Defence Electronics / Sovereign-Tech Bucket</h3>
+  <table>
+    <thead><tr><th>Company</th><th class="num">TTM P/E</th><th class="num">EV/EBITDA</th><th class="num">ROCE</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr style="background:#fffbeb;"><td><strong>Netweb Technologies</strong></td><td class="num"><strong>108x</strong></td><td class="num"><strong>82x</strong></td><td class="num"><strong>37.5%</strong></td><td>50% govt customer; sovereign AI</td></tr>
+      <tr><td>Data Patterns</td><td class="num">92x</td><td class="num">69x</td><td class="num">~30%</td><td>Pure-play defence electronics</td></tr>
+      <tr><td>BEL (Bharat Electronics)</td><td class="num">~50x</td><td class="num">~33x</td><td class="num">~26%</td><td>Large-cap PSU defence</td></tr>
+      <tr><td>HAL (Hindustan Aeronautics)</td><td class="num">~32x</td><td class="num">~20x</td><td class="num">~30%</td><td>Aerospace</td></tr>
+    </tbody>
+  </table>
+  <p>Within the <strong>dual-use / defence-tech bucket</strong>, Netweb's premium over Data Patterns is just 17% on P/E and 19% on EV/EBITDA — much narrower than the EMS-lens gap. If IndiaAI converts into a multi-year, multi-thousand-GPU programme, this is the right comp set.</p>
+
+  <h3>Lens 4 — PEG &amp; EV/Order-Book</h3>
+  <table>
+    <tr><td><strong>PEG (P/E ÷ expected EPS growth)</strong></td><td>108 ÷ ~50% = <strong>~2.2x</strong></td><td>Expensive but defensible for hyper-growth. Compare Kaynes 2.5, Data Patterns 3.5, Dixon 1.5.</td></tr>
+    <tr><td><strong>EV / Order book</strong> (Order book ₹2,400 cr)</td><td><strong>9.3x</strong></td><td>Rich vs Kaynes ~3x; reflects short-cycle (~4 month) order book. Adjusted for 60% pipeline conversion → <strong>~4.4x</strong>, more reasonable.</td></tr>
+  </table>
+
+  <h3>Lens 5 — Reverse DCF / Scenario Analysis</h3>
+  <div class="explainer"><strong>What this is</strong> — A reverse DCF asks: "What growth rate is the current stock price implying?" If the implied rate is unrealistic, the stock is overpriced; if achievable, it's defensible.</div>
+  <p>Using a simple 10-year reverse DCF (cost of equity 15%, terminal growth 3%, PAT margin held at 9.3%), the current ₹22,250 cr m-cap implies <strong>~30% revenue CAGR for the next 10 years</strong>. Management is guiding 35–40% for the first 2 years — possible but not the base case for a decade.</p>
+  <table>
+    <thead><tr><th>Scenario</th><th class="num">10-yr revenue CAGR</th><th class="num">Implied fair value</th><th class="num">Upside / (downside) vs CMP ₹3,888</th></tr></thead>
+    <tbody>
+      <tr><td>Bull — sovereign AI sustains + exports</td><td class="num">32%</td><td class="num">₹4,800</td><td class="num green-tint">+24%</td></tr>
+      <tr><td>Base — 30% for 5 yrs, taper to 15%</td><td class="num">25%</td><td class="num">₹3,400</td><td class="num amber-tint">-13%</td></tr>
+      <tr><td>Bear — competitive pressure, mgn → 7% by FY30</td><td class="num">20%</td><td class="num">₹2,400</td><td class="num red-tint">-38%</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout amber" style="margin-top:18px;">
+    <h4>Synthesis — what's the right multiple for Netweb?</h4>
+    <p style="margin:0;">
+      The stock is <strong>priced for perfection on EV/EBITDA and EV/Sales</strong> but is <strong>defensible on PEG</strong> if FY27–28 deliver 40%+ EPS growth. <strong>EV/EBITDA</strong> (82x vs fair ~48x) is the most useful diagnostic — it shows ~70% premium to a justified peer-adjusted level.<br><br>
+      <strong>Entry framework:</strong> Stagger entries on EV/EBITDA correction to &lt;60x, or P/E correction to &lt;85x. Pair with execution evidence — CFO/PAT &gt; 0.8 in H1 FY27 and borrowings &lt; ₹150 cr.
+    </p>
+  </div>
+</section>
+
+<!-- ============== SECTION: FINAL VERDICT ============== -->
+<section>
+  <h2>Final Verdict &amp; Action Framework</h2>
+  <div class="callout amber">
+    <h4 style="font-size:16px;">WATCH — high-conviction watchlist, await better entry / Q1 FY27 walk-the-talk</h4>
+    <p>The business is one of the cleanest plays on India's sovereign-AI infra capex with genuine technical capability, debt-free balance sheet, marquee customer list, and a generational tailwind from IndiaAI Mission. <strong>However:</strong></p>
+    <ul style="margin:8px 0 0 18px;padding:0;">
+      <li>The working-capital build needs to convert to operating cash in FY27</li>
+      <li>Margin trajectory needs to stabilise at 13%+</li>
+      <li>Current 108x TTM PE / 82x EV-EBITDA prices in flawless execution</li>
+    </ul>
+    <p style="margin-top:10px;"><strong>Convert to BUY-WORTHY when:</strong> 20–25% drawdown OR confirmation of CFO/PAT &gt; 0.8 in H1 FY27 with borrowings unwinding below ₹150 cr.</p>
+  </div>
+
+  <h3>Follow-up Questions for Deep Dive</h3>
+  <ul>
+    <li>What % of the ₹1,734 cr strategic order has been billed by end Q1 FY27?</li>
+    <li>Will inventory days normalise back to ~60 once IndiaAI is fully shipped?</li>
+    <li>Will Netweb capture H100/Blackwell allocation parity with Dell / Supermicro in India?</li>
+    <li>Is there a second strategic order in the ₹4,400 cr pipeline that converts in H2 FY27?</li>
+    <li>Can Netweb sustain &gt;30% ROCE as revenue scales to ₹4,000+ cr?</li>
+  </ul>
+</section>
+
+<!-- ============== SECTION: RAW MARKDOWN ============== -->
+<section>
+  <h2>Raw Source Markdowns (Expand to View)</h2>
+  <details>
+    <summary>Full Quick Scan Markdown</summary>
+    <pre id="md-quickscan"></pre>
+  </details>
+  <details>
+    <summary>Full Concall / Walk-the-Talk Markdown</summary>
+    <pre id="md-concall"></pre>
+  </details>
+  <details>
+    <summary>Full Growth Triggers Markdown</summary>
+    <pre id="md-triggers"></pre>
+  </details>
+  <details>
+    <summary>Full Sector Valuation Markdown</summary>
+    <pre id="md-valuation"></pre>
+  </details>
+</section>
+
+<footer>
+  <p>Generated: 16 May 2026 | Sources: Netweb AR FY25 (126 pp), Q4 FY25–Q4 FY26 concall transcripts (5 calls), CRISIL rating rationale Aug-25 &amp; Jun-25, Screener.in (CMP 15-May-2026), MarketsMojo / Yahoo Finance peer data.</p>
+  <p><strong>Disclaimer:</strong> Research only. Not investment advice. The author / system does not hold a position. Conduct your own due diligence.</p>
+</footer>
+
+</div>
+
+<script>
+// =========== CHARTS ===========
+const blue = '#1d4ed8', green = '#16a34a', amber = '#d97706', red = '#dc2626', grey = '#6b7280';
+
+// 1. Segment mix pie
+new Chart(document.getElementById('segmentMix'), {
+  type: 'doughnut',
+  data: {
+    labels: ['AI Systems (43.4%)', 'HPC / Supercomputing (~24%)', 'Private Cloud / HCI (~24%)', 'Storage / DC / Software (~8%)'],
+    datasets: [{
+      data: [43.4, 24, 24, 8.6],
+      backgroundColor: ['#1d4ed8', '#16a34a', '#d97706', '#6b7280']
+    }]
+  },
+  options: {
+    plugins: {legend: {position: 'right'}, title: {display: true, text: 'FY26 Revenue Mix (%)'}},
+    responsive: true, maintainAspectRatio: false
+  }
+});
+
+// 2. Historical revenue / PAT
+new Chart(document.getElementById('historicalGrowth'), {
+  type: 'bar',
+  data: {
+    labels: ['FY22', 'FY23', 'FY24', 'FY25', 'FY26'],
+    datasets: [
+      {label: 'Revenue (₹ cr)', data: [247, 445, 724, 1149, 2184], backgroundColor: blue, yAxisID: 'y'},
+      {label: 'PAT (₹ cr)', data: [22.5, 47, 76, 115, 206], backgroundColor: green, yAxisID: 'y'}
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    scales: {y: {beginAtZero: true, title: {display: true, text: '₹ crore'}}}
+  }
+});
+
+// 3. DuPont
+new Chart(document.getElementById('dupontChart'), {
+  type: 'bar',
+  data: {
+    labels: ['FY23', 'FY24', 'FY25', 'FY26'],
+    datasets: [
+      {label: 'Net Margin (%)', data: [10.5, 10.5, 9.9, 9.3], backgroundColor: blue},
+      {label: 'Asset Turnover (x)', data: [1.5, 1.4, 1.6, 2.7], backgroundColor: amber},
+      {label: 'Leverage (x)', data: [1.9, 1.9, 1.6, 1.5], backgroundColor: grey},
+      {label: 'ROE (%)', data: [29.5, 29.4, 24.0, 32.9], backgroundColor: green}
+    ]
+  },
+  options: {responsive: true, maintainAspectRatio: false}
+});
+
+// 4. Quarterly trend
+new Chart(document.getElementById('quarterlyChart'), {
+  type: 'line',
+  data: {
+    labels: ['Q4 FY25', 'Q1 FY26', 'Q2 FY26', 'Q3 FY26', 'Q4 FY26'],
+    datasets: [
+      {label: 'Revenue (₹ cr)', data: [414.7, 301.2, 303.7, 804.9, 773.7], borderColor: blue, backgroundColor: 'rgba(29,78,216,0.1)', tension: .3, yAxisID: 'y'},
+      {label: 'EBITDA margin (%)', data: [14.4, 14.9, 15.0, 12.2, 13.3], borderColor: amber, backgroundColor: 'transparent', tension: .3, yAxisID: 'y1'},
+      {label: 'PAT margin (%)', data: [10.3, 10.1, 10.3, 9.0, 9.0], borderColor: green, backgroundColor: 'transparent', tension: .3, yAxisID: 'y1'}
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    scales: {
+      y: {position: 'left', title: {display: true, text: 'Revenue (₹ cr)'}, beginAtZero: true},
+      y1: {position: 'right', title: {display: true, text: 'Margin (%)'}, beginAtZero: true, grid: {drawOnChartArea: false}}
+    }
+  }
+});
+
+// 5. Growth triggers quantum
+new Chart(document.getElementById('triggerChart'), {
+  type: 'bar',
+  data: {
+    labels: ['T1: IndiaAI ₹1,734cr', 'T2: 100k GPU expansion', 'T3: ₹4,400cr pipeline', 'T4: Blackwell moat', 'T5: WC normalisation', 'T6: HPC / NSM 2.0'],
+    datasets: [{
+      label: 'Revenue impact (₹ cr)',
+      data: [1600, 1250, 2640, 0, 0, 500],
+      backgroundColor: [green, amber, amber, green, amber, grey]
+    }]
+  },
+  options: {
+    indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+    plugins: {legend: {display: false}, title: {display: true, text: 'Revenue Impact by Trigger (₹ cr)'}},
+    scales: {x: {beginAtZero: true}}
+  }
+});
+
+// 6. Peer EV/EBITDA
+new Chart(document.getElementById('peerEvEbitda'), {
+  type: 'bar',
+  data: {
+    labels: ['Netweb', 'Kaynes', 'Avalon', 'Dixon', 'Syrma', 'Cyient DLM'],
+    datasets: [{
+      label: 'EV / EBITDA (x)',
+      data: [82, 44, 38, 36, 30, 21],
+      backgroundColor: ['#dc2626', amber, amber, amber, green, green]
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: {legend: {display: false}, title: {display: true, text: 'EV/EBITDA vs EMS Peers (peer median 37x)'}},
+    scales: {y: {beginAtZero: true}}
+  }
+});
+
+// =========== RAW MARKDOWN POPULATE (from external loader) ===========
+// We embed minimal placeholders here — the full text is supplied via the .md files in the package.
+document.getElementById('md-quickscan').textContent = "# Netweb Technologies India Ltd \u2014 Quick Scan\n**Ticker:** NSE: NETWEB / BSE: 543945 | **Scan date:** 16 May 2026 | **CMP:** \u20b93,888 | **M-cap:** \u20b922,250 cr\n**Latest filings reviewed:** AR FY25, Q4 FY26 concall (4-May-26), CRISIL rating reaffirmation Aug-25.\n\n---\n\n## 1. What does the company do?\n\n> _For a first-time reader_ \u2014 Netweb designs and manufactures **high-end computing systems** (HCS): the racks of powerful servers that universities, defence labs, the government and large enterprises use for AI training, supercomputing simulations and private-cloud data centres. Think of them as the **\"Indian Dell/Supermicro for AI infra\"** \u2014 they take chips from NVIDIA, AMD and Intel, design the motherboard and chassis around them in-house, manufacture in Faridabad, and ship full-stack solutions (hardware + software + services). They are an official NVIDIA OEM partner and one of the very few Indian companies on the global Top-500 supercomputer list (15 of their systems have ranked there).\n\n## 2. Business segments \u2014 FY26 revenue mix\n\n| Segment | FY26 share | FY26 YoY growth | What it is |\n|---|---:|---:|---|\n| **AI Systems & Workstations** | **43.4%** | **+459.6%** | NVIDIA Blackwell / Hopper-based GPU servers; large Tyrone Camarero AI platforms |\n| **HPC / Supercomputing** | ~24% | ~+31% | CPU-heavy clusters for academic research, ISRO, defence labs, oil & gas |\n| **Private Cloud / HCI** | ~24% | ~steady | Data-centre infra for enterprises (Infosys, TCS, Yotta, Zoho) |\n| Storage, DC servers, Software | ~8% | mixed | Storage arrays, plain servers, software & services (non-core) |\n\nTwo years ago AI was 5% of revenue. Today it is the engine. This is the single most important structural fact about Netweb.\n\n## 3. Geography mix\n**>95% India** (domestic). Exports remain at ~5% \u2014 management has explicitly chosen to satisfy domestic demand first before pursuing exports. Customer mix is **~50% Government / ~50% Enterprise**.\n\n## 4. Customer concentration & marquee names\nTop customers: **IIT system, ISRO, Railtel, University of Delhi, Yotta, Infosys, TCS, Zoho.** 81% of revenue is repeat-customer revenue (FY25); top-10 customer relationships average 4.8 years. CRISIL noted \"diversified clientele across geographies\" as a positive in the August 2025 rating note. The \u20b91,734 cr IndiaAI Mission strategic order (announced Sep-25) introduces near-term concentration risk \u2014 see Bear Case.\n\n## 5. Promoter & management\n**Lodha family** \u2014 Sanjay (CMD, 28% pre-OFS), Navin, Niraj, Vivek. The four collectively sold 20.79 lakh shares (3.65% stake) in Feb-26 to improve trading liquidity. **Promoter holding now 66.98%** (vs 70.64% earlier). No share pledge. Promoters have a 12-month lock-in commitment after the Feb-26 sale.\n\n## 6. Capex cycle\n**Capability-driven, not capacity-driven** \u2014 management quote: \"Our capacity utilisation is 65-70%; we are a technology company, not a volume company.\" A new 15,000 sq ft SMT-based liquid-cooled rack facility was commissioned in FY26. **No major capex planned for FY27** \u2014 only routine \u20b920\u201325 cr per year. This is unusual and important: most peers (Dixon, Kaynes, Syrma) are in heavy capex cycles. Netweb's growth is largely **working-capital-funded, not capex-funded**.\n\n## 7. Working capital \u2014 _the single most-watched metric for this company_\n\n> _Explainer for a first-time reader_ \u2014\n> - **Debtor days (receivable days)** = avg days a customer takes to pay Netweb. Lower is better. 30\u201360 days is normal for B2C, 80\u2013120 for B2G in India.\n> - **Inventory days** = avg days raw material / finished goods sit on the shelf. Lower = faster turnover = better.\n> - **Cash conversion cycle (CCC)** = Inventory days + Debtor days \u2212 Payable days. It tells you **how many days of cash the company has tied up between paying its suppliers and getting paid by its customers**. A 100-day CCC means the company self-finances 100 days of working capital, which is risky in a high-growth phase.\n\n| Metric | FY24 | FY25 | Q3 FY26 (Dec'25) | Q4 FY26 (Mar'26) |\n|---|---:|---:|---:|---:|\n| Receivable days | ~93 | 115 | 114 | **86** \u2705 improving |\n| Inventory days | ~76 | ~71 | 60 | **86** \u26a0\ufe0f rising (stocking for strategic orders) |\n| Cash conversion cycle | ~95 | ~100 | ~105 | **84** |\n| Total borrowings (\u20b9 cr) | 9.6 | 8.0 | ~150 | **270** \u26a0\ufe0f |\n\nManagement guides CCC will stay in **90\u2013110 day band** through FY27. The \u20b9270 cr short-term borrowings are explicitly to fund inventory and execution of the \u20b91,734 cr IndiaAI order \u2014 management calls it \"transitionary\". Watch this in Q1 FY27.\n\n## 8. Debt position & interest coverage\n\n> _Explainer_ \u2014 **Interest coverage** = EBIT / Interest expense. Above 5x is healthy. Below 2x is a red flag.\n\n- **Net cash: \u20b983 cr** as of Mar'26 (down from \u20b9162 cr Mar'25 because of WC borrowings).\n- Long-term borrowings: practically nil (\u20b913 cr leases).\n- FY25 interest coverage: **>34x** (per CRISIL rationale).\n- **CRISIL rating: A / Stable / A1** (upgraded from A-/A2+ in June 2025). Bank lines enhanced from \u20b9124 cr to **\u20b9260 cr** in Aug-25 to support working capital.\n\n## 9. Key risks disclosed by management\n1. **Component supply chain** \u2014 NVIDIA Blackwell GPU allocation is tight globally; any allocation hit = revenue hit.\n2. **Single-vendor partner dependency** on NVIDIA \u2014 though AMD and Intel partnerships exist as alternates.\n3. **FX exposure** \u2014 USD trade payables of ~\u20b91,082 mn (unhedged a meaningful portion); Q4 FY26 had \u20b952 mn MTM losses.\n4. **Government dependency** \u2014 ~50% of revenue from government / quasi-government; payment cycles can be lumpy.\n5. **Margin pressure** \u2014 components price volatility on AI chips; management guides 13\u201314% EBITDA margin (vs 14.7% FY25).\n\n## 10. Related-party transactions\nDisclosed at arm's length in the AR25 (Note 38); none classified as \"material\" under SEBI LODR. CSR spend of \u20b912.9 mn was fully deployed. No qualifications from auditor **S S Kothari Mehta & Co. LLP**.\n\n## 11. Auditor & qualifications\nAuditor S S Kothari Mehta & Co. LLP \u2014 **clean opinion, no qualifications** in either FY24 or FY25. No auditor change in last 3 years.\n\n## 12. Strategy stated by MD\n*\"India's only full-stack domestic provider for high-end computing systems\u2026 anchored on three pillars: HPC, Private Cloud, AI.\"* Stated FY27 revenue growth guidance: **35\u201340% (organic, ex-strategic orders)**, EBITDA margin **13\u201314%**, no major capex. Sovereign AI infra is positioned as the multi-year tailwind.\n\n---\n\n## Forensic Red Flag Scan\n\n> _Explainer_ \u2014 Forensic accounting looks for divergences between **reported profits (P&L)** and **actual cash being generated**. Good companies convert ~70%+ of profit to operating cash flow over 3 years.\n\n| # | Check | Status | Notes |\n|---|---|---|---|\n| 1 | **CFO/PAT 3-yr avg** | \ud83d\udfe1 **AMBER** | FY25 CFO = (-\u20b913) cr vs PAT \u20b9115 cr \u2014 ratio negative. Driven by \u20b9178 cr WC build, not accruals manipulation. FY24 was healthy. FY26 CFO = \u20b9172 cr per management (vs PAT \u20b9206 cr = ~83% conversion). Acceptable for a hyper-growth WC-intensive business but **must monitor**. |\n| 2 | Receivables vs revenue growth | \ud83d\udfe2 GREEN | Revenue +58.7%; receivables +97% in FY25, but improved sharply to 86 days in Q4 FY26. Trend is towards normalisation. |\n| 3 | Inventory vs revenue growth | \ud83d\udfe1 AMBER | Inventory +94% in FY25 vs revenue +58.7%. Q4 FY26 inventory days rose again to 86d to pre-stock for IndiaAI deal \u2014 strategic, not stuck stock. |\n| 4 | Contingent liabilities vs net worth | \ud83d\udfe2 GREEN | Small, routine bank-guarantee exposure; immaterial to \u20b9530 cr+ net worth. |\n| 5 | Promoter pledging | \ud83d\udfe2 GREEN | Nil pledge. |\n| 6 | Auditor qualifications | \ud83d\udfe2 GREEN | Clean opinion. |\n| 7 | Related-party transactions | \ud83d\udfe2 GREEN | All arm's length, none material. |\n| 8 | Goodwill / intangible bloat | \ud83d\udfe2 GREEN | Intangibles \u20b915 cr \u2014 immaterial. No M&A goodwill. |\n| 9 | Equity dilution | \ud83d\udfe2 GREEN | Only IPO in Jul-23 + small ESOP exercises (~1.6% of capital outstanding). |\n| 10 | Subsidiary losses | \ud83d\udfe2 GREEN | No material subsidiaries. Standalone == Consolidated. |\n\n**Overall:** 8 GREEN / 2 AMBER (working-capital intensity and CFO-PAT divergence) / 0 RED.\n\n---\n\n## Piotroski F-Score (FY25 vs FY24)\n\n> _Explainer for a first-time reader_ \u2014 The **Piotroski F-Score (0\u20139)** is a 9-test checklist invented by Stanford prof Joseph Piotroski to gauge financial strength. Each test passed = 1 point. **7\u20139 = strong**, 4\u20136 = average, 0\u20133 = weak. The tests cover profitability (4), leverage/liquidity (3) and operating efficiency (2).\n\n| # | Test | FY25 vs FY24 | Pass? |\n|---|---|---|:---:|\n| 1 | Positive Net Income | Yes (+\u20b9114.5 cr) | \u2705 1 |\n| 2 | Positive Operating Cash Flow | **No (-\u20b913.2 cr)** | \u274c 0 |\n| 3 | ROA improving YoY | Slight decline (revenue grew faster than profit) | \u274c 0 |\n| 4 | CFO > Net Income | No | \u274c 0 |\n| 5 | Lower long-term debt YoY | Yes (8.0 vs 9.6) | \u2705 1 |\n| 6 | Higher current ratio YoY | No (2.33 vs 3.13 \u2014 payables rose) | \u274c 0 |\n| 7 | No new shares issued | Yes (only ESOP, IPO was prior year) | \u2705 1 |\n| 8 | Higher gross margin YoY | Slight decline (14.7% vs 15.8%) | \u274c 0 |\n| 9 | Higher asset turnover YoY | Yes (22.7x vs 16.2x) | \u2705 1 |\n\n**FY25 Piotroski score: 4 / 9.** This is **lower than what a buy-quality investor wants (\u22657)**. The score is depressed largely because of working-capital strain during hyper-growth (tests 2, 4, 6 all reflect WC build). **FY26 score should rebound to ~6\u20137** based on management commentary on CFO recovery to \u20b9172 cr.\n\n---\n\n## DuPont decomposition \u2014 ROE = Net Margin \u00d7 Asset Turnover \u00d7 Leverage\n\n| Year | Net margin | Asset T/O | Leverage | **ROE** |\n|---|---:|---:|---:|---:|\n| FY23 | 10.5% | 1.5x | 1.9x | **29.5%** |\n| FY24 | 10.5% | 1.4x | 1.9x | **29.4%** |\n| FY25 | 9.9% | 1.6x | 1.6x | **24.0%** |\n| FY26 | 9.3% | 2.7x | 1.5x | **32.9%** |\n\n**Read:** ROE rebounded sharply in FY26 because **asset turnover doubled** \u2014 every rupee of capital now generates more revenue (operating leverage in a fixed-asset-light, design-led model). Net margin compressed slightly as AI segment carries lower gross margins than HPC but is being offset by scale.\n\n---\n\n## Bear Case (5 bullets, intentionally aggressive)\n\n1. **Customer concentration is the elephant in the room.** The single \u20b91,734 cr IndiaAI Mission order represents ~80% of all of FY26 revenue. Execution of one deal across Q4 FY26\u2013Q2 FY27 means a slippage of one quarter would devastate consensus estimates.\n2. **Working capital is masquerading as growth.** FY25 CFO was negative; FY26 borrowings spiked to \u20b9270 cr from near-zero. The business is **funding inventory and receivables through short-term debt**, and any disruption (component allocation, GoI payment delay, FX move) compresses liquidity fast.\n3. **Margin ceiling, not floor.** Management has been **lowering** EBITDA margin guidance (15.8% FY23 \u2192 14.7% FY25 \u2192 13\u201314% FY27). AI hardware is fundamentally a lower-margin business than HPC because chip cost is 60\u201370% of BOM and NVIDIA captures most of the value \u2014 Netweb is the integrator, not the IP holder.\n4. **Valuation has zero margin of safety.** TTM P/E of 108x, EV/EBITDA of 82x. Even on FY28E (assuming 35%+ growth holds), forward P/E is ~50x \u2014 still demanding. Peer Dixon trades at 38x, Kaynes 70x. A single missed quarter compresses the multiple by 30%+.\n5. **Geopolitical / chip allocation risk.** Sovereign AI is a great theme **only if Blackwell GPUs continue to flow into India in volume**. US export-control noise on advanced semis to non-aligned countries is a non-zero risk. Netweb has no captive silicon, no IP.\n\n---\n\n## Verdict\n\n**WATCH \u2014 high-conviction watchlist, await better entry / Q1 FY27 walk-the-talk.**\n\nThe business is one of the cleanest plays on India's sovereign-AI infra capex with genuine technical capability, debt-free B/S, marquee customer list and a generational tailwind from IndiaAI Mission. **However**, (a) the working-capital build needs to convert to operating cash in FY27, (b) margin trajectory needs to stabilise at 13%+, and (c) current 108x TTM PE prices in flawless execution. A 20\u201325% drawdown OR confirmation of CFO/PAT > 0.8 in H1 FY27 would convert this to BUY-WORTHY.\n\n### Follow-up questions for deep dive\n- What % of the \u20b91,734 cr strategic order has been billed by end Q1 FY27?\n- Will inventory days normalise back to ~60 once IndiaAI is fully shipped?\n- Will Netweb capture H100/Blackwell allocation parity with Dell/Supermicro in India?\n- Is there a second strategic order in the \u20b94,400 cr pipeline that converts in H2 FY27?\n- Can the company sustain >30% ROCE as it scales to \u20b94,000+ cr revenue?\n\n---\n**Sources:** Netweb FY25 Annual Report (pages 12, 42\u201344, 96\u201398, 121\u2013122); Q4 FY26 concall transcript (4-May-2026); CRISIL rating rationale (Aug-2025 & Jun-2025); Screener.in (TTM ratios as of 15-May-26).\n";
+document.getElementById('md-concall').textContent = "# Netweb Technologies \u2014 Concall Analyzer (FY26 Walk-the-Talk)\n\n**Transcripts analysed:** Q4 FY25 (5-May-25), Q1 FY26 (1-Aug-25), Q2 FY26 (3-Nov-25), Q3 FY26 (19-Jan-26), Q4 FY26 (4-May-26).\n\n> _Explainer for a first-time reader_ \u2014 A **concall analyzer** does three things:\n> 1. **Brief**: summarise what management said this quarter in plain English.\n> 2. **Deep dive**: flag changes in tone, evasions, and what was NOT answered.\n> 3. **Walk-the-Talk**: take what management promised in earlier calls and check whether the numbers actually came in on those promises. This is the single best test of management credibility, because it's hard to fake delivery against your own past words.\n\n---\n\n## A. Five-call brief \u2014 what happened in FY26\n\n| Quarter | Revenue (\u20b9 cr) | YoY % | EBITDA mgn | PAT mgn | Headline event |\n|---|---:|---:|---:|---:|---|\n| Q4 FY25 | 414.7 | +55.9% | 14.4% | 10.3% | Guidance: 35-40% CAGR, 13-14% EBITDA mgn, 10% PAT mgn |\n| Q1 FY26 | 301.2 | +102% | 14.9% | 10.1% | Large AI order executed in defence; AI = 29% of mix (+300% YoY) |\n| Q2 FY26 | 303.7 | +21% | 15.0% | 10.3% | **Won 2 strategic orders worth \u20b92,184 cr** (incl. \u20b91,734 cr IndiaAI sovereign-AI deal) |\n| Q3 FY26 | 804.9 | +141% | 12.2% | 9.0% | Executed \u20b9450 cr of strategic order; AI = 64% of Q3 mix, 48% of 9M FY26 |\n| Q4 FY26 | 773.7 | +86.6% | 13.3%\u00b9 | 9.0% | \u20b92,100 cr base + \u20b9300 cr L1 entering FY27; capex zero; **borrowings up to \u20b9270 cr** |\n\n\u00b9 Adjusted for \u20b952 mn FX MTM offset. Reported 12.5%.\n\n**FY26 full-year:** Revenue \u20b92,183.6 cr (+90%), EBITDA \u20b9284.8 cr (margin 13.0%), PAT \u20b9205.8 cr (margin 9.3%). ROE 32.9%, ROCE 37.5%.\n\n---\n\n## B. Deep-dive observations across the 5 calls\n\n### 1. The AI inflection (the dominant theme)\n- AI contribution went from **5% \u2192 14.8% \u2192 25.4% (H1) \u2192 48% (9M) \u2192 43.4% (FY26)**.\n- This is not a slow march \u2014 it is a step-function transition driven by (a) one \u20b91,734 cr strategic order, and (b) underlying organic AI demand from enterprise + government.\n- Management is **explicit that AI will settle at ~35% of mix long-term**, with HPC and Private Cloud each ~30%. Implication: AI growth rates _will_ moderate, but absolute base will be much higher.\n\n### 2. Margin guidance has been _lowered_, not raised\n- Management explicitly **revised PAT margin expectation from \"around 10%\" (May-25) to 9.3% (FY26 actual)**.\n- EBITDA margin guidance steady at 13\u201314%, but FY25 actual was 14.7%; FY27 guidance is 13\u201314%. **Margin direction is downward, masked by volume.**\n- Why? AI hardware BOM has 60\u201370% chip cost (NVIDIA captures most value) \u2014 Netweb is the integrator, not the IP holder.\n\n### 3. Working capital narrative changed mid-year\n- Q1 FY26: cash conversion cycle (CCC) was guided **90\u2013110 days**.\n- Q2 FY26: CCC jumped to **120 days** (advance from strategic orders not netted against debtors).\n- Q3 FY26: CCC improved to **69 days** (strategic order milestone billing came in).\n- Q4 FY26: CCC at **84 days** with inventory days rising to 86 (pre-stocking for IndiaAI remaining shipment).\n- Net effect: **Borrowings went from ~zero to \u20b9270 cr** in 12 months. Management calls this \"transitionary\" \u2014 should reverse by Q1\u2013Q2 FY27.\n\n### 4. Strategic order \u2014 full chronology\n- **Sep-25**: \u20b9450 cr AI order under IndiaAI Mission announced.\n- **Nov-25 (Q2 call)**: Disclosed **\u20b92,184 cr total** of strategic orders. Bigger order = \u20b91,734 cr.\n- **Jan-26 (Q3 call)**: Executed \u20b9450 cr piece; strategic backlog \u20b91,734 cr (= 17,336 mn). Confirmed LC-backed (no credit risk).\n- **May-26 (Q4 call)**: Strategic backlog still ~\u20b91,600 cr; \"expect to execute in next 3 quarters\" (Q1\u2013Q3 FY27). No new strategic order yet in this call.\n\n### 5. What management was asked but didn't answer cleanly\n- **Component price softness?** \"I'm not supposed to guide on component pricing\u2026 AI demand is unabated, so pressure on supply chain continues.\"\n- **Exports?** \"Not focused. Will remain ~5%.\"\n- **TPU / custom chip pivot risk?** \"We can address other chips when there is significant adoption.\" (genuine answer, but a known risk)\n- **Hyperscaler relationships?** \"We are not targeting hyperscalers.\" This is a deliberate choice (TAM-limiting) but also means future optionality is left on the table.\n\n### 6. Capex discipline (positive)\n- Repeatedly emphasised: \"We are a capability company, not a capacity company. Capacity utilisation is 65\u201370%.\"\n- FY27 capex guided at \u20b920\u201325 cr (routine only). Compare with Dixon, Kaynes deploying \u20b9500\u20131000+ cr each in capex \u2014 Netweb is asset-light.\n\n### 7. Promoter behaviour\n- **OFS of 3.65% in Feb-26** at improved liquidity reasoning. Management committed to **12-month lock-up** after the sale, so no further dilution before Feb-27.\n- No pledging. No insider activity flagged.\n\n### 8. New product launches mentioned\n- **Skylus.ai** \u2014 GPU orchestration platform (Q4 FY25 launch).\n- **Tyrone Camarero AI** \u2014 Blackwell-based AI training platform.\n- **NVIDIA GB200 NVL4** \u2014 \"Make in India\" liquid-cooled AI server (manufactured locally by Netweb).\n- **New 15,000 sq ft liquid-cooled SMT facility** commissioned in FY26.\n- AMD Turin- and Intel Emerald Rapids-based Make-in-India servers.\n\n---\n\n## C. Walk-the-Talk scorecard (have they delivered on what they said?)\n\n> _Explainer_ \u2014 Walk-the-Talk asks: did the actual results match the specific commitments made by management in prior calls? **HIT = delivered**, **MISS = missed**, **PARTIAL = directionally right but missed magnitude**, **PENDING = too early to judge**.\n\n| Quarter promised | Specific commitment | What actually happened | Score |\n|---|---|---|:---:|\n| Q4 FY25 (May-25) | \"35\u201340% CAGR top-line over next couple of years\" | FY26 actual = **+90% YoY** | \u2705 **BEAT** (helped by strategic order) |\n| Q4 FY25 (May-25) | EBITDA margin 13\u201314% guidance | FY26 actual = **13.0%** (adj 13.3%) | \u2705 **HIT** |\n| Q4 FY25 (May-25) | PAT margin \"around 10%\" | FY26 actual = **9.3%** | \ud83d\udfe1 **PARTIAL** (close but below) |\n| Q1 FY26 (Aug-25) | \"Large AI order pipeline \u2013 we are very confident on conversion\" | \u20b92,184 cr strategic orders won by Q2 | \u2705 **HIT** |\n| Q2 FY26 (Nov-25) | Cash conversion 90\u2013110 days | Q3 = 69d, Q4 = 84d | \u2705 **BEAT** |\n| Q2 FY26 (Nov-25) | \"Strategic orders to be executed by FY27\" \u2014 at least 1/3 in FY26 | \u20b9450 cr executed in Q3 FY26 (~26% of strategic order book) | \u2705 **HIT** |\n| Q3 FY26 (Jan-26) | \"Will execute one-third of strategic order in FY26\" | Executed \u20b9450 cr \u2248 26%; remaining ~\u20b91,600 cr deferred to FY27 | \ud83d\udfe1 **PARTIAL** (close to 1/3 but slipped) |\n| Q3 FY26 (Jan-26) | \"Working capital under control, no fresh borrowing needed\" | Q4 borrowings jumped to \u20b9270 cr | \ud83d\udd34 **MISS** (narrative inconsistency) |\n| Q4 FY26 (May-26) | FY27: 35\u201340% organic growth, 13\u201314% margin, capex \u20b920\u201325 cr | _Pending Q1 FY27 results_ | \u23f3 **PENDING** |\n\n**Composite walk-the-talk score: 6 HIT/BEAT + 2 PARTIAL + 1 MISS = ~78% delivery rate.** That is a strong record for a young listed company (IPO'd Jul-23). The single MISS is around working-capital borrowings \u2014 narrative said \"no fresh borrowing\" but Q4 borrowing climbed to \u20b9270 cr. Management's defence: \"transitionary, LC-backed, will reverse\" \u2014 must verify in Q1 FY27.\n\n---\n\n## D. Management credibility assessment\n\n**Sanjay Lodha (CMD)** \u2014 Founder. Quote-heavy concalls, occasionally rambling but technically deep. Comfortable engaging with detail on chip architectures, component supply chain, government policy. Avoids forward guidance on component prices.\n\n**Ankit Kumar Singhal (CFO)** \u2014 Crisp on numbers, repeated guidance ranges identically across 5 calls (consistency = good signal). Was explicit and on the record about MTM hedging treatment in Q4 FY26 (transparency = good signal).\n\n**Sanjeev Sancheti (IR)** \u2014 Veteran IR advisor; often steps in to clarify or moderate management answers. Quality of disclosure is well above small-cap median.\n\n**Tone trajectory across the year:** Confident \u2192 Hyper-confident (post strategic orders Q2) \u2192 Slightly defensive (Q4 on margins and borrowings) \u2192 Reaffirming (closing comments stable). No defensiveness or evasion on any major question across the 5 calls.\n\n---\n\n## E. Three biggest red flags from concalls\n\n1. **Borrowings narrative contradicts Q3 commentary.** Management said in Q3 that strategic orders are LC-backed and no fresh borrowing is needed. In Q4, \u20b9270 cr of short-term debt appeared. Management explanation is plausible (RBI-mandated minimum WCDL tenure) but check Q1 FY27 \u2014 if borrowings stay above \u20b9150 cr through Q1, the story is fragile.\n2. **Margin guidance is being managed downward.** PAT margin slipped from ~10% guidance to 9.3% delivered. Q4 FY27 onward guidance is 13\u201314% EBITDA, which embeds further compression vs FY23's 15.8%.\n3. **Concentration in one strategic deal.** ~80% of FY26 incremental revenue traces back to a single sovereign-AI order. Any execution slip = a quarter where guidance breaks.\n\n---\n\n## F. Three biggest green flags from concalls\n\n1. **Order book entering FY27 = \u20b92,400 cr** (incl. \u20b9300 cr L1) > FY26's entire revenue. Even with zero new orders, revenue visibility is high.\n2. **Asset-light model with no major capex required.** \u20b920\u201325 cr p.a. capex with 90% revenue growth \u2014 fixed asset turnover at 33x is extraordinary.\n3. **Repeat customer revenue = 81% of FY25.** This is exceptional for a hardware company and indicates sticky technical relationships.\n\n---\n\n**Verdict from concall lens:** **Credible management with strong delivery record but a tightening margin profile and a temporarily stretched working capital position.** Watch Q1 FY27 for (a) borrowings trajectory, (b) strategic order shipment cadence, and (c) any new strategic order from the \u20b94,400 cr pipeline.\n\n**Sources:** Netweb concall transcripts \u2014 Q4 FY25 (5-May-25), Q1 FY26 (1-Aug-25), Q2 FY26 (3-Nov-25), Q3 FY26 (19-Jan-26), Q4 FY26 (4-May-26). All filed with BSE/NSE under Reg 30, SEBI LODR.\n";
+document.getElementById('md-triggers').textContent = "# Netweb Technologies \u2014 Growth Triggers 1-Pager\n*As of 16-May-2026 | CMP: \u20b93,888 | M-cap: \u20b922,250 cr | Source: Screener.in / BSE/NSE filings*\n\n## Business in one line\nIndia's only full-stack, in-house OEM for high-end computing systems (HPC + Private Cloud + AI servers), built under \"Make in India\" \u2014 manufacturing NVIDIA Blackwell GPU systems and supercomputers for IIT, ISRO, defence, IndiaAI Mission, and large enterprise customers like TCS, Infosys, Yotta, Zoho.\n\n> _Explainer \u2014 How to read this page._ Each trigger lists **what** the catalyst is, **evidence** from filings/concall, **quantum** in rupees/% with the likely revenue / EBITDA / PAT impact, and a **conviction tag** (HIGH / MEDIUM / OPTIONALITY). HIGH = money basically on the way. MEDIUM = announced with data. OPTIONALITY = plausible but uncommitted. Sum of HIGH+MEDIUM should justify the thesis on its own; OPTIONALITY is upside.\n\n---\n\n## The 6 Growth Triggers\n\n### Trigger 1: Execution of the \u20b91,734 cr IndiaAI sovereign-AI order   [HIGH]\n- **What:** Single contract under IndiaAI Mission to build Blackwell-based GPU servers for the country's sovereign AI compute. Manufactured by Netweb in India, deployed via Tyrone Camarero AI platform. Of the original \u20b92,184 cr two-order package, ~\u20b9450 cr was shipped in Q3 FY26; **~\u20b91,600 cr remains for Q1\u2013Q3 FY27**.\n- **Evidence:** Q3 FY26 concall (19-Jan-26): _\"During the quarter, Netweb successfully executed a large strategic order valued at \u20b94,504 million.\"_ Q4 FY26 concall (4-May-26): _\"Within the next 3 quarters, we expect strategic orders to be done\u2026 \u20b91,600 crores is the strategic order remaining.\"_\n- **Quantum:** Revenue +\u20b91,600 cr over FY27 (\u224873% of FY26 revenue). Strategic orders carry **slightly thinner margins than core (~13% EBITDA vs base 14%+)** but are LC-backed, so collection risk is near-zero.\n  - **Revenue impact:** +73% revenue contribution from this order alone in FY27.\n  - **EBITDA impact:** ~\u20b9208 cr at 13% margin.\n  - **PAT impact:** ~\u20b9150 cr at ~9.3% margin (~73% accretive to FY26 PAT).\n- **Timeline:** Q1 FY27 through Q3 FY27.\n- **Status:** Execution underway; inventory pre-stocked (\u20b9804 cr inventory at Mar-26).\n\n### Trigger 2: IndiaAI Mission roadmap expansion \u2014 10,000 \u2192 100,000 GPUs   [MEDIUM]\n- **What:** Government of India's IndiaAI Mission initially budgeted for **10,000 GPUs**; this was raised to **25,000 GPUs**, and management now indicates GoI is **prepared to go to 100,000 GPUs**. Netweb is one of two large Indian OEMs eligible to bid (vs international OEMs).\n- **Evidence:** Q4 FY26 concall (4-May-26): _\"They were talking about 10,000 GPUs which became 25,000 GPUs. Now they are even ready to go up to 100,000 GPUs\u2026 government's focus is very clear.\"_ Total IndiaAI Mission budget: **\u20b910,300 cr** (per Q1 FY26 IP).\n- **Quantum:** Even at 30\u201335% share of incremental ~75,000 GPUs over FY27\u201329, that is a **\u20b93,000\u20134,000 cr opportunity** beyond the current strategic backlog. Realistically split across multiple OEMs.\n  - **Revenue impact:** +\u20b91,000\u20131,500 cr p.a. across FY28\u201330 if Netweb wins ~30% share.\n  - **EBITDA impact:** ~\u20b9130\u2013195 cr p.a. additional.\n  - **PAT impact:** ~\u20b993\u2013140 cr p.a. additional.\n- **Timeline:** Tendering FY27\u201328; revenue FY27\u2013FY30.\n- **Status:** Pipeline acknowledged but no specific RFP win disclosed yet.\n\n### Trigger 3: \u20b94,400 cr organic pipeline conversion   [MEDIUM]\n- **What:** Apart from the strategic AI order, management has disclosed a **\u20b94,400 cr active organic pipeline** of which **~60% historically converts** to firm orders over 18\u201324 months.\n- **Evidence:** Q4 FY26 concall (4-May-26): _\"Order book \u20b92,100 cr + L1 \u20b9300 cr = \u20b92,400 cr\u2026 plus \u20b94,400 cr of pipeline. So that stacks up to \u20b96,500 cr total\u2026 normally 60% of pipeline gets converted over 18 months.\"_\n- **Quantum:** Implied **\u20b92,640 cr** in converted organic order flow over 18 months (60% of \u20b94,400 cr) \u2014 incremental to the \u20b92,400 cr starting backlog.\n  - **Revenue impact:** Underpins management's 35\u201340% **organic** growth guidance for FY27\u201328. Organic revenue would scale from ~\u20b9620 cr (FY26 ex-strategic) to ~\u20b91,500 cr+ by FY28.\n  - **EBITDA impact:** Higher-margin (organic mix is HPC + Private Cloud at ~14\u201315%) \u2014 could add \u20b9220+ cr EBITDA at the run-rate.\n  - **PAT impact:** Roughly ~\u20b9160 cr incremental at 10\u201310.5% margin.\n- **Timeline:** FY27 and FY28.\n- **Status:** Pipeline tracked quarterly. No single contract identified yet, but the company has converted ~60% of stated pipeline historically.\n\n### Trigger 4: Tyrone Camarero AI platform + NVIDIA Blackwell GB200 manufacturing partnership   [HIGH]\n- **What:** Netweb is the **only Indian OEM** manufacturing NVIDIA GB200 NVL4 platforms under \"Make in India\". Tyrone Camarero is its productised platform brand for generative AI / foundation-model training. Direct NVIDIA OEM relationship with Blackwell allocation.\n- **Evidence:** AR25 page 13: _\"Established a roadmap to design and develop AI GPU systems based on cutting-edge NVIDIA Blackwell platform under OEM Partnership with NVIDIA in Q3 FY2025.\"_ Multiple Q3-Q4 FY26 commentary references Blackwell allocation in hand.\n- **Quantum:** Pricing power on every AI rack vs commodity ODMs. **Allows Netweb to capture sovereign + private AI infra opportunity at a TAM of \u20b950,000+ cr over 5 years** (multiple industry estimates) where being an indigenous OEM is a precondition for government RFPs.\n  - **Revenue impact:** Sustains 30%+ growth rate beyond FY28 (i.e., extends the runway).\n  - **EBITDA impact:** Defends 13\u201314% margin even as commoditisation risk grows.\n  - **PAT impact:** Protects 9\u201310% PAT margin floor; otherwise margins could compress to mid-single-digits.\n- **Timeline:** Already operational; relevance through FY30.\n- **Status:** Active. New 15,000 sq ft liquid-cooled SMT facility commissioned FY26 specifically for Blackwell-class density.\n\n### Trigger 5: Margin recovery from working-capital normalisation   [MEDIUM]\n- **What:** ROCE / ROE have inflected sharply upward (32.9% / 37.5% in FY26 vs 24% / 32.6% in FY25). Asset turnover doubled from 1.6x \u2192 2.7x. Once the IndiaAI strategic order ships and \u20b9270 cr of WC borrowings unwind, operating leverage compounds.\n- **Evidence:** Q4 FY26 concall \u2014 Ankit Singhal: _\"The high top-line growth and we are still sustaining EBITDA margin \u2014 that primarily gives the validation and the resilience in margins. The leverage is already embedded.\"_ AR25 page 43: ROCE 32.6%; per FY26 FY-end IP: ROCE 37.5%.\n- **Quantum:** As CCC normalises from 84 \u2192 60\u201370 days, \u20b9150\u2013200 cr of working capital frees up, eliminating need for short-term borrowing and lifting **interest coverage** while ROIC steps up.\n  - **Revenue impact:** No direct impact \u2014 this is a quality-of-earnings trigger.\n  - **EBITDA impact:** Modest (saving ~\u20b915\u201320 cr p.a. on interest).\n  - **PAT impact:** **+\u20b915\u201320 cr p.a. via lower finance cost; the bigger impact is on free-cash-flow and ROCE**, which can re-rate the multiple.\n- **Timeline:** H2 FY27.\n- **Status:** Inventory days rising in Q4 due to strategic-order pre-stock; expected to normalise as orders ship.\n\n### Trigger 6: AMD Turin / Intel Emerald Rapids \"Make in India\" platforms + HPC tailwind   [OPTIONALITY]\n- **What:** Beyond NVIDIA, Netweb has built CPU server platforms on AMD Turin (5th-gen EPYC) and Intel Emerald Rapids \u2014 addressing HPC and Agentic AI / inference workloads which are CPU-heavy. National Supercomputing Mission 2.0 (NSM 2.0) is the parallel government tailwind for HPC.\n- **Evidence:** Q4 FY26 concall \u2014 Sanjay Lodha: _\"HPC has grown by around 31%\u2026 because of NSM 2.0 plus adoption of HPC and AI together across automobile, oil & gas industries.\"_\n- **Quantum:** HPC segment grew 31% in FY26 to ~\u20b9520 cr; potential to grow at 25%+ annually for the next 3 years as NSM 2.0 deploys and Agentic AI lifts CPU demand.\n  - **Revenue impact:** HPC segment scaling from \u20b9520 cr \u2192 \u20b91,000+ cr by FY29.\n  - **EBITDA impact:** HPC carries higher gross margins than AI \u2014 protects blended margin.\n  - **PAT impact:** Supports normalised PAT margin at 10%+.\n- **Timeline:** FY27\u2013FY30.\n- **Status:** Underway but smaller in dollar terms than Triggers 1\u20134. Hyperscaler chip diversification (Google TPU, AWS Trainium) is also an optionality \u2014 Netweb is \"open to designing for them if there is significant adoption\" but not signed.\n\n---\n\n## Trigger Scoreboard\n\n| # | Trigger | Conviction | Revenue impact | EBITDA impact | PAT impact | Timeline | Status |\n|---|---|---|---|---|---|---|---|\n| 1 | \u20b91,734 cr IndiaAI sovereign-AI order execution | **HIGH** | +\u20b91,600 cr | +\u20b9208 cr | +\u20b9150 cr | FY27 Q1\u2013Q3 | In progress |\n| 2 | IndiaAI Mission 100k GPU expansion | MEDIUM | +\u20b91,000\u20131,500 cr p.a. | +\u20b9130\u2013195 cr p.a. | +\u20b993\u2013140 cr p.a. | FY27\u2013FY30 | Pipeline only |\n| 3 | \u20b94,400 cr organic pipeline @ 60% conversion | MEDIUM | +\u20b92,640 cr over 18m | +\u20b9370 cr cumulative | +\u20b9275 cr cumulative | FY27\u201328 | Active funnel |\n| 4 | NVIDIA Blackwell OEM partnership / Tyrone Camarero | **HIGH** | Sustains 30%+ growth | Defends 13\u201314% mgn | Protects 9\u201310% mgn | Multi-year | Active |\n| 5 | WC normalisation \u2192 margin recovery | MEDIUM | \u2014 | +\u20b915\u201320 cr (interest saved) | +\u20b915\u201320 cr p.a. | H2 FY27 | Pending shipment |\n| 6 | AMD/Intel CPU servers + NSM 2.0 HPC tailwind | OPTIONALITY | +\u20b9500 cr by FY29 | +\u20b975 cr | +\u20b950 cr | FY27\u2013FY30 | Underway, modest |\n\n**HIGH-conviction sum (T1 + T4):** \u20b91,600+ cr revenue locked in over FY27 alone with the strategic order, plus a long-duration moat from NVIDIA Blackwell exclusivity. This alone supports ~80%+ growth for FY27 and 30%+ structural growth thereafter.\n\n**MEDIUM-conviction sum (T2 + T3 + T5):** Adds another \u20b92,500\u20133,500 cr revenue over FY27\u201328 if conversion is normal.\n\n**OPTIONALITY (T6):** Worth \u20b9500 cr+ but not the reason to own the stock.\n\n---\n\n## What can break the thesis (top 3 risks)\n\n1. **Single-order slippage in IndiaAI execution.** ~73% of incremental FY27 revenue is tied to one \u20b91,600 cr remaining strategic shipment. If GoI delays acceptance / payment by 2 quarters, FY27 PAT could miss by 25\u201330%. Mitigant: LC-backed, no credit risk; only timing.\n\n2. **NVIDIA Blackwell allocation cut due to US export controls.** Netweb has no captive silicon. Any US restriction on advanced GPU shipments to non-aligned countries could throttle the AI segment. Mitigant: AMD/Intel alternates already in production, but those serve different workloads.\n\n3. **Valuation re-rating risk on margin disappointment.** At 108x TTM PE and 82x EV/EBITDA, even a single quarter of margin miss (e.g. 11% EBITDA vs 13% guidance) could compress the multiple by 30\u201340%. Reference: Dixon Tech trades at 38x, Kaynes at 70x \u2014 Netweb already at the high end.\n\n---\n\n## Verdict\n\nThe HIGH-conviction triggers (T1: \u20b91,600 cr strategic order in execution; T4: NVIDIA Blackwell OEM moat) alone justify a ~80% top-line growth path in FY27 and 30%+ structural growth through FY29. **Adding T2, T3, T5 gives plausible FY28 revenue of ~\u20b93,800\u20134,200 cr** (a doubling from FY26 if execution holds). The **thesis is fundamentally strong**, but the entry price (108x TTM PE) demands flawless execution \u2014 small operational misses will be punished hard. Best held as an **accumulate-on-dips** stock with a 3-year horizon; not a buy-at-CMP for new positions.\n\n**Sources:** Netweb AR FY25 (pages 12\u201315, 42\u201344); Concall transcripts \u2014 Q4 FY25 (5-May-25), Q1 FY26 (1-Aug-25), Q2 FY26 (3-Nov-25), Q3 FY26 (19-Jan-26), Q4 FY26 (4-May-26); CRISIL rating rationale Aug-25; Screener.in (CMP as of 15-May-26).\n";
+document.getElementById('md-valuation').textContent = "# Netweb Technologies \u2014 Sector-Specific Valuation\n*As of 16-May-2026 | Inputs: Screener.in, BSE/NSE filings, MarketsMojo, Yahoo Finance*\n\n## Why look beyond P/E for Netweb\n\n> _Explainer for first-time readers_ \u2014 Different valuation multiples answer different questions:\n> - **P/E (Price to Earnings)** is the simplest \u2014 how many years of current earnings the stock costs. Works well for mature, stable-margin businesses.\n> - **EV/EBITDA (Enterprise Value to EBITDA)** strips out capital structure (debt/cash) and non-cash charges (depreciation). **Better for hardware/manufacturing companies with different debt levels and capex cycles**, because it compares operating profitability directly.\n> - **EV/Sales (or P/S)** is used when a business is in rapid scaling phase and margins are still normalising. It tells you how much you pay per rupee of revenue.\n> - **PEG (P/E to Growth)** divides PE by expected earnings-growth rate. PEG < 1 = cheap relative to growth; PEG > 2 = expensive.\n> - **EV/Order Book** is sector-specific \u2014 useful for capital-goods / EMS firms because order book = forward revenue visibility.\n>\n> Netweb sits at the intersection of three sub-sectors: (a) **Indian EMS / contract manufacturing** (Dixon, Kaynes, Syrma, Avalon, Cyient DLM), (b) **AI infrastructure plays** (global: Supermicro, Dell ISG, HPE), and (c) **Defence / dual-use electronics** (Data Patterns, BEL). For each lens, use a different multiple.\n\n---\n\n## Lens 1 \u2014 Indian EMS peer set (P/E + EV/EBITDA + EV/Sales)\n\n| Company | M-cap (\u20b9 cr) | FY26 Rev (\u20b9 cr) | FY26 PAT (\u20b9 cr) | TTM P/E | EV/EBITDA | EV/Sales | ROCE | Rev growth FY26 |\n|---|---:|---:|---:|---:|---:|---:|---:|---:|\n| **Netweb Technologies** | **22,250** | **2,184** | **206** | **108x** | **82x** | **10.2x** | **37.5%** | **+90%** |\n| Dixon Technologies | ~80,000 | 49,586 | 1,644 | ~49x | ~36x | ~1.6x | 27% | +28% |\n| Kaynes Technology | 21,937 | 3,783 | 364 | ~76x | ~44x | ~5.8x | ~19% | +34% |\n| Syrma SGS | ~13,500 | ~4,200 | ~230 | ~59x | ~30x | ~3.2x | 12% | +14% |\n| Cyient DLM | 3,435 | 1,262 | 73 | 47x | 21x | 2.7x | ~12% | -14% |\n| Avalon Tech | ~7,000 | ~1,500 | ~100 | ~70x | ~38x | ~4.7x | 13% | +49% |\n| **EMS peer median** | \u2014 | \u2014 | \u2014 | **~63x** | **~37x** | **~4.0x** | **~13%** | **~+30%** |\n\n**Reading:**\n- On **P/E**, Netweb is ~70% above peer median (108x vs 63x). The market is pricing it as the \"purest AI infra exposure\" within EMS.\n- On **EV/EBITDA**, the premium is even sharper (82x vs 37x) \u2014 **the market believes Netweb's EBITDA quality is superior** (debt-free, light-capex, asset turnover 33x vs peers 4\u20139x). That belief is rational, but at 82x there is little room for disappointment.\n- On **EV/Sales**, Netweb at 10.2x is 2\u20136\u00d7 the peer set. This is the **most concerning multiple** \u2014 if the business turns into a \"commodity AI integrator\" (which is what some peers are also racing to become), EV/Sales should compress to 3\u20134x. Implied downside if that happens: 60\u201370%.\n- On **ROCE**, Netweb at 37.5% is genuinely best-in-class. Capital efficiency is the strongest argument _for_ the premium.\n\n---\n\n## Lens 2 \u2014 Global AI infrastructure OEM peers\n\n| Company | M-cap | TTM P/E | EV/EBITDA | EV/Sales | ROE | FY26 Rev growth |\n|---|---|---:|---:|---:|---:|---:|\n| Netweb Technologies | $2.7B | 108x | 82x | 10.2x | 32.9% | +90% |\n| Super Micro Computer | ~$30B | ~20x | ~14x | ~1.4x | ~26% | ~+90% (similar AI story) |\n| Dell Technologies | ~$80B | ~17x | ~10x | ~0.8x | n/m (negative equity) | +12% (ISG segment +30%) |\n| Hewlett Packard Enterprise | ~$25B | ~13x | ~8x | ~1.0x | ~13% | +18% |\n\n**Reading:** **Super Micro is the closest functional analogue** (NVIDIA-partnered AI server OEM riding sovereign + enterprise AI capex). SMCI trades at 20x earnings and 14x EV/EBITDA \u2014 Netweb's premium of **5\u20136x SMCI's multiples** is largely explained by (a) higher growth runway in India vs saturated US market, (b) sovereign-AI tailwind specific to India, and (c) lower float / Indian market liquidity premium. But it is **not infinitely sustainable**. Historically, Indian premiums over global peers compress to 2\u20133x once growth normalises.\n\n---\n\n## Lens 3 \u2014 Defence-electronics premium (Data Patterns benchmark)\n\n| Company | TTM P/E | EV/EBITDA | ROCE | Notes |\n|---|---:|---:|---:|---|\n| Netweb Technologies | 108x | 82x | 37.5% | 50% gov't customer, sovereign-AI exposure |\n| Data Patterns | 92x | 69x | ~30% | Pure-play defence electronics |\n| BEL (Bharat Electronics) | ~50x | ~33x | ~26% | Large-cap PSU defence |\n| HAL (Hindustan Aeronautics) | ~32x | ~20x | ~30% | Aerospace |\n\n**Reading:** Within the **dual-use / defence-tech bucket**, Netweb's premium over Data Patterns is **17%** on P/E and **19%** on EV/EBITDA \u2014 much narrower than the gap vs EMS. This lens makes Netweb look **less extreme**, because the market is treating it as a defence-adjacent name (sovereign infra = defence-grade procurement and recurring revenue). If the IndiaAI Mission converts to multi-year \u20b9100k GPU programmes, this is the right comp set.\n\n---\n\n## Lens 4 \u2014 Forward-looking PEG and EV/Order-book\n\n**PEG Ratio** (TTM P/E \u00f7 expected EPS growth FY27E)\n- Management FY27 guidance: 35\u201340% organic + strategic order execution. Implied EPS growth FY27E ~ **45\u201355%**.\n- PEG = 108 \u00f7 50 = **~2.2x**.\n- By the \"PEG < 1 is cheap, > 2 is expensive\" rule of thumb, Netweb is **expensive but not absurdly so** for a hyper-growth name. Compare: Data Patterns PEG ~3.5, Kaynes ~2.5, Dixon ~1.5.\n\n**EV/Order Book** \u2014 order-book based valuation:\n- Total order book + strategic backlog + L1 = **\u20b92,400 cr**; M-cap (= EV given net cash) \u2248 \u20b922,250 cr.\n- **EV/Order Book = 9.3x** \u2014 this is rich vs EMS peers (Kaynes ~3x, Cyient DLM ~1.4x) but reflects (a) order book turns ~once every 4 months at current run-rate (i.e. the order book is short-cycle, not a 2-3 year backlog like defence), and (b) the pipeline of \u20b94,400 cr is not yet in order book.\n- **If we include 60% pipeline conversion (\u20b92,640 cr) \u2192 adjusted EV/Order Book \u2248 4.4x** \u2014 more reasonable but still demanding.\n\n---\n\n## Lens 5 \u2014 Reverse-DCF / scenario-based valuation\n\n> _Explainer_ \u2014 A reverse DCF asks: \"what growth rate is the current stock price implying?\" If the implied rate is unrealistic, the stock is overpriced; if achievable, it's defensible.\n\nUsing a simple 10-year reverse DCF with **15% cost of equity**, **3% terminal growth** and **9.3% PAT margin held flat**, the current \u20b922,250 cr market cap implies:\n- **~30% revenue CAGR for the next 10 years**.\n\nThis is approximately what management is guiding for the **first 2 years (35\u201340%)**, with a gradual taper. **The price embeds management hitting the upper end of guidance for half a decade.** Possible, but not the base case.\n\n| Scenario | 10-yr revenue CAGR | Implied fair value | Upside/(downside) vs CMP \u20b93,888 |\n|---|---:|---:|---:|\n| **Bull** \u2014 sovereign AI delivers + global exports take off | 32% | \u20b94,800 | +24% |\n| **Base** \u2014 30% for 5 yrs, taper to 15% | 25% | \u20b93,400 | -13% |\n| **Bear** \u2014 competitive pressure compresses margins to 7% by FY30 | 20% | \u20b92,400 | -38% |\n\n---\n\n## Bottom line \u2014 which multiple matters most for Netweb?\n\nFor a high-growth, debt-free, working-capital-intensive Indian OEM with sovereign exposure, the most useful triangulation is:\n\n1. **EV/EBITDA** (37x peer median \u00d7 1.3x premium for ROCE leadership = ~48x fair) \u2014 Netweb at **82x is ~70% above fair value on this lens**.\n2. **PEG** (2.0x is the \"fair\" line for Indian small-cap high-growth) \u2014 Netweb at **2.2x is borderline fair** if execution holds.\n3. **EV/Sales** (peer median ~4x \u00d7 premium = 5\u20136x fair) \u2014 Netweb at **10.2x is the most stretched lens**.\n\n**Synthesis:** The stock is **priced for perfection on EV/EBITDA and EV/Sales**, but is **defensible on PEG** if FY27\u201328 deliver 40%+ EPS growth. A **15\u201325% drawdown** would bring multiples into a more comfortable zone; conversely, a **single missed quarter** could compress the multiple by 30\u201340% (as happened to Kaynes Q4 FY26 \u2014 stock fell 18% on a PAT miss).\n\n> **Best entry framework:** Stagger entries on EV/EBITDA correction to <60x, or PE correction to <85x, with a target weight tilted by execution evidence (CFO/PAT in H1 FY27 above 0.8, borrowings unwinding below \u20b9150 cr).\n\n**Sources:** Screener.in (Netweb, Dixon, Kaynes, Syrma, Cyient DLM, Avalon, Data Patterns) as of 15-May-2026; MarketsMojo Q4 FY26 result analyses; Yahoo Finance for global peers; BSE/NSE FY26 result filings.\n";
+</script>
+
+</body>
+</html>

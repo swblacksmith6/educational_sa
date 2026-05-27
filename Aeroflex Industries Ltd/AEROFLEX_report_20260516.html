@@ -1,0 +1,504 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aeroflex Industries — Investment Report (16-May-2026)</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<style>
+  :root{
+    --green:#16a34a; --green-bg:#dcfce7;
+    --amber:#d97706; --amber-bg:#fef3c7;
+    --red:#dc2626;   --red-bg:#fee2e2;
+    --grey:#6b7280;  --grey-bg:#e5e7eb;
+    --bg:#f9fafb; --text:#111827; --muted:#6b7280; --border:#e5e7eb;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.55;font-size:15px}
+  .wrap{max-width:1100px;margin:0 auto;padding:24px}
+  h1{font-size:28px;margin:0 0 4px}
+  h2{font-size:20px;margin:36px 0 12px;border-bottom:1px solid var(--border);padding-bottom:8px}
+  h3{font-size:16px;margin:24px 0 8px;color:#374151}
+  small,.muted{color:var(--muted);font-size:12px}
+  table{border-collapse:collapse;width:100%;background:#fff;font-size:14px;margin:8px 0 16px}
+  th,td{border:1px solid var(--border);padding:8px 10px;text-align:left;vertical-align:top}
+  th{background:#f3f4f6;font-weight:600}
+  tr:nth-child(even) td{background:#fafafa}
+  .badge{display:inline-block;padding:4px 12px;border-radius:14px;font-size:13px;font-weight:600;color:#fff}
+  .badge-green{background:var(--green)} .badge-amber{background:var(--amber)} .badge-red{background:var(--red)} .badge-grey{background:var(--grey)}
+  .pill{display:inline-block;padding:2px 8px;border-radius:10px;font-size:12px;font-weight:600}
+  .pill-green{background:var(--green-bg);color:#065f46}
+  .pill-amber{background:var(--amber-bg);color:#92400e}
+  .pill-red{background:var(--red-bg);color:#991b1b}
+  .pill-grey{background:var(--grey-bg);color:#374151}
+  .card{background:#fff;border:1px solid var(--border);border-radius:8px;padding:16px;margin:12px 0}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+  .stat{background:#fff;border:1px solid var(--border);border-radius:8px;padding:14px}
+  .stat .k{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+  .stat .v{font-size:22px;font-weight:600;margin-top:2px}
+  .stat .sub{font-size:12px;color:var(--muted);margin-top:2px}
+  .row-green{background:#f0fdf4 !important}
+  .row-amber{background:#fffbeb !important}
+  .row-red  {background:#fef2f2 !important}
+  .cell-green{background:var(--green-bg)} .cell-amber{background:var(--amber-bg)} .cell-red{background:var(--red-bg)} .cell-grey{background:var(--grey-bg)}
+  .callout{border-left:4px solid var(--red);background:var(--red-bg);padding:12px 16px;border-radius:6px;margin:12px 0}
+  .callout.amber{border-left-color:var(--amber);background:var(--amber-bg)}
+  .callout.green{border-left-color:var(--green);background:var(--green-bg)}
+  .callout h4{margin:0 0 6px}
+  .bar-wrap{background:var(--grey-bg);border-radius:6px;overflow:hidden;height:18px;width:100%;margin:4px 0}
+  .bar-fill{height:100%;background:var(--green)}
+  .chart-box{background:#fff;border:1px solid var(--border);border-radius:8px;padding:12px;height:340px;margin:12px 0}
+  details{background:#fff;border:1px solid var(--border);border-radius:8px;margin:12px 0;padding:0 16px}
+  details summary{cursor:pointer;padding:14px 0;font-weight:600;font-size:15px;list-style:none}
+  details summary::after{content:"▸";float:right;color:var(--muted)}
+  details[open] summary::after{content:"▾"}
+  details pre{white-space:pre-wrap;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px;background:#f3f4f6;padding:14px;border-radius:6px;overflow-x:auto;max-height:480px;overflow-y:auto;margin-bottom:16px}
+  .quote{font-style:italic;color:#1f2937;border-left:3px solid var(--grey);padding-left:10px;margin:6px 0}
+  .src{font-size:11px;color:var(--muted)}
+  .arr-up{color:var(--green);font-weight:700} .arr-dn{color:var(--red);font-weight:700}
+  hr{border:none;border-top:1px solid var(--border);margin:32px 0}
+  .footer{font-size:12px;color:var(--muted);margin-top:36px;padding-top:16px;border-top:1px solid var(--border)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ============ HEADER ============ -->
+  <header>
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px">
+      <div>
+        <h1>Aeroflex Industries Limited</h1>
+        <div class="muted">NSE: AEROFLEX | BSE: 543972 | Industrial — Flexible Flow Solutions | Report date: 16-May-2026</div>
+      </div>
+      <div style="text-align:right">
+        <div class="badge badge-amber" style="font-size:16px;padding:8px 18px">WATCH</div>
+        <div class="muted" style="margin-top:6px">Revisit on trigger</div>
+      </div>
+    </div>
+
+    <div class="grid" style="margin-top:18px">
+      <div class="stat"><div class="k">CMP</div><div class="v">≈ ₹382</div><div class="sub">Post-Q4FY26 (May-26)</div></div>
+      <div class="stat"><div class="k">Market Cap</div><div class="v">₹4,931 Cr</div><div class="sub">Screener.in / Trendlyne</div></div>
+      <div class="stat"><div class="k">P/E (TTM)</div><div class="v">~87x</div><div class="sub">P/B ~14x</div></div>
+      <div class="stat"><div class="k">ROCE / ROE</div><div class="v">22.3% / 14%</div><div class="sub">9MFY26 (post IPO cash drag)</div></div>
+    </div>
+  </header>
+
+  <!-- ============ EXECUTIVE SUMMARY ============ -->
+  <h2>Executive Summary</h2>
+  <div class="card">
+    <p style="margin:0 0 10px"><strong>Business in one line:</strong> India's largest exporter of stainless-steel flexible flow solutions (hoses, assemblies, fittings, metal bellows) — pivoting from commodity hoses to high-margin assemblies and AI-data-centre liquid cooling skid systems.</p>
+    <div class="grid">
+      <div class="stat"><div class="k">Piotroski F-Score</div>
+        <div class="v">5 / 9</div>
+        <div class="bar-wrap"><div class="bar-fill" style="width:55.5%"></div></div>
+        <div class="sub">Moderate — down from 7/9 (FY24) on post-IPO cash drag</div>
+      </div>
+      <div class="stat"><div class="k">Mgmt Credibility</div>
+        <div class="v" style="color:var(--green)">HIGH</div>
+        <div class="sub">9 beats + 5 partials + 1 miss across 5 concalls</div>
+      </div>
+      <div class="stat"><div class="k">Growth Triggers</div>
+        <div class="v"><span class="pill pill-green">3 HIGH</span> <span class="pill pill-amber">3 MED</span> <span class="pill pill-grey">2 OPT</span></div>
+        <div class="sub">Sum HIGH+MED peak revenue ≈ ₹1,150-1,300 Cr</div>
+      </div>
+      <div class="stat"><div class="k">Verdict justification</div>
+        <div class="v" style="font-size:14px;font-weight:400;line-height:1.4">Strategically attractive, tactically expensive. Move to BUY-WORTHY on 15-25% correction or FY27 Q1-Q2 skid validation.</div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ============ QUICK SCAN ============ -->
+  <h2>1 — 30-Minute Quick Scan</h2>
+
+  <h3>12-Point Annual Report Analysis (FY25)</h3>
+  <table>
+    <tr><th style="width:30%">Dimension</th><th>Finding</th></tr>
+    <tr><td>1. What does the company do?</td><td>Manufacturer of SS flexible flow solutions: corrugated hoses (braided/unbraided), assemblies & fittings, metal & miniature bellows, composite & interlock hoses. End-uses: oil & gas, steel, chemicals, aerospace, hydrogen, semiconductors, AI data-centre liquid cooling, EVs, fire-fighting, robotics, solar.</td></tr>
+    <tr><td>2. Segment mix (FY25)</td><td>SS Flexible Hoses: 48% | Assemblies, Fittings & Bellows: 52% (rising to 54% by 9MFY26; targeted >55% in FY26). Skid assemblies = new emerging vertical, FY27 target 20-22% of revenue.</td></tr>
+    <tr><td>3. Geography mix (FY25)</td><td>Exports 75% (90+ countries); Domestic 25% (rising to 31% in Q4FY26). Americas 56% of exports, Europe 30%, Asia 10%, Africa 3%. <strong>US alone = 47% of exports</strong>.</td></tr>
+    <tr><td>4. Customer concentration</td><td>DRHP-era Top-5 = 24.1% of revenue, Top-10 = 31.4% (declining from 33% in FY22). Multi-national OEMs, big-name India clients (ONGC, Tata Steel, IndianOil, Pidilite, Welspun). <strong>Supplier concentration HIGH: 75% from top-5; 43% raw material imports from China.</strong></td></tr>
+    <tr><td>5. Promoter & management</td><td>Promoter holding 67.0% via Aeroflex Enterprises Ltd. <strong>0% pledge.</strong> MD: Asad Daud, 35, MSc LSE + Harvard exec ed. WTD/CFO: Mustafa Kachwala, 57 (since 2010). 4 of 7 directors independent; 97.96% board attendance.</td></tr>
+    <tr><td>6. Capex cycle</td><td><strong>Aggressive expansion.</strong> FY25 capex ₹103 Cr; new metal bellows plant (Lodha Palava II, 68k sqft, live Jan-25); new Chakan unit for skids; Hyd-Air acquisition. Hose capacity 16.5 → 20 Mn m by Q2FY27; skid capacity 2k → 15k units by Q2FY27.</td></tr>
+    <tr><td>7. Working capital</td><td>Inventory turnover up (5.53x → 6.31x). <strong>Debtor turnover down (3.93x → 3.46x; ~106 days).</strong> Net WC turnover compressed (2.82 → 2.12). Current ratio 2.89 — comfortable.</td></tr>
+    <tr><td>8. Debt & interest coverage</td><td>Total borrowings ₹58 Cr (vehicle loans). <strong>Net debt/equity 0.0x</strong> (effectively debt-free). EBITDA/Interest = 283x.</td></tr>
+    <tr><td>9. Key risks</td><td>Regulatory; US tariffs; FX (75% exports USD-denominated); SS commodity prices; geopolitical (43% RM from China).</td></tr>
+    <tr><td>10. Related-party transactions</td><td>Asad Daud remuneration ₹1.15 Cr; modest. Sales to promoter entity Italica Global FZC ₹2.84 Cr (declining). <span class="pill pill-amber">AMBER</span> New M.R. Organisation maintenance contract ₹3.56 Cr; CSR ₹0.89 Cr to SAT Foundation (director's relative trustee).</td></tr>
+    <tr><td>11. Auditor</td><td>Shweta Jain & Co. — continuing. FY25 audit clean, unqualified. No material weakness in IFC.</td></tr>
+    <tr><td>12. Strategy / Guidance</td><td>LT EBITDA margin target 24-25% (currently 22.6% in FY26). FY27 guide: ~35% revenue growth + ~23% EBITDA margin. Value-add mix to keep rising. Domestic share to grow.</td></tr>
+  </table>
+
+  <h3>10-Point Forensic Red Flag Scan</h3>
+  <table>
+    <tr><th>#</th><th>Check</th><th style="width:14%">Status</th><th>Comment</th></tr>
+    <tr class="row-amber"><td>1</td><td>CFO / PAT ratio</td><td><span class="pill pill-amber">AMBER</span></td><td>FY25 CFO ₹26.6 Cr vs PAT ₹52.5 Cr = 0.51x. FY24 was 1.05x. Watch FY26.</td></tr>
+    <tr class="row-amber"><td>2</td><td>Receivables vs revenue</td><td><span class="pill pill-amber">AMBER</span></td><td>Receivables +23% vs revenue +18%; DSO stretched ~106 days.</td></tr>
+    <tr class="row-green"><td>3</td><td>Inventory vs revenue</td><td><span class="pill pill-green">GREEN</span></td><td>Inventory +13% vs revenue +18%; turnover improved.</td></tr>
+    <tr class="row-green"><td>4</td><td>Contingent liabilities vs NW</td><td><span class="pill pill-green">GREEN</span></td><td>Negligible; NW ₹342 Cr buffer.</td></tr>
+    <tr class="row-green"><td>5</td><td>Promoter pledging</td><td><span class="pill pill-green">GREEN</span></td><td>0% pledge, confirmed for FY26.</td></tr>
+    <tr class="row-green"><td>6</td><td>Auditor qualifications</td><td><span class="pill pill-green">GREEN</span></td><td>Clean, no qualifications, no auditor change.</td></tr>
+    <tr class="row-amber"><td>7</td><td>Related-party transactions</td><td><span class="pill pill-amber">AMBER</span></td><td>Modest sales (₹2.8 Cr) + machine maintenance fees (₹3.6 Cr) to promoter group; CSR ₹0.89 Cr to family trust. Monitor.</td></tr>
+    <tr class="row-green"><td>8</td><td>Goodwill / intangibles</td><td><span class="pill pill-green">GREEN</span></td><td>Goodwill (Hyd-Air) ₹1.3 Cr — immaterial.</td></tr>
+    <tr class="row-green"><td>9</td><td>Equity dilution</td><td><span class="pill pill-green">GREEN</span></td><td>IPO Aug-23; no dilution since. Share count constant 12.93 Cr.</td></tr>
+    <tr class="row-green"><td>10</td><td>Subsidiary losses absorbed</td><td><span class="pill pill-green">GREEN</span></td><td>UK sub tiny loss (-₹0.07 Cr), Hyd-Air profitable (+₹0.49 Cr).</td></tr>
+  </table>
+
+  <div class="grid">
+    <div>
+      <h3>Piotroski F-Score breakdown</h3>
+      <div class="chart-box"><canvas id="piotChart"></canvas></div>
+    </div>
+    <div>
+      <h3>DuPont Decomposition (3-year)</h3>
+      <div class="chart-box"><canvas id="dupontChart"></canvas></div>
+    </div>
+  </div>
+
+  <h3>5-Year Financial Trajectory</h3>
+  <div class="chart-box" style="height:380px"><canvas id="finChart"></canvas></div>
+
+  <div class="callout">
+    <h4>Bear Case (sharpest arguments against)</h4>
+    <ol style="margin:0;padding-left:22px">
+      <li><strong>Valuation extreme.</strong> 87x trailing P/E, 14x P/B — needs 35-40% earnings CAGR for 5+ years just to hold price.</li>
+      <li><strong>US tariff + China RM double squeeze.</strong> 47% of exports to US, 43% RM from China.</li>
+      <li><strong>Working capital creep.</strong> Receivables rising faster than revenue 2 years running; CFO/PAT dropped to 51%.</li>
+      <li><strong>Small base, single-customer skid concentration.</strong> ₹300+ Cr peak skid revenue depends on one exclusive US principal.</li>
+      <li><strong>Promoter group complexity.</strong> Multi-entity Daud group, RPTs creep, young 35-year-old MD controls cap table.</li>
+    </ol>
+  </div>
+
+  <hr>
+
+  <!-- ============ CONCALL ============ -->
+  <h2>2 — Concall Walk-the-Talk (5 calls: Aug-25 → May-26)</h2>
+
+  <h3>FY26 Quarterly Headline Numbers</h3>
+  <table>
+    <tr><th>Quarter</th><th>Total Income (₹ Cr)</th><th>EBITDA (₹ Cr)</th><th>EBITDA %</th><th>PAT (₹ Cr)</th><th>PAT %</th></tr>
+    <tr><td>Q1 FY26 (Jul-25)</td><td>84.67 <span class="arr-dn">▼6% YoY</span></td><td>15.81</td><td>18.68%</td><td>7.10</td><td>8.46%</td></tr>
+    <tr><td>Q2 FY26 (Oct-25)</td><td>111.05 <span class="arr-up">▲16% YoY</span></td><td>26.06</td><td>23.47%</td><td>14.23</td><td>12.82%</td></tr>
+    <tr><td>Q3 FY26 (Jan-26)</td><td>121.12 <span class="arr-up">▲21% YoY</span></td><td>28.58</td><td>23.59%</td><td>16.49</td><td>13.62%</td></tr>
+    <tr><td>Q4 FY26 (May-26)</td><td>126.50 <span class="arr-up">▲38% YoY</span></td><td>30.00</td><td>23.86%</td><td>17.60</td><td>13.90%</td></tr>
+    <tr style="background:#eff6ff"><td><strong>FY26 Full Year</strong></td><td><strong>443.30 ▲17%</strong></td><td><strong>99.70 ▲26%</strong></td><td><strong>22.60%</strong></td><td><strong>55.50 ▲6%</strong></td><td><strong>12.50%</strong></td></tr>
+  </table>
+
+  <div class="chart-box" style="height:340px"><canvas id="qChart"></canvas></div>
+
+  <h3>Walk-the-Talk Scorecard (15 forward statements)</h3>
+  <table>
+    <tr><th>#</th><th>Forward Statement</th><th>Source</th><th>Outcome</th><th>Score</th></tr>
+    <tr class="row-green"><td>1</td><td>Q1 dip will be offset over remainder of year</td><td>Aug-25</td><td>Q2-Q4 fully offset; FY26 record numbers</td><td><span class="pill pill-green">+1</span></td></tr>
+    <tr class="row-green"><td>2</td><td>FY26 EBITDA growth &gt;20%</td><td>Aug-25</td><td>FY26 EBITDA +26%</td><td><span class="pill pill-green">+1</span></td></tr>
+    <tr class="row-green"><td>3</td><td>Margins 21-22% in coming quarters</td><td>Oct-25</td><td>Q3 23.6%, Q4 23.9% — beat</td><td><span class="pill pill-green">+1</span></td></tr>
+    <tr class="row-green"><td>4</td><td>Liquid cooling contribution from Q3 onwards</td><td>Oct-25</td><td>Q3 first dispatch; FY26 ₹21.2 Cr</td><td><span class="pill pill-green">+1</span></td></tr>
+    <tr class="row-green"><td>5</td><td>Hyd-Air peak revenue ₹32-35 Cr</td><td>Aug-25</td><td>FY26 actual ₹31.64 Cr — matched</td><td><span class="pill pill-green">+1</span></td></tr>
+    <tr class="row-amber"><td>6</td><td>Bellows run-rate ₹12 Cr → ₹36 Cr in few quarters</td><td>Jan-26</td><td>FY26 actual ₹8 Cr — admitted lag</td><td><span class="pill pill-amber">0</span></td></tr>
+    <tr class="row-green"><td>7</td><td>New businesses to contribute 10-20% of FY26</td><td>Aug-25</td><td>Actual: 14% (Hyd-Air+Skid+Bellows ≈ ₹61 Cr)</td><td><span class="pill pill-green">+1</span></td></tr>
+    <tr class="row-green"><td>8</td><td>Skid capacity to 15,000 units by Jun-26</td><td>Jan-26</td><td>6,000 live in May-26; on track for 15k Q2FY27</td><td><span class="pill pill-green">+1</span></td></tr>
+    <tr class="row-amber"><td>9</td><td>Mini-bellows capex ₹23 Cr by Mar-26</td><td>Oct-25</td><td>Rationalized to ₹10.5 Cr — flexed honestly</td><td><span class="pill pill-amber">0</span></td></tr>
+    <tr class="row-green"><td>10</td><td>FY27 mid-to-high teens growth achievable</td><td>Aug-25, Oct-25</td><td>FY26 17%; FY27 now guided ~35%</td><td><span class="pill pill-green">+1</span></td></tr>
+    <tr class="row-green"><td>11</td><td>No order cancellations from US customers</td><td>Oct-25</td><td>Held up through Q4FY26</td><td><span class="pill pill-green">+1</span></td></tr>
+    <tr class="row-green"><td>12</td><td>Domestic share to keep rising from 28%</td><td>Aug-25</td><td>Q4FY26 domestic = 31%</td><td><span class="pill pill-green">+1</span></td></tr>
+    <tr class="row-amber"><td>13</td><td>Skid order book ₹42 Cr immediate execution</td><td>Jan-26</td><td>FY26 dispatched ₹21.2 Cr; design/audit bottleneck</td><td><span class="pill pill-amber">0</span></td></tr>
+    <tr class="row-amber"><td>14</td><td>25% EBITDA margin over 4-5 years</td><td>Aug-25</td><td>Q4 already 23.9% — directionally right, too early to score</td><td><span class="pill pill-amber">0</span></td></tr>
+    <tr class="row-amber"><td>15</td><td>Bellows peak ₹85 Cr by FY28-29</td><td>Aug-25, Jan-26</td><td>Reset honestly, not yet testable</td><td><span class="pill pill-amber">0</span></td></tr>
+  </table>
+
+  <div style="display:flex;gap:16px;margin:12px 0;align-items:center;flex-wrap:wrap">
+    <div class="chart-box" style="flex:1;min-width:300px;height:240px"><canvas id="wttChart"></canvas></div>
+    <div class="callout green" style="flex:1;min-width:280px">
+      <h4>Net Walk-the-Talk: +9</h4>
+      <div>9 beats / 5 partials / 1 miss → <strong>HIGH credibility — leaning "Credible Optimist"</strong>. Management delivered or beat all major FY26 commitments and openly admitted misses (bellows lag, mini-bellows capex cut).</div>
+    </div>
+  </div>
+
+  <h3>Confidence Language Audit (across 5 calls)</h3>
+  <table>
+    <tr><th>Conviction tier</th><th>Topics</th><th>Pattern</th></tr>
+    <tr class="row-green"><td><span class="pill pill-green">HIGH</span> "we will / have / are"</td><td>Domestic mix, FY26 EBITDA growth, first dispatch live, hose capacity adds, ASME cert, Hyd-Air integration, zero promoter pledge</td><td>Used only for items already underway or delivered — <strong>positive signal</strong></td></tr>
+    <tr class="row-amber"><td><span class="pill pill-amber">MEDIUM</span> "we expect / anticipate"</td><td>FY27 35% growth + 23% margin; skid 20-22% of FY27; bellows peak ₹85 Cr FY29; liquid cooling ₹325 Cr peak FY29</td><td>Reasonable, anchored to capex visibility</td></tr>
+    <tr class="row-red"><td><span class="pill pill-red">LOW</span> "may / could / hopefully"</td><td>International skid exports; QIP timing; FY28+ ROCE; Europe demand timing; tariff resolution</td><td>Reserved for external-dependent items — honest hedging</td></tr>
+  </table>
+
+  <h3>What management dodged / did not answer</h3>
+  <ol>
+    <li><strong>Liquid cooling margins</strong> — repeatedly declined citing confidentiality. Major modelling blind spot.</li>
+    <li><strong>Skid assembly unit margin vs hoses</strong> — only acknowledged "in line with assemblies, better than hoses". No numbers.</li>
+    <li><strong>Updated top-customer concentration</strong> — only said "biggest customer ~25-26% of international sales" in May-26.</li>
+    <li><strong>Specific data-centre customers</strong> — only "listed US corp &gt; USD 70 Bn mcap" (Vertiv / Schneider Electric likely).</li>
+    <li><strong>Tariff price-absorption %</strong> — implied ~8% discount but never confirmed.</li>
+  </ol>
+
+  <hr>
+
+  <!-- ============ GROWTH TRIGGERS ============ -->
+  <h2>3 — Growth Triggers 1-Pager</h2>
+
+  <h3>Trigger Scoreboard</h3>
+  <table>
+    <tr><th>#</th><th>Trigger</th><th>Conviction</th><th>Peak Quantum (₹ Cr)</th><th>Timeline</th><th>Status</th></tr>
+    <tr class="row-green"><td>1</td><td>Liquid cooling skid assemblies (data centre)</td><td><span class="pill pill-green">HIGH</span></td><td>300–325</td><td>Peak FY29</td><td>On track, slight execution lag</td></tr>
+    <tr class="row-green"><td>2</td><td>Value-add mix → 24% EBITDA margin</td><td><span class="pill pill-green">HIGH</span></td><td>+200-300 bps (₹12-18 Cr/yr)</td><td>FY28</td><td>On track (Q4FY26 = 23.86%)</td></tr>
+    <tr class="row-green"><td>3</td><td>Hose capacity 16.5 → 20 Mn metres</td><td><span class="pill pill-green">HIGH</span></td><td>650–675 (full unit)</td><td>Q2FY27 commissioned; FY28 full util.</td><td>On track</td></tr>
+    <tr class="row-amber"><td>4</td><td>Hyd-Air integration + new capex</td><td><span class="pill pill-amber">MEDIUM</span></td><td>45–50 standalone + pull-through</td><td>FY27 ramp</td><td>Awaiting capex announcement</td></tr>
+    <tr class="row-amber"><td>5</td><td>Domestic mix + India-EU FTA</td><td><span class="pill pill-amber">MEDIUM</span></td><td>+60-80 Cr in FY27</td><td>FY27 onwards</td><td>Trending positive</td></tr>
+    <tr class="row-amber"><td>6</td><td>Metal bellows + ASME certification</td><td><span class="pill pill-amber">MEDIUM</span></td><td>85 (FY29)</td><td>FY28-29 peak</td><td>Lagging vs initial guide</td></tr>
+    <tr><td>7</td><td>International skid exports (US, APAC hub)</td><td><span class="pill pill-grey">OPTIONALITY</span></td><td>TBD</td><td>FY28+</td><td>Mgmt aspirational; no contract yet</td></tr>
+    <tr><td>8</td><td>QIP-funded inorganic acquisition</td><td><span class="pill pill-grey">OPTIONALITY</span></td><td>TBD</td><td>When target identified</td><td>Approved but undeployed</td></tr>
+  </table>
+
+  <div class="chart-box" style="height:380px"><canvas id="triggerChart"></canvas></div>
+
+  <div class="callout amber">
+    <h4>What can break the thesis (top 3 risks)</h4>
+    <ol style="margin:0;padding-left:22px">
+      <li><strong>Valuation prices flawless execution.</strong> 87x P/E, 14x P/B — any miss on FY27 (35% growth, 23% margin) could compress the multiple 30-40%.</li>
+      <li><strong>US tariff persistence + slow new-customer onboarding.</strong> US still 25-26% of revenue; existing customers retained but new OEM acquisition is bottlenecked.</li>
+      <li><strong>Single-customer / single-product skid concentration.</strong> Peak ₹300+ Cr skid revenue depends on one exclusive principal; no IP/patent; design now shared.</li>
+    </ol>
+  </div>
+
+  <div class="callout green">
+    <h4>Verdict</h4>
+    <p style="margin:0">The 3 HIGH-conviction triggers (skids ramp, margin mix, hose capex) alone justify a credible 2.5x revenue thesis from ₹443 Cr (FY26) to ₹1,100+ Cr by FY28-29, with EBITDA potentially scaling from ₹100 Cr to ₹250-280 Cr. The thesis is <strong>fundamentally sound</strong>; <strong>valuation is the gating factor</strong>. Stock works as a "WATCH at 87x P/E; BUY-WORTHY on 15-25% correction OR FY27 Q1-Q2 prints validating skid scale-up." Current price already prices in 5 years of perfect execution; asymmetry is unfavourable at CMP.</p>
+  </div>
+
+  <hr>
+
+  <!-- ============ RAW MARKDOWN ============ -->
+  <h2>4 — Raw markdown sources (collapsible)</h2>
+
+  <details><summary>Full Quick Scan markdown</summary><pre id="md1"></pre></details>
+  <details><summary>Full Walk-the-Talk markdown</summary><pre id="md2"></pre></details>
+  <details><summary>Full Growth Triggers markdown</summary><pre id="md3"></pre></details>
+
+  <!-- ============ FOOTER ============ -->
+  <div class="footer">
+    <div>Generated 16-May-2026 | Source files: AEROFLEX_quick_scan_20260516.md · AEROFLEX_walk_the_talk_20260516.md · AEROFLEX_growth_triggers_20260516.md</div>
+    <div>Data inputs: Aeroflex Annual Reports FY23/FY24/FY25; DRHP 2023; Concall transcripts Q1-Q4 FY26 + Q3FY26 Investor Presentation; Screener.in / Trendlyne for valuation & shareholding (May 2026).</div>
+    <div style="margin-top:6px"><strong>Research only. Not investment advice.</strong></div>
+  </div>
+
+</div>
+
+<script>
+/* ============ Raw markdown payload (embedded as template literals) ============ */
+const RAW_QS = `# AEROFLEX INDUSTRIES LIMITED – Quick Scan (SOIC 30-Minute Deep Dive)
+
+Ticker: AEROFLEX (NSE) / 543972 (BSE)
+CMP / Market Cap: ~₹4,931 Cr (May 2026, post Q4FY26 results)
+Sector: Industrial – Flexible Flow Solutions (SS hoses, assemblies, metal bellows)
+Auditor: Shweta Jain & Co., FRN 127673W (clean opinion FY25)
+
+VERDICT: WATCH (revisit on trigger)
+
+5-Year Financials (Standalone):
+- Total Income (₹ Cr): FY21 144.8 → FY22 241.0 → FY23 269.4 → FY24 321.8 → FY25 378.8 (CAGR 21%)
+- EBITDA (₹ Cr): FY21 22.3 → FY22 46.9 → FY23 54.1 → FY24 65.7 → FY25 81.6 (CAGR 30%)
+- EBITDA Margin %: FY21 15.4 → FY25 21.5
+- PAT (₹ Cr): FY21 6.0 → FY22 27.6 → FY23 30.2 → FY24 41.7 → FY25 52.5 (CAGR 62%)
+- ROCE %: FY21 18.8 → FY22 43.1 → FY23 37.0 → FY24 31.3 → FY25 23.9
+- ROE %: FY21 10.8 → FY22 38.0 → FY23 30.1 → FY24 20.5 → FY25 16.5
+- Net Debt/Equity: 0.8 → 0.4 → 0.3 → 0.0 → 0.0
+
+10-Point Forensic Red Flag Scan summary:
+1. CFO/PAT - AMBER (FY25 0.51x)
+2. Receivables vs Revenue - AMBER (+23% vs +18%)
+3. Inventory vs Revenue - GREEN
+4. Contingent liabilities - GREEN (negligible)
+5. Promoter pledging - GREEN (0% pledge)
+6. Auditor qualifications - GREEN
+7. RPT scope - AMBER (M.R. Organisation maintenance ₹3.56 Cr; SAT Foundation CSR ₹0.89 Cr)
+8. Goodwill/intangibles - GREEN
+9. Equity dilution - GREEN (no dilution since IPO Aug-2023)
+10. Subsidiary losses - GREEN
+
+Piotroski F-Score (FY25 vs FY24): 5 / 9 (down from 7/9 due to post-IPO cash drag and capex phase)
+
+DuPont decomposition (consolidated):
+                FY23    FY24    FY25
+Net Margin %    11.2    13.1    13.9
+Asset Turnover  1.66x   0.95x   0.94x
+Leverage        1.62x   1.28x   1.25x
+ROE %           30.1    15.9    16.3
+
+Bear Case (5 sharpest arguments against owning):
+1. Valuation extreme (87x trailing P/E, 14x P/B) — needs 35-40% earnings CAGR 5+ yrs to hold price
+2. Export concentration to US + tariff risk (47% of exports to US; 43% raw material from China)
+3. Working capital creep (CFO/PAT dropped to 51%, debtor days stretching)
+4. Small base, single-customer skid concentration
+5. Promoter group complexity & RPT optics
+
+For full markdown see file: AEROFLEX_quick_scan_20260516.md`;
+
+const RAW_WTT = `# AEROFLEX INDUSTRIES — Concall Walk-the-Talk Scorecard
+Period covered: Q4 FY25 → Q4 FY26 (Aug-25, Nov-25, Jan-26 IP, Feb-26, May-26)
+Concalls analyzed: 5
+
+FY26 Quarterly Headline Numbers:
+Quarter        Total Income  EBITDA   EBITDA%   PAT    PAT%
+Q1 FY26 Jul-25    84.67       15.81    18.68%    7.10   8.46%
+Q2 FY26 Oct-25   111.05       26.06    23.47%   14.23  12.82%
+Q3 FY26 Jan-26   121.12       28.58    23.59%   16.49  13.62%
+Q4 FY26 May-26   126.50       30.00    23.86%   17.60  13.90%
+FY26 FULL YEAR   443.30       99.70    22.60%   55.50  12.50%
+
+Walk-the-Talk: 9 beats + 5 partials + 1 miss = +9 net score
+
+Management Credibility: HIGH — leaning "Credible Optimist"
+- Major FY26 guidance items delivered or beat
+- Management voluntarily admitted misses (bellows slow; mini-bellows capex cut from ₹23 Cr to ₹10.5 Cr)
+- Q1 stress test (tariff shock) navigated without losing full-year
+- Margin guidance 21-22% (kept conservatively low; actuals ~23.5-23.9%)
+
+Confidence Language Audit:
+HIGH conviction used for: items already underway (capacity added, contracts signed, certifications received)
+MEDIUM conviction for: FY27 35% growth + 23% margin, skid 20-22% of FY27, peak revenues FY28-29
+LOW conviction for: international skid exports, tariff resolution, EU demand timing, QIP timing
+
+Dodged questions:
+1. Liquid cooling unit margins (citing confidentiality)
+2. Skid margin vs hoses vs bellows (only directional commentary)
+3. Top customer % concentration (only one number given in May-26: ~25-26%)
+4. Specific data-centre customer naming
+5. Tariff price-absorption %
+
+FY27 explicit guidance (May-26 call): ~35% revenue growth + ~23% EBITDA margin
+Skid assemblies to scale from 5% (FY26) to 20-22% (FY27) of revenue
+
+For full markdown see file: AEROFLEX_walk_the_talk_20260516.md`;
+
+const RAW_GT = `# AEROFLEX INDUSTRIES — Growth Triggers 1-Pager
+As of 16-May-2026 | CMP ≈ ₹382 | Mcap ≈ ₹4,931 Cr
+
+Business in one line:
+India's largest exporter of stainless-steel flexible flow solutions, pivoting from commodity hoses to high-margin assemblies and AI-data-centre liquid cooling skid systems.
+
+Trigger Scoreboard:
+1. Liquid cooling skid assemblies (DC)             HIGH        300-325 Cr peak FY29
+2. Value-add mix → 24% EBITDA                       HIGH        +200-300 bps
+3. Hose capacity 16.5 → 20 Mn metres                HIGH        650-675 Cr peak
+4. Hyd-Air ramp + new capex                         MEDIUM      45-50 Cr standalone
+5. Domestic + India-EU FTA                          MEDIUM      +60-80 Cr FY27
+6. Metal bellows + ASME                             MEDIUM      85 Cr FY29 peak
+7. International skid exports (US, APAC hub)        OPTIONALITY TBD (mgmt aspirational)
+8. QIP-funded inorganic acquisition                 OPTIONALITY TBD (approved, undeployed)
+
+Sum of HIGH + MEDIUM peak revenue triggers ≈ ₹1,150-1,300 Cr by FY28-29 vs FY26 base of ₹443 Cr (~2.5-3x runway)
+
+Top 3 risks:
+1. Valuation already discounting flawless execution (87x P/E, 14x P/B)
+2. US tariff persistence + slow new-customer onboarding
+3. Single-customer / single-product skid concentration
+
+Verdict:
+The 3 HIGH-conviction triggers alone justify a credible 2.5x revenue thesis from FY26 base by FY28-29, with EBITDA potentially scaling from ₹100 Cr to ₹250-280 Cr. The thesis is fundamentally sound but valuation is the gating factor. Stock works as a "WATCH at 87x P/E; BUY-WORTHY on 15-25% correction OR FY27 Q1-Q2 prints validating skid scale-up."
+
+For full markdown see file: AEROFLEX_growth_triggers_20260516.md`;
+
+document.getElementById('md1').textContent = RAW_QS;
+document.getElementById('md2').textContent = RAW_WTT;
+document.getElementById('md3').textContent = RAW_GT;
+
+/* ============ Charts ============ */
+const GREEN = '#16a34a', AMBER = '#d97706', RED = '#dc2626', GREY = '#6b7280', BLUE = '#2563eb';
+
+// Piotroski F-Score detail
+new Chart(document.getElementById('piotChart'), {
+  type:'bar',
+  data:{
+    labels:['NI>0','CFO>0','ΔROA>0','CFO>NI','LT debt↓','CR↑','No issue','Gross margin↑','Asset turn↑'],
+    datasets:[{label:'Score',data:[1,1,0,0,1,0,1,1,0],backgroundColor:(c)=>c.parsed.y===1?GREEN:RED}]
+  },
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},title:{display:true,text:'5/9 — 4 items missing'}},scales:{y:{min:0,max:1,ticks:{stepSize:1}}}}
+});
+
+// DuPont
+new Chart(document.getElementById('dupontChart'), {
+  type:'bar',
+  data:{
+    labels:['Net Margin %','Asset Turnover (x)','Leverage (x)','ROE %'],
+    datasets:[
+      {label:'FY23',data:[11.2,1.66,1.62,30.1],backgroundColor:GREY},
+      {label:'FY24',data:[13.1,0.95,1.28,15.9],backgroundColor:AMBER},
+      {label:'FY25',data:[13.9,0.94,1.25,16.3],backgroundColor:GREEN}
+    ]
+  },
+  options:{responsive:true,maintainAspectRatio:false}
+});
+
+// 5-year financials
+new Chart(document.getElementById('finChart'), {
+  type:'line',
+  data:{
+    labels:['FY21','FY22','FY23','FY24','FY25','FY26'],
+    datasets:[
+      {label:'Total Income (₹ Cr)',data:[144.8,241.0,269.4,321.8,378.8,443.3],borderColor:BLUE,backgroundColor:'rgba(37,99,235,0.1)',yAxisID:'y',tension:0.25},
+      {label:'EBITDA (₹ Cr)',data:[22.3,46.9,54.1,65.7,81.6,99.7],borderColor:GREEN,backgroundColor:'rgba(22,163,74,0.1)',yAxisID:'y',tension:0.25},
+      {label:'PAT (₹ Cr)',data:[6.0,27.6,30.2,41.7,52.5,55.5],borderColor:AMBER,backgroundColor:'rgba(217,119,6,0.1)',yAxisID:'y',tension:0.25},
+      {label:'EBITDA Margin %',data:[15.4,19.5,20.1,20.4,21.5,22.6],borderColor:RED,backgroundColor:'rgba(220,38,38,0.1)',yAxisID:'y1',tension:0.25,borderDash:[5,5]}
+    ]
+  },
+  options:{
+    responsive:true,maintainAspectRatio:false,
+    scales:{
+      y:{position:'left',title:{display:true,text:'₹ Cr'}},
+      y1:{position:'right',title:{display:true,text:'EBITDA Margin %'},grid:{drawOnChartArea:false},min:10,max:25}
+    }
+  }
+});
+
+// Quarterly FY26
+new Chart(document.getElementById('qChart'), {
+  type:'bar',
+  data:{
+    labels:['Q1FY26','Q2FY26','Q3FY26','Q4FY26'],
+    datasets:[
+      {type:'bar',label:'Total Income (₹ Cr)',data:[84.67,111.05,121.12,126.50],backgroundColor:BLUE,yAxisID:'y'},
+      {type:'bar',label:'EBITDA (₹ Cr)',data:[15.81,26.06,28.58,30.00],backgroundColor:GREEN,yAxisID:'y'},
+      {type:'line',label:'EBITDA Margin %',data:[18.68,23.47,23.59,23.86],borderColor:RED,borderWidth:2,yAxisID:'y1',tension:0.2,fill:false}
+    ]
+  },
+  options:{
+    responsive:true,maintainAspectRatio:false,
+    scales:{
+      y:{position:'left',title:{display:true,text:'₹ Cr'}},
+      y1:{position:'right',title:{display:true,text:'EBITDA %'},grid:{drawOnChartArea:false},min:10,max:30}
+    }
+  }
+});
+
+// Walk-the-talk scorecard
+new Chart(document.getElementById('wttChart'), {
+  type:'doughnut',
+  data:{
+    labels:['Beats (+1)','Partials (0)','Misses (-1)'],
+    datasets:[{data:[9,5,1],backgroundColor:[GREEN,AMBER,RED],borderWidth:0}]
+  },
+  options:{responsive:true,maintainAspectRatio:false,plugins:{title:{display:true,text:'Walk-the-Talk: 15 forward statements'}}}
+});
+
+// Trigger quantum
+new Chart(document.getElementById('triggerChart'), {
+  type:'bar',
+  data:{
+    labels:['Liquid cooling skid','Value-add EBITDA lift','Hose 20Mn m capacity','Hyd-Air ramp','Domestic + FTA','Metal bellows','Intl skid exports','Inorganic'],
+    datasets:[{
+      label:'Peak revenue / impact (₹ Cr)',
+      data:[325,18,675,50,70,85,0,0],
+      backgroundColor:[GREEN,GREEN,GREEN,AMBER,AMBER,AMBER,GREY,GREY]
+    }]
+  },
+  options:{
+    indexAxis:'y',
+    responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},title:{display:true,text:'Quantum sized — HIGH (green), MEDIUM (amber), OPTIONALITY (grey)'}},
+    scales:{x:{title:{display:true,text:'₹ Cr (peak revenue or annual EBITDA lift)'}}}
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>RIR Power Electronics — Investment Report — 16 May 2026</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.0/marked.min.js"></script>
+<style>
+  :root {
+    --green:#16a34a; --amber:#d97706; --red:#dc2626; --grey:#6b7280;
+    --green-bg:#dcfce7; --amber-bg:#fef3c7; --red-bg:#fee2e2; --grey-bg:#f3f4f6;
+    --bg:#f9fafb; --text:#111827; --border:#e5e7eb; --card:#ffffff;
+  }
+  * { box-sizing: border-box; }
+  html,body { margin:0; padding:0; background:var(--bg); color:var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 14.5px; line-height: 1.55; }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 24px 20px 80px; }
+  h1 { font-size: 1.55rem; margin: 0 0 4px; }
+  h2 { font-size: 1.18rem; margin: 28px 0 12px; padding-bottom:6px; border-bottom: 2px solid var(--border); }
+  h3 { font-size: 1.02rem; margin: 18px 0 8px; }
+  p { margin: 6px 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; margin: 8px 0 16px; background: var(--card); }
+  th, td { border: 1px solid var(--border); padding: 7px 9px; text-align: left; vertical-align: top; }
+  th { background: #f3f4f6; font-weight: 600; }
+  tr:nth-child(even) td { background: #fafafa; }
+  .badge { display: inline-block; padding: 4px 10px; border-radius: 999px; font-weight: 600; font-size: 12px; letter-spacing: 0.5px; }
+  .badge.green { background: var(--green-bg); color: var(--green); }
+  .badge.amber { background: var(--amber-bg); color: var(--amber); }
+  .badge.red { background: var(--red-bg); color: var(--red); }
+  .badge.grey { background: var(--grey-bg); color: var(--grey); }
+  .cell-green { background: var(--green-bg) !important; }
+  .cell-amber { background: var(--amber-bg) !important; }
+  .cell-red { background: var(--red-bg) !important; }
+  .cell-grey { background: var(--grey-bg) !important; }
+  .header-strip {
+    background: linear-gradient(180deg, #ffffff 0%, #f3f4f6 100%);
+    border: 1px solid var(--border); border-radius: 10px;
+    padding: 18px 22px; margin-bottom: 22px;
+  }
+  .header-strip .meta { color: #4b5563; font-size: 13px; margin-top: 2px; }
+  .header-strip .verdict { float: right; margin-top: -4px; }
+  .summary-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 22px; }
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; }
+  .card .label { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.6px; color: #6b7280; }
+  .card .value { font-size: 1.3rem; font-weight: 700; margin-top: 4px; }
+  .card .sub { font-size: 12px; color: #6b7280; margin-top: 4px; }
+  .pio-bar { width: 100%; height: 14px; background: #e5e7eb; border-radius: 6px; overflow: hidden; margin-top:8px; }
+  .pio-bar > div { height: 100%; background: var(--amber); }
+  .callout { border-left: 4px solid var(--red); background: #fff5f5; padding: 12px 16px; margin: 12px 0; border-radius: 0 8px 8px 0; }
+  .callout.amber { border-color: var(--amber); background: #fffbeb; }
+  .callout.green { border-color: var(--green); background: #f0fdf4; }
+  .citation { color: #6b7280; font-size: 11.5px; font-style: italic; }
+  details { background: var(--card); border: 1px solid var(--border); border-radius: 8px; margin: 8px 0; padding: 8px 14px; }
+  details summary { cursor: pointer; font-weight: 600; padding: 4px 0; }
+  details[open] summary { margin-bottom: 8px; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+  details pre { white-space: pre-wrap; font-family: ui-monospace, "SF Mono", "Cascadia Code", Consolas, monospace; font-size: 12.5px; max-height: 600px; overflow:auto; }
+  .chart-wrap { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px 8px; margin: 12px 0; }
+  .chart-wrap canvas { max-height: 280px; }
+  .small { font-size: 12.5px; color: #4b5563; }
+  ul { margin: 6px 0 10px; padding-left: 22px; }
+  li { margin: 3px 0; }
+  .legend { display: flex; gap: 14px; font-size: 12px; color: #4b5563; margin: 6px 0 0; flex-wrap: wrap; }
+  .legend .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 5px; vertical-align: middle; }
+  footer { color: #6b7280; font-size: 12px; margin-top: 36px; padding-top: 18px; border-top: 1px solid var(--border); }
+  @media (max-width: 760px) {
+    .summary-cards { grid-template-columns: repeat(2, 1fr); }
+    .header-strip .verdict { float: none; display:block; margin-top: 8px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HEADER -->
+  <div class="header-strip">
+    <span class="verdict badge amber">VERDICT: WATCH</span>
+    <h1>RIR Power Electronics Ltd.</h1>
+    <div class="meta">
+      BSE: 517035 &nbsp;·&nbsp; Sector: Power Semiconductors / SiC Fab &nbsp;·&nbsp; Report date: 16 May 2026<br>
+      <strong>CMP / Mcap / TTM P/E:</strong> pull from Screener.in immediately before any decision (post 1:1 bonus + 1:5 split; FV ₹2).
+    </div>
+  </div>
+
+  <!-- EXEC SUMMARY CARDS -->
+  <div class="summary-cards">
+    <div class="card">
+      <div class="label">Quick-scan Verdict</div>
+      <div class="value" style="color:var(--amber);">WATCH</div>
+      <div class="sub">Re-visit on FY26 results + Odisha milestones</div>
+    </div>
+    <div class="card">
+      <div class="label">Piotroski F-Score</div>
+      <div class="value">3 / 9</div>
+      <div class="pio-bar"><div style="width:33%"></div></div>
+      <div class="sub">Distorted by capex; re-score post-Odisha</div>
+    </div>
+    <div class="card">
+      <div class="label">Mgmt Credibility (Walk-the-Talk)</div>
+      <div class="value" style="color:var(--red);">LOW–MED</div>
+      <div class="sub">2 beats / 6 partials / 6 misses</div>
+    </div>
+    <div class="card">
+      <div class="label">Growth Triggers</div>
+      <div class="value"><span style="color:var(--green);">1</span> · <span style="color:var(--amber);">4</span> · <span style="color:var(--grey);">1</span></div>
+      <div class="sub">HIGH · MEDIUM · OPTIONALITY</div>
+    </div>
+  </div>
+
+  <p class="small"><strong>Business:</strong> India's only listed pure-play power-semiconductor &amp; power-equipment maker (Halol, Gujarat), now executing a ₹618 Cr Silicon Carbide ecosystem (EPI + Device-Fab + Packaging) in Odisha — first-of-its-kind in India — for railways, defence, renewables, EV-power, and green-hydrogen end-markets.</p>
+
+  <!-- ===================== QUICK SCAN ===================== -->
+  <h2>1. Quick Scan — Business &amp; Forensics</h2>
+
+  <h3>1.1 Five-Year Financial Highlights (Standalone, ₹ Lakhs)</h3>
+  <div class="chart-wrap">
+    <canvas id="rev_chart"></canvas>
+  </div>
+
+  <table>
+    <thead><tr><th>Metric (₹ Lakhs)</th><th>FY21</th><th>FY22</th><th>FY23</th><th>FY24</th><th>FY25</th></tr></thead>
+    <tbody>
+      <tr><td>Net Revenue</td><td>3,007</td><td>4,233</td><td>5,733</td><td>6,676</td><td>8,621</td></tr>
+      <tr><td>EBITDA</td><td>288</td><td>377</td><td>820</td><td>996</td><td>1,139</td></tr>
+      <tr><td>PAT</td><td>133</td><td>282</td><td>668</td><td>796</td><td>828</td></tr>
+      <tr><td>EBITDA Margin (%)</td><td>9.58</td><td>8.91</td><td>14.30</td><td>14.92</td><td>13.22</td></tr>
+      <tr><td>PAT Margin (%)</td><td>4.33</td><td>6.40</td><td>11.13</td><td>11.44</td><td>9.38</td></tr>
+      <tr><td>Net Worth</td><td>2,146</td><td>2,146</td><td>2,903</td><td>5,975</td><td>11,219</td></tr>
+      <tr><td>ROCE (%)</td><td>11.05</td><td>16.58</td><td>28.72</td><td>18.11</td><td>10.66</td></tr>
+      <tr><td>Interest Coverage (×)</td><td>4.95</td><td>5.94</td><td>7.85</td><td>8.00</td><td>7.89</td></tr>
+    </tbody>
+  </table>
+  <p class="citation">Source: RIR AR FY25 (56th Annual Report), KPI section.</p>
+
+  <h3>1.2 12-Point AR Analysis (highlights)</h3>
+  <table>
+    <thead><tr><th style="width:32%">Question</th><th>Finding</th></tr></thead>
+    <tbody>
+      <tr><td>What does the company do?</td><td>Power semiconductors (diodes, thyristors, modules, bridge rectifiers, 28–125 mm devices up to 5,000 V) + power equipment (rectifiers, battery chargers, stacks) from Halol, Gujarat. Setting up ₹618 Cr Silicon Carbide fab in Odisha.</td></tr>
+      <tr><td>Business segments &amp; revenue mix</td><td>Reported as <strong>single segment</strong> (Power Electronics). Management discloses three product/channel groups: Semiconductor Devices, High-Power Equipment, Exports — all three grew ~27% in FY25.</td></tr>
+      <tr><td>Geography mix</td><td>Export House status; "300+ customers, 10+ countries". Domestic/Export % not disclosed in AR. From Jun-24 IP: <strong>FY24 ~84% domestic / 16% international.</strong></td></tr>
+      <tr><td>Customer concentration</td><td>Not explicitly disclosed (transparency gap). Key buyers: Indian Railways (RDSO Part-I), NPCIL Nuclear, Defence PSUs, BHEL.</td></tr>
+      <tr><td>Promoter / management</td><td>Promoter holding <strong>61.68%</strong> at 31-Mar-25, down from 69.73% (-7.5 pp YoY due to Bhavna Mehta sales). <strong>No pledging.</strong> Chairman: Dr. Harshad Mehta (technologist; also Chairman of related-party Silicon Power Corp USA &amp; SiCamore).</td></tr>
+      <tr><td>Capex cycle</td><td><strong>Aggressive expansion.</strong> CWIP ₹29.3 Cr + Intangible Assets under Development ₹43 Cr (SiC IP). Total Odisha SiC plant: ₹618 Cr (~5.5× FY25 net worth).</td></tr>
+      <tr><td>Working capital</td><td>Inventory days improving (≈126); receivables ~97 days. <strong>Trade receivables +37% YoY vs revenue +29%</strong> (yellow flag).</td></tr>
+      <tr><td>Debt position</td><td>Total Borrowings ₹12 Cr; <strong>D/E 0.13×</strong>; Interest Coverage 7.89×. Material debt will be needed for Phase-2 Odisha.</td></tr>
+      <tr><td>Related-party transactions</td><td><strong>₹70 Cr aggregate RPT in FY25</strong> (~80% of revenue), dominated by ₹42 Cr SiC IP purchase from SiCamore (common-control). Independent-valuer + 99.88% minority approval. Visicon being sold to Silicon Power Corp USA at undisclosed terms.</td></tr>
+      <tr><td>Auditor qualifications</td><td><strong>Clean</strong> — Kirtane &amp; Pandit LLP, no qualifications in FY23-FY24-FY25.</td></tr>
+      <tr><td>Strategy (Chairman's letter)</td><td>Three pillars: (a) core Si power-semi growth in defence/railways/exports; (b) green-hydrogen rectifiers; (c) Odisha SiC fab as transformational bet.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>1.3 10-Point Forensic Red Flag Scan</h3>
+  <table>
+    <thead><tr><th>#</th><th>Check</th><th>Color</th><th>Note</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>CFO/PAT ≥ 0.7 over 3 yrs</td><td class="cell-red"><span class="badge red">RED</span></td><td>3-yr CFO ≈ ₹2.7 Cr vs 3-yr PAT ≈ ₹22.9 Cr → <strong>CFO/PAT ≈ 0.12</strong>. Inventory + receivables build-up.</td></tr>
+      <tr><td>2</td><td>Receivables ≤ revenue growth</td><td class="cell-amber"><span class="badge amber">AMBER</span></td><td>Receivables +37% vs revenue +29%; turnover ratio flat (3.76×).</td></tr>
+      <tr><td>3</td><td>Inventory ≤ revenue growth</td><td class="cell-green"><span class="badge green">GREEN</span></td><td>Inventory flat YoY while revenue +29%.</td></tr>
+      <tr><td>4</td><td>Contingent liab. vs net worth</td><td class="cell-green"><span class="badge green">GREEN</span></td><td>₹0.43 Cr vs net worth ₹112 Cr (0.4%).</td></tr>
+      <tr><td>5</td><td>Promoter pledging trend</td><td class="cell-green"><span class="badge green">GREEN</span></td><td>No pledging. Holding fell 7.5 pp (sale not pledge).</td></tr>
+      <tr><td>6</td><td>Auditor qualifications</td><td class="cell-green"><span class="badge green">GREEN</span></td><td>Clean reports across FY23–FY25.</td></tr>
+      <tr><td>7</td><td>Related-party-txn size</td><td class="cell-red"><span class="badge red">RED</span></td><td>~₹70 Cr aggregate RPT vs ₹86 Cr revenue; dominated by ₹42 Cr SiC IP from common-control entity.</td></tr>
+      <tr><td>8</td><td>Goodwill / intangible bloat</td><td class="cell-amber"><span class="badge amber">AMBER</span></td><td>Intangibles under development ₹43 Cr (SiC IP). Impairment risk if Odisha slips.</td></tr>
+      <tr><td>9</td><td>Frequent equity dilution</td><td class="cell-amber"><span class="badge amber">AMBER</span></td><td>Warrant conversions raised ₹45 Cr; bonus + split executed; treasury sales ₹2.68 Cr. More raises likely for Odisha.</td></tr>
+      <tr><td>10</td><td>Subsidiary losses absorbed quietly</td><td class="cell-amber"><span class="badge amber">AMBER</span></td><td>Visicon loss-making; being sold to related party at undisclosed terms.</td></tr>
+    </tbody>
+  </table>
+  <p class="small">Tally: <span class="badge red">2 RED</span> · <span class="badge amber">4 AMBER</span> · <span class="badge green">4 GREEN</span></p>
+
+  <h3>1.4 Piotroski F-Score &amp; DuPont</h3>
+  <div class="chart-wrap">
+    <canvas id="dupont_chart"></canvas>
+    <div class="legend">
+      <span><span class="dot" style="background:#94a3b8;"></span>Net Margin (%)</span>
+      <span><span class="dot" style="background:#60a5fa;"></span>Asset Turnover (×, ×10)</span>
+      <span><span class="dot" style="background:#fbbf24;"></span>Equity Multiplier (×, ×10)</span>
+      <span><span class="dot" style="background:#16a34a;"></span>ROE (%)</span>
+    </div>
+  </div>
+  <p class="small"><strong>ROE compression is mechanical</strong> — Odisha CWIP and SiC IP not yet earning. Operating margins are intact-to-modestly-weakening.</p>
+
+  <h3>1.5 Bear Case</h3>
+  <div class="callout">
+    <ol>
+      <li><strong>Massive related-party intangible.</strong> ₹42 Cr to promoter-controlled SiCamore for SiC IP. If Odisha slips or under-utilises, the intangible must be impaired — and minority shareholders foot the bill while promoter group has already received the cash.</li>
+      <li><strong>CFO has not supported PAT for three years.</strong> 3-yr CFO/PAT ≈ 0.12. If Odisha working-capital build adds to this, repeated dilution becomes the funding path.</li>
+      <li><strong>Single-segment, opaque disclosure.</strong> No sub-segment mix, no top-customer share, no order book, no SiC unit economics in the AR. Concalls are light on hard numbers.</li>
+      <li><strong>Tiny company taking on outsized capex.</strong> ₹618 Cr SiC fab vs FY25 revenue ₹86 Cr (~7×). RIR has no prior wafer-fab experience; SiC fabs are notoriously yield-sensitive.</li>
+      <li><strong>Governance optics.</strong> 7.5 pp promoter sell-down, multiple long-tenured directors out, SiC IP from common-control entity, Visicon sold to common-control entity at undisclosed terms.</li>
+    </ol>
+  </div>
+
+  <!-- ===================== WALK THE TALK ===================== -->
+  <h2>2. Concall Analysis — Walk-the-Talk Across 3 Quarters</h2>
+
+  <h3>2.1 Quarterly Performance Trend</h3>
+  <div class="chart-wrap">
+    <canvas id="qtr_chart"></canvas>
+  </div>
+  <table>
+    <thead><tr><th>Quarter</th><th>Revenue (₹ Cr)</th><th>EBITDA (₹ Cr)</th><th>EBITDA Margin</th><th>PAT (₹ Cr)</th><th>PAT Margin</th></tr></thead>
+    <tbody>
+      <tr><td>Q4 FY25 (Mar-25)</td><td>26.46</td><td>3.44</td><td>13.0%</td><td>2.55</td><td>9.6%</td></tr>
+      <tr><td>Q1 FY26 (Jun-25) — implied</td><td>20.96</td><td>2.10</td><td>10.0%</td><td>1.74</td><td>8.3%</td></tr>
+      <tr><td>Q2 FY26 (Sep-25)</td><td>25.64</td><td>4.36</td><td class="cell-green"><strong>17.0%</strong></td><td>3.15</td><td class="cell-green"><strong>12.3%</strong></td></tr>
+      <tr><td>Q3 FY26 (Dec-25)</td><td class="cell-red">20.27</td><td class="cell-red">0.86</td><td class="cell-red"><strong>4.2%</strong></td><td class="cell-red">0.44</td><td class="cell-red"><strong>2.2%</strong></td></tr>
+      <tr><td>9M FY26 cumulative</td><td>66.92</td><td>8.11</td><td>12.1%</td><td>5.33</td><td>8.0%</td></tr>
+    </tbody>
+  </table>
+  <p class="citation">Source: RIR Q4 FY25 + Q2 FY26 + Q3 FY26 concall transcripts. Q1 FY26 derived from H1 FY26 minus Q2 FY26 reported numbers.</p>
+
+  <h3>2.2 Key Guidance Statements (verbatim) — colour-coded by conviction</h3>
+  <table>
+    <thead><tr><th>Quote</th><th>Call</th><th>Conviction</th></tr></thead>
+    <tbody>
+      <tr><td>"From the existing plant, we expect INR100 crores and INR110 odd crores [FY26]"</td><td>Q4 FY25</td><td class="cell-amber"><span class="badge amber">MEDIUM</span></td></tr>
+      <tr><td>"First phase will start in the last quarter of FY26"</td><td>Q4 FY25</td><td class="cell-green"><span class="badge green">HIGH</span></td></tr>
+      <tr><td>"We should be able to get from Odisha … about INR1,200 crores or so"</td><td>Q4 FY25</td><td class="cell-red"><span class="badge red">LOW</span><br><span class="small">followed by "I'm not so sure what the regulations are…"</span></td></tr>
+      <tr><td>"At 618 crores investment, fully done … revenues about 600 crores or so" <em>(halved)</em></td><td>Q2 FY26</td><td class="cell-amber"><span class="badge amber">MEDIUM</span></td></tr>
+      <tr><td>"Once we get the power, we will have commercial production within 90 days"</td><td>Q3 FY26</td><td class="cell-red"><span class="badge red">LOW</span><br><span class="small">conditional on power</span></td></tr>
+      <tr><td>"Clean room will be done by end of February or mid-March"</td><td>Q3 FY26</td><td class="cell-amber"><span class="badge amber">MEDIUM</span></td></tr>
+      <tr><td>"We have letters of intent from Alpha Omega Semiconductor, ST Micro, Microchip"</td><td>Q2 FY26</td><td class="cell-green"><span class="badge green">HIGH</span></td></tr>
+      <tr><td>"We are replacing ABB from this applications [10 kV / 200 kA switch for Indian Army]"</td><td>Q3 FY26</td><td class="cell-green"><span class="badge green">HIGH</span></td></tr>
+    </tbody>
+  </table>
+
+  <h3>2.3 Walk-the-Talk Scorecard</h3>
+  <div class="chart-wrap">
+    <canvas id="wtt_chart"></canvas>
+    <p class="small" style="margin-top:8px;">2 beats · 6 partials · 6 misses · 1 not-yet-testable → <strong>Net –4 across 15 testable items → LOW–MEDIUM credibility (leans LOW).</strong></p>
+  </div>
+  <table>
+    <thead><tr><th>#</th><th>Earlier promise</th><th>Outcome by Feb-2026</th><th>Score</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Capex ₹618 Cr over 2-2.5 yrs</td><td>Phase-1 restated ₹100 → ₹225 Cr; timeline slipping 4-6 mo</td><td class="cell-amber"><strong>0</strong></td></tr>
+      <tr><td>2</td><td>Phase-1 commercial start Q4 FY26</td><td>Clean room not commissioned; power pending; realistic Q1-Q2 FY27</td><td class="cell-red"><strong>-1</strong></td></tr>
+      <tr><td>3</td><td>Existing-plant FY26 revenue ₹100-110 Cr</td><td>9M Halol = ~₹66 Cr; Q3 weak (₹20 Cr); likely ₹90-95 Cr</td><td class="cell-red"><strong>-1</strong></td></tr>
+      <tr><td>4</td><td>Odisha SiC FY26 revenue ₹10-12 Cr</td><td>YTD ~₹1 Cr (sample shipments); revised to ₹8-10 then likely ₹1-3 Cr</td><td class="cell-red"><strong>-1</strong></td></tr>
+      <tr><td>5</td><td>Odisha full-capacity revenue ₹1,200 Cr</td><td><strong>Halved to ₹600 Cr in Q2 FY26</strong></td><td class="cell-red"><strong>-1</strong></td></tr>
+      <tr><td>6</td><td>SiC EBITDA margin 25-28%</td><td>SiC not yet commercial → not testable</td><td class="cell-grey">n/a</td></tr>
+      <tr><td>7</td><td>Govt subsidy 50% Odisha + 25% central = up to 75%</td><td>Only 50% Odisha; no central component booked</td><td class="cell-red"><strong>-1</strong></td></tr>
+      <tr><td>8</td><td>CEO appointment imminent</td><td>Ramesh Kumar joined 11-Feb-2026 (~9 mo after first promise)</td><td class="cell-amber"><strong>0</strong></td></tr>
+      <tr><td>9</td><td>Odisha state subsidy before end of June 2025</td><td>First tranche received Nov-25 (5 mo late)</td><td class="cell-amber"><strong>0</strong></td></tr>
+      <tr><td>10</td><td>LOIs from global leaders</td><td>Confirmed: Alpha Omega Semi, ST Micro, Microchip; first $20K shipment to Richardson Electronics</td><td class="cell-green"><strong>+1</strong></td></tr>
+      <tr><td>11</td><td>Halol bottlenecks addressed</td><td>Q3 FY26 revenue moderated; partly orders, partly capacity flow</td><td class="cell-amber"><strong>0</strong></td></tr>
+      <tr><td>12</td><td>Funding ₹125 Cr debt + ₹125 Cr equity</td><td>Restructured: Phase-1 ₹70 Cr debt + grant; Phase-2 not financed</td><td class="cell-amber"><strong>0</strong></td></tr>
+      <tr><td>13</td><td>Packaging operational July 2026</td><td>Phase-2 equipment lead-time 18-24 mo, no order placed</td><td class="cell-red"><strong>-1</strong></td></tr>
+      <tr><td>14</td><td>Full facility operational by ~Nov 2027</td><td>Cumulative slippage ≥6 mo; likely H1 FY28+</td><td class="cell-red"><strong>-1</strong></td></tr>
+      <tr><td>15</td><td>NSE listing in process</td><td>Re-affirmed for 31-Mar-2026; pending</td><td class="cell-amber"><strong>0</strong></td></tr>
+      <tr><td>16</td><td>"Replacing ABB" — defence / industrial wins</td><td>10 MW rocket-launcher rectifier tested; 10 kV/200 kA Army switch near complete</td><td class="cell-green"><strong>+1</strong></td></tr>
+    </tbody>
+  </table>
+
+  <!-- ===================== GROWTH TRIGGERS ===================== -->
+  <h2>3. Growth Triggers Scoreboard</h2>
+  <div class="chart-wrap">
+    <canvas id="trig_chart"></canvas>
+    <div class="legend">
+      <span><span class="dot" style="background:var(--green);"></span>HIGH</span>
+      <span><span class="dot" style="background:var(--amber);"></span>MEDIUM</span>
+      <span><span class="dot" style="background:var(--grey);"></span>OPTIONALITY</span>
+    </div>
+  </div>
+
+  <table>
+    <thead><tr><th>#</th><th>Trigger</th><th>Conviction</th><th>Quantum (₹ Cr)</th><th>Timeline</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Odisha SiC Phase-1 EPI production</td><td class="cell-amber"><span class="badge amber">MEDIUM</span></td><td>₹8-10 Cr FY26 → ₹60 Cr FY27 → ₹150 Cr FY29</td><td>Q1 FY27 first revenue</td><td>Slipping — clean-room near, power pending</td></tr>
+      <tr><td>2</td><td>Halol industrial wins (ABB displacement)</td><td class="cell-green"><span class="badge green">HIGH</span></td><td>+₹40-50 Cr by FY28 over current run-rate</td><td>FY26-FY27</td><td>On track; orders being delivered</td></tr>
+      <tr><td>3</td><td>International SiC via Richardson Electronics</td><td class="cell-amber"><span class="badge amber">MEDIUM</span></td><td>₹20-40 Cr FY27 → ₹100+ Cr by FY29</td><td>FY27+</td><td>First $20K shipment done; eval. underway</td></tr>
+      <tr><td>4</td><td>Green hydrogen electrolyser rectifiers</td><td class="cell-amber"><span class="badge amber">MEDIUM</span></td><td>₹150-300 Cr cumulative FY27-FY30</td><td>FY27-FY30</td><td>Credentialled; orders starting</td></tr>
+      <tr><td>5</td><td>New MD Ramesh Kumar — operational reset</td><td class="cell-amber"><span class="badge amber">MEDIUM</span></td><td>Indirect (operating leverage)</td><td>H2 FY27</td><td>Joined 11-Feb-26; guidance next call</td></tr>
+      <tr><td>6</td><td>NSE listing + Strategic investor + ISM-2</td><td class="cell-grey"><span class="badge grey">OPTIONALITY</span></td><td>Re-rating only (not P&amp;L)</td><td>FY27 + open</td><td>NSE filing in process; investor talks "ongoing"</td></tr>
+    </tbody>
+  </table>
+
+  <h3>3.1 Top 3 Thesis-Breakers</h3>
+  <div class="callout">
+    <ol>
+      <li><strong>Odisha execution slippage / cost over-run.</strong> Phase-1 has already slipped 6 months and full-capacity guidance was halved within 6 months. If Phase-2 (₹400 Cr) slips another 6-12 months or asset turnover under-delivers vs. 0.8-1.0×, the SiC thesis weakens materially — and the ₹42 Cr SiC IP intangible faces impairment.</li>
+      <li><strong>Funding gap → equity dilution.</strong> Phase-2 (~₹400 Cr) financing is not yet tied (Ankit Shah Q3 FY26 p.10). At current Mcap, an equity raise could be 5-15% dilutive. The recent track of warrant conversions and treasury monetisation makes further dilution likely.</li>
+      <li><strong>Governance &amp; related-party density.</strong> FY25 had ₹70 Cr in RPT vs ₹86 Cr revenue (mostly the SiC IP). Visicon sale to common-control Silicon Power Corp at undisclosed terms is pending. Any FY26 RPT escalation damages the discount.</li>
+    </ol>
+  </div>
+
+  <!-- ===================== FINAL VERDICT ===================== -->
+  <h2>4. Verdict</h2>
+  <div class="callout amber">
+    <p><strong>WATCH</strong> — revisit after FY26 results + Odisha milestone updates. The HIGH-conviction Halol industrial trigger underwrites a fair-value floor at current revenue + modest growth; the MEDIUM Odisha trigger provides the asymmetric upside. <strong>Combined HIGH + MEDIUM triggers can plausibly take revenue to ₹350-450 Cr by FY29 at 17-20% EBITDA margin, even on management's downward-revised numbers.</strong></p>
+    <p>Convert to <strong>BUY</strong> when (a) CFO/PAT normalises above 0.7 over a rolling 4-quarter period, (b) Odisha Phase-1 EPI shows ≥₹15 Cr of actual revenue in any quarter, and (c) Phase-2 financing is closed without &gt;10% equity dilution. Convert to <strong>PASS</strong> if related-party flows escalate, Phase-2 slips beyond FY28, or the SiC IP intangible takes an impairment charge.</p>
+  </div>
+
+  <!-- ===================== COLLAPSIBLES — RAW MARKDOWN ===================== -->
+  <h2>5. Source Materials (Full Markdown)</h2>
+  <p class="small">Full text of the three skill outputs that feed this report, with citations preserved inline.</p>
+
+  <details>
+    <summary>📄 Full Quick Scan markdown (company-quick-scan)</summary>
+    <div id="md_qs"></div>
+  </details>
+  <details>
+    <summary>📞 Full Concall / Walk-the-Talk markdown (concall-analyzer Mode C)</summary>
+    <div id="md_wt"></div>
+  </details>
+  <details>
+    <summary>🚀 Full Growth Triggers markdown (growth-triggers-onepager)</summary>
+    <div id="md_gt"></div>
+  </details>
+
+  <footer>
+    <p><strong>Report generated:</strong> 16 May 2026 · <strong>Subject:</strong> RIR Power Electronics Ltd (BSE: 517035)</p>
+    <p><strong>Sources consumed:</strong> RIR_AR_23.pdf · RIR_AR_24.pdf · RIR_AR_25.pdf · RIR_Concall_Jun_24.pdf (Investor Presentation) · RIR_Concall_Jun_25.pdf (Q4 FY25 transcript) · RIR_Concall_Nov_25.pdf (Q2 FY26 transcript) · RIR_Concall_Feb_26.pdf (Q3 FY26 transcript).</p>
+    <p><strong>Pipeline:</strong> company-quick-scan → concall-analyzer (Mode C) → growth-triggers-onepager → investment-report-html.</p>
+    <p style="margin-top:10px;"><em>Research only. Not investment advice. CMP / Mcap / TTM P/E to be pulled from Screener.in immediately before any position-sizing decision.</em></p>
+  </footer>
+
+</div>
+
+<script>
+const RAW = {"quick_scan": "# RIR Power Electronics Ltd \u2014 Company Quick Scan (SOIC 30-Min Deep Dive)\n\n**Ticker / Listing:** BSE: 517035 (RIR Power Electronics Ltd)\n**Date of scan:** 16-May-2026\n**Source documents:** FY23, FY24, FY25 Annual Reports + Concall transcripts Jun-24, Jun-25, Nov-25, Feb-26 (uploaded by user)\n**Sector:** Power semiconductors / Power electronics / Silicon Carbide (SiC) fabs\n\n---\n\n## Step 1 \u2014 Locate the Annual Report\nMost recent AR: **FY25 (56th Annual Report)**, financial year ended 31-Mar-2025, signed 04-Sep-2025. Cited throughout. Standalone financials used unless otherwise stated.\n\n---\n\n## Step 2 \u2014 12-Point Annual Report Analysis\n\n### 1. What does the company do?\nRIR Power Electronics (formerly Ruttonsha International Rectifier, founded 1969) designs and manufactures high-reliability power semiconductors (diodes, thyristors, IGBT-modules, bridge rectifiers, 28 mm \u2013 125 mm devices up to 5,000 V) and power equipment (rectifiers, battery chargers, high-power stacks, AC voltage regulators) from a 12,000 sq m plant in Halol, Gujarat. The company is now executing a **\u20b9618.6 crore Silicon Carbide (SiC) fabrication plant in Odisha** \u2014 India's first end-to-end SiC fab \u2014 based on process know-how licensed from related-party SiCamore Semiconductor Inc., USA. End-markets: Defence, Railways (RDSO Part-I supplier), Nuclear, Renewables, Oil & Gas, Mining, EV, Green Hydrogen electrolysers. (AR25 pp. 2\u20139, 45)\n\n### 2. Business segments and revenue mix\nReported as **a single segment \"Power Electronics\"** per Ind AS 108 (AR25 p. 45). Management commentary discloses three product/channel groups: Semiconductor Devices, High-Power Equipment, and Exports \u2014 all three reportedly grew, with combined revenue growth of ~27%. Granular sub-segment revenue mix is NOT disclosed \u2014 a transparency gap that complicates monitoring.\n\n### 3. Geography mix\nExport House status awarded by Govt of India. AR25 highlights \"300+ customers across the globe\" and \"10+ countries\" but **does not publish domestic vs export % split**. Concalls indicate exports ~25-30% of revenue with a stated intent to scale international share materially.\n\n### 4. Customer concentration\nTop-customer concentration is **not disclosed** in the AR. Trade receivables ageing (Note in AR25) shows no obvious single-customer dominance, but the absence of explicit Top-5/Top-10 disclosure is a gap. Government / PSU clients (Indian Railways via RDSO, NPCIL Nuclear, Defence PSUs) appear to be material.\n\n### 5. Promoter / management background and pledging\n- Promoter holding: **61.68% at 31-Mar-2025** (down from 69.73% prior year \u2014 a **7.5 percentage-point drop** mainly Mrs. Bhavna H. Mehta selling). (AR25 Note 14.5)\n- Chairman: **Dr. Harshad Mehta** (technologist; also Chairman of Silicon Power Corp USA and SiCamore \u2014 see related-party section).\n- MD: **Mrs. Bhavna H. Mehta** (Promoter, Non-Executive turned MD).\n- CEO & CFO: Mr. Ramesh G. Trasi (also receives \u20b960.18 L consultancy charges \u2014 paid as KMP).\n- **No pledged shares disclosed** by promoters.\n- Board changes were heavy in FY25: three long-standing directors retired/resigned (Kisan Choksey, Pravin Shah, Piyush Shah); two new directors added (Sonali Mehta \u2014 family; Rajiv Choksey).\n\n### 6. Capex cycle status \u2014 **AGGRESSIVE EXPANSION**\n- **Capital Work-in-Progress (CWIP) jumped to \u20b929.29 crore** as of 31-Mar-2025 vs. negligible prior year. (AR25 Note 38)\n- **Intangible Assets under Development (SiC process know-how): \u20b942.99 crore** (Note 43).\n- Total Odisha SiC plant outlay announced: **\u20b9618.6 crore** (~10\u00d7 FY25 net worth).\n- FY25 cash capex outflow was \u20b978.37 crore (per Cash Flow Statement) \u2014 funded primarily by \u20b945.23 crore share-warrant proceeds.\n\n### 7. Working capital trend\n| Metric | FY23 | FY24 | FY25 |\n|---|---|---|---|\n| Inventory days (COGS basis) | ~166 | ~161 | ~126 |\n| Receivables days (Rev) | ~98 | ~98 | ~97 |\n| Payables days | ~70 | ~59 | ~71 |\n| Inventory turnover (\u00d7) | \u2013 | 2.26 | 2.89 |\n| Trade receivables turnover (\u00d7) | \u2013 | 3.73 | 3.76 |\nWorking capital intensity has eased slightly in FY25 (inventory turning faster) but trade receivables still ~3 months, and **trade receivables ABSOLUTE rose 37% YoY** (\u20b926.49 Cr vs. \u20b919.32 Cr) \u2014 faster than revenue (29%) \u2014 a yellow flag. (AR25 Note 47)\n\n### 8. Debt position and interest coverage\n- Total Borrowings 31-Mar-25: **\u20b911.99 crore** (all current/short-term). (AR25 Note 20)\n- Net worth FY25: \u20b9112.19 crore (vs. \u20b959.75 Cr FY24 \u2014 almost doubled via warrant conversions).\n- **Debt / Equity = 0.13** (FY24: 0.18). (AR25 Note 47)\n- Interest Coverage = **7.89\u00d7** (FY24: 8.00\u00d7) \u2014 healthy.\n- BUT large SiC capex (~\u20b9618 Cr) will likely need **significant fresh debt and/or equity** in FY26-FY28. Current balance sheet cannot fund it.\n\n### 9. Key risks disclosed by management\nDisclosed: input cost / forex volatility; supply chain / geopolitical (US-China, Ukraine, Middle East); global slowdown; tech disruption; new-plant execution & ramp-up risk on SiC; reliance on a few technology partners (SiCamore \u2014 related). Not explicitly disclosed but evident: customer concentration in PSU/defence orders; very high related-party-transaction footprint on the SiC IP purchase.\n\n### 10. Related-party transactions \u2014 **MATERIAL & ELEVATED**\n- **Purchase of SiC process know-how / intangible IP from SiCamore Semiconductor Inc. (USA): \u20b941.95 crore in FY25**. SiCamore is described as \"an entity under common control\" \u2014 80 % held by promoter group entity. Approved by minority shareholders 30-Sep-2024 with 99.88% approval. Independent valuer-certified arm's length. (AR25 Note 36.2 / Note 43)\n- Plant & Machinery purchase from subsidiary Visicon Power Electronics \u20b927.52 crore.\n- Loan to / from Visicon (gave \u20b90.77 Cr, repaid \u20b99.62 Cr, outstanding nil at FY25 close).\n- Other related-party items: rent to MD \u20b98.40 L, consultancy \u20b960 L (CEO/CFO), director sitting fees.\n- **Post FY25 (29-May-2025): Board approved sale of 100% stake in Visicon Power Electronics to Silicon Power Corp USA** (another related party of Dr. Harshad Mehta).\n- **Aggregate FY25 related-party flows ~\u20b970 crore \u2014 VERY HIGH relative to revenue \u20b986 Cr.** Most of it is one-time IP purchase; recurring run-rate is much smaller. Investors must satisfy themselves that the SiC IP is genuinely worth \u20b942 Cr; the independent-valuer + 99.88% minority approval is positive but does not eliminate the question.\n\n### 11. Auditor changes / qualifications in last 3 years\n- Statutory Auditors: **Kirtane & Pandit LLP** (FRN 105215W/W100057). Re-appointed at the 55th AGM (Sep-2024) for 5 years (till 60th AGM, FY30). No qualifications, reservations, or adverse remarks across FY23, FY24, FY25.\n- Secretarial Auditor: M/s Neetu Agrawal & Co. appointed FY25 onwards.\n- Internal Audit: Bhandarkar & Kale, CAs.\n- No history of auditor switching or modified opinions. **Clean audit.**\n\n### 12. Strategy and guidance stated by Chairman/MD\nDr. Harshad Mehta (Chairman) frames the company around three pillars: **(a)** core power semiconductor / equipment business growing in defence, railways, exports; **(b)** rectifiers for **green hydrogen** electrolysers as a growth vertical; **(c)** the **Odisha SiC fab** as the centrepiece transformation, positioning RIR on the global SiC value chain and addressing EV / renewables / aerospace / hydrogen. Quantitative guidance is not provided in AR25; concalls give more specific revenue / margin commentary.\n\n---\n\n## Step 3 \u2014 10-Point Forensic Red-Flag Scan\n\n| # | Check | Color | Notes |\n|---|---|:--:|---|\n| 1 | CFO/PAT \u2265 0.7 over 3 yrs | \ud83d\udd34 **RED** | Standalone CFO: FY23 = **\u2212\u20b93.29 Cr**, FY24 = \u20b92.05 Cr, FY25 = \u20b93.97 Cr. 3-yr total CFO \u2248 \u20b92.7 Cr vs. 3-yr total PAT \u2248 \u20b922.9 Cr \u2192 CFO/PAT \u2248 **0.12**. Driven by inventory + receivable build-up. Needs to normalise as the business scales. |\n| 2 | Receivables \u2264 revenue growth | \ud83d\udfe1 **AMBER** | FY25 trade receivables +37% vs. revenue +29%; turnover ratio unchanged (3.76\u00d7 vs. 3.73\u00d7) so on a turnover basis it's flat \u2014 flag, but not yet broken. |\n| 3 | Inventory \u2264 revenue growth | \ud83d\udfe2 **GREEN** | Inventory flat YoY (\u20b919.42 Cr vs. \u20b919.47 Cr) while revenue +29%; inventory days improving. |\n| 4 | Contingent liab. vs. net worth | \ud83d\udfe2 **GREEN** | \u20b90.43 Cr vs. net worth \u20b9112 Cr \u2014 immaterial (0.4 %). |\n| 5 | Promoter pledging trend | \ud83d\udfe2 **GREEN** | No pledging disclosed. Promoter holding fell 7.5 pp YoY (sales/dilution), worth monitoring but no pledge. |\n| 6 | Auditor qualifications | \ud83d\udfe2 **GREEN** | Clean reports across FY23\u2013FY25; no reservations. |\n| 7 | Related-party-txn size | \ud83d\udd34 **RED** | \u20b970 Cr aggregate RPT in FY25 (~80% of revenue), dominated by \u20b942 Cr SiC IP purchase from common-control entity. Independent-valuer + 99.88% minority approval mitigates but does NOT eliminate concentration risk. |\n| 8 | Goodwill / intangible bloat | \ud83d\udfe1 **AMBER** | Intangible Assets under Development \u20b943 Cr (the SiC IP). Will sit on the balance sheet pending plant commissioning; impairment risk if Odisha plant slips or under-utilises. |\n| 9 | Frequent equity dilution | \ud83d\udfe1 **AMBER** | Share warrants (preferential issue), conversion in FY25 raised \u20b945 Cr; some warrants still outstanding (~2.84 L). Bonus 1:1 + 1:5 stock split also executed (housekeeping, not dilutive). Treasury share sales of \u20b92.68 Cr in FY24. Expect more capital raises to fund Odisha. |\n| 10 | Subsidiary losses absorbed quietly | \ud83d\udfe1 **AMBER** | Visicon Power Electronics is loss-making and is being sold to related party Silicon Power Corp USA. Stake sale price and consideration NOT yet disclosed \u2014 monitor. |\n\n**Overall red-flag tally:** 2 RED, 4 AMBER, 4 GREEN.\n\n---\n\n## Step 4 \u2014 Piotroski F-Score + DuPont\n\n### Piotroski F-Score (FY25 vs. FY24, standalone)\n| # | Test | Pass? | Note |\n|---|---|:--:|---|\n| 1 | Net Income > 0 | \u2705 | PAT \u20b98.28 Cr |\n| 2 | CFO > 0 | \u2705 | CFO \u20b93.97 Cr |\n| 3 | ROA improved | \u274c | RoA ~5.4% vs. ~9.1% (asset base doubled w/ CWIP) |\n| 4 | CFO > Net Income | \u274c | \u20b93.97 Cr < \u20b98.28 Cr |\n| 5 | LT-Debt / Assets fell | \u2705 | LT debt ~nil; only short-term |\n| 6 | Current Ratio improved | \u274c | 2.04 (FY25) vs. 3.50 (FY24) |\n| 7 | No new shares issued | \u274c | Warrant conversions raised equity capital |\n| 8 | Gross Margin improved | \u274c (\u2248) | Material cost % rose with mix shift |\n| 9 | Asset Turnover improved | \u274c | Revenue/Assets fell as CWIP swelled |\n| | **Piotroski Score** | **3 / 9** | **Weak** \u2014 driven entirely by capex distortion. Re-run after Odisha commercial production starts. |\n\n### DuPont (FY25 vs. FY24)\n| Driver | FY24 | FY25 |\n|---|---|---|\n| Net Margin (PAT / Revenue) | 11.91% | 9.60% |\n| Asset Turnover (Rev / Total Assets) | 0.76\u00d7 | 0.57\u00d7 |\n| Equity Multiplier (Assets / Equity) | 1.36\u00d7 | 1.30\u00d7 |\n| **ROE** | **~13.3%** (avg-equity 12.0%) | **~9.4%** (avg-equity 9.0%) |\nROE compression is **entirely an asset-base story** (Odisha CWIP + SiC IP not yet earning). Operating margins are intact-to-modestly-weakening; the de-rating of returns is mechanical until Odisha contributes.\n\n---\n\n## Step 5 \u2014 Bear Case (5 bullets)\n\n1. **Massive related-party intangible.** \u20b942 Cr paid to promoter-controlled SiCamore for SiC process IP, capitalised as an intangible. If Odisha plant slips, under-utilises, or yields underperform, this asset must be impaired \u2014 and minority shareholders foot the bill while the promoter group has already received the cash.\n\n2. **CFO has not supported PAT for three years running.** 3-yr cumulative CFO/PAT \u2248 0.12. If Odisha capex stretches working capital further, the gap between \"book profit\" and \"cash\" widens, forcing repeated equity raises and warrant issuances that dilute optionality.\n\n3. **Single-segment, no transparent disclosure.** Company reports one segment; sub-segment mix, top-customer share, geography %, order book, and SiC unit economics are not in the AR. Investors must rely on concall colour, which is light on hard numbers.\n\n4. **Tiny company taking on outsized capex (\u20b9618 Cr SiC fab vs. FY25 revenue \u20b986 Cr).** SiC fabs are notoriously capital-intensive, technology-risky, yield-sensitive, and slow to ramp. RIR has no prior wafer-fab experience. Time-to-positive-EBITDA on Odisha is multi-year and assumes flawless execution + government incentives flowing on schedule.\n\n5. **Governance optics.** Promoter holding stepped down 7.5 pp during the year (Bhavna Mehta sold). Multiple long-tenured directors exited. SiC IP purchase from common-control entity. Visicon sale to another common-control entity (Silicon Power Corp USA) at undisclosed terms. Each event in isolation is defensible; the cluster warrants monitoring of future RPTs and director independence.\n\n---\n\n## Step 6 \u2014 Verdict\n\n### \ud83d\udfe1 **WATCH** \u2014 revisit after FY26 H1 results and Odisha milestone updates.\n\n**Three-sentence justification:**\nRIR has a real, decades-old, profitably-growing core semiconductor + power-equipment business with credible defence/railway/nuclear customers, and the SiC opportunity in Odisha is genuinely strategic to India's import-substitution story \u2014 making the upside narrative compelling. However, the company is mid-flight into a \u20b9618 Cr capex that is ~7\u00d7 its annual revenue, funded partly via promoter-related IP purchase, on a balance sheet whose 3-year CFO/PAT is only 0.12 \u2014 meaning the risk of dilution, impairment, or execution slippage is non-trivial. The right behaviour is to WATCH: track Odisha trial-production updates, SiC offtake / order announcements, quarterly working-capital normalisation, and any further related-party flows; convert to BUY only when CFO/PAT normalises above 0.7 and Odisha shows revenue contribution, or PASS if related-party flows escalate or capex slips materially.\n\n> \u26a0\ufe0f **P/E caveat per skill rules:** TTM P/E should be pulled from Screener.in before any position sizing \u2014 do **not** compute it from quarterly PAT here. As of last available print, RIR trades at a rich multiple on the SiC thesis; verify before action.\n\n---\n\n## Follow-up questions for a deeper dive\n\n1. What is the post-FY25 status of the Odisha SiC plant \u2014 site preparation %, equipment ordering, first-wafer date, qualified customer pipeline?\n2. What is the planned capital structure for the remaining Odisha capex (debt mix, fresh equity, government grant/PLI receipts), and when are draw-downs expected?\n3. Detailed sub-segment revenue split: Semiconductor Devices vs. Power Equipment vs. Exports vs. Green Hydrogen rectifiers \u2014 and the gross-margin profile of each.\n4. Top-5 customer concentration and order-book size (\u20b9) by end-market.\n5. SiCamore Semiconductor Inc. \u2014 who owns the remaining 20%, what is the IP scope, and are there ongoing royalty obligations beyond the \u20b942 Cr one-time payment?\n6. Sale price and timing of Visicon Power Electronics divestment to Silicon Power Corp USA, and the use of proceeds.\n7. PLI / state-incentive eligibility \u2014 quantum committed in writing, conditions, milestones.\n8. Working capital roadmap: when does CFO converge with PAT, and what gate keeps inventory + receivables from growing with the new SiC line?\n\n---\n\n*Next steps in the analysis pipeline: (i) concall-analyzer over the 4 uploaded transcripts to verify management walk-the-talk and capture quantitative guidance; (ii) growth-triggers-onepager to crystallise the catalyst stack; (iii) investment-report-html to consolidate.*\n", "walk_the_talk": "# RIR Power Electronics Ltd \u2014 Concall Analyzer (Walk-the-Talk + Briefs)\n\n**Scope:** Q4 FY25 earnings call (30-May-2025) \u25b8 Q2 FY26 (17-Nov-2025) \u25b8 Q3 FY26 (17-Feb-2026), plus FY24 Investor Presentation (Jun-2024) for context.\n**Approach:** Mode C \u2014 Walk-the-Talk (4 inputs). Per-call Brief included after the credibility scorecard.\n\n---\n\n## A. Concall Brief \u2014 Q4 FY25 (call dated 30-May-2025)\n| Field | Value | Source |\n|---|---|---|\n| Q4 Revenue / EBITDA / PAT | \u20b926.46 Cr / \u20b93.44 Cr / \u20b92.55 Cr | Ankit Shah, p.2 |\n| FY25 Revenue / EBITDA / PAT | \u20b986.21 Cr / \u20b911.39 Cr / \u20b98.28 Cr (+29% / +14% / +4% YoY) | Ankit Shah, p.2 |\n| EPS (FY25, pre-split) | \u20b911.48 | Ankit Shah, p.2 |\n| Demand commentary | \"Improved demand in all three segments \u2014 Semiconductor Devices, High Power Equipment, Exports\" | Mehta, p.3 |\n| Margin drivers | Higher value mix on the rise (defence/railways); SiC margins guided 25\u201328% EBITDA | Mehta, p.6 |\n| Capex & BS | \"Odisha plan is INR618 crores over two or two and a half years \u2026 so far we have spent about 10%\" | Mehta, p.3 |\n| Guidance (verbatim) | **\"From the existing plant, we expect INR100 crores and INR110 odd crores. And for Odisha, one quarter that we would be operational, we expect it to be around INR10 crores to INR12 crores.\"** (Ankit Shah, p.4) | MEDIUM conviction |\n| | **\"First phase will start in the last quarter of FY26. The next part of it, some part of it would get operational in July 26. And the full facility would start operating or functional from 2 years, 2.5 years from now.\"** (Ankit Shah, p.4) | MEDIUM conviction |\n| | **\"I think in five years or so\u2026 we should be able to get from Odisha, silicon carbide plant about INR1,200 crores or so.\"** (Mehta, p.8) | LOW conviction (\"I'm not so sure what the regulations are in terms of forward-looking\") |\n| New announcements | 1:1 bonus + 1:5 stock split + \u20b92/share dividend; Perry Schugart hired as CMO; CEO search active; \u20b94,195 L SiC IP purchase from SiCamore (related party) already announced | Mehta, p.4 |\n| Top Q&A | (1) Capex / phasing \u2014 answered with Phase split; (2) Customers \u2014 \"letter of intent from many different sectors, leaders globally\"; (3) Why bonus + split simultaneously? \u2014 \"non-cash, address illiquidity\" | pp.3\u201310 |\n| Takeaway | First-ever concall: ambitious targets set on Odisha (\u20b91,200 Cr potential by ~FY30, 25\u201328% EBITDA, \u20b9125 Cr debt + \u20b9125 Cr equity funding); modest near-term guidance (\u20b9110-122 Cr FY26 revenue). |\n\n---\n\n## B. Concall Brief \u2014 Q2 FY26 (call dated 17-Nov-2025)\n| Field | Value | Source |\n|---|---|---|\n| Q2 Revenue / EBITDA / PAT | \u20b925.64 Cr / \u20b94.36 Cr / \u20b93.15 Cr (+36% / +77% / +105% YoY; +22% sequential) | Ankit Shah |\n| EBITDA margin | 17.01 % (vs 13.09 % in Q2 FY25) | Ankit Shah |\n| H1 FY26 Revenue / PBT / PAT | \u20b946.6 Cr / \u20b96.92 Cr / \u20b94.89 Cr | Ankit Shah |\n| Demand commentary | Strong growth in industrial, renewables, railways, power infra, defence | Mehta |\n| Margin drivers | \"Better product mix, improved cost structure, disciplined execution\" | Mehta |\n| Capex & BS update | Phase-1 capex now \u20b9225 Cr (was \u20b9100 Cr in Q4FY25 call); Phase-2 capex \u20b9395-400 Cr. Odisha Govt fiscal support of \u20b932.56 Cr accorded; \u20b926 Cr received in escrow. **\u20b970 Cr Phase-1 debt being arranged.** | Ankit Shah |\n| Guidance (verbatim) | **\"At 618 crores investment, fully done \u2026 you can expect once we are fully operating revenues about 600 crores or so.\"** (Mehta) | MEDIUM conviction \u2014 **NOTE: halved from prior \u20b91,200 Cr guidance** |\n| | **\"Asset turnover ratio in semiconductors is about 0.6 to 0.8 and I would say we will go up to between 0.8 and 1.0.\"** (Mehta) | MEDIUM conviction |\n| | **\"This fiscal year\u2026 we were targeting at around 8 to 10 crores revenue out of that for this fiscal year\u2026 Next year we will do about 60 corrodes or so revenue from EPI.\"** (Ankit, then Mehta) | MEDIUM conviction |\n| | **\"Q4 of FY26\"** for first SiC revenue, subject to electricity (LOW conviction conditional) | LOW conviction |\n| New announcements | Indian Navy 10,000 SiC devices shipped ($95K, contract-manufactured in Taiwan w/ RIR IP); LOIs from Alpha Omega Semi, ST Micro, Microchip; ESOP plan being prepared; NSE listing initiated. ISM-2 bid plans (looking at Ukraine + Mitsubishi as tech partners). | Mehta |\n| Top Q&A | (1) 200 mm SiC timing \u2014 \"not mainstream for next 3-5 years\"; (2) Strategic investor \u2014 \"in talks, can't name\"; (3) Power 1 MW transformer \u2014 \"trying to push, lead-time globally long\". |\n| Takeaway | Profit & margin print was strong (EBITDA +77%) but **Odisha guidance materially de-rated** (\u20b91,200\u2192\u20b9600 Cr full-capacity, Phase-1 capex +125%, debt requirement down from \u20b9125\u2192\u20b970 Cr because they re-sized funding mix). State subsidy started flowing but with 5-month delay vs. Q4FY25 promise. CEO appointment still slipping. |\n\n---\n\n## C. Concall Brief \u2014 Q3 FY26 (call dated 17-Feb-2026)\n| Field | Value | Source |\n|---|---|---|\n| Q3 Revenue / EBITDA / PAT | **\u20b920.27 Cr / \u20b90.86 Cr / \u20b90.44 Cr** \u2014 sharp sequential drop | Ankit Shah, p.2 |\n| EBITDA margin | **4.2 %** (collapsed from 17 % in Q2) | Implied from numbers |\n| EPS Q3 | \u20b90.06 | Ankit Shah |\n| 9M FY26 Revenue / PAT | **\u20b966.92 Cr / \u20b95.33 Cr** (vs \u20b959.74 Cr / \u20b95.73 Cr) \u2014 Revenue +12 %, **PAT down YoY** | Ankit Shah |\n| Demand commentary | \"Temporary moderation arising from realignment of certain orders due to customer-driven scheduling changes, increase in material consumption cost, and provision for cost due to introduction of New Labour Laws\" (Ankit Shah, p.3) | Confidence LOW \u2014 multi-factor explanation |\n| Margin drivers / pressures | Material cost inflation + new-labour-law provisioning + order rescheduling | Ankit Shah |\n| Capex & BS update | Odisha capex spent: \u20b965 Cr (pre-disbursement) + \u20b952 Cr (matched escrow, of which \u20b943-45 Cr drawn) = ~\u20b9110-117 Cr. Bank debt of \u20b970 Cr at \"in-principle approval\" \u2014 closure by mid-March 2026. Phase-2 financing **not yet started**. | Mehta + Ankit Shah |\n| Guidance (verbatim) | **\"Once we get the power, we will have the commercial production started at Bhubaneswar facility \u2026 within 90 days.\"** (Mehta) \u2014 i.e. Q1 FY27 at earliest | LOW conviction (conditional on power) |\n| | **\"Clean room will be done by end of February or mid-March.\"** (Mehta) | MEDIUM conviction \u2014 note this was promised \"end of November\" in the previous call |\n| | \"I don't want to drop those numbers [FY27, FY28] within 3 days or 4 days of joining\" \u2014 new MD Ramesh Kumar declines to give forward numbers | LOW conviction (no guidance) |\n| New announcements | **New MD & CEO appointed: Mr. N. Ramesh Kumar (ex-CG Power leader during fraud crisis, ex-Diffusion Engineers) joined 11-Feb-2026.** First international SiC shipment $20,000 to Richardson Electronics; 10 MW rectifier tested for rocket-launcher; high-voltage capacitor-discharge switch (10 kV / 200 kA) nearing completion for Indian Army \u2014 \"we are replacing ABB\". | Mehta, p.3 |\n| Top Q&A | (1) Clean-room timing \u2014 \"end of Feb or mid-March, contingent on power\"; (2) Bank debt \u2014 \"90-95% done, in-principle this week\"; (3) New MD priorities \u2014 three external (sales, brand, customer-connect) + three internal (ops excellence, IT, Odisha) |\n| Takeaway | A **soft quarter** with margin collapse blamed on lumpy orders + cost shocks; meanwhile Odisha keeps slipping (clean room: was Nov-25 \u2192 now Feb/Mar-26; power: still pending; commercial SiC production: pushed into FY27). Bright spots: real first international SiC shipment, Halol industrial wins (rocket-launcher rectifier, Indian-Army capacitor switch), MD finally on board. Management credibility tested. |\n\n---\n\n## D. Confidence Language Audit (cross-call)\n\n| Statement | Conviction | Comment |\n|---|---|---|\n| \"We **will** be able to do\" device fabrication 22 kV-class SiC | HIGH | Anchored in past US-Army shipments |\n| \"We **expect** about INR1,200 crores or so\" (Q4FY25) | MEDIUM | Subsequently revised |\n| \"I'm **not so sure** what the regulations are in terms of the forward-looking statement\" (Q4FY25, while giving \u20b91,200 Cr) | LOW | Hedge inside the headline |\n| \"First phase **will** start in last quarter of FY26\" | HIGH | Slipped \u2014 clean-room only readied late-Feb 2026 |\n| \"Subsidy from Odisha \u2026 I **expect** something before end of June [2025]\" | MEDIUM | Slipped 5 months |\n| \"It **could be** 60-40, **could be** 70-30. **Don't know yet**.\" (funding mix) | LOW | Open-ended; ultimately restructured |\n| \"We **have** letters of intent from \u2026 Alpha Omega Semi, ST Micro, Microchip\" | HIGH | Verified by Q3FY26 shipment to Richardson Electronics |\n| \"Commercial production **within 90 days** of getting power\" | LOW (conditional) | Power not yet given |\n| \"Phase-2 capex \u2026 we **will tie up** once Phase-1 is done\" | LOW | Sequential, no plan yet |\n| \"We are **about 90-95% done**\" on bank debt | MEDIUM | Closure deferred 4 quarters already |\n\n**Watch-out:** Several material catalysts (full-capacity revenue, capex amount, funding mix, commercial-production timing) were originally communicated in MEDIUM-conviction language without numeric ranges or sensitivities; they have all been revised. Investors should down-weight forward numerics from this management until at least one full Odisha milestone is delivered on time.\n\n---\n\n## E. Walk-the-Talk Scorecard\n\nEach row: forward statement from an **earlier** call \u25b8 observed outcome by the **latest** (Q3 FY26) call \u25b8 **+1 beat / 0 partial / -1 miss**.\n\n| # | Earlier promise | Call | Outcome by Feb-2026 | Score |\n|--:|---|---|---|:--:|\n| 1 | \"Capex for Odisha plan is INR618 crores over two or two and a half years\" | Q4 FY25 | Capex still ~\u20b9625 Cr total, but re-phased: Phase-1 \u20b9225 Cr (vs \u20b9100 Cr stated initially); timeline slipped at least 4-6 months. | **0** |\n| 2 | **\"First phase will start in last quarter of FY26\"** for commercial SiC production | Q4 FY25 | As of Feb-26, clean-room not yet handed over, power not yet connected, 60-day qualification + 30-day commercial ramp pending \u2014 earliest realistic commercial start Q1-Q2 FY27. | **-1** |\n| 3 | **\"Existing plant \u20b9100-110 Cr revenue in FY26\"** | Q4 FY25 | 9M FY26 Halol revenue ~\u20b966 Cr; Q3 alone \u20b920 Cr (weak). Likely FY26 print \u2248 \u20b990-95 Cr \u2192 just short of guidance. | **-1** (likely) |\n| 4 | \"Odisha SiC \u20b910-12 Cr revenue in Q4 FY26\" | Q4 FY25 | Revised to \u20b98-10 Cr in Q2; actual SiC revenue YTD = ~\u20b91 Cr (contract-manufactured Navy + sample). FY26 SiC revenue likely \u20b91-3 Cr. | **-1** |\n| 5 | **\"\u20b91,200 Cr Odisha full-capacity revenue\"** | Q4 FY25 | Restated in Q2 FY26 to \"**about 600 crores or so**\" \u2014 **halved**. | **-1** |\n| 6 | \"SiC EBITDA margins 25-28 %\" | Q4 FY25 | Not yet testable \u2014 SiC commercial production hasn't started. Overall H1 EBITDA 17 %, Q3 EBITDA 4 %. | **Not-yet-testable** |\n| 7 | \"Government subsidy: 50 % Odisha + (likely) 25 % central = up to 75 %\" | Q4 FY25 | Only 50 % Odisha booked. No central component disclosed for either phase. | **-1** |\n| 8 | **\"CEO appointment is in process\"** (May-25) \u2192 \"by end of November\" (Nov-25) | Q4 FY25 / Q2 FY26 | Mr. N. Ramesh Kumar joined 11-Feb-2026 \u2014 ~9 months after first promise. Achieved, but with material slippage and a high-profile failure (one candidate declined, one rejected). | **0** |\n| 9 | **\"Odisha state subsidy expected before end of June 2025\"** | Q4 FY25 | First tranche received Nov-2025 (~5 months late). Second tranche received by Feb-26. | **0** |\n| 10 | \"LOIs from many global leaders\" | Q4 FY25 | Confirmed in Q2 FY26 (Alpha Omega Semi, ST Micro, Microchip). First commercial $20K international shipment to Richardson Electronics in Q3 FY26. | **+1** |\n| 11 | \"Halol bottlenecks largely addressed \u2014 additional furnaces installed\" | Q4 FY25 | Q3 FY26 Halol revenue moderated (\u20b920.27 Cr vs Q2's \u20b925.64 Cr) \u2014 partly customer scheduling but also points to capacity / order-flow lumpiness. | **0** |\n| 12 | \"Funding plan \u20b9125 Cr debt + \u20b9125 Cr equity\" | Q4 FY25 | Restructured to Phase-1 \u20b970 Cr debt + state grant; Phase-2 not financed yet. Magnitude similar but timing & structure changed. | **0** |\n| 13 | \"Packaging operational by July 2026 (Q2 FY27)\" | Q4 FY25 | Phase-2 equipment lead-time 18-24 months, no order placed yet \u2014 very likely slips to FY28. | **-1** (provisional) |\n| 14 | \"Full facility operational 2-2.5 yrs from May-25 (\u2248 Nov-2027); full ramp by FY30\" | Q4 FY25 | Cumulative slippage to date \u2248 6 months. Full operational date most-likely H1 FY28; full ramp pushed to FY31. | **-1** (provisional) |\n| 15 | \"NSE listing process initiated\" | Q2 FY26 | Re-affirmed in Q3 FY26 for \"by March 31, 2026 or earlier.\" Pending. | **0** |\n| 16 | **\"Replacing ABB in industrial applications\"** | Q3 FY26 (new claim) | 10 MW rectifier for rocket-launcher tested; Indian-Army 10 kV / 200 kA capacitor discharge switch in final stages. Tangible product-level wins. | **+1** (in motion) |\n\n### Aggregate Score\n- **Beats (+1):** 2 (LOIs converting to first shipments; Halol industrial-product wins)\n- **Partials (0):** 6 (capex envelope, CEO, subsidy timing, funding plan, NSE listing, Halol capacity)\n- **Misses (-1):** 6 (Phase-1 production timing, FY26 revenue guidance, SiC FY26 revenue, full-capacity revenue halved, central-govt component, Phase-2/full operational timing)\n- **Not testable:** 1 (SiC EBITDA margin)\n\n**Net: -4 across 15 testable items \u2192 Management Credibility Rating: LOW\u2013MEDIUM (closer to LOW).**\n\n### Pattern of repeated optimism without delivery \u2014 yes, present.\n- Headline numbers were given with MEDIUM conviction in Q4 FY25, **revised materially within two calls**.\n- Operational milestones (clean room, power, CEO) repeatedly slipped 4-9 months.\n- The Q3 FY26 weak print (PAT collapse) wasn't flagged in any prior call.\n- Mitigating factors: management is **transparent in restating** numbers (not hiding the cuts), the **underlying technology and customer pipeline are real** (Indian Navy SiC shipment, Richardson Electronics, Indian Army order, ABB displacement), and **state subsidies are actually flowing** even if late.\n\n---\n\n## F. What was NOT answered / dodged\n\n- **Exact ramp curve of Halol revenue** after FY26 \u2014 new MD declined; reasonable given 4-day tenure, but represents a real gap.\n- **Bank-debt collateral & guarantee structure** \u2014 Ankit deferred details until sanction letter arrives.\n- **Strategic investor identity** \u2014 repeatedly punted, \"we'll disclose when finalized.\"\n- **Sale of Visicon Power Electronics to Silicon Power Corporation USA** (announced May-2025) \u2014 no consideration disclosed in any of the 3 concalls.\n- **Quantum of fresh equity raise needed for Phase-2** \u2014 Mehta vague: \"60-40 or 70-30, don't know yet.\"\n- **Royalty obligations to SiCamore beyond the \u20b942 Cr IP purchase** \u2014 never asked, never disclosed.\n- **Q3 FY26 specific dollar value of \"labour-law provision\"** \u2014 bundled into a multi-factor explanation.\n- **Customer-concentration disclosure** \u2014 none in any call.\n\n---\n\n## G. Changes in tone vs. prior calls\n\n| Dimension | Q4 FY25 | Q2 FY26 | Q3 FY26 |\n|---|---|---|---|\n| **Headline numerics** | Big, round, eye-catching (\u20b91,200 Cr, 25-28% EBITDA) | First downward revisions; more granular by phase | Almost no forward numerics; new MD declines |\n| **Founder-led narrative** | Strong, technology-first (\"only company in India\", \"second to none\") | Still strong; Mehta dominant | Moderated; deliberate handoff to new MD |\n| **Defensive posture** | Low \u2014 confident | Medium \u2014 explaining delays | Higher \u2014 explaining margin collapse + repeated delays |\n| **Use of conditional language** | Frequent (\"could be\", \"I don't know yet\") | Frequent | Mounted further; \"subject to power\" |\n| **Concrete operational wins** | Few | Indian Navy 10K devices (first tangible SiC shipment) | Richardson Electronics shipment, 10 MW rectifier, 10 kV / 200 kA Army switch \u2014 **best concrete-win list yet** |\n| **Margin discussion** | Aspirational (25-28 % SiC) | Demonstrated 17 % EBITDA | Collapse explained as \"temporary\" \u2014 needs verification next call |\n\nOverall trajectory: management is **adapting from \"vision selling\" to \"execution accountability\"** \u2014 which is healthy \u2014 but the credibility hole opened by the Q4 FY25 numbers is wide and only the next 2-3 calls can close it.\n\n---\n\n## H. Final Take-aways\n\n1. **Core business is real and improving in quality, but lumpy.** Halol is winning marquee defence / railway / industrial orders against global incumbents (ABB-replacement claim). Revenue trajectory is positive in trend but volatile in any single quarter.\n\n2. **The SiC story is real but is at least 6-12 months behind the originally communicated schedule** \u2014 and the steady-state revenue potential has been **halved** (\u20b91,200 \u2192 \u20b9600 Cr) within a six-month window. Investors who anchored to the May-25 numbers should re-anchor.\n\n3. **The new MD (Ramesh Kumar) is the single most positive operational change in 9 months.** His CG Power experience (steering a fraud-hit company through NCLT avoidance) gives RIR a turnaround-capable hand. Watch the next 1-2 calls for whether he restates guidance with firmer numbers.\n\n4. **Funding gap is the gating risk.** Phase-1 \u20b970 Cr debt should close by mid-March 2026 (Q4 FY26); Phase-2 (\u20b9395-400 Cr, ~50 % govt) has no debt or equity tied. Expect a meaningful equity raise in FY27 \u2014 at the current share price, this could be sized at \u20b9150-200 Cr. Dilution risk: real.\n\n5. **Walk-the-Talk Rating: LOW-MEDIUM credibility.** Management is honest in restating; not honest in original sizing. Treat all forward numerics with a 20-30 % haircut and a 6-month delay assumption until proven otherwise.\n\n---\n\n*Skill mode used: Mode C (Walk-the-Talk, 4 inputs). All quotes verbatim from concall transcripts cited inline.*\n", "growth_triggers": "# RIR Power Electronics Ltd \u2014 Growth Triggers 1-Pager\n*As of 16-May-2026 | BSE: 517035 | CMP: pull from Screener.in (post 1:1 bonus + 1:5 split, FV \u20b92) | Source: Screener.in*\n\n> **Valuation discipline:** This is a 1-pager for trigger mapping, not a valuation note. CMP / Mcap / TTM P/E must be sourced from Screener.in immediately before any position-sizing decision \u2014 they have moved sharply on SiC narrative since FY25 close and the script changed after corporate actions.\n\n---\n\n## Business in one line\nIndia's only listed pure-play **power-semiconductor + power-equipment** maker (Halol, Gujarat); now executing a **\u20b9618 Cr Silicon Carbide ecosystem (EPI + Device-fab + Packaging) in Odisha** \u2014 first-of-its-kind in India \u2014 for railways, defence, renewables, EV-power, and green-hydrogen end-markets.\n\n---\n\n## The 6 Growth Triggers\n\n### Trigger 1: Odisha SiC Phase-1 (EPI wafer line) commercial production \u2014 **MEDIUM**\n- **What:** 150 mm SiC epitaxial-wafer line (4,000 wafers/month at full ramp); two reactors \u2014 one delivered, second arriving ~mid-March-2026; \"we are not growing the boule, we are buying SiC substrate wafers and growing 20-180 micron defect-free EPI on top\" (Mehta, Q2 FY26 p.6).\n- **Evidence:** \"Once we get the power, we will have the commercial production started at Bhubaneswar facility \u2026 within 90 days.\" (Mehta, Q3 FY26 call p.6). Clean room ready by \"end of February or mid-March\" 2026 (Mehta, Q3 FY26 p.8). State subsidy \u20b952 Cr already received in two tranches (Ankit Shah, Q3 FY26 p.7).\n- **Quantum:** \u20b960 Cr revenue in FY27 from EPI alone (Mehta, Q2 FY26 p.6); 25-28 % EBITDA margin target (Mehta, Q4 FY25 p.6).\n- **Timeline:** First EPI revenue in Q1-Q2 FY27 (slipped from Q4 FY26 guided in May-25); meaningful ramp from H2 FY27.\n- **Why MEDIUM (not HIGH):** Power 33 kV connection still pending from Odisha state utility; reactor-2 still en route; commercial qualification = 60 days post first-power. Customer LOIs in place (Alpha Omega Semi, ST Micro, Microchip per Mehta, Q2 FY26 p.7) but no firm signed offtake contract disclosed.\n\n### Trigger 2: Halol industrial-product wins \u2014 defence & infrastructure replacement of global incumbents \u2014 **HIGH**\n- **What:** Halol plant has delivered/is on the verge of delivering several large, irreplaceable industrial orders against ABB / Siemens / Mitsubishi: (i) 10 MW base-power rectifier for rocket launcher (tested in Q3 FY26); (ii) 10 kV / 200 kA capacitor discharge switch for Indian Army nearing completion; (iii) OSD-595 (3,600 V) and OSD-550 (4,300 V) for diesel + electric locomotives \u2014 RDSO Part-I supplier; (iv) sub-cycle transfer / fault-current-limiter assemblies for grid; (v) 22 kV SiC diode delivered to **US Army** historically.\n- **Evidence:** \"We provided and we tested almost 10 megawatt rectifier for base power for rocket launcher \u2026 high voltage capacitor discharge switch for Indian Army, which is about 10,000 volts and 200,000 amps \u2026 we are by the way replacing ABB from this applications\" (Mehta, Q3 FY26 p.3). RDSO Part-I status verified in AR25 p.6.\n- **Quantum:** Halol revenue ran-rate ~\u20b985-90 Cr FY25 \u2192 guided \u20b9100-110 Cr FY26 by management; under new MD Ramesh Kumar (joined Feb-26) we expect \u20b9130-160 Cr ran-rate by FY28 based on the order pipeline and industry experience. EBITDA margin 14-17 % achievable (proved in Q2 FY26).\n- **Timeline:** Continuous flow; orders book over FY26-FY27.\n- **Why HIGH:** Products are already at advanced testing / RDSO-approved stage with named PSU/defence customers. India has zero domestic alternative on most of these \u2014 switching cost to ABB-equivalent is years.\n\n### Trigger 3: First international commercial SiC shipment & global distribution via Richardson Electronics \u2014 **MEDIUM**\n- **What:** First $20,000 international shipment of SiC product was made in Q3 FY26 to Richardson Electronics USA (one of the largest power-semi distributors globally). Volume orders expected post-evaluation.\n- **Evidence:** \"Last quarter, we did our first international shipment to a very reputed global dealer and there was a sample order of $20,000. Once that is evaluated, we expect volume orders from Richardson Electronics which is the one of the largest and the most reputed distributor.\" (Mehta, Q3 FY26 p.3). Indian Navy 10,000-device SiC shipment ($95K) executed in Q2 FY26 via Taiwan contract manufacturer with RIR IP.\n- **Quantum:** Management guides **65 % of SiC Phase-1 revenue will be export** (Mehta, Q2 FY26 p.6). If Phase-1 ramps to ~\u20b960 Cr in FY27, export contribution \u2248 \u20b940 Cr; could scale to \u20b9100-200 Cr by FY29 if Richardson channel develops.\n- **Timeline:** Volume orders contingent on $20K-batch evaluation \u2014 typically 3-6 months. Real revenue impact FY27 onwards.\n- **Why MEDIUM:** Distributor relationship is real and the first shipment has happened, but no firm volume contract size has been disclosed.\n\n### Trigger 4: India's green-hydrogen electrolyser rectifier opportunity \u2014 **MEDIUM**\n- **What:** RIR is one of very few Indian players supplying high-power DC rectifiers (60 V/2,000 A; 200 V/3,200 A; 12 V/10,000 A) for water electrolysers used in green hydrogen, hydrogenation, electro-chlorination, and refinery applications.\n- **Evidence:** Already commissioned at 15 MW Kadodiya/Ujjain green hydrogen facility (AR25, Investor Presentation Jun-24 p.7). AR25 highlights \"rectifiers integral to electrolysis applications\" (p.5). India's NGHM (National Green Hydrogen Mission) targets 5 MMT of green H\u2082 capacity by 2030 \u2014 implies tens-of-GW of electrolyser capacity.\n- **Quantum:** Specific revenue per electrolyser MW: ~\u20b940-60 L of rectifier value. If RIR captures 5-10 % of incremental Indian electrolyser capacity over FY27-FY30, opportunity = \u20b9150-300 Cr cumulative.\n- **Timeline:** Order flow already starting; meaningful revenue contribution from FY27.\n- **Why MEDIUM:** Demand is real, RIR is already credentialled, but final L-1/L-2 wins on specific RFP-based electrolyser tenders haven't been disclosed.\n\n### Trigger 5: New MD Mr. N. Ramesh Kumar \u2014 execution & guidance reset \u2014 **MEDIUM**\n- **What:** Mr. N. Ramesh Kumar (ex-CG Power business head; led CG out of NCLT-risk during the 2019 fraud disclosure; ex-Diffusion Engineers Ltd) joined as MD & CEO on 11-Feb-2026. Stated priorities: external \u2014 sales reorg, brand-building, customer-connect, new applications/products; internal \u2014 operational excellence, IT, Odisha oversight.\n- **Evidence:** \"I am pleased to welcome our new MD and CEO, Ramesh Kumar ji\" (Mehta, Q3 FY26 p.3); \"I have taken three targets for internally and three targets externally\" (Ramesh Kumar, Q3 FY26 p.5).\n- **Quantum:** Hard to size \u2014 but the absence of an India-resident MD for the prior 12+ months was repeatedly cited by analysts as a credibility gap; resolution of this gap could unlock institutional ownership and re-rate the stock.\n- **Timeline:** Tangible operational impact from H2 FY27 onwards; firm forward numerics likely from Q1 FY27 concall (May-2026).\n- **Why MEDIUM:** New incumbent with strong track record but only 4 days on the job at the time of latest call. Watch the next 1-2 quarters.\n\n### Trigger 6: NSE listing + potential strategic investor \u2014 re-rating trigger \u2014 **OPTIONALITY**\n- **What:** RIR is currently BSE-only (scrip 517035). NSE listing process is underway; expected by 31-Mar-2026. Management has separately confirmed it is in discussions with **strategic investors and FIIs** (\"we are in talks with strategic partners to join in but we will not be able to share any names currently\" \u2014 Ankit Shah, Q2 FY26 p.6). ISM-2 bid (Indian Semiconductor Mission Phase-2) is also being prepared with potential foreign tech partner (Mitsubishi / Ukrainian company) for medium-and-high voltage IGBTs.\n- **Evidence:** Q2 FY26 + Q3 FY26 concalls.\n- **Quantum:** A confirmed strategic investor with a name (e.g., a global power-semi major or a sovereign-fund) at a 5-10 % stake would typically re-rate Indian semi names by 20-40 %. NSE inclusion expands the institutional buyer base meaningfully.\n- **Timeline:** NSE listing \u2014 3-6 months (next quarter). Strategic investor \u2014 open-ended; ISM-2 \u2014 depends on government tender cycle.\n- **Why OPTIONALITY:** No name has been disclosed; **this cannot be the main reason to own the stock**. Pure upside if it lands.\n\n---\n\n## Trigger Scoreboard\n\n| # | Trigger | Conviction | Quantum (\u20b9 Cr \u2014 incremental rev) | Timeline | Status |\n|---|---|---|---|---|---|\n| 1 | Odisha SiC Phase-1 EPI commercial production | MEDIUM | \u20b98-10 Cr FY26 \u2192 \u20b960 Cr FY27 \u2192 \u20b9150 Cr FY29 | Q1 FY27 first revenue | Slipping \u2014 clean-room near, power pending |\n| 2 | Halol defence + railway + grid wins (ABB displacement) | **HIGH** | +\u20b940-50 Cr by FY28 over current run-rate | FY26-FY27 | On track; orders being delivered |\n| 3 | International SiC channel via Richardson Electronics | MEDIUM | \u20b920-40 Cr FY27 \u2192 \u20b9100+ Cr by FY29 (export ~65 % of SiC) | FY27 onwards | First shipment done; evaluation underway |\n| 4 | Green hydrogen electrolyser rectifiers | MEDIUM | \u20b9150-300 Cr cumulative FY27-FY30 | FY27-FY30 | Credentialled; order flow starting |\n| 5 | New MD Ramesh Kumar \u2014 operational reset | MEDIUM | Indirect; could unlock 10-20 % operating leverage | H2 FY27 onwards | Joined 11-Feb-2026; guidance next call |\n| 6 | NSE listing + Strategic investor + ISM-2 | OPTIONALITY | Re-rating only; not a P&L line | FY27 + open | NSE filing in process; investor talks \"ongoing\" |\n\n**Sum of MEDIUM + HIGH triggers (Triggers 1-5) supports a credible 2-3\u00d7 revenue scale-up over FY27-FY30 from the FY25 base of \u20b986 Cr \u2014 assuming Odisha execution and Halol order conversion hold.**\n\n---\n\n## What can break the thesis (top 3 risks)\n\n1. **Odisha execution slippage / cost over-run.** Phase-1 timeline has already slipped 6 months and full-capacity revenue guidance was halved (\u20b91,200 \u2192 \u20b9600 Cr) within six months. If Phase-2 (\u20b9400 Cr packaging + device-fab) is delayed by another 6-12 months or the asset turnover proves below the guided 0.8-1.0\u00d7, the SiC thesis weakens materially. The \u20b942 Cr SiC IP (intangible on the balance sheet) would face impairment risk.\n\n2. **Funding gap \u2192 equity dilution.** Phase-1 \u20b970 Cr debt is at in-principle approval (closure expected mid-March-2026). **Phase-2 financing (~\u20b9400 Cr) is not yet tied** \u2014 Ankit Shah explicitly said \"we'll tie up Phase-2 once Phase-1 is done\" (Q3 FY26 p.10). At current Mcap, a Phase-2 equity raise could be 5-15 % dilutive. The recent track-record of warrant conversions and treasury-share monetisation makes further dilution likely.\n\n3. **Governance & related-party density.** FY25 saw a \u20b942 Cr intangible purchase from related-party SiCamore Semiconductor (USA); FY26 sees sale of 100 % subsidiary Visicon Power Electronics to related-party Silicon Power Corp (USA) at undisclosed terms; 7.5 pp promoter shareholding reduction; multiple long-tenured director exits. None individually is disqualifying \u2014 but the cluster matters. Any FY26 RPT escalation (e.g., further IP purchases, royalty arrangements, additional asset transfers) would damage the discount-to-fair-value the stock should command.\n\n---\n\n## Verdict\n\nThe **HIGH-conviction Halol industrial-product trigger (Trigger 2) alone underwrites a fair-value floor at current revenue + modest growth**, with the MEDIUM-conviction Odisha SiC trigger (Trigger 1) providing the asymmetric upside that has driven the stock's narrative. **The combined HIGH + MEDIUM triggers can plausibly take revenue to \u20b9350-450 Cr by FY29 at a 17-20 % EBITDA margin**, even if the full \u20b9600 Cr Odisha-only guidance proves out only by FY31 \u2014 i.e. the thesis works even with management's downward-revised numbers. **The OPTIONALITY triggers (NSE listing, strategic investor, ISM-2) are the kicker, not the case.** Bet sizing should reflect that this is a small-cap with a sub-1\u00d7 CFO/PAT history, an aggressive related-party-funded capex programme, and a credibility hole that the new MD's first two quarters need to close.\n\n---\n\n*Source citations: AR25 (RIR Power Electronics 56th Annual Report FY24-25); RIR Q4 FY25 concall transcript (30-May-2025); RIR Q2 FY26 concall transcript (17-Nov-2025); RIR Q3 FY26 concall transcript (17-Feb-2026); RIR Investor Presentation (10-Jun-2024). CMP / Mcap / TTM P/E to be pulled from Screener.in immediately before any decision.*\n"};
+
+
+// ----- Render raw markdown into collapsibles -----
+function renderMarkdown() {
+  if (window.marked) {
+    document.getElementById('md_qs').innerHTML = marked.parse(RAW.quick_scan);
+    document.getElementById('md_wt').innerHTML = marked.parse(RAW.walk_the_talk);
+    document.getElementById('md_gt').innerHTML = marked.parse(RAW.growth_triggers);
+  } else {
+    document.getElementById('md_qs').innerHTML = '<pre>' + escHtml(RAW.quick_scan) + '</pre>';
+    document.getElementById('md_wt').innerHTML = '<pre>' + escHtml(RAW.walk_the_talk) + '</pre>';
+    document.getElementById('md_gt').innerHTML = '<pre>' + escHtml(RAW.growth_triggers) + '</pre>';
+  }
+}
+function escHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+renderMarkdown();
+
+// ----- Charts -----
+const FONT = "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif";
+Chart.defaults.font.family = FONT;
+Chart.defaults.color = '#374151';
+
+// Revenue / EBITDA / PAT trend (₹ Lakhs)
+new Chart(document.getElementById('rev_chart'), {
+  type: 'bar',
+  data: {
+    labels: ['FY21','FY22','FY23','FY24','FY25'],
+    datasets: [
+      { label: 'Revenue', data: [3007, 4233, 5733, 6676, 8621], backgroundColor: '#60a5fa' },
+      { label: 'EBITDA',  data: [288, 377, 820, 996, 1139], backgroundColor: '#16a34a' },
+      { label: 'PAT',     data: [133, 282, 668, 796, 828],  backgroundColor: '#d97706' }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: { title: { display: true, text: '5-yr Revenue / EBITDA / PAT (₹ Lakhs)' }, legend: { position: 'bottom' } },
+    scales: { y: { beginAtZero: true } }
+  }
+});
+
+// DuPont 3-yr
+new Chart(document.getElementById('dupont_chart'), {
+  type: 'bar',
+  data: {
+    labels: ['FY23','FY24','FY25'],
+    datasets: [
+      { label: 'Net Margin (%)',         data: [11.13, 11.91, 9.60], backgroundColor: '#94a3b8' },
+      { label: 'Asset Turnover (×10)',    data: [9.5, 7.6, 5.7],     backgroundColor: '#60a5fa' },
+      { label: 'Equity Multiplier (×10)', data: [16, 13.6, 13.0],    backgroundColor: '#fbbf24' },
+      { label: 'ROE (%)',                 data: [23.0, 13.3, 9.4],   backgroundColor: '#16a34a' }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: { title: { display: true, text: 'DuPont Decomposition (3-yr) — Asset Turnover & Multiplier scaled ×10 for display' }, legend: { position: 'bottom' } },
+    scales: { y: { beginAtZero: true } }
+  }
+});
+
+// Quarterly performance
+new Chart(document.getElementById('qtr_chart'), {
+  type: 'line',
+  data: {
+    labels: ['Q4 FY25','Q1 FY26','Q2 FY26','Q3 FY26'],
+    datasets: [
+      { label: 'Revenue (₹ Cr)', data: [26.46, 20.96, 25.64, 20.27], borderColor: '#60a5fa', backgroundColor: '#60a5fa33', tension: 0.2 },
+      { label: 'EBITDA (₹ Cr)',  data: [3.44, 2.10, 4.36, 0.86],     borderColor: '#16a34a', backgroundColor: '#16a34a33', tension: 0.2 },
+      { label: 'PAT (₹ Cr)',     data: [2.55, 1.74, 3.15, 0.44],     borderColor: '#d97706', backgroundColor: '#d9770633', tension: 0.2 }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: { title: { display: true, text: 'Quarterly Performance — Q4 FY25 to Q3 FY26' }, legend: { position: 'bottom' } },
+    scales: { y: { beginAtZero: true } }
+  }
+});
+
+// Walk-the-Talk running score
+new Chart(document.getElementById('wtt_chart'), {
+  type: 'bar',
+  data: {
+    labels: ['Beats (+1)','Partials (0)','Misses (-1)','Not testable'],
+    datasets: [{
+      label: 'Count',
+      data: [2, 6, 6, 1],
+      backgroundColor: ['#16a34a','#d97706','#dc2626','#6b7280']
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    plugins: { title: { display: true, text: 'Walk-the-Talk Scorecard — 15 testable items' }, legend: { display: false } },
+    scales: { x: { beginAtZero: true } }
+  }
+});
+
+// Growth Triggers quantum (₹ Cr potential)
+new Chart(document.getElementById('trig_chart'), {
+  type: 'bar',
+  data: {
+    labels: [
+      'Odisha SiC Phase-1 (FY29 est)',
+      'Halol industrial wins (by FY28)',
+      'International / Richardson (FY29)',
+      'Green Hydrogen rectifiers (cumul. FY27-30)',
+      'New MD operational reset',
+      'NSE/Strategic/ISM-2 (re-rating)'
+    ],
+    datasets: [{
+      label: 'Quantum (₹ Cr, mid-point estimate)',
+      data: [150, 45, 100, 225, 0, 0],
+      backgroundColor: ['#d97706','#16a34a','#d97706','#d97706','#d97706','#6b7280']
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    plugins: { title: { display: true, text: 'Growth Triggers — Estimated Incremental Revenue (₹ Cr)' }, legend: { display: false } },
+    scales: { x: { beginAtZero: true } }
+  }
+});
+</script>
+</body>
+</html>

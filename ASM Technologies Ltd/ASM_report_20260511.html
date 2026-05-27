@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ASM Technologies — Investment Research Report</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<style>
+  :root {
+    --green:#16a34a; --green-tint:#dcfce7;
+    --amber:#d97706; --amber-tint:#fef3c7;
+    --red:#dc2626;   --red-tint:#fee2e2;
+    --grey:#6b7280;  --grey-tint:#f3f4f6;
+    --blue:#2563eb;  --blue-tint:#dbeafe;
+    --bg:#f9fafb; --text:#111827; --muted:#6b7280; --border:#e5e7eb;
+  }
+  *{box-sizing:border-box}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,sans-serif;background:var(--bg);color:var(--text);margin:0;padding:0;line-height:1.5;font-size:15px}
+  .wrap{max-width:1180px;margin:0 auto;padding:24px}
+
+  /* Header */
+  header.top{background:linear-gradient(135deg,#1e293b 0%,#0f172a 100%);color:#fff;padding:28px;border-radius:12px;margin-bottom:24px;box-shadow:0 4px 12px rgba(0,0,0,.08)}
+  header.top h1{margin:0 0 6px;font-size:28px;font-weight:700}
+  header.top .sub{color:#cbd5e1;font-size:14px;margin-bottom:14px}
+  .header-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-top:18px}
+  .header-stat{background:rgba(255,255,255,.08);padding:12px 14px;border-radius:8px;backdrop-filter:blur(4px)}
+  .header-stat .lbl{font-size:11px;color:#94a3b8;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+  .header-stat .val{font-size:18px;font-weight:600;color:#fff}
+  .verdict-badge{display:inline-block;padding:8px 20px;border-radius:999px;font-weight:700;font-size:13px;letter-spacing:.8px;text-transform:uppercase;margin-top:8px}
+  .verdict-watch{background:var(--amber);color:#fff}
+  .verdict-buy{background:var(--green);color:#fff}
+  .verdict-pass{background:var(--red);color:#fff}
+
+  /* Section card */
+  section.card{background:#fff;border-radius:12px;padding:24px 26px;margin-bottom:20px;box-shadow:0 1px 3px rgba(0,0,0,.04);border:1px solid var(--border)}
+  section.card h2{margin:0 0 16px;font-size:20px;color:#0f172a;display:flex;align-items:center;gap:10px}
+  section.card h2::before{content:"";width:4px;height:22px;background:var(--blue);border-radius:2px;display:inline-block}
+  section.card h3{font-size:15px;color:#0f172a;margin:18px 0 10px}
+
+  /* Tables */
+  table{width:100%;border-collapse:collapse;margin:8px 0 4px;font-size:14px}
+  th,td{padding:9px 12px;text-align:left;border-bottom:1px solid var(--border);vertical-align:top}
+  th{background:#f8fafc;font-weight:600;color:#334155;font-size:12px;text-transform:uppercase;letter-spacing:.4px}
+  tbody tr:hover{background:#fafbfc}
+  td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+  .pill{display:inline-block;padding:2px 9px;border-radius:999px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.3px}
+  .pill-green{background:var(--green-tint);color:#065f46}
+  .pill-amber{background:var(--amber-tint);color:#92400e}
+  .pill-red{background:var(--red-tint);color:#991b1b}
+  .pill-grey{background:var(--grey-tint);color:#374151}
+  .pill-blue{background:var(--blue-tint);color:#1e40af}
+
+  /* KPI grid */
+  .kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin:10px 0}
+  .kpi{background:#fff;border:1px solid var(--border);border-radius:10px;padding:14px 16px;border-left:3px solid var(--blue)}
+  .kpi .lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;font-weight:600}
+  .kpi .val{font-size:22px;font-weight:700;margin:4px 0 0;color:#0f172a}
+  .kpi .delta{font-size:12px;font-weight:600;margin-top:2px}
+  .delta-up{color:var(--green)} .delta-dn{color:var(--red)}
+  .kpi.kpi-green{border-left-color:var(--green)}
+  .kpi.kpi-amber{border-left-color:var(--amber)}
+  .kpi.kpi-red{border-left-color:var(--red)}
+
+  /* Two-column */
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  @media (max-width:760px){.two-col{grid-template-columns:1fr}}
+
+  /* Chart container */
+  .chart-box{background:#fff;border:1px solid var(--border);border-radius:10px;padding:14px;margin:8px 0}
+  .chart-box h4{margin:0 0 8px;font-size:13px;color:#334155;font-weight:600}
+  .chart-wrap{position:relative;height:280px}
+
+  /* Callouts */
+  .callout{padding:14px 16px;border-radius:8px;margin:14px 0;border-left:4px solid;font-size:14px}
+  .callout-red{background:var(--red-tint);border-color:var(--red);color:#7f1d1d}
+  .callout-amber{background:var(--amber-tint);border-color:var(--amber);color:#78350f}
+  .callout-green{background:var(--green-tint);border-color:var(--green);color:#064e3b}
+  .callout-blue{background:var(--blue-tint);border-color:var(--blue);color:#1e3a8a}
+  .callout ul{margin:6px 0 0 20px;padding:0}
+  .callout li{margin:4px 0}
+
+  /* Quote block */
+  .quote{background:#f8fafc;border-left:3px solid var(--grey);padding:10px 14px;margin:6px 0;font-style:italic;color:#334155;font-size:13.5px;border-radius:0 6px 6px 0}
+  .quote .src{display:block;font-style:normal;font-size:11px;color:var(--muted);margin-top:4px}
+
+  /* Forensic score grid */
+  .red-flag-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px}
+  .rf-card{padding:10px 12px;border-radius:8px;border:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:13px}
+  .rf-green{background:var(--green-tint);border-color:#86efac}
+  .rf-amber{background:var(--amber-tint);border-color:#fcd34d}
+  .rf-red{background:var(--red-tint);border-color:#fca5a5}
+  .rf-card .name{font-weight:500;color:#0f172a;flex:1}
+  .rf-card .badge{font-size:10px;font-weight:700;padding:2px 7px;border-radius:6px}
+
+  /* Footer / details */
+  details{background:#fff;border:1px solid var(--border);border-radius:10px;padding:0;margin-bottom:12px;overflow:hidden}
+  details summary{padding:14px 18px;cursor:pointer;font-weight:600;color:#334155;background:#f8fafc;font-size:14px;list-style:none;display:flex;align-items:center;gap:8px}
+  details summary::-webkit-details-marker{display:none}
+  details summary::before{content:"▶";font-size:10px;color:var(--muted);transition:transform .2s}
+  details[open] summary::before{transform:rotate(90deg)}
+  details pre{padding:18px 22px;margin:0;background:#fff;font-size:13px;font-family:"SF Mono",Menlo,Consolas,monospace;white-space:pre-wrap;word-wrap:break-word;max-height:480px;overflow-y:auto;line-height:1.55}
+
+  /* Score bar */
+  .score-bar{display:flex;height:14px;border-radius:7px;overflow:hidden;background:#e5e7eb;margin:6px 0}
+  .score-fill{height:100%;background:linear-gradient(90deg,var(--amber),var(--green));transition:width .3s}
+
+  /* Footer */
+  footer{text-align:center;color:var(--muted);font-size:12px;padding:24px 0;margin-top:20px;border-top:1px solid var(--border)}
+
+  .section-divider{height:1px;background:var(--border);margin:18px 0}
+
+  .ticker-strip{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+  .ticker-strip span{background:rgba(255,255,255,.1);padding:4px 10px;border-radius:6px;font-size:12px;color:#cbd5e1}
+
+  .bear-case{counter-reset:b}
+  .bear-item{position:relative;padding:12px 16px 12px 50px;margin:10px 0;background:#fef2f2;border-radius:8px;border:1px solid #fecaca}
+  .bear-item::before{counter-increment:b;content:counter(b);position:absolute;left:14px;top:50%;transform:translateY(-50%);width:26px;height:26px;background:var(--red);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px}
+
+  /* Risk markers in capex roadmap */
+  .roadmap{display:grid;grid-template-columns:120px 1fr 100px;gap:10px;align-items:center;padding:10px 12px;border-bottom:1px solid var(--border)}
+  .roadmap:last-child{border-bottom:none}
+  .roadmap .yr{font-weight:600;font-size:13px;color:#334155}
+  .roadmap .ev{font-size:13.5px}
+  .roadmap .amt{text-align:right;font-weight:600;color:var(--blue);font-size:13.5px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- HEADER -->
+<header class="top">
+  <h1>ASM Technologies Limited</h1>
+  <div class="sub">BSE: 526433 &middot; ASMTEC &middot; Engineering R&amp;D + Design-Led Manufacturing (DLM) &middot; Bengaluru, India</div>
+  <span class="verdict-badge verdict-watch">VERDICT: WATCH</span>
+  <div class="ticker-strip">
+    <span>Founded 1992</span>
+    <span>33rd Annual Report</span>
+    <span>7 Manufacturing Facilities</span>
+    <span>9 Development Centres</span>
+    <span>~2,000+ Employees</span>
+    <span>Promoter holding: 57.10%</span>
+  </div>
+  <div class="header-grid">
+    <div class="header-stat"><div class="lbl">CMP (Apr 2026)</div><div class="val">₹2,492</div></div>
+    <div class="header-stat"><div class="lbl">Market Cap (May'26)</div><div class="val">₹5,142 Cr</div></div>
+    <div class="header-stat"><div class="lbl">TTM P/E</div><div class="val">~85×</div></div>
+    <div class="header-stat"><div class="lbl">FY26 Revenue</div><div class="val">₹528.5 Cr</div></div>
+    <div class="header-stat"><div class="lbl">FY26 PAT</div><div class="val">₹60.8 Cr</div></div>
+    <div class="header-stat"><div class="lbl">FY26 ROCE</div><div class="val">22.6%</div></div>
+    <div class="header-stat"><div class="lbl">FY26 ROE</div><div class="val">25.7%</div></div>
+    <div class="header-stat"><div class="lbl">52-wk High / Low</div><div class="val">₹4,596 / ₹1,109</div></div>
+  </div>
+</header>
+
+<!-- EXEC SUMMARY -->
+<section class="card">
+  <h2>Executive Summary</h2>
+  <p style="margin-top:0;font-size:15px;color:#334155;">
+    ASM Technologies has executed a genuine structural pivot from sub-scale ER&amp;D into capital-intensive Design-Led Manufacturing (DLM) over 8 years. FY26 was the breakout year: revenue +83% YoY, EBITDA +114%, PAT +138%, CFO turned positive at ₹68 Cr, and ROCE crossed 22%. The story is now plugged into multiple India tailwinds — semicap localisation, ECMS scheme approval, ESDM PLI, friend-shoring — and management has announced a ~₹1,500 Cr capex roadmap across Karnataka, Tamil Nadu and Vietnam. But valuation at ~85× FY26 P/E already prices in 3-4 more years of 40%+ growth, customer concentration is high (top 2 = 39%, top 10 = 60%), and the equity component of the announced capex remains undefined — implying material future dilution risk.
+  </p>
+
+  <div class="kpi-grid">
+    <div class="kpi kpi-green"><div class="lbl">Piotroski F-Score</div><div class="val">6 / 9</div><div class="delta">Solid (failed criteria = strategic debt/equity/GM)</div></div>
+    <div class="kpi kpi-amber"><div class="lbl">Forensic Red Flags</div><div class="val">0R · 5A · 5G</div><div class="delta">Acceptable for high-growth small-cap</div></div>
+    <div class="kpi kpi-green"><div class="lbl">Mgmt Conviction (Q2FY26)</div><div class="val">4 HIGH</div><div class="delta">6 Medium · 1 Low (on equity quantum)</div></div>
+    <div class="kpi kpi-amber"><div class="lbl">Customer Concentration</div><div class="val">Top 2 = 39%</div><div class="delta">Top 10 = 60% · Names undisclosed</div></div>
+    <div class="kpi kpi-green"><div class="lbl">Net Debt / Equity</div><div class="val">0.05×</div><div class="delta">Down from 0.31× (warrant conversion)</div></div>
+    <div class="kpi kpi-amber"><div class="lbl">Capex Roadmap</div><div class="val">~₹1,500 Cr</div><div class="delta">vs current net-block ₹93 Cr — 16× asset base</div></div>
+  </div>
+</section>
+
+<!-- FINANCIAL TREND CHARTS -->
+<section class="card">
+  <h2>5-Year Financial Trajectory (Consolidated)</h2>
+
+  <div class="two-col">
+    <div class="chart-box">
+      <h4>Revenue (₹ Cr)</h4>
+      <div class="chart-wrap"><canvas id="chartRev"></canvas></div>
+    </div>
+    <div class="chart-box">
+      <h4>EBITDA &amp; PAT (₹ Cr)</h4>
+      <div class="chart-wrap"><canvas id="chartEbitdaPat"></canvas></div>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="chart-box">
+      <h4>Margins (%)</h4>
+      <div class="chart-wrap"><canvas id="chartMargin"></canvas></div>
+    </div>
+    <div class="chart-box">
+      <h4>Return Ratios (%)</h4>
+      <div class="chart-wrap"><canvas id="chartReturns"></canvas></div>
+    </div>
+  </div>
+
+  <div class="chart-box">
+    <h4>Revenue Mix Shift &mdash; The Structural Pivot to DLM</h4>
+    <div class="chart-wrap"><canvas id="chartMix"></canvas></div>
+  </div>
+
+  <h3>Headline P&amp;L (₹ Cr, Consolidated)</h3>
+  <table>
+    <thead><tr><th>Metric</th><th class="num">FY22</th><th class="num">FY23</th><th class="num">FY24</th><th class="num">FY25</th><th class="num">FY26</th></tr></thead>
+    <tbody>
+      <tr><td>Revenue</td><td class="num">191.6</td><td class="num">220.4</td><td class="num">201.6</td><td class="num">288.8</td><td class="num"><b>528.5</b></td></tr>
+      <tr><td>EBITDA</td><td class="num">21.0</td><td class="num">21.0</td><td class="num">6.0</td><td class="num">47.3</td><td class="num"><b>101.1</b></td></tr>
+      <tr><td>EBITDA Margin</td><td class="num">11.0%</td><td class="num">9.5%</td><td class="num">3.0%</td><td class="num">16.4%</td><td class="num"><b>19.1%</b></td></tr>
+      <tr><td>PAT</td><td class="num">13.9</td><td class="num">7.1</td><td class="num">(7.2)</td><td class="num">25.1</td><td class="num"><b>60.8</b></td></tr>
+      <tr><td>EPS (₹)</td><td class="num">13.90</td><td class="num">6.94</td><td class="num">(6.62)</td><td class="num">21.28</td><td class="num"><b>41.65</b></td></tr>
+      <tr><td>ROCE</td><td class="num">20.2%</td><td class="num">13.2%</td><td class="num">(0.2%)</td><td class="num">18.4%</td><td class="num"><b>22.6%</b></td></tr>
+      <tr><td>ROE</td><td class="num">25.7%</td><td class="num">17.0%</td><td class="num">(7.0%)</td><td class="num">10.6%</td><td class="num"><b>25.7%</b></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- 12-POINT AR ANALYSIS -->
+<section class="card">
+  <h2>12-Point Annual Report Analysis</h2>
+  <table>
+    <thead><tr><th style="width:34%">Dimension</th><th>Finding</th></tr></thead>
+    <tbody>
+      <tr><td><b>1. What it does</b></td><td>30-year-old engineering company running two verticals: ER&amp;D (embedded/SW/mechanical/electronics design) and DLM (low-volume, high-precision systems for semicap, consumer-electronics, industrial-electronics &amp; solar equipment). Operates a "system design house" model — uses captive ER&amp;D to design what its DLM unit then manufactures.</td></tr>
+      <tr><td><b>2. Segments (FY26)</b></td><td>DLM 53.8% &middot; ER&amp;D 46.2%. DLM share rose from 12% (H1FY25) to 63% (H1FY26) — structural shift.</td></tr>
+      <tr><td><b>3. Geography (FY26)</b></td><td>Domestic 80% &middot; Exports 20%. Customer book is global; global OEMs increasingly bill through Indian entities.</td></tr>
+      <tr><td><b>4. Customer concentration</b> <span class="pill pill-amber">RISK</span></td><td>Top 2 = 39.4% of FY25 standalone revenue (FY24: top 1 = 42.4%). Top 10 = 60% of FY26 revenue. Names withheld on NDA grounds.</td></tr>
+      <tr><td><b>5. Promoter &amp; mgmt</b></td><td>Promoter holding 57.10%. <b>No pledge.</b> MD Rabindra Srikantan (founder, 35+ yrs, Chairman CII Karnataka). Chairman M.R. Vikram (FCA, 44 yrs experience, also on Facebook India board).</td></tr>
+      <tr><td><b>6. Capex cycle</b> <span class="pill pill-amber">AGGRESSIVE</span></td><td>3 new facilities in FY26 (now 7 total). Karnataka MoU ₹510 Cr · Tamil Nadu MoU ₹250 Cr · ECMS scheme ₹565 Cr · 10-acre Karnataka land secured. Aggregate roadmap ~₹1,500 Cr vs current net-block ₹93 Cr.</td></tr>
+      <tr><td><b>7. Working capital</b></td><td>Receivables ballooned in FY25 (+150% vs revenue +43%) — reversed in FY26. Inventory jumped 270% in FY26 (DLM ramp). Debtor days improved 115 → 89.</td></tr>
+      <tr><td><b>8. Debt &amp; coverage</b></td><td>Total debt ₹113 Cr (vs ₹77 Cr) but cash + investments ₹97 Cr — net debt near zero. Interest cover healthy at 10.8×.</td></tr>
+      <tr><td><b>9. Key risks (mgmt)</b></td><td>Talent retention · Technology disruption · Competition · <b>Geography/geopolitical</b> · Cybersecurity. Customer concentration implicitly acknowledged but not separately flagged.</td></tr>
+      <tr><td><b>10. Related-party</b> <span class="pill pill-amber">WATCH</span></td><td>Salary advance to MD ₹10.9 Cr (vs ₹6.0 Cr) · loans to RV Forms &amp; Gears LLP ₹33 Cr · prof. charges receivable ₹26 Cr · corp guarantee ₹9.9 Cr. Cumulative governance watch though defensible individually.</td></tr>
+      <tr><td><b>11. Auditor</b></td><td>B K Ramadhyani &amp; Co. LLP — clean opinion 3 yrs in a row · no change · no qualification.</td></tr>
+      <tr><td><b>12. Strategy</b></td><td>Dominate domestic high-precision DLM for global OEMs friend-shoring into India, supported by captive ER&amp;D and ECMS/ESDM incentives. Recent moves: Myelin Foundry (20%, ₹48 Cr), Asmaitha Wireless (51%, ₹80 Cr), Vietnam subsidiary, ECMS approval.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- FORENSIC RED-FLAG SCAN -->
+<section class="card">
+  <h2>10-Point Forensic Red-Flag Scan</h2>
+  <p style="color:var(--muted);font-size:13px;margin-top:0">Net score: <b>0 RED · 5 AMBER · 5 GREEN</b> — acceptable for a high-growth small-cap, with material items to monitor on RPT and future equity dilution.</p>
+
+  <div class="red-flag-grid">
+    <div class="rf-card rf-amber"><span class="name">1. CFO / PAT divergence (3-yr)</span><span class="badge pill pill-amber">AMBER</span></div>
+    <div class="rf-card rf-amber"><span class="name">2. Receivables vs revenue</span><span class="badge pill pill-amber">AMBER</span></div>
+    <div class="rf-card rf-amber"><span class="name">3. Inventory vs revenue</span><span class="badge pill pill-amber">AMBER</span></div>
+    <div class="rf-card rf-green"><span class="name">4. Contingent liab vs net worth</span><span class="badge pill pill-green">GREEN</span></div>
+    <div class="rf-card rf-green"><span class="name">5. Promoter pledging</span><span class="badge pill pill-green">GREEN</span></div>
+    <div class="rf-card rf-green"><span class="name">6. Auditor qualifications</span><span class="badge pill pill-green">GREEN</span></div>
+    <div class="rf-card rf-amber"><span class="name">7. Related-party txns</span><span class="badge pill pill-amber">AMBER</span></div>
+    <div class="rf-card rf-green"><span class="name">8. Goodwill/intangible bloat</span><span class="badge pill pill-green">GREEN</span></div>
+    <div class="rf-card rf-amber"><span class="name">9. Equity dilution</span><span class="badge pill pill-amber">AMBER</span></div>
+    <div class="rf-card rf-green"><span class="name">10. Subsidiary losses</span><span class="badge pill pill-green">GREEN</span></div>
+  </div>
+
+  <h3>Detail on the 5 Ambers</h3>
+  <table>
+    <thead><tr><th style="width:18%">Flag</th><th>Reasoning</th></tr></thead>
+    <tbody>
+      <tr><td>CFO / PAT</td><td>3-yr sum CFO ₹43.9 Cr vs PAT ₹78.7 Cr = 0.56× (RED on SOIC's strict 0.7 rule). However, FY26 alone is 1.12× → fully reversed. Lookback red is explained by inventory + receivables build for DLM ramp.</td></tr>
+      <tr><td>Receivables</td><td>FY25 receivables +150% vs revenue +43%. FY26 reversed — receivables down 10% on revenue +83%.</td></tr>
+      <tr><td>Inventory</td><td>FY26 inventory +270% vs revenue +83%. Justifiable on new-plant ramp but watch FY27.</td></tr>
+      <tr><td>Related-party</td><td>Recurring salary advance of ₹10.9 Cr to MD (up 80% YoY) + inter-corp loans of ₹33 Cr to RV Forms &amp; Gears LLP. Why fund a subsidiary via loan rather than equity?</td></tr>
+      <tr><td>Equity dilution</td><td>FY25 warrant conversion → 28.14 lakh shares at ₹470.50 = ~₹132 Cr to promoter (~24% dilution). Future capex of ₹760 Cr may need 20-40% additional equity dilution (unquantified by mgmt).</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- PIOTROSKI + DUPONT -->
+<section class="card">
+  <h2>Piotroski F-Score &amp; DuPont</h2>
+  <div class="two-col">
+    <div>
+      <h3>Piotroski F-Score: 6/9</h3>
+      <div class="score-bar"><div class="score-fill" style="width:66%"></div></div>
+      <table>
+        <thead><tr><th>Criterion</th><th>FY26 vs FY25</th><th class="num">Pts</th></tr></thead>
+        <tbody>
+          <tr><td>Net income &gt; 0</td><td>₹60.8 Cr</td><td class="num">1</td></tr>
+          <tr><td>CFO &gt; 0</td><td>₹68 Cr</td><td class="num">1</td></tr>
+          <tr><td>ROA improving</td><td>12.1% vs 8.7%</td><td class="num">1</td></tr>
+          <tr><td>CFO &gt; Net income</td><td>1.12×</td><td class="num">1</td></tr>
+          <tr><td>LT debt / assets falling</td><td>13.7% vs 3.4%</td><td class="num">0</td></tr>
+          <tr><td>Current ratio improving</td><td>2.61 vs 1.75</td><td class="num">1</td></tr>
+          <tr><td>Shares not diluted</td><td>14.6Cr vs 11.9Cr</td><td class="num">0</td></tr>
+          <tr><td>Gross margin improving</td><td>76.4% vs 84.3%</td><td class="num">0</td></tr>
+          <tr><td>Asset turnover improving</td><td>1.05× vs 0.99×</td><td class="num">1</td></tr>
+          <tr style="background:#f8fafc;font-weight:600"><td colspan="2">Total</td><td class="num">6/9</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:12px;color:var(--muted);margin-top:6px"><i>The 3 failed criteria all reflect the deliberate strategic shift — debt-funded capex, warrant conversion equity, GM compression from DLM mix. Earnings-quality items (CFO &gt; NI, ROA, CFO &gt; 0) are all GREEN.</i></p>
+    </div>
+
+    <div>
+      <h3>DuPont — ROE Decomposition</h3>
+      <div class="chart-box" style="margin:0">
+        <div class="chart-wrap"><canvas id="chartDupont"></canvas></div>
+      </div>
+      <table>
+        <thead><tr><th>Year</th><th class="num">Net Margin</th><th class="num">Asset T/O</th><th class="num">Eq. Mult.</th><th class="num">ROE</th></tr></thead>
+        <tbody>
+          <tr><td>FY24</td><td class="num">-3.5%</td><td class="num">1.05×</td><td class="num">1.76×</td><td class="num">(6.5%)</td></tr>
+          <tr><td>FY25</td><td class="num">8.7%</td><td class="num">1.20×</td><td class="num">1.76×</td><td class="num">18.4%</td></tr>
+          <tr><td>FY26</td><td class="num">11.5%</td><td class="num">1.05×</td><td class="num">1.64×</td><td class="num">19.8%</td></tr>
+        </tbody>
+      </table>
+      <div class="callout callout-green" style="margin-top:10px">
+        <b>Quality of ROE expansion:</b> Driven primarily by <b>margin expansion</b> (net margin tripling), with asset turnover flat and leverage slightly falling. Highest-quality form of ROE growth — operating leverage and mix shift, not financial engineering.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BEAR CASE -->
+<section class="card">
+  <h2>Bear Case &mdash; 5 Hard Bullets</h2>
+  <div class="bear-case">
+    <div class="bear-item"><b>Customer concentration is dangerously high.</b> Two customers = 39% of FY25 revenue; top 10 = 60% of FY26. Management refuses to disclose names or splits. A single semicap OEM cancelling a programme could erase 15-20% of revenue overnight; ASM has no pricing leverage.</div>
+    <div class="bear-item"><b>Valuation has run far ahead of execution.</b> Market cap ~₹5,140 Cr on FY26 PAT ₹60.8 Cr → ~85× TTM P/E. For context: TCS ~28× · KPIT ~52× · Cyient ~25× · Avalon Tech ~50×. ASM has done <i>one year</i> of clean execution. One disappointing quarter could de-rate the stock 40-50%.</div>
+    <div class="bear-item"><b>~₹1,500 Cr capex on a ~₹100 Cr EBITDA base.</b> Funding is "accrual + debt + incentives + some equity". Management has been deliberately vague on equity quantum. That implies 20-40% further dilution risk over 24-36 months — possibly at lower prices. Commissioning 3 large new sites simultaneously is real execution risk.</div>
+    <div class="bear-item"><b>Related-party noise.</b> ₹10.9 Cr salary advance to MD (recurring), ₹33 Cr inter-corp loans to RV Forms LLP, large promoter warrant issuance at fixed price prior to re-rating. Standalone CFO has been <b>negative for 2 consecutive years</b> (FY24: -6 Cr; FY25: -235 Cr) — only consolidation cleans it up.</div>
+    <div class="bear-item"><b>DLM margins may not be repeatable.</b> Q4FY26 EBITDA margin was only 18.7% (vs 22.2% in Q4FY25); H2 was supported by operating leverage on a small revenue base. As 7 facilities ramp, gestation losses and depreciation rise. 19.1% FY26 EBITDA margin may compress 200-400 bps in FY27.</div>
+  </div>
+</section>
+
+<!-- CAPEX ROADMAP -->
+<section class="card">
+  <h2>Capex Roadmap &amp; Strategic Investments</h2>
+  <p style="margin-top:0;color:var(--muted);font-size:13px">Aggregate announced ~₹1,500 Cr over 3-5 years vs current consolidated net-block ~₹93 Cr.</p>
+
+  <div class="chart-box">
+    <h4>Capex Programme Breakdown (₹ Cr)</h4>
+    <div class="chart-wrap" style="height:240px"><canvas id="chartCapex"></canvas></div>
+  </div>
+
+  <h3>Programme Timeline</h3>
+  <div style="background:#fff;border:1px solid var(--border);border-radius:8px;overflow:hidden">
+    <div class="roadmap"><span class="yr">FY26 (done)</span><span class="ev">3 new manufacturing facilities commissioned — 2 in Bengaluru, 1 in Vietnam; total now 7 facilities</span><span class="amt">~₹30-35 Cr</span></div>
+    <div class="roadmap"><span class="yr">Q4FY26</span><span class="ev">Myelin Foundry stake (20%) — AI for semicap, electronics, solar predictive maintenance</span><span class="amt">₹48 Cr</span></div>
+    <div class="roadmap"><span class="yr">Q4FY26</span><span class="ev">Asmaitha Wireless stake (51%) — embedded, firmware, wireless capability tuck-in</span><span class="amt">₹80 Cr</span></div>
+    <div class="roadmap"><span class="yr">Mar 2026</span><span class="ev">ECMS scheme approval for high-precision capital equipment manufacturing</span><span class="amt">₹565 Cr</span></div>
+    <div class="roadmap"><span class="yr">FY27-FY29</span><span class="ev">Karnataka MoU — 3-phase ESDM/DLM expansion, 10-acre land secured</span><span class="amt">₹510 Cr</span></div>
+    <div class="roadmap"><span class="yr">FY27-FY29</span><span class="ev">Tamil Nadu MoU — DLM capacity expansion at Sriperumbudur</span><span class="amt">₹250 Cr</span></div>
+  </div>
+
+  <div class="callout callout-blue">
+    <b>Funding mix per management (Q2FY26 concall):</b> Combination of (a) operating accrual, (b) debt, (c) central + state incentives (~25%+25% on machinery), and (d) <i>"some additional equity"</i> — quantum and timing of equity component not disclosed. <b>This is the single largest open question for shareholders.</b>
+  </div>
+</section>
+
+<!-- Q2 CONCALL BRIEF -->
+<section class="card">
+  <h2>Q2 FY26 Concall Brief &mdash; 10 Nov 2025</h2>
+  <p style="margin-top:0;font-size:13px;color:var(--muted)">First-ever investor concall. Management: MD Rabindra Srikantan, CFO N.L. Rathod, Finance Head Rajesh MS, CS Vanishree Kulkarni.</p>
+
+  <h3>Headline Numbers (Q2FY26, ₹ Cr)</h3>
+  <table>
+    <thead><tr><th>Metric</th><th class="num">Q2FY26</th><th class="num">Q2FY25</th><th class="num">YoY</th><th class="num">H1FY26</th><th class="num">H1FY25</th><th class="num">YoY</th></tr></thead>
+    <tbody>
+      <tr><td>Revenue</td><td class="num">~157</td><td class="num">~58</td><td class="num"><span class="pill pill-green">+171%</span></td><td class="num">277</td><td class="num">110</td><td class="num"><span class="pill pill-green">+153%</span></td></tr>
+      <tr><td>EBITDA</td><td class="num">31</td><td class="num">7</td><td class="num"><span class="pill pill-green">+343%</span></td><td class="num">56</td><td class="num">n/a</td><td class="num">—</td></tr>
+      <tr><td>EBITDA Margin</td><td class="num">19.7%</td><td class="num">~12%</td><td class="num"><span class="pill pill-green">+770 bps</span></td><td class="num">20.3%</td><td class="num">—</td><td class="num">—</td></tr>
+      <tr><td>PAT</td><td class="num">19</td><td class="num">2</td><td class="num"><span class="pill pill-green">+850%</span></td><td class="num">35</td><td class="num">5</td><td class="num"><span class="pill pill-green">+600%</span></td></tr>
+    </tbody>
+  </table>
+
+  <h3>Key Quotes (Confidence-Language Tagged)</h3>
+  <table>
+    <thead><tr><th>Quote</th><th style="width:130px">Conviction</th></tr></thead>
+    <tbody>
+      <tr><td><i>"We have visibility of at least 18 months and in some cases, 24 months."</i> <span style="font-size:11px;color:var(--muted)">— MD, p.8</span></td><td><span class="pill pill-green">HIGH</span></td></tr>
+      <tr><td><i>"We will continue doing that while the larger one happens… that would essentially mean in 12 months, we would have added 3 facilities."</i> <span style="font-size:11px;color:var(--muted)">— MD, p.11</span></td><td><span class="pill pill-green">HIGH</span></td></tr>
+      <tr><td><i>"Some of those revenues will reflect in Q3."</i> <span style="font-size:11px;color:var(--muted)">— MD on ER&amp;D fixed-bid acceptances, p.11</span></td><td><span class="pill pill-green">HIGH</span></td></tr>
+      <tr><td><i>"India will continue to grow. This is the fastest growing economy, large economy in the world today."</i> <span style="font-size:11px;color:var(--muted)">— MD, p.6</span></td><td><span class="pill pill-green">HIGH</span></td></tr>
+      <tr><td><i>"We expect this kind of momentum to continue in the medium term."</i> <span style="font-size:11px;color:var(--muted)">— MD, p.5</span></td><td><span class="pill pill-amber">MEDIUM</span></td></tr>
+      <tr><td><i>"We expect some of the deliveries [solar] to happen later this year or definitely early part of next year."</i> <span style="font-size:11px;color:var(--muted)">— MD, p.7</span></td><td><span class="pill pill-amber">MEDIUM</span></td></tr>
+      <tr><td><i>"Services growth is also happening… You will see that in the coming quarters."</i> <span style="font-size:11px;color:var(--muted)">— MD, p.12</span></td><td><span class="pill pill-amber">MEDIUM</span></td></tr>
+      <tr><td><i>"Capacity utilisation is currently about 80-85%."</i> <span style="font-size:11px;color:var(--muted)">— Rajesh, p.11</span></td><td><span class="pill pill-amber">MEDIUM</span></td></tr>
+      <tr><td><i>"Funding will be a combination of accrual, combination of some debt and if needed some additional equity."</i> <span style="font-size:11px;color:var(--muted)">— MD on ₹760 Cr capex, p.4</span></td><td><span class="pill pill-red">LOW</span></td></tr>
+      <tr><td><i>"We have a broad understanding. Depending on the phases, we will decide how we want to do this."</i> <span style="font-size:11px;color:var(--muted)">— MD on equity quantum, p.16</span></td><td><span class="pill pill-red">LOW</span></td></tr>
+    </tbody>
+  </table>
+
+  <div class="chart-box" style="margin-top:14px">
+    <h4>Confidence-Language Distribution (Q2FY26)</h4>
+    <div class="chart-wrap" style="height:200px"><canvas id="chartConv"></canvas></div>
+  </div>
+
+  <div class="callout callout-red">
+    <b>Warning:</b> The single LOW-conviction area is on the <b>most material</b> question — the equity component of the ₹760 Cr capex programme. For a small-cap doing ~10× equity-base capex, this opacity is a real diligence item to watch in upcoming calls.
+  </div>
+
+  <h3>Top Analyst Questions &amp; Quality of Answers</h3>
+  <table>
+    <thead><tr><th>Analyst</th><th>Question</th><th>Answer Quality</th></tr></thead>
+    <tbody>
+      <tr><td>Tej (Diamond Capital)</td><td>What is top-1 / top-3 customer concentration?</td><td><span class="pill pill-amber">Partial</span> — gave top-10 (60%) but refused top-1/3</td></tr>
+      <tr><td>Anant Jain</td><td>Disclosure quality — segment / phasing of capex</td><td><span class="pill pill-amber">Promised improvement</span> — gave phasing in principle, no dates</td></tr>
+      <tr><td>Anand Trivedi (Nepean Capital)</td><td>Equity component of ₹760 Cr capex?</td><td><span class="pill pill-red">Dodged</span> — "broad understanding", "depending on phases"</td></tr>
+      <tr><td>Meet (Niveshaay)</td><td>FY26/27 mix &amp; margin profile</td><td><span class="pill pill-amber">Refused range</span> — pointed to last 3 quarters as proxy</td></tr>
+      <tr><td>Rupesh (Long Equity)</td><td>Front-end vs back-end semicap; export traction</td><td><span class="pill pill-green">Direct</span> — confirmed front + back-end, no India OSAT equipment</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Key Takeaway (2 sentences)</h3>
+  <div class="callout callout-blue">
+    ASM's first-ever investor call confirmed that the DLM pivot is real and accelerating (171% Q2 growth, DLM now 63% of mix, 80-85% utilisation, 18-24 month visibility) but management is uncomfortable with public-market disclosure expectations — no quantitative guidance, no customer split, no segment-wise revenue, no clarity on equity quantum for a ~₹760 Cr capex roadmap. The next two concalls should be judged on: (a) ER&amp;D growth recovering as promised, (b) capacity utilisation staying &gt;80% as new facilities come on, and (c) the equity-vs-debt mix being finally disclosed.
+  </div>
+</section>
+
+<!-- VERDICT -->
+<section class="card">
+  <h2>Verdict</h2>
+  <div style="text-align:center;padding:20px 10px">
+    <span class="verdict-badge verdict-watch" style="font-size:16px;padding:10px 28px">WATCH &mdash; Revisit on Trigger</span>
+  </div>
+
+  <div class="callout callout-amber">
+    <b>3-Sentence Rationale:</b>
+    <ol style="margin:8px 0 0 18px">
+      <li>ASM has executed a genuine, structural pivot from sub-scale ER&amp;D to DLM — 83% revenue growth, ROCE crossing 22%, CFO turning positive, debt fully covered — plugged into right tailwinds (semicap localisation, ECMS, ESDM PLI, friend-shoring).</li>
+      <li>But valuation at ~85× FY26 earnings already prices in 3-4 more years of 40%+ growth, customer concentration is high, and ~₹1,500 Cr capex will require debt and probably equity dilution that has not been quantified.</li>
+      <li>Wait for one of: <b>(a)</b> 30-40% valuation reset, <b>(b)</b> clear disclosure of customer mix and equity quantum of capex, or <b>(c)</b> two more clean quarters that prove FY26 was not a one-customer-driven blowout.</li>
+    </ol>
+  </div>
+
+  <h3>Follow-up Questions for a Deeper Dive</h3>
+  <ol style="margin:0;padding-left:20px">
+    <li>What % of FY26 revenue came from the largest single customer? Is the contract take-or-pay or order-by-order?</li>
+    <li>Of the ₹1,300+ Cr announced capex, what is the equity component pencilled in? At what price band?</li>
+    <li>RV Forms &amp; Gears LLP is consolidated as a subsidiary — why are inter-corp loans of ₹33 Cr + interest still outstanding rather than equity-converted?</li>
+    <li>Salary advance to MD: nature, repayment schedule, board approval mechanism?</li>
+    <li>Asmaitha (51%, ₹80 Cr) and Myelin Foundry (20%, ₹48 Cr) — when do these become P&amp;L positive, and how much further investment is committed?</li>
+    <li>Q4FY26 EBITDA margin (18.7%) was below Q4FY25 (22.2%) — new structural margin profile or one-off cost absorption?</li>
+    <li>Vietnam subsidiary — pipeline and breakeven plan?</li>
+    <li>ECMS scheme: actual cash subsidy / incentive flow vs the ₹565 Cr investment commitment?</li>
+  </ol>
+</section>
+
+<!-- RAW MARKDOWN -->
+<section class="card">
+  <h2>Full Source Reports (Raw Markdown)</h2>
+  <p style="margin-top:0;font-size:13px;color:var(--muted)">Expandable raw markdown outputs from the underlying skills.</p>
+
+  <details>
+    <summary>📄 Full Quick Scan markdown (ASM_quick_scan_20260511.md)</summary>
+    <pre id="md-qs"></pre>
+  </details>
+
+  <details>
+    <summary>🎤 Full Concall Brief markdown (ASM_concall_Q2FY26_briefmode.md)</summary>
+    <pre id="md-cc"></pre>
+  </details>
+</section>
+
+<footer>
+  <p>Report generated: 11 May 2026 &middot; Sources: ASM AR FY25 (33rd AR), ASM AR FY24, Q3FY26 Investor Presentation (Jan 2026), Q4FY26 Investor Presentation (May 2026), Q2FY26 Concall Transcript (Nov 2025) &middot; Cross-checks: Screener.in, BSE filings.<br>
+  <b>Research only. Not investment advice.</b></p>
+</footer>
+
+</div>
+
+<script>
+/* ---------- Chart palette ---------- */
+const C = {
+  blue:'#2563eb', green:'#16a34a', amber:'#d97706', red:'#dc2626', grey:'#6b7280',
+  blueT:'rgba(37,99,235,.15)', greenT:'rgba(22,163,74,.18)',
+  amberT:'rgba(217,119,6,.2)', redT:'rgba(220,38,38,.18)'
+};
+Chart.defaults.font.family = "-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif";
+Chart.defaults.font.size = 11;
+Chart.defaults.color = '#475569';
+Chart.defaults.plugins.legend.labels.boxWidth = 12;
+
+const yrs = ['FY22','FY23','FY24','FY25','FY26'];
+
+/* Revenue */
+new Chart(document.getElementById('chartRev'), {
+  type:'bar',
+  data:{labels:yrs,datasets:[{label:'Revenue (₹ Cr)',data:[191.6,220.4,201.6,288.8,528.5],
+    backgroundColor:['#cbd5e1','#cbd5e1','#94a3b8','#60a5fa',C.blue],borderRadius:6}]},
+  options:{plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'₹'+c.parsed.y+' Cr'}}},
+    scales:{y:{beginAtZero:true,grid:{color:'#f1f5f9'}}}}
+});
+
+/* EBITDA + PAT */
+new Chart(document.getElementById('chartEbitdaPat'), {
+  type:'bar',
+  data:{labels:yrs,datasets:[
+    {label:'EBITDA',data:[21,21,6,47.3,101.1],backgroundColor:C.green,borderRadius:4},
+    {label:'PAT',data:[13.9,7.1,-7.2,25.1,60.8],backgroundColor:C.blue,borderRadius:4}
+  ]},
+  options:{plugins:{tooltip:{callbacks:{label:c=>c.dataset.label+': ₹'+c.parsed.y+' Cr'}}},
+    scales:{y:{grid:{color:'#f1f5f9'}}}}
+});
+
+/* Margins */
+new Chart(document.getElementById('chartMargin'), {
+  type:'line',
+  data:{labels:yrs,datasets:[
+    {label:'EBITDA Margin %',data:[11,9.5,3,16.4,19.1],borderColor:C.green,backgroundColor:C.greenT,fill:true,tension:.35,pointRadius:5,pointBackgroundColor:C.green},
+    {label:'PAT Margin %',data:[7.2,3.2,-3.5,8.7,11.5],borderColor:C.blue,backgroundColor:C.blueT,fill:true,tension:.35,pointRadius:5,pointBackgroundColor:C.blue}
+  ]},
+  options:{plugins:{tooltip:{callbacks:{label:c=>c.dataset.label+': '+c.parsed.y+'%'}}},
+    scales:{y:{grid:{color:'#f1f5f9'},ticks:{callback:v=>v+'%'}}}}
+});
+
+/* Returns */
+new Chart(document.getElementById('chartReturns'), {
+  type:'line',
+  data:{labels:yrs,datasets:[
+    {label:'ROCE %',data:[20.2,13.2,-0.2,18.4,22.6],borderColor:C.amber,backgroundColor:C.amberT,fill:false,tension:.35,pointRadius:5,pointBackgroundColor:C.amber,borderWidth:2.5},
+    {label:'ROE %',data:[25.7,17,-7,10.6,25.7],borderColor:C.red,backgroundColor:C.redT,fill:false,tension:.35,pointRadius:5,pointBackgroundColor:C.red,borderWidth:2.5}
+  ]},
+  options:{plugins:{tooltip:{callbacks:{label:c=>c.dataset.label+': '+c.parsed.y+'%'}}},
+    scales:{y:{grid:{color:'#f1f5f9'},ticks:{callback:v=>v+'%'}}}}
+});
+
+/* Mix shift */
+new Chart(document.getElementById('chartMix'), {
+  type:'bar',
+  data:{labels:['H1FY25','H1FY26','Q4FY26','FY26 (full)'],datasets:[
+    {label:'DLM %',data:[12,63,43.4,53.8],backgroundColor:C.blue,stack:'mix',borderRadius:4},
+    {label:'ER&D / Services %',data:[88,37,56.6,46.2],backgroundColor:C.amber,stack:'mix',borderRadius:4}
+  ]},
+  options:{indexAxis:'y',plugins:{tooltip:{callbacks:{label:c=>c.dataset.label+': '+c.parsed.x+'%'}}},
+    scales:{x:{stacked:true,grid:{color:'#f1f5f9'},ticks:{callback:v=>v+'%'},max:100},y:{stacked:true}}}
+});
+
+/* DuPont */
+new Chart(document.getElementById('chartDupont'), {
+  type:'bar',
+  data:{labels:['FY24','FY25','FY26'],datasets:[
+    {label:'Net Margin %',data:[-3.5,8.7,11.5],backgroundColor:C.blue,borderRadius:4},
+    {label:'Asset Turnover (×10)',data:[10.5,12,10.5],backgroundColor:C.green,borderRadius:4},
+    {label:'Eq Multiplier (×10)',data:[17.6,17.6,16.4],backgroundColor:C.amber,borderRadius:4}
+  ]},
+  options:{plugins:{tooltip:{callbacks:{label:c=>{
+      if(c.dataset.label==='Net Margin %')return c.dataset.label+': '+c.parsed.y+'%';
+      if(c.dataset.label.includes('Asset'))return 'Asset Turnover: '+(c.parsed.y/10).toFixed(2)+'×';
+      return 'Eq Multiplier: '+(c.parsed.y/10).toFixed(2)+'×';
+  }}}},scales:{y:{grid:{color:'#f1f5f9'}}}}
+});
+
+/* Capex programme */
+new Chart(document.getElementById('chartCapex'), {
+  type:'bar',
+  data:{labels:['ECMS Scheme','Karnataka MoU','Tamil Nadu MoU','Asmaitha (51%)','Myelin Foundry (20%)','FY26 Done'],datasets:[
+    {data:[565,510,250,80,48,33],backgroundColor:[C.blue,C.blue,C.blue,C.amber,C.amber,C.green],borderRadius:6}
+  ]},
+  options:{indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'₹'+c.parsed.x+' Cr'}}},
+    scales:{x:{grid:{color:'#f1f5f9'},ticks:{callback:v=>'₹'+v+' Cr'}}}}
+});
+
+/* Confidence distribution */
+new Chart(document.getElementById('chartConv'), {
+  type:'doughnut',
+  data:{labels:['HIGH conviction (4)','MEDIUM conviction (6)','LOW conviction (1)'],datasets:[
+    {data:[4,6,1],backgroundColor:[C.green,C.amber,C.red],borderWidth:2,borderColor:'#fff'}
+  ]},
+  options:{plugins:{legend:{position:'right'},tooltip:{callbacks:{label:c=>c.label+': '+c.parsed+' statements'}}},cutout:'55%'}
+});
+
+/* Embedded raw markdowns */
+const mdQS = `# ASM Technologies Ltd — SOIC 30-Minute Quick Scan
+
+The full quick scan report is saved separately as ASM_quick_scan_20260511.md in this folder.
+It contains:
+- Snapshot (5-year P&L)
+- 12-point Annual Report analysis
+- 10-point Forensic Red Flag Scan with reasoning
+- Piotroski F-Score (6/9) detail
+- DuPont decomposition
+- Bear Case (5 bullets)
+- Verdict: WATCH
+- 8 Follow-up questions for deeper dive
+
+(Open the .md file directly for the verbatim text — this HTML report renders all of its content in structured form above.)`;
+
+const mdCC = `# ASM Technologies — Q2FY26 Concall Brief
+
+Mode A (Brief) — only one transcript was available.
+The full concall brief is saved separately as ASM_concall_Q2FY26_briefmode.md in this folder.
+It contains:
+1. Headline numbers (Q2FY26 + H1FY26)
+2. Segment performance
+3. Demand commentary
+4. Margin drivers / pressures
+5. Capex & balance sheet update
+6. Guidance — verbatim with confidence-language tagging
+7. New announcements
+8. Top 3 analyst Q&A
+9. Key takeaway
+
+A Walk-the-Talk (Mode C) scoring is pending — needs 4+ concall transcripts. Once Q3FY26 and Q4FY26 transcripts are uploaded, full management credibility scoring becomes possible.
+
+(Open the .md file directly for the verbatim text — this HTML report renders all of its content in structured form above.)`;
+
+document.getElementById('md-qs').textContent = mdQS;
+document.getElementById('md-cc').textContent = mdCC;
+</script>
+</body>
+</html>

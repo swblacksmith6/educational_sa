@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diamond Power Infrastructure (DIACABS) — Investment Report</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.0/marked.min.js"></script>
+<style>
+  :root {
+    --green:#16a34a; --green-bg:#dcfce7;
+    --amber:#d97706; --amber-bg:#fef3c7;
+    --red:#dc2626; --red-bg:#fee2e2;
+    --grey:#6b7280; --grey-bg:#f3f4f6;
+    --bg:#f9fafb; --card:#ffffff; --text:#111827; --muted:#4b5563;
+    --border:#e5e7eb;
+  }
+  * { box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+         background: var(--bg); color: var(--text); margin:0; padding:0; line-height:1.45;}
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 24px; }
+  header { background: linear-gradient(180deg, #ffffff 0%, #f1f5f9 100%); border:1px solid var(--border);
+           border-radius:12px; padding:20px 24px; margin-bottom:24px; }
+  h1 { font-size: 26px; margin: 0 0 4px 0; }
+  h2 { font-size: 20px; margin: 28px 0 12px 0; border-bottom:2px solid var(--border); padding-bottom:6px; }
+  h3 { font-size: 16px; margin: 18px 0 8px 0; color: var(--muted); }
+  .sub { color: var(--muted); font-size: 14px; }
+  .badge { display:inline-block; padding:6px 14px; border-radius:999px; font-weight:600; font-size:13px; }
+  .badge-watch { background: var(--amber-bg); color: var(--amber); border:1px solid var(--amber);}
+  .badge-buy { background: var(--green-bg); color: var(--green); border:1px solid var(--green);}
+  .badge-pass { background: var(--red-bg); color: var(--red); border:1px solid var(--red);}
+  .grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:12px; margin-top:16px; }
+  .stat { background: var(--card); border:1px solid var(--border); border-radius:10px; padding:14px; }
+  .stat .label { font-size: 12px; color: var(--muted); margin-bottom:4px; }
+  .stat .value { font-size: 18px; font-weight:700; }
+  .stat .delta { font-size: 12px; color: var(--muted); margin-top:2px; }
+  section.card { background: var(--card); border:1px solid var(--border); border-radius:12px; padding:20px; margin-bottom:18px;}
+  table { width: 100%; border-collapse: collapse; margin: 8px 0 16px 0; font-size: 14px; }
+  th, td { border:1px solid var(--border); padding:8px 10px; text-align:left; vertical-align:top; }
+  th { background: var(--grey-bg); font-weight:600; }
+  tr:nth-child(even) td { background: #fafafa; }
+  .green-cell { background: var(--green-bg) !important; }
+  .amber-cell { background: var(--amber-bg) !important; }
+  .red-cell { background: var(--red-bg) !important; }
+  .grey-cell { background: var(--grey-bg) !important; }
+  .num { text-align:right; font-variant-numeric: tabular-nums; }
+  .callout { border-left: 4px solid; padding: 10px 14px; border-radius: 6px; margin: 12px 0; }
+  .callout-red { background: var(--red-bg); border-color: var(--red); color: #7f1d1d; }
+  .callout-green { background: var(--green-bg); border-color: var(--green); color: #14532d; }
+  .callout-amber { background: var(--amber-bg); border-color: var(--amber); color: #78350f; }
+  .citation { display:inline; color: var(--grey); font-size: 11px; margin-left: 6px; }
+  .pio-bar { width:100%; background:var(--grey-bg); height:24px; border-radius:6px; overflow:hidden; position:relative;}
+  .pio-fill { height:100%; background: var(--green); }
+  .pio-label { position:absolute; left:8px; top:3px; color:#fff; font-weight:600; font-size:13px;}
+  details summary { cursor:pointer; padding:8px 12px; background: var(--grey-bg); border-radius:6px; font-weight:600;
+                    margin-top:10px;}
+  .md-body { background: #ffffff; color: var(--text); padding: 18px 22px; border:1px solid var(--border);
+             border-radius: 6px; margin-top: 8px; font-size: 14px; line-height: 1.55; }
+  .md-body h1 { font-size: 22px; margin: 0 0 10px 0; border-bottom: 2px solid var(--border); padding-bottom: 6px; }
+  .md-body h2 { font-size: 18px; margin: 22px 0 10px 0; border-bottom: 1px solid var(--border); padding-bottom: 4px; }
+  .md-body h3 { font-size: 16px; margin: 16px 0 6px 0; color: var(--text); }
+  .md-body h4 { font-size: 14px; margin: 12px 0 6px 0; }
+  .md-body p { margin: 6px 0 10px 0; }
+  .md-body ul, .md-body ol { margin: 4px 0 10px 0; padding-left: 26px; }
+  .md-body li { margin: 3px 0; }
+  .md-body code { background: #f1f5f9; padding: 1px 5px; border-radius: 3px; font-size: 12px;
+                  font-family: "SF Mono", Menlo, Consolas, monospace; }
+  .md-body pre { background: #0f172a; color: #e2e8f0; padding: 12px; border-radius: 6px; overflow:auto; font-size:12px; }
+  .md-body table { width: 100%; border-collapse: collapse; margin: 10px 0 14px 0; font-size: 13px; }
+  .md-body th, .md-body td { border: 1px solid var(--border); padding: 6px 9px; text-align: left; vertical-align: top; }
+  .md-body th { background: var(--grey-bg); font-weight: 600; }
+  .md-body tr:nth-child(even) td { background: #fafafa; }
+  .md-body blockquote { margin: 10px 0; padding: 8px 14px; background: var(--grey-bg);
+                        border-left: 4px solid var(--grey); color: var(--muted); border-radius: 4px; }
+  .md-body em { color: var(--muted); }
+  .md-body strong { color: var(--text); }
+  .md-body hr { border: none; border-top: 1px solid var(--border); margin: 14px 0; }
+  .two-col { display:grid; grid-template-columns: 1fr 1fr; gap:16px; }
+  @media (max-width: 800px) { .two-col { grid-template-columns: 1fr; } }
+  .chart-wrap { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:14px; margin-top:12px;}
+  .chart-wrap h4 { margin:0 0 8px 0; font-size:14px; color:var(--muted); }
+  .chart-canvas { max-height: 280px; }
+  footer { text-align:center; color:var(--muted); font-size:12px; padding:16px 0 8px 0; margin-top:24px;
+           border-top:1px solid var(--border); }
+  .price-line { color: var(--green); font-weight:600; }
+  .price-line.bear { color: var(--red); }
+  .price-line.base { color: var(--amber); }
+  .pill { display:inline-block; padding:3px 10px; border-radius:999px; font-weight:600; font-size:12px; }
+  .pill-high { background:var(--green-bg); color:var(--green); }
+  .pill-med { background:var(--amber-bg); color:var(--amber); }
+  .pill-opt { background:var(--grey-bg); color:var(--grey); }
+  .small { font-size:12px; color:var(--muted);}
+  ul.compact { margin: 6px 0; padding-left: 20px; }
+  ul.compact li { margin: 2px 0; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- Header -->
+<header>
+  <div style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:flex-start; gap:12px;">
+    <div>
+      <h1>Diamond Power Infrastructure Ltd</h1>
+      <div class="sub">NSE: <b>DIACABS</b> &nbsp;|&nbsp; BSE: 522163 &nbsp;|&nbsp; Sector: Capital Goods → Cables (Electricals)<br>
+      Report date: 11 May 2026 &nbsp;|&nbsp; CMP ~₹158 &nbsp;|&nbsp; Mcap ~₹8,320 cr &nbsp;|&nbsp; Shares: 52.70 cr (FV ₹1)</div>
+    </div>
+    <div style="text-align:right;">
+      <div class="badge badge-watch">VERDICT: WATCH</div>
+      <div class="small" style="margin-top:6px;">Revisit on credit-rating upgrade & QIP closure</div>
+    </div>
+  </div>
+</header>
+
+<!-- Executive summary -->
+<section class="card">
+  <h2 style="margin-top:0;">Executive Summary</h2>
+  <p>Diamond Power Infrastructure is India's oldest single-location cables and conductors manufacturer (Vadodara, 110 acres),
+  reset under NCLT in June 2022 by a consortium of GSEC Ltd and Mr Rakesh Shah (Monarch Group). After two years of ramp-up,
+  the company has turned profitable at scale, with a Q3 FY26 EBITDA margin of <b>14.7%</b>, PAT of <b>₹49.7 cr</b> (+693% YoY),
+  and a disclosed order book of <b>₹3,500 cr+</b>. The execution is real; the question is whether the share price
+  (already at ~64× annualised PAT) leaves any margin of safety, and whether the credit rating (still "<b>BWR D / Issuer Not
+  Cooperating</b>") will catch up with the operating turnaround.</p>
+
+  <div class="grid">
+    <div class="stat"><div class="label">Piotroski F-Score (FY25)</div>
+      <div class="pio-bar"><div class="pio-fill" style="width:77.7%;"></div><div class="pio-label">7 / 9</div></div>
+      <div class="delta">Strong post-bankruptcy reset</div>
+    </div>
+    <div class="stat"><div class="label">Mgmt credibility (Walk-the-talk)</div>
+      <div class="value" style="color:var(--amber)">MEDIUM</div>
+      <div class="delta">Numbers delivered, but credit-agency non-cooperation is a flag</div>
+    </div>
+    <div class="stat"><div class="label">Growth Triggers</div>
+      <div class="value">4 HIGH · 1 MED · 1 OPT</div>
+      <div class="delta">Adani anchor + rod mills + EHV + QIP</div>
+    </div>
+    <div class="stat"><div class="label">Q3 FY26 Revenue</div>
+      <div class="value">₹474 cr</div>
+      <div class="delta">+54% YoY · +8% QoQ</div>
+    </div>
+    <div class="stat"><div class="label">Q3 FY26 PAT</div>
+      <div class="value" style="color:var(--green)">₹49.7 cr</div>
+      <div class="delta">+693% YoY · +79% QoQ</div>
+    </div>
+    <div class="stat"><div class="label">Order Book (Mar-26)</div>
+      <div class="value">₹3,500+ cr</div>
+      <div class="delta">~70% Adani Group linked</div>
+    </div>
+  </div>
+
+  <div class="callout callout-amber" style="margin-top:14px;">
+    <b>Key tension:</b> Operating numbers are excellent. But (1) tangible net worth is <b>negative ₹881 cr</b>,
+    (2) credit rating is still <b>BWR D</b>, (3) ~70% of order book sits with the Adani Group which has announced its
+    own cable manufacturing ambitions in 2026, and (4) valuation already reflects 2-3 years of perfect execution.
+  </div>
+</section>
+
+<!-- Post-bankruptcy journey -->
+<section class="card">
+  <h2 style="margin-top:0;">The Post-Bankruptcy Journey (2018 → 2026)</h2>
+  <table>
+    <thead><tr><th>Date</th><th>Milestone</th></tr></thead>
+    <tbody>
+      <tr><td>August 2018</td><td>Admitted to CIRP under IBC. Total admitted claims: <b>₹3,308.88 cr</b>.</td></tr>
+      <tr><td>5 Feb 2022</td><td>CoC approves Resolution Plan by GSEC Ltd + Rakesh Shah consortium with <b>89.46% majority</b>.</td></tr>
+      <tr><td>20-22 Jun 2022</td><td>NCLT Ahmedabad approves Resolution Plan. RA proposes ₹501 cr against ₹3,308.88 cr admitted claims (~85% haircut). 60-month implementation window.</td></tr>
+      <tr><td>17 Sep 2022</td><td>GSEC + Rakesh Shah takes over; Board reconstituted; new management installed.</td></tr>
+      <tr><td>Late 2022</td><td>(1) ₹50 cr equity infusion. (2) ₹72.30 cr upfront paid to secured creditors. (3) Term-loan of <b>₹367.41 cr</b> payable over 5 years. (4) Unsecured 30-year bond of <b>₹1,900 cr at 0.001% coupon</b> issued to ex-lenders; immediately repurchased by Gomex Aviation (SPV of RA) via repurchase agreements. Per Ind AS 109, discounted to NPV of ~₹25.67 cr.</td></tr>
+      <tr><td>FY23 (Mar 2023)</td><td>Restart year. Revenue ₹15.5 cr; net loss ₹42.9 cr (still ramping). EBITDA negative.</td></tr>
+      <tr><td>FY24 (Mar 2024)</td><td>First full year of operations. Revenue jumps to ₹343 cr; EBITDA ₹43 cr (12.6%); PAT ₹17 cr. <b>First profitable year</b>.</td></tr>
+      <tr><td>FY25 (Mar 2025)</td><td>Revenue ₹1,115 cr (+225% YoY); EBITDA ₹68 cr; PAT ₹35 cr. Two aluminium rod mills commissioned. 1:10 stock split (Dec 2024). OFS in Jun-25 reduced promoter from 90% → 84%.</td></tr>
+      <tr><td>Jul 2025</td><td>Adani Energy Solutions LoI of <b>₹1,349 cr</b> for AL-59 conductors (24,080 km) — execution by Jun 2028. Board approves up to <b>₹1,000 cr QIP</b>.</td></tr>
+      <tr><td>9M FY26</td><td>Revenue ₹1,214 cr (already > FY25 full year); EBITDA ₹147 cr (12.1%); PAT ₹98 cr. Q3 FY26 EBITDA margin 14.7%.</td></tr>
+      <tr><td>Nov 2025-Mar 2026</td><td>Additional Adani orders: Khavda ₹276 cr, Adani Electricity Mumbai ₹100.5 cr + ₹45.5 cr, Adani Green ₹19.6 cr. Order book crosses ₹3,500 cr.</td></tr>
+      <tr><td>14 Jul 2025</td><td>Brickwork Rating: bank loans BWR D withdrawn; NCDs (₹105.97 cr) remain BWR D / Issuer Not Cooperating. Company has not engaged with rating agency since 2022.</td></tr>
+    </tbody>
+  </table>
+  <div class="callout callout-green">
+    <b>What changed:</b> The Vadodara plant (which was idle and obsolete in 2018-2022) has been
+    re-equipped with 2 operational rod mills + 2 more by Oct 2025, 4 CCV cable lines + 5th by Mar 2026, India's
+    only 1,200 kV NABL-accredited lab, and BIS/IEC/IS approvals across the product range. The asset base is genuinely re-productive,
+    not just a paper turnaround.
+  </div>
+  <div class="callout callout-red">
+    <b>What hasn't changed:</b> Tangible net worth remains <b>negative ₹881 cr</b> because the accumulated losses from 2014-2022
+    have not been wiped out. The ₹1,900 cr 0.001% bond is technically still a liability. The credit rating still says
+    "<b>D / Issuer Not Cooperating</b>" — until this is fixed, no institutional / debt-mutual-fund / pension money can flow into the stock.
+  </div>
+</section>
+
+<!-- 12-Point AR analysis -->
+<section class="card">
+  <h2 style="margin-top:0;">12-Point Annual Report Analysis (FY25)</h2>
+  <table>
+    <thead><tr><th style="width:30%;">Item</th><th>Reading</th></tr></thead>
+    <tbody id="ar12"></tbody>
+  </table>
+</section>
+
+<!-- 10-Point red flag -->
+<section class="card">
+  <h2 style="margin-top:0;">10-Point Forensic Red-Flag Scan</h2>
+  <table>
+    <thead><tr><th style="width:35%;">Check</th><th>Reading</th><th style="width:90px;">Tag</th></tr></thead>
+    <tbody id="redflags"></tbody>
+  </table>
+  <p class="small">Composite: <b>AMBER</b> — Largely driven by post-NCLT capital-structure quirks (negative equity, unique ₹1,900 cr 0.001% bond, "Issuer Not Cooperating" rating) and ramp-phase working capital, rather than fresh governance breakdowns.</p>
+</section>
+
+<!-- Piotroski + DuPont chart -->
+<section class="card">
+  <h2 style="margin-top:0;">Piotroski F-Score &amp; DuPont</h2>
+  <div class="two-col">
+    <div>
+      <h3>Piotroski breakdown (FY25)</h3>
+      <table>
+        <tbody id="piotroski"></tbody>
+      </table>
+    </div>
+    <div>
+      <div class="chart-wrap">
+        <h4>DuPont sub-components (3-year)</h4>
+        <canvas id="dupontChart" class="chart-canvas"></canvas>
+        <div class="small" style="margin-top:6px;">ROE is not meaningful — equity is negative. The chart shows
+          net-margin %, asset-turnover (x10 for visual scale), and revenue (₹ cr ÷ 100) for FY23 → FY25.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Headline numbers + chart -->
+<section class="card">
+  <h2 style="margin-top:0;">Headline Financials (Quarterly &amp; Annual)</h2>
+  <table>
+    <thead><tr>
+      <th>Metric (₹ cr)</th><th class="num">Q3 FY25</th><th class="num">Q2 FY26</th><th class="num">Q3 FY26</th>
+      <th class="num">9M FY25</th><th class="num">9M FY26</th><th class="num">FY25</th>
+    </tr></thead>
+    <tbody id="headlines"></tbody>
+  </table>
+  <div class="chart-wrap">
+    <h4>Revenue, EBITDA, PAT — annual trajectory (₹ cr)</h4>
+    <canvas id="annualChart" class="chart-canvas"></canvas>
+  </div>
+  <div class="chart-wrap">
+    <h4>Quarterly trajectory — Q3 FY25 → Q3 FY26 (₹ cr)</h4>
+    <canvas id="quarterChart" class="chart-canvas"></canvas>
+  </div>
+</section>
+
+<!-- Guidance walk-the-talk -->
+<section class="card">
+  <h2 style="margin-top:0;">Management Guidance vs Outcome (Walk-the-Talk Lite)</h2>
+  <table>
+    <thead><tr><th>Date / Source</th><th>Guidance</th><th>Outcome</th><th style="width:120px;">Confidence</th></tr></thead>
+    <tbody id="walktalk"></tbody>
+  </table>
+  <p class="small">Note: A full Walk-the-Talk scorecard requires 4 concall transcripts. Only investor presentations and the AR were provided; this is a presentation-based read.</p>
+</section>
+
+<!-- Growth triggers -->
+<section class="card">
+  <h2 style="margin-top:0;">Growth Triggers — Scoreboard</h2>
+  <table>
+    <thead><tr>
+      <th style="width:30px;">#</th><th>Trigger</th><th style="width:120px;">Conviction</th>
+      <th style="width:160px;">Quantum (₹ cr)</th><th style="width:150px;">Timeline</th><th>Status</th>
+    </tr></thead>
+    <tbody id="triggers"></tbody>
+  </table>
+  <div class="chart-wrap">
+    <h4>Trigger quantum (₹ cr) — coloured by conviction</h4>
+    <canvas id="triggerChart" class="chart-canvas"></canvas>
+  </div>
+  <div class="callout callout-red">
+    <b>Risks that can break the thesis:</b>
+    <ul class="compact">
+      <li>Adani Group decides to manufacture cables/conductors in-house — ~₹2,500 cr of the order book migrates captive.</li>
+      <li>QIP fails to find marquee anchors or prices weakly (&lt;₹120) — negative net worth remains, institutional float capped.</li>
+      <li>Raw-material spike (Cu / Al) outpaces Price-Variation clauses, compressing cable margins by 200-300 bps.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- Valuation scenarios -->
+<section class="card">
+  <h2 style="margin-top:0;">Valuation — Bull / Base / Bear Scenarios (FY28 target)</h2>
+  <p>All scenarios project to FY28 (when the AESL ₹1,349 cr order finishes and full capex is on-stream),
+  then derive a target Mcap and per-share price. Peer anchors: Polycab ~45x P/E, KEI ~50x, RR Kabel ~38x.</p>
+
+  <table>
+    <thead><tr>
+      <th>Scenario</th><th>Prob.*</th><th>FY28 Revenue</th><th>EBITDA %</th>
+      <th>FY28 PAT</th><th>Target P/E</th><th>Target Mcap</th><th>Target Price</th><th>Δ vs ₹158</th>
+    </tr></thead>
+    <tbody>
+      <tr>
+        <td><b style="color:var(--green)">Bull</b></td><td>25%</td>
+        <td>₹4,500 cr</td><td>15%</td><td>₹440 cr</td><td>50×</td>
+        <td>₹22,000 cr</td><td class="price-line">₹350</td><td class="price-line">+120%</td>
+      </tr>
+      <tr>
+        <td><b style="color:var(--amber)">Base</b></td><td>50%</td>
+        <td>₹3,500 cr</td><td>13%</td><td>₹260 cr</td><td>38×</td>
+        <td>₹9,900 cr</td><td class="price-line base">₹165</td><td class="price-line base">+5%</td>
+      </tr>
+      <tr>
+        <td><b style="color:var(--red)">Bear</b></td><td>25%</td>
+        <td>₹2,200 cr</td><td>9%</td><td>₹58 cr</td><td>25×</td>
+        <td>₹1,450 cr</td><td class="price-line bear">₹23</td><td class="price-line bear">−85%</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="small">*Subjective probabilities for illustration only.</div>
+
+  <p style="margin-top:14px;"><b>Probability-weighted target price:</b>
+  0.25×₹350 + 0.50×₹165 + 0.25×₹23 ≈ <b>₹176</b> (~+11% over 24 months).
+  Skew is asymmetrical because the bear case requires a single trigger (Adani in-sourcing) while the bull case
+  requires multiple things to go right simultaneously.</p>
+
+  <div class="chart-wrap">
+    <h4>Scenario target prices vs CMP ₹158</h4>
+    <canvas id="scenarioChart" class="chart-canvas"></canvas>
+  </div>
+
+  <h3>Recommended action levels</h3>
+  <table>
+    <thead><tr><th>Action</th><th>Trigger</th><th>CMP / Mcap zone</th></tr></thead>
+    <tbody>
+      <tr><td><b style="color:var(--green)">Buy on dip</b></td><td>Within 1× FY28E revenue at base case; margin of safety</td><td>≤ ₹120 / Mcap ≤ ₹6,300 cr</td></tr>
+      <tr><td><b style="color:var(--green)">Accumulate</b></td><td>Only on confirmation of QIP pricing & rating upgrade</td><td>₹120-150 / Mcap ₹6,300-7,900 cr</td></tr>
+      <tr><td><b style="color:var(--amber)">Hold / Watch</b></td><td>Base-case fair value; wait for catalysts</td><td>₹150-200 (CMP zone)</td></tr>
+      <tr><td><b style="color:var(--amber)">Trim / Profit-book</b></td><td>Bull-case territory; partial exit if no new orders or QIP delays</td><td>₹250-350</td></tr>
+      <tr><td><b style="color:var(--red)">Avoid / Exit</b></td><td>Rating not upgraded by FY27 end, OR Adani in-sources cables</td><td>Any price</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Catalysts to watch (next 12-18 months)</h3>
+  <ul class="compact">
+    <li><b>QIP pricing &amp; anchor book</b> — pricing ≥₹200 with marquee anchors re-rates the thesis.</li>
+    <li><b>Credit-rating upgrade</b> — first to "BB"/"BBB" via CRISIL / ICRA / India Ratings unlocks debt-MF flows.</li>
+    <li><b>FY26 full-year results</b> (May 2026) — confirms ₹1,700-1,800 cr revenue at 12%+ EBITDA.</li>
+    <li><b>MPS compliance</b> — promoter must drop from 84% to ≤75%; expect another OFS or fresh issuance.</li>
+    <li><b>Adani Group cable capex announcement</b> — any concrete plan would be a thesis-breaker.</li>
+    <li><b>AESL ₹1,349 cr execution pace</b> — first 30% should show in H1 FY27 revenue.</li>
+    <li><b>Big-4 auditor appointment</b> — would be a substantial positive governance signal.</li>
+  </ul>
+</section>
+
+<!-- Bear case callout -->
+<section class="card">
+  <h2 style="margin-top:0;">Bear Case (Reproduced)</h2>
+  <div class="callout callout-red">
+    <ol>
+      <li><b>Negative tangible net worth (-₹881 cr).</b> The company is solvent only because the resolution applicant's SPV (Gomex Aviation) has bought back the ex-bank ₹1,900 cr 30-year, 0.001%-coupon bond. Conventional book value is deeply negative.</li>
+      <li><b>"Issuer Not Cooperating" credit rating (BWR D).</b> For a listed company with ₹2,800 cr of rated debt, this is a serious governance signal even if business performance has improved.</li>
+      <li><b>Customer concentration on Adani Group.</b> ~70% of ₹3,500 cr order book is Adani Group. Any pause or renegotiation by a single counterparty blows a hole in the FY27/FY28 thesis.</li>
+      <li><b>Adani and Aditya Birla / UltraTech entering cables in 2026.</b> Both have signalled large in-house cable manufacturing ambitions. Diamond is small (~₹1,600 cr revenue annualised) vs Polycab ~₹29,000 cr — limited pricing power.</li>
+      <li><b>Valuation already discounts the turnaround.</b> ~64× annualised PAT, ~45× FY28E PAT. Polycab is ~45× with 5× the revenue, 30% market share and clean balance sheet. ₹1,000 cr QIP will dilute the EPS further if priced sub-₹200.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- Peers -->
+<section class="card">
+  <h2 style="margin-top:0;">Peer Snapshot (May 2026)</h2>
+  <table>
+    <thead><tr><th>Company</th><th>FY26 Revenue (₹ cr)</th><th>EBITDA margin</th><th>P/E (TTM)</th><th>Mcap (₹ cr)</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>Polycab India</td><td class="num">28,884</td><td class="num">~14-15%</td><td class="num">45-47x</td><td class="num">~2,40,000-2,60,000</td><td>30-31% organised market share; B2C ~40%</td></tr>
+      <tr><td>KEI Industries</td><td class="num">~10,000</td><td class="num">~11-12%</td><td class="num">50-53x</td><td class="num">~50,000-60,000</td><td>EHV cables strong; institutional dominant</td></tr>
+      <tr><td>RR Kabel</td><td class="num">9,722</td><td class="num">~9-10%</td><td class="num">36-44x</td><td class="num">~35,000-40,000</td><td>FMEG-heavy; "Project Rise" expansion</td></tr>
+      <tr><td>Apar Industries</td><td class="num">~17,000</td><td class="num">~11-12%</td><td class="num">30-35x</td><td class="num">~50,000-55,000</td><td>Conductor leader globally; CTC capacity tripling</td></tr>
+      <tr style="background:#fef3c7;"><td><b>Diamond Power (DIACABS)</b></td><td class="num"><b>~1,620</b> (9MFY26 annualised)</td><td class="num"><b>12.1%</b></td><td class="num">~64x</td><td class="num">~8,320</td><td>Post-NCLT turnaround; ₹3,500 cr order book; ~70% Adani</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- Sources / files consumed -->
+<section class="card">
+  <h2 style="margin-top:0;">Documents Consumed</h2>
+  <ul class="compact">
+    <li>diamond_AR_2025.pdf — Annual Report FY2024-25 (33rd AGM, signed 30 May 2025)</li>
+    <li>diamond_ar_2024.pdf, diamond_ar_2023.pdf, diamond_ar_2022.pdf — historical ARs</li>
+    <li>diamond_mar_2026_presentation.pdf — Q3 FY26 investor presentation (7 Mar 2026)</li>
+    <li>diamond_jun_2025_presentation.pdf — FY25 investor presentation (9 Jun 2025)</li>
+    <li>diamond_aug_2025_presentation.pdf — Aug-25 investor presentation</li>
+    <li>diamond_feb_2024_presentation.pdf — Feb 2024 investor presentation</li>
+    <li>diamond_aug_2015_presentation.pdf — Aug 2015 (historical, pre-CIRP)</li>
+    <li>diamond_Rating_update_2024.pdf, diamond_Rating_update_2025.pdf — Brickwork rating reports</li>
+    <li>Web research: BSE / NSE filings, Business Standard, dsij, Business Today, Screener.in, Whalesbook, Tickertape, scanx.trade, Business Upturn, EquityBulls, AngelOne, ConstructionWorld, SOIC blog</li>
+  </ul>
+</section>
+
+<!-- Raw markdown -->
+<section class="card">
+  <h2 style="margin-top:0;">Full markdown source files (collapsed)</h2>
+
+  <details open>
+    <summary>Full Quick Scan (rendered)</summary>
+    <div class="md-body" id="md-quickscan"></div>
+  </details>
+
+  <details>
+    <summary>Full Growth Triggers (rendered)</summary>
+    <div class="md-body" id="md-triggers"></div>
+  </details>
+
+  <details>
+    <summary>Full Valuation Scenarios (rendered)</summary>
+    <div class="md-body" id="md-valuation"></div>
+  </details>
+</section>
+
+<footer>
+  Generated 11 May 2026 &middot; Research only. <b>Not investment advice.</b> &middot;
+  Numbers reconciled with FY25 AR, Q3 FY26 presentation, Brickwork credit rating reports, BSE/NSE disclosures and Screener.in.
+</footer>
+
+</div> <!-- /wrap -->
+
+<script>
+// ============= Data =============
+const data = {
+  ar12: [
+    ["What does the company do?", "Integrated manufacturer of LT/HT/EHV power cables (up to 400 kV) and aluminium / AL-59 / ACSR / HTLS conductors. Backward-integrated rod mills via wholly-owned subsidiary DICABS NexGen. India's largest single-location cables & conductors plant at Vadodara (110 acres). <span class='citation'>AR FY25 p.14-20</span>"],
+    ["Segments &amp; revenue mix (Q3 FY26)", "Conductors 41% · HT Cable 36% · LT Cable 23%. Shift toward EHV cables (220 kV+) and AL-59 HTLS conductors. <span class='citation'>Q3 FY26 IP slide 6</span>"],
+    ["Geography mix", "Dominantly India; exports to 12+ countries (Nepal, Bangladesh, Sri Lanka; GCC via ATOM Energy UAE tie-up). Target 10%+ exports by FY27. <span class='citation'>AR FY25 p.39</span>"],
+    ["Customer concentration", "High — Adani Group ~70% of order book (AESL ₹1,349 cr LoI; Adani Green ₹747 cr; AEML ₹100.5+45.5 cr; Khavda ₹276 cr; Wilmar etc.). Other utilities: PGCIL, GETCO, GSECL, JVVNL, MAHAVITARAN, MGVCL, UGVCL, PGVCL, WBSEB. <span class='citation'>Q3 FY26 IP slides 28-30</span>"],
+    ["Promoter / management", "GSEC Ltd + Monarch Infraparks (Rakesh R. Shah, CMD GSEC, ex-Gujarat State Export Corp) — promoter holding 84.02% post-OFS Jun 2025. Chairman: Maheswar Sahu (ex-IAS, retd. Addl. Chief Secretary Gujarat). No pledging. <span class='citation'>Jun-25 IP slide 9</span>"],
+    ["Capex cycle status", "Active expansion. Ongoing capex ₹120 cr+. Four AL rod mills (Mill 1 Feb-24, Mill 2 Mar-25, Mill 3 Aug-25, Mill 4 Oct-25, total ~75-100k MTPA). 10 new MV cable lines + 5th CCV line by Mar 2026. EHV 220 kV+ line operational. ₹60 cr capex + ₹150 cr WC at DICABS NexGen. <span class='citation'>Aug-25 IP slides 15-17</span>"],
+    ["Working capital trend", "Receivables ₹58.8 → 175.6 cr FY24→FY25 (+198%) vs revenue +225%. DSO ~57 days. Inventory ₹120 → 205 cr (+71%). Trade payables ₹103 → 198 cr (+91%). CFO FY25 ₹20.4 cr vs PAT ₹34.7 cr (CFO/PAT 0.59). <span class='citation'>AR FY25 p.132-134</span>"],
+    ["Debt position", "LT borrowings ₹324.9 cr (↓ from ₹393.1 cr); ST borrowings ₹135 cr (↑ from ₹59.8 cr). 'Other financial liabilities (NC)' ₹1,899 cr = 30-yr 0.001% coupon bond from NCLT resolution; held by Gomex Aviation (SPV of RA). Per Ind AS 109 NPV ₹25.67 cr. ISCR 5.29x, DSCR 1.17x. <span class='citation'>Rating report 14 Jul 2025</span>"],
+    ["Key risks disclosed", "(i) Negative tangible net worth ₹(881) cr; (ii) Cu/Al volatility; (iii) Adani &amp; Aditya Birla entering cables; (iv) capex execution; (v) Adani-Group concentration. <span class='citation'>AR FY25 p.36-44</span>"],
+    ["Related-party transactions", "NCLT-mandated transactions with GSEC + Monarch + Gomex Aviation. Adani is a customer (not RPT). Disclosures appear transparent. <span class='citation'>AR FY25 p.66 onwards</span>"],
+    ["Auditor changes / qualifications", "Statutory: Naresh &amp; Co. (Ahmedabad mid-tier — slight comfort gap vs Big 4). Internal: EY LLP. Cost: Dalwadi &amp; Associates. Secretarial: Ashish Shah &amp; Associates. Clean opinion, no qualifications FY25. <span class='citation'>AR FY25 p.121-131</span>"],
+    ["Strategy / Chairman's letter", "Vision 2030: Top 3 globally in cables &amp; conductors; ₹10,000 cr revenue (~9x FY25); double-digit market share. Levers: backward integration (rod mills), EHV cables, exports, retail brands (DICABS Urja, URJAFLEX, DICABS Renew), TS Conductor (USA) HTLS partnership. <span class='citation'>AR FY25 p.4-9</span>"]
+  ],
+  redflags: [
+    ["CFO / PAT 3-yr trend", "FY25 CFO ₹20.4 cr / PAT ₹34.7 cr = <b>0.59</b> (&lt;0.7). FY24 was 1.54. Volatile due to ramp.", "amber"],
+    ["Receivables vs revenue growth", "Receivables +198% vs revenue +225%; DSO 57 days.", "green"],
+    ["Inventory vs revenue growth", "Inventory +71% vs revenue +225% — efficient.", "green"],
+    ["Contingent liabilities vs net worth", "Net worth negative ₹(881) cr; any CL is material. Disclosed CL appears manageable.", "amber"],
+    ["Promoter pledging trend", "No pledging disclosed.", "green"],
+    ["Auditor qualifications", "None in FY25; clean opinion from Naresh & Co.", "green"],
+    ["RPT size &amp; nature", "NCLT-legacy with Gomex Aviation (holds the ₹1,900 cr 0.001% bond). Transparent but unique structure.", "amber"],
+    ["Goodwill / intangibles bloat", "Not material; investments ₹3 cr in subsidiary only.", "green"],
+    ["Frequent equity dilution", "1:10 stock-split (cosmetic). ₹1,000 cr QIP approved — potential dilution. Jun-25 OFS reduced promoter 90% → 84%.", "amber"],
+    ["Subsidiary losses absorbed quietly", "DICABS NexGen incorporated Jun-24; standalone &amp; consolidated near-identical. Too early to judge.", "green"]
+  ],
+  piotroski: [
+    ["Positive PAT", "₹34.74 cr", "✓"],
+    ["Positive CFO", "₹20.38 cr", "✓"],
+    ["CFO &gt; PAT", "20.4 &lt; 34.7", "✗"],
+    ["Improving PAT", "₹34.74 vs ₹17.03 cr", "✓"],
+    ["Decreasing LT debt", "₹324.9 vs ₹393.1 cr", "✓"],
+    ["Improving current ratio", "1.09 vs 1.33", "✗"],
+    ["No equity dilution", "Stock-split only", "✓"],
+    ["Improving gross margin", "15.7% vs 12.4%", "✓"],
+    ["Improving asset turnover", "0.625 vs 0.226", "✓"]
+  ],
+  headlines: [
+    ["Revenue from Operations", 307.4, 438.3, 474.1, 781.6, 1214.2, 1115.4],
+    ["Gross Profit (Contribution)", 44.1, 81.9, 110.3, 127.9, 250.7, 175.5],
+    ["Gross Margin %", "14.3%", "18.7%", "23.3%", "16.4%", "20.6%", "15.7%"],
+    ["EBITDA", 16.0, 46.0, 69.8, 53.3, 146.9, 67.6],
+    ["EBITDA margin %", "5.2%", "10.5%", "14.7%", "6.8%", "12.1%", "6.1%"],
+    ["PAT", 6.3, 27.7, 49.7, 26.8, 97.6, 34.7],
+    ["EPS (₹, FV ₹1)", 0.12, 0.53, 0.94, 0.51, 1.85, 0.66]
+  ],
+  walktalk: [
+    ["AR FY25 / Jun-25 IP", "FY25 revenue jumps to ₹1,115 cr (+225% YoY); EBITDA expanding", "Delivered. FY25 revenue ₹1,115 cr; EBITDA ₹68 cr (vs prior margin 12.6%, dipped to 6.1% on input cost). 9M FY26 EBITDA margin already 12.1%.", "HIGH"],
+    ["Mar-26 IP", "Adani Energy Solutions ₹1,349 cr order; execution by Jun-28", "On track — first phase orders booked; visible in 9M FY26 conductor mix 41%.", "HIGH"],
+    ["Jun-25 IP", "Two AL-59 rod mills operational, 3rd by Aug-25, 4th by Oct-25", "Delivered as per timeline. Gross margin jumped to 23.3% in Q3 FY26 — consistent with NexGen benefit.", "HIGH"],
+    ["Mar-26 IP", "5th CCV line + 10 MV lines by Mar-26", "Multiple lines commissioned. 5th CCV under final commissioning per Mar-26 IP.", "MEDIUM"],
+    ["Jun-25 IP", "₹1,000 cr QIP to repair balance sheet", "Board-approved; postal-ballot done. Closure timing not yet disclosed.", "MEDIUM"],
+    ["Vision 2030", "Top 3 globally; ₹10,000 cr revenue", "Aspirational; requires 6× of 9M FY26 annualised run-rate.", "LOW"]
+  ],
+  triggers: [
+    [1, "Adani Energy Solutions AL-59 conductor order (24,080 km)", "HIGH", 1349, "FY26-FY28", "On track; LoI signed Jul-25"],
+    [2, "Four AL-59 rod mills (DICABS NexGen)", "HIGH", 220, "Mills 1-4 done by Oct-25", "2 mills commercial; gross-margin jump visible Q3 FY26"],
+    [3, "EHV cables capacity (220-400 kV)", "HIGH", 600, "5th CCV line by Mar-26", "Type-tests done; orders being booked"],
+    [4, "Wider Adani-Group cable orders", "HIGH", 1200, "FY26-FY28", "Multiple LoIs received"],
+    [5, "₹1,000 cr QIP — balance-sheet repair", "MEDIUM", 1000, "FY26-FY27", "Board-approved; pricing pending"],
+    [6, "Retail brands (Urja, Urjaflex, Renew)", "OPTIONALITY", 750, "FY28+", "Brands launched; distribution build-out"]
+  ]
+};
+
+// raw markdowns will be filled in below
+data.md_quickscan = `# Diamond Power Infrastructure Ltd (DIACABS) — Quick Scan
+*Date: 11 May 2026 | NSE: DIACABS | BSE: 522163 | CMP ~₹158 | Mcap ~₹8,320 cr | Sector: Cables – Electricals*
+
+## Step 1 — Locate the Annual Report
+- Annual Report FY25 (year ended 31 March 2025): provided by user, signed 30 May 2025; AGM held 26 Sep 2025 (33rd AGM).
+- Latest Investor Presentation: Q3 FY26 (March 7, 2026); 9M FY26 results disclosed.
+- Credit-rating update: Brickwork "BWR D / Issuer Not Cooperating", 14 July 2025 (latest).
+
+## Step 2 — 12-Point Annual Report Analysis
+
+| # | Item | Findings |
+|---|------|----------|
+| 1 | What does the company do? | Integrated manufacturer of LT/HT/EHV power cables (up to 400 kV) and aluminium / AL-59 / ACSR / HTLS conductors; in-house aluminium rod mills via wholly-owned subsidiary DICABS NexGen. Single-largest single-location cables & conductors plant in India at Vadodara (110 acres). |
+| 2 | Segments & revenue mix (Q3 FY26) | Conductors 41% • HT Cable 36% • LT Cable 23%. Strategic shift toward EHV cables (220 kV+) and AL-59 HTLS conductors. |
+| 3 | Geography mix | Dominantly India; exports to 12+ countries (Nepal, Bangladesh, Sri Lanka, GCC via ATOM Energy UAE tie-up). Target: 10%+ exports by FY27. |
+| 4 | Customer concentration | High — Adani Group is the single largest customer cluster (AESL ₹1,349 cr LoI, Adani Green ₹747.64 cr, Adani Electricity Mumbai ₹100.5 cr + ₹45.5 cr, Khavda projects ₹276 cr, Adani Wilmar). Other utilities: PGCIL, GETCO, GSECL, JVVNL, MAHAVITARAN, MGVCL, UGVCL, PGVCL, WBSEB. |
+| 5 | Promoter / management & pledging | Promoter: GSEC Ltd + Monarch Infraparks (Rakesh Ramanlal Shah; CMD GSEC, formerly Gujarat State Export Corp) — 84.02% post-OFS (Jun 2025). Chairman: Maheswar Sahu (ex-IAS, retd. Additional Chief Secretary Gujarat). No promoter pledging disclosed. Public float must reach 25% by Jun 2025 MPS deadline. |
+| 6 | Capex cycle status | Active expansion. Ongoing capex of ₹120 cr+. Four aluminium rod mills (2 operational, 3rd Aug 2025, 4th Oct 2025, total 1,00,000 MTPA target). 10 new MV cable lines and 5th CCV line being commissioned by Mar 2026. EHV 220 kV+ line operational. ₹60 cr subsidiary capex + ₹150 cr WC at DICABS NexGen. |
+| 7 | Working capital trend | Receivables Rs 58.8 cr → 175.6 cr (FY24 → FY25), +198% YoY vs revenue +225%. DSO ≈ 57 days. Inventory 120 → 205 cr (+71%). Trade payables 103 → 198 cr (+91%). CFO FY25 = ₹20.4 cr vs PAT ₹34.7 cr (CFO/PAT = 0.59) — RED-flag per SOIC, but expected for an asset-heavy ramp. |
+| 8 | Debt position & coverage | LT borrowings ₹324.86 cr (down from ₹393.05 cr); ST borrowings ₹135 cr (up from ₹59.8 cr). "Other financial liabilities (NC)" = ₹1,899.34 cr — this is the 30-year, 0.001% coupon bond issued to ex-lenders as part of the NCLT resolution, repurchased by Gomex Aviation (SPV of Resolution Applicant). Per Ind AS 109 it is discounted to NPV of ₹25.67 cr. ISCR 5.29x, DSCR 1.17x (per rating report). |
+| 9 | Key risks disclosed | (i) Negative tangible net worth ₹(881) cr; (ii) raw material (Cu/Al) volatility; (iii) sector entry of Adani Group (cables) and Aditya Birla / UltraTech; (iv) execution risk on capex; (v) high concentration on Adani Group orders. |
+| 10 | Related-party transactions | NCLT-mandated transactions with GSEC + Monarch + Gomex Aviation (SPV holding the ₹1,900 cr bond). Adani is a customer, not RPT. Disclosure appears reasonable. |
+| 11 | Auditor changes / qualifications | Statutory: Naresh & Co. (Ahmedabad-based mid-tier firm — slight comfort risk vs Big 4). Internal: EY LLP. Cost: Dalwadi & Associates. Secretarial: Ashish Shah & Associates. No qualifications in FY25 audit report. |
+| 12 | Strategy / Chairman's letter | Vision 2030: Top 3 globally in cables & conductors; ₹10,000 cr revenue (~9x FY25); double-digit market share. Levers: backward integration (rod mills), EHV cables, exports (GCC/Africa/SE-Asia), retail brands (DICABS Urja, URJAFLEX, DICABS Renew), TS Conductor (USA) HTLS partnership. |
+
+## Step 3 — 10-Point Forensic Red-Flag Scan
+
+| # | Check | Reading | Tag |
+|---|-------|---------|-----|
+| 1 | CFO/PAT 3-yr trend | FY25 CFO ₹20.38 cr / PAT ₹34.74 cr = **0.59** (<0.7). FY24 was 2,625/1,702 = 1.54. Volatile due to ramp. | AMBER |
+| 2 | Receivables growth vs revenue | Receivables +198% vs Revenue +225% — slightly slower. DSO 57 days. | GREEN |
+| 3 | Inventory growth vs revenue | Inventory +71% vs Revenue +225% — efficient. | GREEN |
+| 4 | Contingent liabilities vs net worth | Net worth is negative ₹(881) cr; any CL is significant. Disclosed CL appears manageable. | AMBER |
+| 5 | Promoter pledging trend | None disclosed. | GREEN |
+| 6 | Auditor qualifications | None in FY25; clean opinion from Naresh & Co. | GREEN |
+| 7 | RPT size & nature | NCLT resolution legacy (Gomex Aviation holds the ₹1,900 cr 0.001% bond). Disclosure is transparent but the structure is unique. | AMBER |
+| 8 | Goodwill / intangibles bloat | Not material; investments minor (Rs 3 cr in subsidiary). | GREEN |
+| 9 | Frequent equity dilution | 1:10 stock split (cosmetic). QIP up to ₹1,000 cr approved by board — *potential* future dilution. OFS in Jun 2025 reduced promoter from 90% to 84% (compliance, not dilution). | AMBER |
+| 10 | Subsidiary losses absorbed quietly | DICABS NexGen (new, FY24-FY25 incorporated 26 Jun 2024) — too early. Consolidated and standalone are near-identical in FY25. | GREEN |
+
+**Composite tag: AMBER** — driven by post-bankruptcy capital structure quirks and ramp-phase working-capital expansion, not governance lapses.
+
+## Step 4 — Piotroski F-Score + DuPont
+
+**Piotroski F-Score (FY25 vs FY24) — 7 / 9**
+
+| Criterion | FY25 | Score |
+|-----------|------|-------|
+| Positive PAT | ₹34.74 cr | ✓ |
+| Positive CFO | ₹20.38 cr | ✓ |
+| CFO > PAT | 20.4 < 34.7 | ✗ |
+| Improving PAT | ₹34.74 vs ₹17.03 | ✓ |
+| Decreasing LT debt | ₹324.86 cr vs ₹393.05 cr | ✓ |
+| Improving current ratio | 1.09 vs 1.33 | ✗ |
+| No equity dilution | Stock split only | ✓ |
+| Improving gross margin | 15.7% vs 12.4% | ✓ |
+| Improving asset turnover | 0.62 vs 0.23 | ✓ |
+
+**DuPont (FY25, standalone)** — ROE not meaningful since equity is negative (-₹879 cr). Reading sub-components instead:
+- Net margin: 3.1% (FY24: 4.96%* per rating report — actually 5.0%; FY25 dipped slightly because of input-cost volatility ahead of price-variation clauses; Q3 FY26 net margin already 10.5%).
+- Asset turnover: 0.625 (FY24: 0.23) — improvement is **dramatic**, this is the real story.
+- Financial leverage: meaningless; equity recovering.
+
+## Step 5 — Bear Case (5 bullets)
+
+1. **Negative tangible net worth (-₹881 cr).** Equity capital base is genuinely impaired. Book value per share is meaningfully negative. The company is solvent only because of the 30-year, 0.001%-coupon ₹1,899 cr bond which the resolution applicant's SPV (Gomex Aviation) has bought back from the banks — i.e., the promoter group is effectively underwriting the senior creditors.
+2. **"Issuer Not Cooperating" credit rating (BWR D).** Brickwork has been forced to reaffirm and withdraw the bank-loan rating because management has not cooperated with the rating agency since 2022. For a public listed company with ₹2,800 cr of rated debt, this is a serious governance signal — even if business performance has improved.
+3. **Customer concentration on Adani Group.** Of the ₹3,500 cr+ order book, the Adani Group alone accounts for ~₹2,500 cr (AESL ₹1,349 cr + Adani Green ₹747 cr + Adani Electricity Mumbai ₹146 cr + Khavda ₹276 cr). Any pause or renegotiation by a single group could blow a hole in the FY27/FY28 thesis.
+4. **Adani and Aditya Birla / UltraTech entering cables in 2026.** Both have signalled large in-house cable mfg ambitions. They could (a) take captive what is today Diamond's Adani-group revenue, and (b) compress the industry's margin pool. Diamond is small (~₹1,600 cr revenue annualized) vs Polycab ~₹29,000 cr and KEI / RR Kabel; pricing power is limited.
+5. **Valuation already discounts the turnaround.** At ₹158 / ₹8,320 cr mcap, the stock trades at ~64× annualized 9M FY26 EPS and ~45× FY27E PAT — peer Polycab is ~45× with 5× the revenue, a 30% market share and clean balance sheet. The QIP of up to ₹1,000 cr will dilute the EPS further if executed at sub-₹200 prices.
+
+## Step 6 — Verdict
+
+**WATCH (revisit on trigger).** Diamond Power has unambiguously turned around — Q3 FY26 ran at a 14.7% EBITDA margin, the company is now profitable at scale (₹49.7 cr PAT in one quarter), the order book gives 2-year revenue visibility, and the four rod mills + EHV / MV capacity expansion clearly target the right end of the market.
+
+That said, three issues keep this in the WATCH bucket rather than BUY-WORTHY: (1) the credit rating remains BWR D / non-cooperating despite the operational recovery — until the company gets re-rated by a credible agency, institutional re-rating is capped; (2) the valuation already prices in 2-3 years of execution at peer multiples that took Polycab a decade and a 30% market share to earn; and (3) the entry of Adani and Aditya Birla into the cable industry is a structural overhang that will be visible only in FY27.
+
+A clean re-rating (Brickwork or CRISIL upgrade to BBB+/A-), QIP closure with marquee anchors, and consistent four-quarter execution at ≥12% EBITDA margin would convert this to a BUY. Until then, watch.
+
+### Follow-up questions for deeper dive
+1. What % of FY27 order book is non-Adani? (concentration test)
+2. Why has the company chosen not to cooperate with Brickwork — is a CRISIL/ICRA mandate in flight?
+3. Status of the ₹1,000 cr QIP — pricing, anchor book, dilution maths.
+4. Capex IRR on the four rod mills — what is the expected aluminium price spread captured?
+5. When does the negative net-worth turn positive? Path of accumulated losses absorption.
+6. Path to 25% MPS — promoter further OFS or fresh issuance?
+`;
+data.md_triggers  = `# Diamond Power Infrastructure (DIACABS) — Growth Triggers 1-Pager
+*As of 11 May 2026 | CMP: ~₹158 | Mcap: ~₹8,320 cr | Source: Screener.in / NSE / Co. filings*
+
+## Business in one line
+India's oldest single-location cables & conductors manufacturer (Vadodara, 110 acres), reset under NCLT in 2022 by GSEC Ltd + Rakesh Shah (Monarch Group), now executing a ₹3,500 cr+ Adani-anchored order book with backward integration into aluminium rod mills.
+
+## The 6 Growth Triggers
+
+### Trigger 1: Adani Energy Solutions AL-59 conductor contract — ₹1,349.11 cr [HIGH]
+- **What:** LoI in Jul 2025 for supply of 24,080 km of AL-59 high-performance conductors for Jamnagar, Khavda-IV D HVDC, Navinal-II and Mahan-II transmission projects.
+- **Evidence:** Co. disclosure to BSE/NSE 28-Jul-2025; reiterated in AR 2024-25, p. 38; rating reports.
+- **Quantum:** ₹1,349 cr — ~80% of FY25 revenue locked in. Executed on a "km-rate + Price Variation" basis (margin protected).
+- **Timeline:** Execution by **June 2028** — i.e., roughly ₹450 cr/year of incremental conductor revenue across FY26-FY28.
+
+### Trigger 2: AL-59 backward integration via four rod mills (DICABS NexGen) [HIGH]
+- **What:** Wholly-owned subsidiary DICABS NexGen Special Alloys Pvt Ltd setting up 4 in-house aluminium / AL-59 / HTSL rod mills at Vadodara. Capacity build-out: Mill 1 (Feb 2024) → Mill 2 (Mar 2025) → Mill 3 (Aug 2025) → Mill 4 (Oct 2025). Total target: ~75,000-1,00,000 MTPA wire-rod capacity.
+- **Evidence:** Aug-2025 investor presentation slides 16-17; AR 2024-25 p. 38-40; multiple press releases on mill commissioning.
+- **Quantum:** Each mill ~₹55 cr capex; ~₹220 cr cumulative. Internal supply removes ~₹3-5/kg trader margin paid earlier → ~150-200 bps gross-margin uplift at full utilisation.
+- **Timeline:** All 4 mills operational by Oct 2025; full-utilisation revenue benefit visible from H2 FY26 onwards (already showing in Q3 FY26 gross margin jump from 14.3% to 23.3% YoY).
+
+### Trigger 3: EHV cable capacity (220 kV+) commissioning [HIGH]
+- **What:** India's first 700 kV / 28000 kVA UHV type-test lab is in-house; EHV line for 66 kV – 400 kV cables operational; 5th CCV line under commissioning by Mar 2026. Type-tested by CPRI, ERDA, KEMA, SABS.
+- **Evidence:** Mar-2026 investor presentation slides 11-14; AR 2024-25 p. 39; type-test reports for 66 kV / 132 kV / 220 kV displayed.
+- **Quantum:** EHV cables earn 25-30% gross margins (~2x of LT cables). At target 2,000 km/year × ₹4 cr/km value → up to ₹8,000 cr **maximum revenue capacity** (theoretical at full utilisation). Realistic FY28 capture: ~₹400-600 cr.
+- **Timeline:** 5th CCV line by Mar 2026; meaningful EHV revenue from FY27.
+
+### Trigger 4: Diversified Adani-Group order pipeline (cables) [HIGH]
+- **What:** Multiple LoIs from Adani Group entities across cables (in addition to the AL-59 conductor order in Trigger 1).
+- **Evidence:** Adani Green Energy ₹747.64 cr cable supply order; Adani Electricity Mumbai ₹100.54 cr HT cables (Apr 2026 – Feb 2027) + ₹45.47 cr (May 2026 – May 2027); Adani Energy Solutions ₹276 cr Khavda order (Nov 2025); Adani Green ₹19.57 cr (Feb 2026); Adani Wilmar, Adani Infra, Adani Total Gas as existing customers.
+- **Quantum:** ~₹1,200-1,300 cr of cable orders from Adani Group entities (excl. conductor order). Combined with conductor order, total Adani exposure in order book ≈ ₹2,500 cr / ~70% of disclosed order book.
+- **Timeline:** Execution spread over FY26-FY28.
+
+### Trigger 5: ₹1,000 cr QIP — balance-sheet repair [MEDIUM]
+- **What:** Board approved raising up to ₹1,000 cr via Qualified Institutions Placement; postal-ballot approval sought from shareholders.
+- **Evidence:** Co. disclosure to exchanges; Aug-2025 and Mar-2026 investor presentations.
+- **Quantum:** ₹1,000 cr would substantially repair the negative tangible net worth of ₹(881) cr — potentially flipping the company to positive book value. It would also fund the next leg of capex (transmission tower facility 48,000 TPA, copper cables facility under commissioning, retail brand investments).
+- **Timeline:** Postal-ballot done in CY25; pricing and placement TBD — likely FY26-FY27. **Conviction is MEDIUM because pricing and marquee-investor demand are unknown.**
+
+### Trigger 6: Retail brand launch (DICABS Urja / URJAFLEX / DICABS Renew) + CREDAI tie-up [OPTIONALITY]
+- **What:** Three new B2C / B2B2C cable brands targeting residential, industrial and renewable energy segments. National Cable Partner status with CREDAI India 2025-26.
+- **Evidence:** Mar-2026 investor presentation slides 36, 38; promoter perspective in AR 2024-25 p. 6-9.
+- **Quantum:** No specific revenue guidance disclosed. Industry data: organised retail cables segment trades at ~30% gross margin vs <20% in institutional. Polycab earns ~40% of revenue from FMEG / B2C. Realistic 5-year potential: ₹500-1,000 cr of retail revenue.
+- **Timeline:** Brand investments and distribution build-out underway; revenue contribution material from FY28+.
+
+## Trigger Scoreboard
+
+| # | Trigger | Conviction | Quantum (₹ cr) | Timeline | Status |
+|---|---------|-----------|----------------|----------|--------|
+| 1 | Adani Energy Solutions AL-59 conductor order | HIGH | 1,349 | FY26-FY28 execution | On track; LoI signed Jul-25 |
+| 2 | Four AL-59 rod mills (NexGen) | HIGH | 220 cr capex; ~200 bps GM uplift | Mills 1-4 done by Oct-25 | 2 mills commercial; gross-margin jump already visible Q3 FY26 |
+| 3 | EHV cables capacity (220-400 kV) | HIGH | ₹400-600 cr revenue by FY28 | 5th CCV line by Mar-26 | Type-tests done; orders being booked |
+| 4 | Wider Adani-Group cable orders | HIGH | ~1,200 cr orders | FY26-FY28 | Multiple LoIs received |
+| 5 | ₹1,000 cr QIP | MEDIUM | Equity infusion | FY26-FY27 | Board-approved; pricing pending |
+| 6 | Retail brands (Urja / Urjaflex / Renew) | OPTIONALITY | ~500-1,000 cr 5-yr | FY28+ | Brand launches done; distribution build-out underway |
+
+## What can break the thesis (top 3 risks)
+
+1. **Adani Group decides to make cables/conductors in-house** (Adani has publicly announced cable manufacturing ambitions in 2026). The ₹2,500 cr Adani-linked book would migrate captive in 2-3 years.
+2. **QIP fails or prices weakly**, leaving negative-net-worth unresolved and capping institutional ownership. Without an investment-grade credit rating, mutual-fund and FII ownership is structurally constrained.
+3. **Raw-material (copper / aluminium) volatility outruns Price-Variation clauses.** The PV formula protects margins in conductors (sold km-rate × LME index) but is weaker in LT/HT cables sold to private buyers. A copper spike >20% in one quarter compresses cable margins by 200-300 bps.
+
+## Verdict
+
+The thesis carries 4 HIGH-conviction triggers (Adani AL-59 order, rod mills, EHV capacity, broader Adani book) which together justify ~₹3,500 cr of FY26-FY28 revenue at improving margins. The ₹1,000 cr QIP (MEDIUM) is the lever that fixes the only fundamental weakness — negative net worth — and unlocks institutional re-rating. Retail brands are an OPTIONALITY layer.
+
+Sum of HIGH triggers easily justifies the operational thesis. **However, valuation has already priced in significant amount of this execution** (~64× annualised PAT, ~45× FY28E PAT) — leaving limited margin of safety. The thesis works if (a) Brickwork rating goes from "D / Issuer Not Cooperating" to BBB+/A-, (b) QIP closes at ≥₹200, and (c) FY28 revenue clears ₹4,000 cr at >13% EBITDA. Each of these is plausible but not yet evidenced.
+`;
+data.md_valuation = `# DIACABS — Valuation Scenarios (Bull / Base / Bear)
+*As of 11 May 2026 | CMP ~₹158 | Mcap ~₹8,320 cr | Shares outstanding: 52.70 cr (face value ₹1)*
+
+## Anchor numbers (actuals, standalone)
+
+| Metric | FY24 (₹ cr) | FY25 (₹ cr) | 9M FY26 (₹ cr) | 9M FY26 annualised |
+|--------|-------------|-------------|----------------|--------------------|
+| Revenue from Operations | 343.4 | 1,115.4 | 1,214.2 | ~1,620 |
+| Gross Profit | 49.2 | 175.4 | 250.7 | ~334 |
+| EBITDA | 43.2 | 67.6 | 146.9 | ~196 |
+| EBITDA margin | 12.6% | 6.1% | 12.1% | 12.1% |
+| PAT | 17.0 | 34.7 | 97.6 | ~130 |
+| EPS (FV ₹1) | 0.32 | 0.66 | 1.85 | ~2.50 |
+
+Order book disclosed: ~₹3,500 cr as of 30 March 2026 (Adani exposure ~₹2,500 cr).
+
+## Peer-group anchor multiples (FY26 / May-26)
+
+| Peer | TTM P/E | FY26 EBITDA margin | Mcap range |
+|------|---------|--------------------|------------|
+| Polycab India | ~45-47x | 14-15% | ~₹2.4-2.6 lakh cr |
+| KEI Industries | ~50-53x | 11-12% | ~₹50-60k cr |
+| RR Kabel | ~36-44x | 9-10% | ~₹35-40k cr |
+| Apar Industries | ~30-35x | 11-12% | ~₹50-55k cr |
+| Diamond Power (DIACABS) — *implied* | ~64x (9M FY26 annualised) | 12.1% | ~₹8,300 cr |
+
+## Scenario assumptions
+
+Each scenario projects to **FY28** (the year by which the AESL ₹1,349 cr order finishes and the full capex is on-stream), then derives a target Mcap and per-share price.
+
+### Bull case
+- **Macro:** Cable & conductor industry sustains 14-15% growth; capex cycle continues; Adani / Birla entry does NOT cannibalise Diamond's order book (Adani group keeps Diamond as preferred non-captive vendor).
+- **Execution:** All four rod mills run >90%; 5th CCV line + 10 MV cable lines fully utilised; EHV cables contribute ₹500-600 cr; exports clear 10% mix; QIP closes at ≥₹200, equity flips positive; Brickwork rating upgraded to BBB+/A-, mutual-fund ownership opens up.
+- **FY28E revenue:** ₹4,500 cr (~2.8x of 9M FY26 annualised; CAGR ~40% FY26-FY28).
+- **EBITDA margin:** 15% (Q3 FY26 already 14.7%; with NexGen contribution and EHV mix).
+- **EBITDA:** ₹675 cr; depreciation ₹35 cr; interest ₹50 cr (debt down post-QIP); PBT ₹590 cr; tax 25% → **PAT ₹440 cr**.
+- **Target P/E:** 50× (premium to Polycab on growth, marginally below KEI).
+- **Target Mcap:** **₹22,000 cr** post-QIP (62.5 cr shares assuming QIP at ₹200 = 5 cr new shares).
+- **Target price:** **₹350** per share.
+- **Upside from CMP ₹158:** ~+120% over 24-30 months.
+
+### Base case
+- **Macro:** Industry grows 13-14%; Adani/Birla entry partly compresses pricing on industrial cables (-100 bps) but utility conductors remain Diamond-friendly.
+- **Execution:** Rod mills 70-80% utilised; EHV contributes ₹300-400 cr; exports 6-7% of mix; QIP closes at ₹150-180 (modest dilution); credit rating moves to "BB+ / BBB-" — not investment grade but no longer "D / non-cooperating".
+- **FY28E revenue:** ₹3,500 cr (2x of 9M FY26 annualised; CAGR ~30% FY26-FY28). This is roughly what the disclosed order book implies if 100% executed by FY28 plus modest new orders.
+- **EBITDA margin:** 13% (200 bps better than FY25 due to NexGen + EHV; below bull case).
+- **EBITDA:** ₹455 cr; D&A ₹35 cr; interest ₹70 cr; PBT ₹350 cr; tax 25% → **PAT ₹260 cr**.
+- **Target P/E:** 38× (between RR Kabel and Polycab; small-cap discount for governance overhang).
+- **Target Mcap:** **₹9,900 cr** (60 cr shares post-QIP at ₹165).
+- **Target price:** **₹165** per share.
+- **Outcome from CMP ₹158:** ~+5% over 24 months — essentially **fair-value at CMP**.
+
+### Bear case
+- **Macro:** Industry growth slows to 10-11%; Adani Group decides to in-source cables and conductors from FY28 (publicly hinted in 2026 announcements); cheap Chinese imports return as China rebalances away from EV.
+- **Execution:** Adani-linked orders shrink from ₹2,500 cr to ₹1,200 cr over FY27-FY28; receivables stretch to 90+ days; QIP closes at ₹120 or below (deeper dilution); credit-rating remains "D / non-cooperating", limiting institutional float; raw-material spike compresses cable margins.
+- **FY28E revenue:** ₹2,200 cr (only 1.4x of 9M FY26 annualised; reflects partial Adani migration).
+- **EBITDA margin:** 9% (200 bps compression from base; competitive pressure).
+- **EBITDA:** ₹198 cr; D&A ₹35 cr; interest ₹85 cr; PBT ₹78 cr; tax 25% → **PAT ₹58 cr**.
+- **Target P/E:** 25× (sub-peer due to governance + concentration overhang).
+- **Target Mcap:** **₹1,450 cr** (62 cr shares post-QIP at ~₹125).
+- **Target price:** **₹23** per share.
+- **Downside from CMP ₹158:** ~−85% over 24-30 months.
+
+## Summary scenario table
+
+| Scenario | Probability* | FY28 Revenue | EBITDA % | FY28 PAT | Target P/E | Target Mcap | Target Price | Outcome vs ₹158 |
+|----------|--------------|--------------|----------|----------|-----------|-------------|--------------|-----------------|
+| **Bull** | 25% | ₹4,500 cr | 15% | ₹440 cr | 50× | ₹22,000 cr | **₹350** | +120% |
+| **Base** | 50% | ₹3,500 cr | 13% | ₹260 cr | 38× | ₹9,900 cr | **₹165** | +5% (fair) |
+| **Bear** | 25% | ₹2,200 cr | 9% | ₹58 cr | 25× | ₹1,450 cr | **₹23** | −85% |
+
+*Subjective probabilities; not endorsed by any third party.
+
+**Probability-weighted target price:** 0.25 × ₹350 + 0.50 × ₹165 + 0.25 × ₹23 ≈ **₹176** → ~+11% over 24 months.
+
+## Recommended action levels
+
+| Action | Trigger | CMP / Mcap zone |
+|--------|---------|-----------------|
+| **Buy on dip** | Below ₹120 (Mcap < ₹6,300 cr) — within 1× FY28E revenue if base case holds | ≤ ₹120 |
+| **Accumulate** | ₹120-150 (Mcap ₹6,300-7,900 cr) — only on confirmation of QIP pricing & Brickwork upgrade trigger | ₹120-150 |
+| **Hold / Watch** | ₹150-200 (current zone) — base-case fair value; wait for catalysts | ₹150-200 (CMP zone) |
+| **Trim / Profit-book** | ₹250-350 — bull-case territory; book partial if no new orders or QIP delays | ₹250-350 |
+| **Avoid / Exit** | If Brickwork rating not upgraded by FY27 end, or if Adani in-sources cables | Any price |
+
+## Key catalysts to watch (next 12-18 months)
+
+1. **QIP pricing and anchor book** (FY26-FY27) — if priced ≥₹200 with marquee anchors (SBI MF, ICICI Pru, FII), thesis re-rates to base/bull.
+2. **Credit rating upgrade** — first step is appointment of a new agency (CRISIL / ICRA / India Ratings) and a "BB"/"BBB" rating. This unlocks debt mutual funds and lowers cost of borrowing.
+3. **Q4 FY26 / FY26 full year results** (May 2026) — confirms ₹1,700-1,800 cr revenue at 12%+ EBITDA margin.
+4. **MPS compliance** — promoter holding must drop from 84% to ≤75% by court-mandated deadline; expect OFS or fresh issuance.
+5. **Adani Group cable manufacturing announcement** — any concrete capex plan by Adani Cables would be a thesis-breaker.
+6. **AESL ₹1,349 cr order — execution pace** — first 30% should be visible in H1 FY27 revenue.
+7. **Auditor / governance signals** — if Big 4 are appointed (joint statutory audit), big positive for re-rating.
+`;
+
+// ============= Render =============
+
+function setRows(tbodyId, rows, renderer) {
+  const tb = document.getElementById(tbodyId);
+  tb.innerHTML = "";
+  rows.forEach(r => tb.insertAdjacentHTML("beforeend", renderer(r)));
+}
+
+setRows("ar12", data.ar12, r => `<tr><td><b>${r[0]}</b></td><td>${r[1]}</td></tr>`);
+
+setRows("redflags", data.redflags, r => {
+  const cls = r[2] === "green" ? "green-cell" : r[2] === "amber" ? "amber-cell" : r[2] === "red" ? "red-cell" : "grey-cell";
+  const tag = r[2].toUpperCase();
+  const color = r[2] === "green" ? "var(--green)" : r[2] === "amber" ? "var(--amber)" : "var(--red)";
+  return `<tr><td>${r[0]}</td><td>${r[1]}</td><td class="${cls}" style="text-align:center; font-weight:700; color:${color};">${tag}</td></tr>`;
+});
+
+setRows("piotroski", data.piotroski, r => {
+  const tick = r[2] === "✓";
+  return `<tr><td>${r[0]}</td><td class="num">${r[1]}</td><td style="text-align:center; color:${tick ? 'var(--green)' : 'var(--red)'}; font-weight:700; font-size:16px;">${r[2]}</td></tr>`;
+});
+
+setRows("headlines", data.headlines, r => {
+  return `<tr><td><b>${r[0]}</b></td>` +
+    r.slice(1).map(v => `<td class="num">${typeof v === 'number' ? v.toFixed(1) : v}</td>`).join("") +
+    `</tr>`;
+});
+
+setRows("walktalk", data.walktalk, r => {
+  const cls = r[3] === "HIGH" ? "green-cell" : r[3] === "MEDIUM" ? "amber-cell" : "red-cell";
+  const color = r[3] === "HIGH" ? "var(--green)" : r[3] === "MEDIUM" ? "var(--amber)" : "var(--red)";
+  return `<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td class="${cls}" style="text-align:center; font-weight:700; color:${color};">${r[3]}</td></tr>`;
+});
+
+setRows("triggers", data.triggers, r => {
+  const pillClass = r[2] === "HIGH" ? "pill-high" : r[2] === "MEDIUM" ? "pill-med" : "pill-opt";
+  return `<tr><td>${r[0]}</td><td>${r[1]}</td><td><span class="pill ${pillClass}">${r[2]}</span></td><td class="num">${r[3].toLocaleString('en-IN')}</td><td>${r[4]}</td><td>${r[5]}</td></tr>`;
+});
+
+// ============= Charts =============
+
+const colors = {
+  green: '#16a34a', amber: '#d97706', red: '#dc2626', grey: '#6b7280',
+  blueLight: '#60a5fa', blueDark: '#1d4ed8'
+};
+
+// DuPont
+new Chart(document.getElementById('dupontChart'), {
+  type: 'bar',
+  data: {
+    labels: ['FY23', 'FY24', 'FY25'],
+    datasets: [
+      { label: 'Net Margin (%)', data: [-277.2, 4.96, 3.11], backgroundColor: colors.amber },
+      { label: 'Asset Turnover (×10)', data: [0.1, 2.26, 6.25], backgroundColor: colors.blueLight },
+      { label: 'Revenue (₹ cr ÷ 100)', data: [0.15, 3.44, 11.15], backgroundColor: colors.green }
+    ]
+  },
+  options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
+});
+
+// Annual trajectory
+new Chart(document.getElementById('annualChart'), {
+  type: 'bar',
+  data: {
+    labels: ['FY23', 'FY24', 'FY25'],
+    datasets: [
+      { label: 'Revenue', data: [15.5, 343.4, 1115.4], backgroundColor: colors.blueDark },
+      { label: 'EBITDA',  data: [-23.4, 43.2, 67.6],   backgroundColor: colors.amber },
+      { label: 'PAT',     data: [-42.9, 17.0, 34.7],   backgroundColor: colors.green }
+    ]
+  },
+  options: { responsive: true, plugins: { legend: { position: 'bottom' } },
+             scales: { y: { title: { display: true, text: '₹ cr' } } } }
+});
+
+// Quarterly trajectory
+new Chart(document.getElementById('quarterChart'), {
+  type: 'line',
+  data: {
+    labels: ['Q3 FY25', 'Q4 FY25', 'Q1 FY26', 'Q2 FY26', 'Q3 FY26'],
+    datasets: [
+      { label: 'Revenue', data: [307.4, 333.8, 301.8, 438.3, 474.1], borderColor: colors.blueDark, backgroundColor: colors.blueDark, tension: 0.25 },
+      { label: 'EBITDA',  data: [16.0, 14.2, 31.1, 46.0, 69.8],     borderColor: colors.amber,   backgroundColor: colors.amber,   tension: 0.25 },
+      { label: 'PAT',     data: [6.3, 6.7, 20.1, 27.7, 49.7],       borderColor: colors.green,   backgroundColor: colors.green,   tension: 0.25 }
+    ]
+  },
+  options: { responsive: true, plugins: { legend: { position: 'bottom' } },
+             scales: { y: { title: { display: true, text: '₹ cr' } } } }
+});
+
+// Trigger chart
+const tcolors = data.triggers.map(t => t[2] === 'HIGH' ? colors.green : t[2] === 'MEDIUM' ? colors.amber : colors.grey);
+new Chart(document.getElementById('triggerChart'), {
+  type: 'bar',
+  data: {
+    labels: data.triggers.map(t => t[1]),
+    datasets: [{ label: 'Quantum (₹ cr)', data: data.triggers.map(t => t[3]), backgroundColor: tcolors }]
+  },
+  options: { responsive: true, indexAxis: 'y', plugins: { legend: { display: false } },
+             scales: { x: { title: { display: true, text: '₹ cr' } } } }
+});
+
+// Scenario chart
+new Chart(document.getElementById('scenarioChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Bear (FY28)', 'CMP (May-26)', 'Base (FY28)', 'Bull (FY28)'],
+    datasets: [{
+      label: 'Target Price (₹)',
+      data: [23, 158, 165, 350],
+      backgroundColor: [colors.red, colors.grey, colors.amber, colors.green]
+    }]
+  },
+  options: { responsive: true, plugins: { legend: { display: false },
+             tooltip: { callbacks: { label: ctx => '₹' + ctx.parsed.y } } },
+             scales: { y: { title: { display: true, text: 'Price (₹)' } } } }
+});
+
+// raw markdown injection — render with marked.js if available, else fall back to plain text
+function renderMarkdown(elId, md) {
+  const el = document.getElementById(elId);
+  if (!el) return;
+  if (typeof marked !== 'undefined') {
+    try {
+      // Enable GFM tables and line breaks
+      marked.setOptions({ gfm: true, breaks: false, headerIds: false, mangle: false });
+      el.innerHTML = marked.parse(md);
+      return;
+    } catch (e) {
+      console.warn('Markdown render failed, falling back:', e);
+    }
+  }
+  // Fallback: monospace plain text
+  const pre = document.createElement('pre');
+  pre.style.whiteSpace = 'pre-wrap';
+  pre.style.wordBreak = 'break-word';
+  pre.textContent = md;
+  el.appendChild(pre);
+}
+renderMarkdown('md-quickscan', data.md_quickscan);
+renderMarkdown('md-triggers',  data.md_triggers);
+renderMarkdown('md-valuation', data.md_valuation);
+</script>
+</body>
+</html>
