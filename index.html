@@ -101,7 +101,7 @@
       gap: 12px;
     }
 
-    .company-list a {
+    .company-card {
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -115,8 +115,8 @@
       transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
     }
 
-    .company-list a:hover,
-    .company-list a:focus-visible {
+    .company-card:hover,
+    .company-card:focus-within {
       transform: translateY(-2px);
       border-color: rgba(15, 118, 110, 0.35);
       box-shadow: 0 12px 24px rgba(15, 118, 110, 0.12);
@@ -126,6 +126,46 @@
     .company-meta {
       display: grid;
       gap: 4px;
+    }
+
+    .company-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .company-links a {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(15, 118, 110, 0.18);
+      background: rgba(15, 118, 110, 0.06);
+      color: var(--accent);
+      font-size: 0.88rem;
+      font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+      transition: background-color 160ms ease, border-color 160ms ease, transform 160ms ease;
+    }
+
+    .company-links a:hover,
+    .company-links a:focus-visible {
+      background: rgba(15, 118, 110, 0.12);
+      border-color: rgba(15, 118, 110, 0.32);
+      transform: translateY(-1px);
+      outline: none;
+    }
+
+    .company-main-link {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .company-main-link:hover,
+    .company-main-link:focus-visible {
+      outline: none;
     }
 
     .company-name {
@@ -158,7 +198,7 @@
         padding: 36px 16px 56px;
       }
 
-      .company-list a {
+      .company-card {
         align-items: flex-start;
         flex-direction: column;
       }
@@ -184,13 +224,21 @@
 
       <ul class="company-list">
         <li>
-          <a href="Pace%20Digitek%20Ltd/PACEDIGITK_report_20260527.html">
-            <span class="company-meta">
-              <span class="company-name">Pace Digitek Ltd</span>
-              <span class="company-path">Pace Digitek Ltd / PACEDIGITK_report_20260527.html</span>
-            </span>
+          <div class="company-card">
+            <a class="company-main-link" href="Pace%20Digitek%20Ltd/PACEDIGITK_report_20260527.html">
+              <span class="company-meta">
+                <span class="company-name">Pace Digitek Ltd</span>
+                <span class="company-path">Pace Digitek Ltd / PACEDIGITK_report_20260527.html</span>
+              </span>
+            </a>
             <span class="arrow">Open report</span>
-          </a>
+          </div>
+          <div class="company-links" aria-label="Pace Digitek Ltd documents">
+            <a href="Pace%20Digitek%20Ltd/PACEDIGITK_report_20260527.html">Report</a>
+            <a href="Pace%20Digitek%20Ltd/PACEDIGITK_quick_scan_20260527.md">Quick scan</a>
+            <a href="Pace%20Digitek%20Ltd/PACEDIGITK_growth_triggers_20260527.md">Growth triggers</a>
+            <a href="Pace%20Digitek%20Ltd/PACEDIGITK_walk_the_talk_20260527.md">Walk the talk</a>
+          </div>
         </li>
       </ul>
     </section>
