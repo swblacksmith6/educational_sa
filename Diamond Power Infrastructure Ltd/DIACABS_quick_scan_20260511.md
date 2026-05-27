@@ -1,3 +1,8 @@
+---
+title: "Diamond Power Infrastructure Ltd (DIACABS) — Quick Scan"
+company: "Diamond Power Infrastructure Ltd"
+---
+
 # Diamond Power Infrastructure Ltd (DIACABS) — Quick Scan
 *Date: 11 May 2026 | NSE: DIACABS | BSE: 522163 | CMP ~₹158 | Mcap ~₹8,320 cr | Sector: Cables – Electricals*
 

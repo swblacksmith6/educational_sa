@@ -1,3 +1,8 @@
+---
+title: "DIACABS — Valuation Scenarios (Bull / Base / Bear)"
+company: "Diamond Power Infrastructure Ltd"
+---
+
 # DIACABS — Valuation Scenarios (Bull / Base / Bear)
 *As of 11 May 2026 | CMP ~₹158 | Mcap ~₹8,320 cr | Shares outstanding: 52.70 cr (face value ₹1)*
 

@@ -1,3 +1,8 @@
+---
+title: "Pace Digitek Ltd — Growth Triggers 1-Pager"
+company: "Pace Digitek Ltd"
+---
+
 # Pace Digitek Ltd — Growth Triggers 1-Pager
 
 *As of 2026-05-27 | CMP: not pulled (use Screener.in) | Mcap: post-IPO base ~₹4,000-5,000 cr indicative (issue size ₹819 cr at ~₹250-280/share) | Sources: RHP Sep 2025, 3 concalls, May 2026 IP*

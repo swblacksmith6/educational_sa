@@ -1,3 +1,8 @@
+---
+title: "Netweb Technologies — Sector-Specific Valuation"
+company: "Netweb Technologies India Ltd"
+---
+
 # Netweb Technologies — Sector-Specific Valuation
 *As of 16-May-2026 | Inputs: Screener.in, BSE/NSE filings, MarketsMojo, Yahoo Finance*
 

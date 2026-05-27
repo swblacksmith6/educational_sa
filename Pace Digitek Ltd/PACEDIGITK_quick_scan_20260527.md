@@ -1,3 +1,8 @@
+---
+title: "Pace Digitek Ltd — Company Quick Scan (SOIC 30-Minute Deep Dive)"
+company: "Pace Digitek Ltd"
+---
+
 # Pace Digitek Ltd — Company Quick Scan (SOIC 30-Minute Deep Dive)
 
 **Ticker:** PACEDIGITK (NSE) / 544550 (BSE)

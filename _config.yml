@@ -1,0 +1,8 @@
+title: Public Company Analysis
+markdown: kramdown
+defaults:
+  - scope:
+      path: ""
+      type: pages
+    values:
+      layout: report

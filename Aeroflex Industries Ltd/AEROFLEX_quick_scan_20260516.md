@@ -1,3 +1,8 @@
+---
+title: "AEROFLEX INDUSTRIES LIMITED – Quick Scan (SOIC 30-Minute Deep Dive)"
+company: "Aeroflex Industries Ltd"
+---
+
 # AEROFLEX INDUSTRIES LIMITED – Quick Scan (SOIC 30-Minute Deep Dive)
 
 **Ticker:** AEROFLEX (NSE) / 543972 (BSE)

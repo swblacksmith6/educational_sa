@@ -1,3 +1,8 @@
+---
+title: "Valiant Communications Ltd (VCL) — SOIC Quick Scan"
+company: "Valiant Communications Ltd"
+---
+
 # Valiant Communications Ltd (VCL) — SOIC Quick Scan
 
 - **Ticker:** BSE 526775 | NSE not listed (BSE-only SME-mid cap)

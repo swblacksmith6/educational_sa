@@ -1,3 +1,8 @@
+---
+title: "Valiant Communications (VCL) — Growth Triggers 1-Pager"
+company: "Valiant Communications Ltd"
+---
+
 # Valiant Communications (VCL) — Growth Triggers 1-Pager
 *As of 16-May-2026 | BSE: 526775 | CMP: not verified — please cross-check Screener.in before sizing | Mcap reference: ₹297.95 cr as of 31-Mar-2025 per company IP, p.7 (Apr-25 PPT)*
 

@@ -1,3 +1,8 @@
+---
+title: "AEROFLEX INDUSTRIES — Growth Triggers 1-Pager"
+company: "Aeroflex Industries Ltd"
+---
+
 # AEROFLEX INDUSTRIES — Growth Triggers 1-Pager
 *As of 16-May-2026 | CMP ≈ ₹382 | Mcap ≈ ₹4,931 Cr | Source: Screener.in / Trendlyne (post-Q4FY26)*
 

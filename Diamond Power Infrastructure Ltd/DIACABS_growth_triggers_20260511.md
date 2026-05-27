@@ -1,3 +1,8 @@
+---
+title: "Diamond Power Infrastructure (DIACABS) — Growth Triggers 1-Pager"
+company: "Diamond Power Infrastructure Ltd"
+---
+
 # Diamond Power Infrastructure (DIACABS) — Growth Triggers 1-Pager
 *As of 11 May 2026 | CMP: ~₹158 | Mcap: ~₹8,320 cr | Source: Screener.in / NSE / Co. filings*
 

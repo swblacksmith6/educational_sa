@@ -1,3 +1,8 @@
+---
+title: "RIR Power Electronics Ltd — Company Quick Scan (SOIC 30-Min Deep Dive)"
+company: "RIR Power Electronics Ltd"
+---
+
 # RIR Power Electronics Ltd — Company Quick Scan (SOIC 30-Min Deep Dive)
 
 **Ticker / Listing:** BSE: 517035 (RIR Power Electronics Ltd)

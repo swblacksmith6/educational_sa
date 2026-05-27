@@ -1,3 +1,8 @@
+---
+title: "ASM Technologies — Q2FY26 Concall Brief"
+company: "ASM Technologies Ltd"
+---
+
 # ASM Technologies — Q2FY26 Concall Brief
 
 **Mode:** A (Brief — 1 transcript available)

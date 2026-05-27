@@ -1,3 +1,8 @@
+---
+title: "RIR Power Electronics Ltd — Growth Triggers 1-Pager"
+company: "RIR Power Electronics Ltd"
+---
+
 # RIR Power Electronics Ltd — Growth Triggers 1-Pager
 *As of 16-May-2026 | BSE: 517035 | CMP: pull from Screener.in (post 1:1 bonus + 1:5 split, FV ₹2) | Source: Screener.in*
 

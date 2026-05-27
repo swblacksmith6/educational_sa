@@ -1,3 +1,8 @@
+---
+title: "AEROFLEX INDUSTRIES — Concall Walk-the-Talk Scorecard"
+company: "Aeroflex Industries Ltd"
+---
+
 # AEROFLEX INDUSTRIES — Concall Walk-the-Talk Scorecard
 **Period covered:** Q4 FY25 → Q4 FY26 (Aug-25, Nov-25, Jan-26 IP, Feb-26, May-26)
 **Concalls analyzed:** 5 (1 quarterly investor presentation + 4 earnings transcripts)

@@ -1,3 +1,8 @@
+---
+title: "Valiant Communications — Walk the Talk (Mgmt Credibility Scorecard)"
+company: "Valiant Communications Ltd"
+---
+
 # Valiant Communications — Walk the Talk (Mgmt Credibility Scorecard)
 
 **Note:** VCL does **not** host earnings concalls. Management communicates exclusively through BSE business-update filings and an annual investor presentation. We've therefore substituted **4 quarterly business updates (Feb-25, Apr-25, May-25, Aug-25)** as the corpus of management commentary. All quotes below are verbatim from those filings.

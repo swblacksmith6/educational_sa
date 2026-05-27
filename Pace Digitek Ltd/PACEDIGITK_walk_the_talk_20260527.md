@@ -1,3 +1,8 @@
+---
+title: "Pace Digitek Ltd — Concall Walk-the-Talk Analysis"
+company: "Pace Digitek Ltd"
+---
+
 # Pace Digitek Ltd — Concall Walk-the-Talk Analysis
 
 **Ticker:** PACEDIGITK

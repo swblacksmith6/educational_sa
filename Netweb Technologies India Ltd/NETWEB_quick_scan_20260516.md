@@ -1,3 +1,8 @@
+---
+title: "Netweb Technologies India Ltd — Quick Scan"
+company: "Netweb Technologies India Ltd"
+---
+
 # Netweb Technologies India Ltd — Quick Scan
 **Ticker:** NSE: NETWEB / BSE: 543945 | **Scan date:** 16 May 2026 | **CMP:** ₹3,888 | **M-cap:** ₹22,250 cr
 **Latest filings reviewed:** AR FY25, Q4 FY26 concall (4-May-26), CRISIL rating reaffirmation Aug-25.

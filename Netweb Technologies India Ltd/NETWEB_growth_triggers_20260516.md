@@ -1,3 +1,8 @@
+---
+title: "Netweb Technologies — Growth Triggers 1-Pager"
+company: "Netweb Technologies India Ltd"
+---
+
 # Netweb Technologies — Growth Triggers 1-Pager
 *As of 16-May-2026 | CMP: ₹3,888 | M-cap: ₹22,250 cr | Source: Screener.in / BSE/NSE filings*
 

@@ -1,3 +1,8 @@
+---
+title: "RIR Power Electronics Ltd — Concall Analyzer (Walk-the-Talk + Briefs)"
+company: "RIR Power Electronics Ltd"
+---
+
 # RIR Power Electronics Ltd — Concall Analyzer (Walk-the-Talk + Briefs)
 
 **Scope:** Q4 FY25 earnings call (30-May-2025) ▸ Q2 FY26 (17-Nov-2025) ▸ Q3 FY26 (17-Feb-2026), plus FY24 Investor Presentation (Jun-2024) for context.

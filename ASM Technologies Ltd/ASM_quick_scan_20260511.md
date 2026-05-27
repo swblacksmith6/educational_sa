@@ -1,3 +1,8 @@
+---
+title: "ASM Technologies Ltd — SOIC 30-Minute Quick Scan"
+company: "ASM Technologies Ltd"
+---
+
 # ASM Technologies Ltd — SOIC 30-Minute Quick Scan
 
 **Ticker:** BSE 526433 (ASMTEC) | **Sector:** Engineering R&D + Design-Led Manufacturing (DLM) | **Date of scan:** 11 May 2026
