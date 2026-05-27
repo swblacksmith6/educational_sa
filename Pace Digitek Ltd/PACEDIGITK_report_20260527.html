@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Pace Digitek Ltd — Investment Research Report (May 2026)</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<style>
+:root {
+  --green:#16a34a; --amber:#d97706; --red:#dc2626; --grey:#6b7280;
+  --bg:#f9fafb; --text:#111827; --border:#e5e7eb; --green-bg:#dcfce7;
+  --amber-bg:#fef3c7; --red-bg:#fee2e2; --grey-bg:#f3f4f6;
+}
+* { box-sizing:border-box; }
+body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+       background:var(--bg); color:var(--text); margin:0; padding:0; line-height:1.5; }
+.wrap { max-width:1100px; margin:0 auto; padding:24px; }
+header { border-bottom:2px solid var(--border); padding-bottom:16px; margin-bottom:24px; }
+h1 { margin:0 0 4px 0; font-size:26px; }
+h2 { margin-top:32px; font-size:20px; border-bottom:1px solid var(--border); padding-bottom:6px; }
+h3 { margin-top:24px; font-size:16px; }
+.meta { color:var(--grey); font-size:13px; }
+.badge { display:inline-block; padding:4px 12px; border-radius:4px; font-weight:600; color:white; font-size:13px; }
+.badge.watch { background:var(--amber); }
+.badge.buy { background:var(--green); }
+.badge.pass { background:var(--red); }
+.tag { display:inline-block; padding:2px 8px; border-radius:3px; font-size:11px; font-weight:600; }
+.tag.high { background:var(--green-bg); color:var(--green); }
+.tag.med { background:var(--amber-bg); color:var(--amber); }
+.tag.low, .tag.opt { background:var(--grey-bg); color:var(--grey); }
+.tag.red { background:var(--red-bg); color:var(--red); }
+.tag.green { background:var(--green-bg); color:var(--green); }
+.tag.amber { background:var(--amber-bg); color:var(--amber); }
+.row { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px; margin:12px 0 24px; }
+.card { background:white; border:1px solid var(--border); border-radius:6px; padding:14px; }
+.card .label { font-size:12px; color:var(--grey); text-transform:uppercase; letter-spacing:0.5px; }
+.card .val { font-size:22px; font-weight:600; margin-top:4px; }
+.card .sub { font-size:12px; color:var(--grey); }
+table { border-collapse:collapse; width:100%; background:white; font-size:13px; margin:8px 0; }
+th, td { border:1px solid var(--border); padding:8px 10px; text-align:left; }
+th { background:var(--grey-bg); font-weight:600; }
+tr:nth-child(even) td { background:#fafbfc; }
+td.green { background:var(--green-bg) !important; }
+td.amber { background:var(--amber-bg) !important; }
+td.red { background:var(--red-bg) !important; }
+.callout { border-left:4px solid var(--red); background:#fff5f5; padding:14px 18px; margin:14px 0; border-radius:4px; }
+.callout.amber { border-color:var(--amber); background:#fffbeb; }
+.callout.green { border-color:var(--green); background:#f0fdf4; }
+.callout h4 { margin:0 0 6px 0; color:var(--red); }
+.callout.amber h4 { color:var(--amber); }
+.callout.green h4 { color:var(--green); }
+.cite { font-size:11px; color:var(--grey); }
+.bar-track { background:var(--grey-bg); border-radius:4px; height:24px; position:relative; overflow:hidden; }
+.bar-fill { background:var(--amber); height:100%; transition:width .3s; }
+.bar-label { position:absolute; left:8px; top:0; line-height:24px; color:white; font-weight:600; font-size:12px; }
+.chart-wrap { background:white; border:1px solid var(--border); border-radius:6px; padding:16px; margin:16px 0; height:320px; }
+details { background:white; border:1px solid var(--border); border-radius:6px; margin:8px 0; padding:0; }
+details summary { padding:12px 16px; cursor:pointer; font-weight:600; background:var(--grey-bg); border-radius:6px; }
+details[open] summary { border-bottom:1px solid var(--border); }
+details pre { padding:12px 16px; overflow-x:auto; font-size:11px; line-height:1.45; white-space:pre-wrap; background:white; margin:0; }
+footer { margin-top:32px; padding-top:16px; border-top:1px solid var(--border); color:var(--grey); font-size:12px; }
+ul { margin:8px 0; padding-left:22px; }
+li { margin-bottom:4px; }
+.two-col { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+@media (max-width:740px) { .two-col { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>Pace Digitek Limited <span style="font-size:14px;color:var(--grey);font-weight:400;">(PACEDIGITK | NSE/BSE 544550)</span></h1>
+  <div class="meta">
+    Sector: Telecom Infra + BESS / Energy EPC &nbsp;|&nbsp; Listed: 6 Oct 2025 &nbsp;|&nbsp; Report date: 27 May 2026 &nbsp;|&nbsp;
+    Sources: RHP (Sep 2025) + 3 concalls/IPs (Nov 2025, Feb 2026, May 2026)
+  </div>
+  <div style="margin-top:12px;">
+    <span class="badge watch">VERDICT: WATCH</span>
+    <span class="tag amber" style="margin-left:8px;">Management Credibility: MEDIUM-LOW</span>
+    <span class="tag red" style="margin-left:8px;">Piotroski: 4/9</span>
+  </div>
+</header>
+
+<!-- EXECUTIVE SUMMARY -->
+<section>
+  <h2>Executive Summary</h2>
+  <p>Pace Digitek is a Bengaluru-based telecom passive-infrastructure EPC firm that built its ₹2,400 cr revenue base on the BSNL 4G tower deployment and is now mid-pivot into <strong>utility-scale Battery Energy Storage System (BESS) manufacturing, EPC, and Build-Own-Operate</strong> assets for state DISCOMs and central PSUs. The investment case rests on its ₹11,338 cr order book (78% energy) and ₹4,433 cr of BOO capex pipeline yielding 12-year annuity revenues, anchored by the live MSEDCL 750 MW project.</p>
+
+  <div class="row">
+    <div class="card"><div class="label">FY26 Revenue (Consol)</div><div class="val">₹2,641 cr</div><div class="sub">+8.3% YoY; FY27 guide ₹3,200-3,400 cr</div></div>
+    <div class="card"><div class="label">FY26 PAT</div><div class="val">₹307 cr</div><div class="sub">+10.1% YoY; margin 11.4%</div></div>
+    <div class="card"><div class="label">Order Book (May 2026)</div><div class="val">₹11,338 cr</div><div class="sub">Energy 78% / Telecom 22%</div></div>
+    <div class="card"><div class="label">Net Debt</div><div class="val">₹192 cr</div><div class="sub">D/E 0.43× | Net D/E 0.09×</div></div>
+    <div class="card"><div class="label">BESS Mfg Capacity</div><div class="val">2.5 GWh</div><div class="sub">→ 10 GWh by Q3 FY27</div></div>
+    <div class="card"><div class="label">BOO Pipeline</div><div class="val">2.72 GWh</div><div class="sub">₹4,433 cr capex (4 projects)</div></div>
+  </div>
+
+  <h3>Piotroski F-Score (FY25)</h3>
+  <div class="bar-track" style="max-width:520px;">
+    <div class="bar-fill" style="width:44.4%;"></div>
+    <div class="bar-label">4 / 9</div>
+  </div>
+  <p class="cite">Weak score — fails on CFO positive, CFO &gt; NI, ROA growth, new equity issued, and asset turnover deterioration.</p>
+
+  <h3>Growth Triggers — Conviction Counts</h3>
+  <div class="row">
+    <div class="card"><div class="label">HIGH conviction</div><div class="val" style="color:var(--green);">2</div><div class="sub">MSEDCL BOO + Energy OB conversion</div></div>
+    <div class="card"><div class="label">MEDIUM</div><div class="val" style="color:var(--amber);">1</div><div class="sub">BESS Mfg 2.5→10 GWh scale-up</div></div>
+    <div class="card"><div class="label">OPTIONALITY</div><div class="val" style="color:var(--grey);">2</div><div class="sub">TGX HoldCo hive-off + Africa exports</div></div>
+  </div>
+</section>
+
+<!-- FINANCIAL TREND -->
+<section>
+  <h2>Financial Trend (Consolidated, ₹ Mn)</h2>
+  <div class="chart-wrap"><canvas id="rev-chart"></canvas></div>
+  <table>
+    <thead><tr><th>Particulars</th><th>FY23</th><th>FY24</th><th>FY25</th><th>FY26</th></tr></thead>
+    <tbody>
+      <tr><td>Revenue from operations</td><td>5,032</td><td>24,345</td><td>24,388</td><td><strong>26,413</strong></td></tr>
+      <tr><td>EBITDA</td><td>283</td><td>3,980</td><td>4,817</td><td>4,552</td></tr>
+      <tr><td>EBITDA Margin %</td><td>5.6%</td><td>16.3%</td><td>19.8%</td><td>17.2%</td></tr>
+      <tr><td>PAT</td><td>165</td><td>2,299</td><td>2,791</td><td><strong>3,073</strong></td></tr>
+      <tr><td>PAT Margin %</td><td>3.3%</td><td>9.4%</td><td>11.4%</td><td>11.6%</td></tr>
+      <tr><td>EPS (₹)</td><td>0.95</td><td>14.63</td><td>16.30</td><td>15.11</td></tr>
+      <tr><td>Total Debt</td><td>1,921</td><td>4,932</td><td>1,607</td><td>9,607</td></tr>
+      <tr><td>D/E</td><td>0.57</td><td>0.87</td><td>0.13</td><td><strong>0.43</strong></td></tr>
+    </tbody>
+  </table>
+  <p class="cite">Source: RHP p.28 + Q4 FY26 Investor Presentation (May 26, 2026)</p>
+</section>
+
+<!-- 12-POINT AR -->
+<section>
+  <h2>12-Point RHP Analysis (snapshot)</h2>
+  <table>
+    <thead><tr><th>#</th><th>Item</th><th>Finding</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>What it does</td><td>Telecom passive-infra + power equipment manufacturer + BESS EPC and BOO (12-yr annuity assets)</td></tr>
+      <tr><td>2</td><td>Segment mix (FY25)</td><td>Telecom 94.22% / Energy 5.59% / ICT 0.19%. <strong>FY26: Energy 45.4%, Telecom 54.6%</strong></td></tr>
+      <tr><td>3</td><td>Geography</td><td>~99% India; Maharashtra-Karnataka-AP-J&K-TN cluster (West India = 46% of FY25)</td></tr>
+      <tr><td>4</td><td>Customer concentration</td><td>Top 10 = <strong>96.25%</strong> | Public sector = <strong>96.17%</strong> (FY25)</td></tr>
+      <tr><td>5</td><td>Promoters</td><td>Maddisetty family 84.07% pre-IPO. Chairman MVR &gt;20 yrs experience. <em>4 criminal proceedings vs MVR (RHP p.20)</em></td></tr>
+      <tr><td>6</td><td>Capex cycle</td><td>Aggressive expansion phase — BESS 2.5→10 GWh, container fab, 4 BOO projects @ ₹4,433 cr total</td></tr>
+      <tr><td>7</td><td>Working capital</td><td>Receivable days 218 (FY25); receivables now 92% of revenue. Deteriorating</td></tr>
+      <tr><td>8</td><td>Debt</td><td>D/E 0.43× FY26 (vs 0.13× FY25). IREDA ₹1,221 cr MSEDCL loan drawn</td></tr>
+      <tr><td>9</td><td>Risks (mgmt-disclosed)</td><td>Customer/PSU/telecom/region concentration; tender L1 pressure; receivables; PBGs ₹138.75 cr</td></tr>
+      <tr><td>10</td><td>RPT</td><td>Lanarsy Infra EPC sub-contract ₹136 cr (5.56% of revenue FY25) — recurring. Watch item</td></tr>
+      <tr><td>11</td><td>Auditor</td><td>MRKS &amp; Associates. No qualifications in restated financials</td></tr>
+      <tr><td>12</td><td>Strategy (FY27/28 guide)</td><td>FY27 ₹3,200-3,400 cr | FY28 ₹4,000-4,200 cr | Maintain 11-12% PAT margin</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- FORENSIC RED FLAGS -->
+<section>
+  <h2>10-Point Forensic Red Flag Scan</h2>
+  <table>
+    <thead><tr><th>#</th><th>Flag</th><th>FY24</th><th>FY25</th><th>FY26</th><th>Rating</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>CFO / PAT (3-yr cumulative)</td><td>0.93</td><td>-0.63</td><td>n/d</td><td class="red"><span class="tag red">RED</span> 3-yr cum CFO ≈ 0 vs PAT ₹525 cr</td></tr>
+      <tr><td>2</td><td>Receivables growth vs revenue</td><td>+173% vs +384%</td><td>+71% vs +0.18%</td><td>+13.5% vs +8.3%</td><td class="red"><span class="tag red">RED</span></td></tr>
+      <tr><td>3</td><td>Inventory growth vs revenue</td><td>+1314%</td><td>-42%</td><td>+380%</td><td class="amber"><span class="tag amber">AMBER</span> BESS cell/container build-up</td></tr>
+      <tr><td>4</td><td>Contingent liab / NW</td><td>—</td><td>5.1%</td><td>~3%</td><td class="green"><span class="tag green">GREEN</span></td></tr>
+      <tr><td>5</td><td>Promoter pledging</td><td>nil</td><td>nil</td><td>nil</td><td class="green"><span class="tag green">GREEN</span></td></tr>
+      <tr><td>6</td><td>Auditor qualifications</td><td>none</td><td>none</td><td>none</td><td class="green"><span class="tag green">GREEN</span></td></tr>
+      <tr><td>7</td><td>RPT size</td><td>1.24%</td><td>5.56%</td><td>n/d</td><td class="amber"><span class="tag amber">AMBER</span> Lanarsy EPC recurring</td></tr>
+      <tr><td>8</td><td>Goodwill / intangibles</td><td>—</td><td>de minimis</td><td>de minimis</td><td class="green"><span class="tag green">GREEN</span></td></tr>
+      <tr><td>9</td><td>Equity dilution</td><td>—</td><td>Pre-IPO ₹362.6 cr</td><td>IPO ₹819 cr</td><td class="amber"><span class="tag amber">AMBER</span></td></tr>
+      <tr><td>10</td><td>Subsidiary losses absorbed</td><td>—</td><td>n/d</td><td>n/d</td><td class="amber"><span class="tag amber">AMBER</span> PREPL central to BOO</td></tr>
+    </tbody>
+  </table>
+  <p class="cite">2 RED / 4 AMBER / 4 GREEN — cash conversion is the dominant concern.</p>
+</section>
+
+<!-- DUPONT -->
+<section>
+  <h2>DuPont Decomposition</h2>
+  <div class="chart-wrap"><canvas id="dupont-chart"></canvas></div>
+  <table>
+    <thead><tr><th>Year</th><th>Net Margin</th><th>Asset Turnover</th><th>Leverage</th><th>ROE</th></tr></thead>
+    <tbody>
+      <tr><td>FY23</td><td>3.29%</td><td>1.55×</td><td>1.85</td><td>4.93%</td></tr>
+      <tr><td>FY24</td><td>9.44%</td><td>1.46×</td><td>2.13</td><td>40.53%</td></tr>
+      <tr><td>FY25</td><td>11.44%</td><td>0.92×</td><td>2.45</td><td>23.09%</td></tr>
+      <tr><td>FY26</td><td>11.64%</td><td>0.50×</td><td>2.36</td><td><strong>13.6%</strong></td></tr>
+    </tbody>
+  </table>
+  <p class="cite">ROE has fallen from 40.5% → 13.6% in 2 years. Margin holding ~11%, but asset turnover collapse (BOO assets pre-COD) is the central issue.</p>
+</section>
+
+<!-- BEAR CASE -->
+<section>
+  <h2>Bear Case (Top 5)</h2>
+  <div class="callout">
+    <h4>The strongest arguments AGAINST owning</h4>
+    <ol style="margin:0;padding-left:20px;">
+      <li><strong>Cash never reaches the bank.</strong> 3-year cumulative CFO ≈ ₹0 against ₹525 cr cumulative PAT. The BOO pivot is <em>structurally cash-negative</em> until annuity collections begin in FY28.</li>
+      <li><strong>Pseudo-diversification.</strong> Swapped one PSU customer (BSNL) for a stack of PSU customers (SECI/NTPC/NLC/MSEDCL/KPTCL/KREDL/DVC) — still 96%+ public sector exposure with L1 tender pricing risk.</li>
+      <li><strong>BOO economics are thin.</strong> Project IRR 10-11.5% at 9% cost of debt and 70% leverage. Recent BESS tenders bid at ₹1.7 lakh/MW/month vs Pace's ₹2.19-2.55 lakh — 20%+ tariff compression would push equity IRR below cost of capital.</li>
+      <li><strong>Simultaneous execution risk on 5 fronts.</strong> 2.5→10 GWh mfg + 75 MSEDCL sites + SECI ₹1,159 cr EPC + 4 BOO projects + container backward integration — all in 12 months. Probability of slippage is high (already 1-2 quarter slip in container fab and 5 GWh commissioning).</li>
+      <li><strong>Standalone parent is shrinking.</strong> Standalone revenue fell 24.7% YoY in FY26 (₹1,711 cr vs ₹2,271 cr). Consolidated growth comes from intercompany sales to BOO SPVs / Lineage that get eliminated. Real underlying business momentum unclear.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ===== CONCALL / WTT ===== -->
+<section>
+  <h2>Concall &amp; Walk-the-Talk</h2>
+
+  <h3>Quarterly Revenue Trajectory (₹ Mn)</h3>
+  <div class="chart-wrap"><canvas id="qtr-chart"></canvas></div>
+
+  <h3>FY26 Quarterly Performance (Consolidated)</h3>
+  <table>
+    <thead><tr><th>Particulars</th><th>Q4 FY25</th><th>Q1 FY26</th><th>Q2 FY26</th><th>Q3 FY26</th><th>Q4 FY26</th></tr></thead>
+    <tbody>
+      <tr><td>Revenue (₹ Mn)</td><td>6,833</td><td>3,671</td><td>5,334</td><td>6,440</td><td><strong>10,968</strong></td></tr>
+      <tr><td>Gross Margin</td><td>19.0%</td><td>31.9%</td><td>26.5%</td><td>26.3%</td><td>22.7%</td></tr>
+      <tr><td>EBITDA Margin</td><td>11.2%</td><td>21.8%</td><td>17.6%</td><td>18.3%</td><td>14.9%</td></tr>
+      <tr><td>PAT Margin</td><td>8.2%</td><td>14.9%</td><td>12.7%</td><td>12.0%</td><td>9.5%</td></tr>
+    </tbody>
+  </table>
+  <p class="cite">Q4 FY26 is a "Big Bath" of revenue lumping — margins compressed as BOO revenue booked alongside Q4 project completions.</p>
+
+  <h3>Guidance Statements with Confidence Tags</h3>
+  <table>
+    <thead><tr><th>Date</th><th>Statement</th><th>Confidence</th></tr></thead>
+    <tbody>
+      <tr><td>Nov-25</td><td>"FY26 ₹2,600-2,700 cr; PAT margin 11-12%"</td><td class="green"><span class="tag high">HIGH</span></td></tr>
+      <tr><td>Nov-25</td><td>"FY27 ₹3,100-3,200 cr"</td><td class="green"><span class="tag high">HIGH</span></td></tr>
+      <tr><td>Nov-25</td><td>"40 MSEDCL sites by March 2026; very confident"</td><td class="green"><span class="tag high">HIGH</span></td></tr>
+      <tr><td>Nov-25</td><td>"Energy OB to ₹10,000 cr by March 2026"</td><td class="amber"><span class="tag med">MED</span></td></tr>
+      <tr><td>Feb-26</td><td>"Targets for FY26/FY27 intact"</td><td class="green"><span class="tag high">HIGH</span></td></tr>
+      <tr><td>Feb-26</td><td>"BESS tariffs will stabilise from April"</td><td class="amber"><span class="tag med">MED</span></td></tr>
+      <tr><td>Feb-26</td><td>"5 GWh by March 2026; 10 GWh by Sept 2026"</td><td class="green"><span class="tag high">HIGH</span></td></tr>
+      <tr><td>Feb-26</td><td>"BOO equity IRR 14% / project IRR 10-11.5%"</td><td class="amber"><span class="tag med">MED</span></td></tr>
+      <tr><td>May-26 IP</td><td>"FY27 ₹3,200-3,400 cr; FY28 ₹4,000-4,200 cr"</td><td class="green"><span class="tag high">HIGH</span></td></tr>
+    </tbody>
+  </table>
+
+  <h3>Walk-the-Talk Scorecard</h3>
+  <table>
+    <thead><tr><th>Forward statement (date)</th><th>Outcome (May 2026)</th><th>Score</th></tr></thead>
+    <tbody>
+      <tr><td>FY26 ₹2,600-2,700 cr / 11-12% PAT (Nov-25)</td><td>₹2,641 cr / 11.4% — landed</td><td class="green">+1 BEAT</td></tr>
+      <tr><td>40 MSEDCL sites by March 2026 (Nov-25)</td><td>3 sites operational; closure target slipped to Aug-Sep 2026</td><td class="red">-1 MISS</td></tr>
+      <tr><td>Energy OB to ₹10,000 cr by March 2026</td><td>₹8,854 cr Energy OB (₹11,338 cr total) — narrowly missed energy, overshot total</td><td class="amber">0 PARTIAL</td></tr>
+      <tr><td>5 GWh mfg by March 2026</td><td>Still at 2.5 GWh; expansion now Q2 FY27 — slipped 2 quarters</td><td class="red">-1 MISS</td></tr>
+      <tr><td>BESS tariff stabilises from April (Feb-26)</td><td>Tariff pressure persisted into Q4 FY26 IP</td><td class="red">-1 MISS</td></tr>
+      <tr><td>Container fab ready mid-April (Feb-26)</td><td>"Equipment installation underway", Q2 FY27 target — slipped</td><td class="red">-1 MISS</td></tr>
+      <tr><td>Lineage Power to 100% by FY27 (Feb-26)</td><td>PREPL conversion done; Lineage still ~80%</td><td class="amber">0 PARTIAL</td></tr>
+      <tr><td>Working capital to come down by Mar-26 (Nov-25)</td><td>Receivables ₹2,442 cr (up from ₹1,843 cr)</td><td class="red">-1 MISS</td></tr>
+      <tr><td>Finance cost to normalise as IREDA loan comes (Feb-26)</td><td>Q4 ₹343 mn (up from ₹93 mn) — happened as predicted</td><td class="green">+1 BEAT</td></tr>
+    </tbody>
+  </table>
+  <div class="bar-track" style="max-width:520px; margin-top:8px;">
+    <div style="display:flex;height:24px;">
+      <div style="background:var(--green);width:22.2%;color:white;text-align:center;line-height:24px;font-size:12px;font-weight:600;">+2</div>
+      <div style="background:var(--grey);width:22.2%;color:white;text-align:center;line-height:24px;font-size:12px;font-weight:600;">0×2</div>
+      <div style="background:var(--red);width:55.6%;color:white;text-align:center;line-height:24px;font-size:12px;font-weight:600;">-5 MISSES</div>
+    </div>
+  </div>
+  <p class="cite" style="margin-top:6px;">Running total: <strong>-3 / 9</strong>. Headline financial guidance met cleanly, but every operational sub-target slipped.</p>
+  <p><strong>Management Credibility Rating:</strong> <span class="tag amber">MEDIUM-LOW (provisional)</span></p>
+
+  <h3>Key takeaway from concalls</h3>
+  <div class="callout amber">
+    <p>Pace cleanly met its first-ever year of listed guidance on revenue and PAT (₹2,641 cr / 11.4% PAT margin), and built an enviable ₹11,338 cr order book in its BESS pivot. <strong>But every granular operational milestone has slipped by 1-2 quarters, working-capital and cash-conversion problems remain unresolved, and analyst grilling on BOO unit economics revealed the headline "85% EBITDA" claim collapses to ~10% PAT after depreciation and interest.</strong> Management is delivering at the financial top-line but the operational walk has lagged the talk; second year of listed disclosures (FY27 quarterlies) is the real credibility test.</p>
+  </div>
+</section>
+
+<!-- ===== GROWTH TRIGGERS ===== -->
+<section>
+  <h2>Growth Triggers Scoreboard</h2>
+  <div class="chart-wrap"><canvas id="triggers-chart"></canvas></div>
+  <table>
+    <thead><tr><th>#</th><th>Trigger</th><th>Conviction</th><th>Quantum (₹ Cr)</th><th>Timeline</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>MSEDCL BESS BOO 750 MW</td><td class="green"><span class="tag high">HIGH</span></td><td>₹197 cr/yr × 12 yrs (₹2,364 cr lifetime); ₹1,258 cr capex</td><td>FY27 annuity start</td><td>First site live; 75 by Aug-26</td></tr>
+      <tr><td>2</td><td>BESS Mfg 2.5 → 10 GWh + container fab</td><td class="amber"><span class="tag med">MEDIUM</span></td><td>Peak revenue ₹6,000-7,000 cr/yr at 10 GWh</td><td>Q2-Q3 FY27</td><td>Machinery received; installing</td></tr>
+      <tr><td>3</td><td>Energy Order Book ₹8,854 cr conversion</td><td class="green"><span class="tag high">HIGH</span></td><td>EPC ₹4,421 cr + BOO ₹4,433 cr capex</td><td>FY27 (~40%) - FY28</td><td>All signed; multiple PSUs</td></tr>
+      <tr><td>4</td><td>TransGreenX Energy HoldCo hive-off</td><td><span class="tag opt">OPTIONALITY</span></td><td>Speculative — ₹2,000-4,000 cr unlock</td><td>FY28+</td><td>TGX incorporated; assets moving</td></tr>
+      <tr><td>5</td><td>BESS export to Africa / Middle East</td><td><span class="tag opt">OPTIONALITY</span></td><td>Not quantified</td><td>FY27+</td><td>Telecom presence; BESS not yet contracted</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Top 3 risks (what can break the thesis)</h3>
+  <div class="callout">
+    <h4>Risk to thesis</h4>
+    <ol style="margin:0;padding-left:20px;">
+      <li><strong>Cash-flow / working capital trap deepens.</strong> Receivables grew faster than revenue in FY26; 3-yr cumulative CFO ≈ ₹0. Without operating cash generation, BOO equity IRR claim is unverifiable.</li>
+      <li><strong>BESS tariff compression.</strong> Recent state tenders at ₹1.7 lakh/MW/month vs Pace's ₹2.19-2.55 lakh. 20% tariff cut pushes equity IRR below cost of capital.</li>
+      <li><strong>Concentration risk.</strong> 96% PSU + 94% telecom (FY25); in FY26 it's the same systemic exposure just spread across more PSU counterparties. Standalone parent revenue down 24.7% in FY26.</li>
+    </ol>
+  </div>
+
+  <div class="callout green">
+    <h4>Verdict</h4>
+    <p>2 HIGH-conviction triggers (MSEDCL annuity already commissioned + Energy OB signed with named PSUs) + 1 MEDIUM (mfg capacity on track) + 2 OPTIONALITY upsides (HoldCo + exports). Credible re-rating story <strong>IF</strong> cash conversion turns positive in FY27 and BESS execution stays on calendar. Working-capital evidence and operational milestone slippage so far suggest the multiple won't expand until investors see one clean year of BOO annuity collections. <strong>Best treated as a WATCH with a re-look at Q2 FY27 results.</strong></p>
+  </div>
+</section>
+
+<!-- ===== RAW MARKDOWN ===== -->
+<section>
+  <h2>Full source markdown</h2>
+
+  <details>
+    <summary>Full Quick Scan markdown</summary>
+    <pre id="md-quick"></pre>
+  </details>
+
+  <details>
+    <summary>Full Concall / Walk-the-Talk markdown</summary>
+    <pre id="md-wtt"></pre>
+  </details>
+
+  <details>
+    <summary>Full Growth Triggers markdown</summary>
+    <pre id="md-trig"></pre>
+  </details>
+</section>
+
+<footer>
+  Generated: 27 May 2026 | Sources: Pace Digitek RHP (Sep 19, 2025), H1 FY26 Concall (Nov 20, 2025), Q3 FY26 Concall (Feb 9, 2026), Q4 FY26 Investor Presentation (May 26, 2026).
+  <br>Research only. Not investment advice. CMP / valuation multiples deliberately not pulled — use Screener.in / NSE for live data.
+</footer>
+
+</div>
+
+<script>
+// ============ Charts ============
+const COLORS = { green:'#16a34a', amber:'#d97706', red:'#dc2626', grey:'#6b7280' };
+
+// Revenue / EBITDA / PAT trend
+new Chart(document.getElementById('rev-chart'), {
+  type:'bar',
+  data:{
+    labels:['FY23','FY24','FY25','FY26'],
+    datasets:[
+      { label:'Revenue', data:[5032,24345,24388,26413], backgroundColor:'#60a5fa' },
+      { label:'EBITDA',  data:[283,3980,4817,4552], backgroundColor:COLORS.amber },
+      { label:'PAT',     data:[165,2299,2791,3073], backgroundColor:COLORS.green }
+    ]
+  },
+  options:{
+    responsive:true, maintainAspectRatio:false,
+    plugins:{ title:{display:true,text:'Revenue / EBITDA / PAT (₹ Mn)'} },
+    scales:{ y:{ beginAtZero:true } }
+  }
+});
+
+// DuPont
+new Chart(document.getElementById('dupont-chart'), {
+  type:'line',
+  data:{
+    labels:['FY23','FY24','FY25','FY26'],
+    datasets:[
+      { label:'Net Margin %', data:[3.29,9.44,11.44,11.64], borderColor:COLORS.green, tension:0.3 },
+      { label:'Asset Turnover ×', data:[1.55,1.46,0.92,0.50], borderColor:COLORS.red, tension:0.3 },
+      { label:'Leverage', data:[1.85,2.13,2.45,2.36], borderColor:COLORS.amber, tension:0.3 },
+      { label:'ROE %', data:[4.93,40.53,23.09,13.6], borderColor:'#2563eb', tension:0.3, borderWidth:3 }
+    ]
+  },
+  options:{
+    responsive:true, maintainAspectRatio:false,
+    plugins:{ title:{display:true,text:'DuPont — ROE & Drivers'} }
+  }
+});
+
+// Quarterly trend
+new Chart(document.getElementById('qtr-chart'), {
+  type:'line',
+  data:{
+    labels:['Q4 FY25','Q1 FY26','Q2 FY26','Q3 FY26','Q4 FY26'],
+    datasets:[
+      { label:'Revenue (₹ Mn)', data:[6833,3671,5334,6440,10968], borderColor:'#2563eb', tension:0.25, yAxisID:'y' },
+      { label:'EBITDA',          data:[763,801,941,1179,1632], borderColor:COLORS.amber, tension:0.25, yAxisID:'y' },
+      { label:'PAT',             data:[563,547,679,788,1059], borderColor:COLORS.green, tension:0.25, yAxisID:'y' }
+    ]
+  },
+  options:{
+    responsive:true, maintainAspectRatio:false,
+    plugins:{ title:{display:true,text:'Quarterly Trend (₹ Mn)'} }
+  }
+});
+
+// Triggers — quantum bar (where quantifiable)
+new Chart(document.getElementById('triggers-chart'), {
+  type:'bar',
+  data:{
+    labels:[
+      'T1 MSEDCL BOO (lifetime)',
+      'T2 BESS Mfg @10 GWh (peak rev)',
+      'T3 Energy OB conversion',
+      'T4 TGX hive-off (speculative)',
+      'T5 Africa BESS export'
+    ],
+    datasets:[{
+      label:'Quantum (₹ Cr)',
+      data:[2364, 6500, 8854, 3000, 0],
+      backgroundColor:[COLORS.green, COLORS.amber, COLORS.green, COLORS.grey, COLORS.grey]
+    }]
+  },
+  options:{
+    indexAxis:'y',
+    responsive:true, maintainAspectRatio:false,
+    plugins:{ legend:{display:false}, title:{display:true,text:'Growth Triggers — Quantum by Conviction (₹ Cr)'} }
+  }
+});
+
+// Inject raw markdown via fetch is not possible (offline). We embed text using placeholders below.
+const MD_QUICK = `# Pace Digitek Ltd — Company Quick Scan (SOIC 30-Minute Deep Dive)
+
+See companion markdown file: PACEDIGITK_quick_scan_20260527.md in the same folder.
+Key sections:
+- Issue & Listing Snapshot — Fresh Issue ₹819 cr; Promoters 84.07%; Listed Oct 6, 2025
+- 12-Point Analysis — telecom 94%, PSU 96%, top 10 customers 96.25% (FY25)
+- Forensic Red Flags — 2 RED (CFO/PAT, Receivables growth), 4 AMBER, 4 GREEN
+- Piotroski 4/9 — fails on CFO, ROA, CFO>NI, dilution, asset turnover
+- DuPont — ROE collapsed from 40.5% → 13.6% in 2 yrs
+- Bear Case — 5 arguments; central concern: cash conversion ≈ 0 over 3 yrs
+- VERDICT: WATCH`;
+
+const MD_WTT = `# Pace Digitek Ltd — Walk-the-Talk Analysis
+
+See companion markdown file: PACEDIGITK_walk_the_talk_20260527.md in the same folder.
+Key sections:
+- 3 calls covered: H1 FY26 (Nov-25), Q3 FY26 (Feb-26), Q4 FY26 IP (May-26)
+- Q4 FY26 headline: Revenue ₹2,641 cr (+8.3%), PAT ₹307 cr (+10.1%), Margin 11.4%
+- Order Book ₹11,338 cr (Energy 78%) | BOO pipeline ₹4,433 cr
+- Guidance evolution: FY26 met; FY27 raised to ₹3,200-3,400 cr; FY28 first disclosure ₹4,000-4,200 cr
+- Walk-the-Talk: -3 / 9 (4 misses, 2 beats, 3 partial)
+- Tone audit: financial KPIs HIGH conviction, operational milestones drifted to MEDIUM
+- Credibility: MEDIUM-LOW provisional`;
+
+const MD_TRIG = `# Pace Digitek Ltd — Growth Triggers 1-Pager
+
+See companion markdown file: PACEDIGITK_growth_triggers_20260527.md in the same folder.
+Key sections:
+- 5 triggers identified
+- HIGH × 2: MSEDCL BOO (₹2,364 cr lifetime), Energy OB ₹8,854 cr
+- MEDIUM × 1: BESS Mfg 2.5→10 GWh (₹6,000-7,000 cr peak revenue)
+- OPTIONALITY × 2: TGX hive-off, Africa exports
+- 3 risks: cash trap, BESS tariff compression, PSU concentration
+- Verdict: WATCH, revisit at Q2 FY27`;
+
+document.getElementById('md-quick').textContent = MD_QUICK;
+document.getElementById('md-wtt').textContent   = MD_WTT;
+document.getElementById('md-trig').textContent  = MD_TRIG;
+</script>
+</body>
+</html>

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Public Company Analysis</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f4f1ea;
+      --card: #fffaf3;
+      --text: #1f2933;
+      --muted: #5f6b75;
+      --accent: #0f766e;
+      --accent-hover: #115e59;
+      --border: rgba(31, 41, 51, 0.12);
+      --shadow: 0 18px 40px rgba(31, 41, 51, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Georgia, "Times New Roman", serif;
+      background:
+        radial-gradient(circle at top left, rgba(15, 118, 110, 0.12), transparent 35%),
+        radial-gradient(circle at bottom right, rgba(214, 158, 46, 0.14), transparent 30%),
+        var(--bg);
+      color: var(--text);
+    }
+
+    .shell {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 64px 24px 80px;
+    }
+
+    .hero {
+      display: grid;
+      gap: 16px;
+      margin-bottom: 36px;
+    }
+
+    .eyebrow {
+      margin: 0;
+      font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-size: 0.78rem;
+      color: var(--accent);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.4rem, 5vw, 4.5rem);
+      line-height: 0.95;
+      max-width: 10ch;
+    }
+
+    .intro {
+      margin: 0;
+      max-width: 60ch;
+      font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+
+    .card {
+      background: rgba(255, 250, 243, 0.9);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      backdrop-filter: blur(8px);
+    }
+
+    .card-header {
+      padding: 22px 24px 0;
+    }
+
+    .card-header h2 {
+      margin: 0 0 6px;
+      font-size: 1.25rem;
+    }
+
+    .card-header p {
+      margin: 0;
+      font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+      color: var(--muted);
+    }
+
+    .company-list {
+      list-style: none;
+      padding: 12px;
+      margin: 0;
+      display: grid;
+      gap: 12px;
+    }
+
+    .company-list a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 18px 18px 18px 20px;
+      border-radius: 18px;
+      text-decoration: none;
+      color: var(--text);
+      background: #ffffff;
+      border: 1px solid rgba(31, 41, 51, 0.08);
+      transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+    }
+
+    .company-list a:hover,
+    .company-list a:focus-visible {
+      transform: translateY(-2px);
+      border-color: rgba(15, 118, 110, 0.35);
+      box-shadow: 0 12px 24px rgba(15, 118, 110, 0.12);
+      outline: none;
+    }
+
+    .company-meta {
+      display: grid;
+      gap: 4px;
+    }
+
+    .company-name {
+      font-size: 1.15rem;
+      font-weight: 700;
+    }
+
+    .company-path {
+      font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+
+    .arrow {
+      flex: none;
+      font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .footer-note {
+      margin-top: 18px;
+      font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 640px) {
+      .shell {
+        padding: 36px 16px 56px;
+      }
+
+      .company-list a {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="hero">
+      <p class="eyebrow">Public company analysis</p>
+      <h1>Company reports in one place</h1>
+      <p class="intro">
+        Browse the published analysis pages for each company in this repository.
+        Add a new company folder here whenever you publish another report.
+      </p>
+    </section>
+
+    <section class="card" aria-labelledby="company-list-title">
+      <div class="card-header">
+        <h2 id="company-list-title">Available companies</h2>
+        <p>Click a company name to open its analysis page.</p>
+      </div>
+
+      <ul class="company-list">
+        <li>
+          <a href="Pace%20Digitek%20Ltd/PACEDIGITK_report_20260527.html">
+            <span class="company-meta">
+              <span class="company-name">Pace Digitek Ltd</span>
+              <span class="company-path">Pace Digitek Ltd / PACEDIGITK_report_20260527.html</span>
+            </span>
+            <span class="arrow">Open report</span>
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <p class="footer-note">
+      Future company pages can be added to this list using the same folder-and-report structure.
+    </p>
+  </main>
+</body>
+</html>
