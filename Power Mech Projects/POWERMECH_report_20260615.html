@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Power Mech Projects — Investment Report</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.0/marked.min.js"></script>
+<style>
+:root{--green:#16a34a;--amber:#d97706;--red:#dc2626;--grey:#6b7280;--bg:#f9fafb;--text:#111827;--line:#e5e7eb;}
+*{box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--text);background:var(--bg);margin:0;line-height:1.5}
+.wrap{max-width:1100px;margin:0 auto;padding:24px}
+h1{font-size:26px;margin:0 0 2px}
+h2{font-size:20px;margin:34px 0 12px;padding-bottom:6px;border-bottom:2px solid var(--line)}
+h3{font-size:16px;margin:22px 0 8px}
+.sub{color:var(--grey);font-size:14px}
+.badge{display:inline-block;padding:4px 12px;border-radius:6px;color:#fff;font-weight:700;font-size:14px;letter-spacing:.3px}
+.b-amber{background:var(--amber)}.b-green{background:var(--green)}.b-red{background:var(--red)}
+.header{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:16px;border:1px solid var(--line);background:#fff;border-radius:10px;padding:18px 20px}
+.kpis{display:flex;gap:22px;flex-wrap:wrap;margin-top:10px}
+.kpi{font-size:13px;color:var(--grey)}.kpi b{display:block;font-size:17px;color:var(--text)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin-top:16px}
+.card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px}
+.card .lbl{font-size:12px;color:var(--grey);text-transform:uppercase;letter-spacing:.4px}
+.card .val{font-size:20px;font-weight:700;margin-top:4px}
+table{border-collapse:collapse;width:100%;font-size:13.5px;background:#fff;margin:6px 0}
+th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}
+th{background:#f3f4f6;font-weight:600}
+tbody tr:nth-child(even){background:#fcfcfd}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+.g{background:rgba(22,163,74,.13)}.a{background:rgba(217,119,6,.15)}.r{background:rgba(220,38,38,.13)}.gr{background:rgba(107,114,128,.13)}
+.pill{font-weight:700;font-size:12px;padding:2px 8px;border-radius:5px;color:#fff;white-space:nowrap}
+.p-green{background:var(--green)}.p-amber{background:var(--amber)}.p-red{background:var(--red)}.p-grey{background:var(--grey)}
+.callout{border-left:5px solid var(--red);background:#fef2f2;border-radius:6px;padding:12px 16px;margin:10px 0}
+.callout.warn{border-color:var(--amber);background:#fffbeb}
+.callout h3{margin-top:0}
+.callout ol,.callout ul{margin:6px 0 0 18px;padding:0}
+.callout li{margin:5px 0;font-size:14px}
+.chartbox{background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px;margin:12px 0}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:760px){.grid2{grid-template-columns:1fr}}
+.pscore{display:flex;align-items:center;gap:14px;margin:8px 0}
+.bar{flex:1;height:22px;background:#eee;border-radius:11px;overflow:hidden}
+.bar>span{display:block;height:100%;background:var(--amber)}
+.arrow-up{color:var(--green);font-weight:700}.arrow-down{color:var(--red);font-weight:700}
+details{background:#fff;border:1px solid var(--line);border-radius:8px;margin:10px 0;padding:0 14px}
+summary{cursor:pointer;font-weight:600;padding:12px 0}
+.md{font-size:13.5px;border-top:1px solid var(--line);padding:8px 0 16px}
+.md table{font-size:12.5px}.md h1{font-size:20px}.md h2{font-size:17px;border:0}.md h3{font-size:15px}
+footer{margin-top:36px;padding-top:14px;border-top:1px solid var(--line);font-size:12.5px;color:var(--grey)}
+.note{font-size:12px;color:var(--grey);margin:4px 0 0}
+.tension{background:#eff6ff;border:1px solid #bfdbfe;border-radius:10px;padding:14px 18px;margin:16px 0}
+</style></head>
+<body><div class="wrap">
+
+<div class="header">
+  <div>
+    <h1>Power Mech Projects Ltd</h1>
+    <div class="sub">NSE: POWERMECH &nbsp;·&nbsp; BSE: 539302 &nbsp;·&nbsp; Civil Construction / Power &amp; Infra E&amp;C &nbsp;·&nbsp; Report date: 15 Jun 2026</div>
+    <div class="kpis">
+      <div class="kpi">CMP<b>₹~2,780</b></div>
+      <div class="kpi">Mkt Cap<b>₹~7,840 cr</b></div>
+      <div class="kpi">TTM P/E<b>~24x</b></div>
+      <div class="kpi">P/B<b>~3.6x</b></div>
+      <div class="kpi">52-wk<b>₹3,415 / 1,718</b></div>
+      <div class="kpi">Order book<b>₹55,151 cr</b></div>
+    </div>
+  </div>
+  <div style="text-align:right">
+    <div class="badge b-amber">VERDICT: WATCH</div>
+    <div class="note" style="max-width:220px">Clean franchise, 10x book — but unproven cash-conversion &amp; ~24x P/E leave no margin of safety</div>
+  </div>
+</div>
+<p class="note">Valuation note: Screener's early-Apr-2026 snapshot showed ₹1,948 / P/E 18.2x; the stock swung ₹1,718–3,415 over the year. Treat any single multiple with caution.</p>
+
+<h2>Executive Summary</h2>
+<p style="font-size:15px"><b>India's largest power-O&amp;M services provider and a diversified E&amp;C contractor</b> (boiler/turbine/generator erection, civil/EPC, BOP) that has pivoted into long-life, high-margin contract coal mining (MDO) while scaling annuity O&amp;M against a record order book.</p>
+<div class="cards">
+  <div class="card"><div class="lbl">Verdict</div><div class="val" style="color:var(--amber)">WATCH</div><div class="note">Nothing broken; cash-conversion thesis unproven</div></div>
+  <div class="card"><div class="lbl">Piotroski F-Score</div><div class="val">3 / 9</div><div class="bar" style="margin-top:6px"><span style="width:33%"></span></div><div class="note">Low — artefact of MDO capex year + bonus</div></div>
+  <div class="card"><div class="lbl">Mgmt Credibility</div><div class="val" style="color:var(--red)">LOW–MEDIUM</div><div class="note">Net −9/18: LOW on guidance, MEDIUM on execution</div></div>
+  <div class="card"><div class="lbl">Growth Triggers</div><div class="val"><span style="color:var(--green)">4 HIGH</span> · <span style="color:var(--amber)">1 MED</span> · <span style="color:var(--grey)">2 OPT</span></div><div class="note">Thesis rests on signed MDO + order book + O&amp;M</div></div>
+</div>
+
+<div class="tension">
+  <b>⚖️ The central tension.</b> The books are clean (unqualified audits, no pledge, trivial contingents, credible board) and the franchise is real — yet the Walk-the-Talk audit shows management <b>missed its order-inflow target three years running</b> and <b>cut revenue guidance every year</b>, often in high-conviction language. Good operators, unreliable forecasters. Underwrite the <i>delivered</i> items (O&amp;M, execution capacity, cash recovery in FY26), discount the <i>promised</i> ones (far-dated MDO peak, ₹12,000 cr inflow).
+</div>
+
+<!-- QUICK SCAN -->
+<h2>1 · Fundamental Quick Scan <span class="sub">(SOIC 30-min deep dive — FY23–25 annual reports)</span></h2>
+
+<h3>Key financials (consolidated, ₹ cr)</h3>
+<div id="finTable"></div>
+<p class="note">Order book ₹55,151 cr at 31-Mar-26 (₹53,994 cr at 31-Mar-25) ≈ 10x revenue. 3-yr Sales CAGR ~25%, PAT CAGR ~32%. <b>FY25 CFO collapsed to ₹1 cr</b> (vs ₹348 cr PAT) on MDO working-capital build — the single most important watch-item.</p>
+
+<div class="grid2">
+  <div class="chartbox"><h3 style="margin-top:0">DuPont — ROE decomposition</h3><canvas id="dupontChart" height="220"></canvas><p class="note">ROE held ~16% across the cycle: margin-led (net margin 5.7→6.6%) offsetting softer asset turnover as MDO assets aren't yet revenue-productive.</p></div>
+  <div class="chartbox"><h3 style="margin-top:0">Piotroski F-Score = 3 / 9 (FY25)</h3><div id="pioList"></div><p class="note">Items 4,5,6,9 fail because the company is spending cash &amp; gearing up to build two coal mines; item 7 fails only on a cosmetic 1:1 bonus. Expect recovery as MDO normalises.</p></div>
+</div>
+
+<h3>12-Point Annual Report Analysis</h3>
+<div id="ar12Table"></div>
+
+<h3>10-Point Forensic Red-Flag Scan</h3>
+<div id="redflagTable"></div>
+<p class="note">No accounting-fraud markers. The two genuine watch-items — MDO cash-conversion stress and the scale of intra-group MDO RPTs — are structural/operational, not forensic.</p>
+
+<div class="callout"><h3>Bear case</h3><ol id="bearList"></ol></div>
+
+<!-- CONCALL -->
+<h2>2 · Management &amp; Concalls <span class="sub">(Walk-the-Talk across 10 calls, Feb-24 → May-26)</span></h2>
+
+<h3>Latest quarter — Q4 FY26 headline (call 22-May-26)</h3>
+<div id="headlineTable"></div>
+<p class="note">Record FY26 (revenue ₹6,107 cr, PAT ₹412 cr) with cash flow recovered hard — OCF ₹430 cr vs ₹0.74 cr in FY25; net debt down to ₹163 cr. But a <b>third straight order-inflow miss</b> (₹7,210 cr vs ₹10,000 cr target), worsened by the WBSEDCL BESS cancellation.</p>
+
+<div class="chartbox"><h3 style="margin-top:0">Quarterly revenue, EBITDA &amp; PAT (₹ cr)</h3><canvas id="qChart" height="150"></canvas></div>
+
+<div class="grid2">
+  <div class="chartbox"><h3 style="margin-top:0">Walk-the-Talk scorecard (18 tracked promises)</h3><canvas id="wttChart" height="200"></canvas><p class="note">Net score <b style="color:var(--red)">−9</b>: 3 delivered, 3 partial, 12 missed. Delivered items (O&amp;M, execution scale, conversion) protect downside; misses cluster in forward guidance.</p></div>
+  <div class="chartbox"><h3 style="margin-top:0">What was delivered vs missed</h3><div id="wttTable" style="max-height:420px;overflow:auto"></div></div>
+</div>
+
+<h3>Confidence-language audit</h3>
+<p class="note">Conviction tag had <b>no predictive value</b> — high-conviction claims (e.g. "₹5,500 cr… chances of disappointment extremely low") missed as often as hedged ones. Only near-term, already-downgraded numbers proved reliable.</p>
+<div id="guidanceTable"></div>
+
+<!-- GROWTH TRIGGERS -->
+<h2>3 · Growth Triggers <span class="sub">(catalysts that could re-rate the stock)</span></h2>
+<h3>Trigger scoreboard</h3>
+<div id="triggerTable"></div>
+<div class="chartbox"><h3 style="margin-top:0">Headline quantum by trigger (₹ cr, mixed basis — lifetime / backlog / annual / pipeline)</h3><canvas id="trigChart" height="170"></canvas></div>
+<div class="callout"><h3>What can break the thesis (top 3)</h3><ol id="riskList"></ol></div>
+
+<!-- RAW MARKDOWN -->
+<h2>Appendix · Full analysis (raw)</h2>
+<details><summary>Full Quick Scan markdown</summary><div class="md" id="md-quick"></div></details>
+<details><summary>Full Walk-the-Talk / Concall markdown</summary><div class="md" id="md-walk"></div></details>
+<details><summary>Full Growth Triggers markdown</summary><div class="md" id="md-grow"></div></details>
+
+<footer>
+  Generated 15 Jun 2026 · Sources consumed: POWERMECH_quick_scan_20260615.md, POWERMECH_walk_the_talk_20260615.md, POWERMECH_growth_triggers_20260615.md · Underlying: Annual Reports FY23–25, 10 concall transcripts, 5 investor presentations, Screener.in.<br>
+  <b>Research only. Not investment advice.</b>
+</footer>
+
+<script type="text/markdown" id="raw-quick"># Power Mech Projects Ltd — 30-Minute Company Deep Dive (SOIC)
+
+**Ticker:** NSE: POWERMECH | BSE: 539302
+**Scan date:** 15 June 2026 | **CMP:** ~Rs 2,780 | **Mcap:** ~Rs 7,840 cr
+**Sources:** Annual Reports FY23 / FY24 / FY25 (page citations below); consolidated financials per Screener.in (source of truth for numbers).
+
+> Note on price/valuation: the Screener cached snapshot in early Apr-2026 showed CMP Rs 1,948 / P/E 18.2x; the live June-2026 figure is ~Rs 2,780 / P/E ~24x. The 52-week range is Rs 3,415 / Rs 1,718 — a near-2x swing in one year. Treat any single P/E print with caution; the stock is volatile and re-rating is sentiment-driven.
+
+---
+
+## Authoritative Financials (Consolidated, Rs Cr)
+
+| Metric | FY23 | FY24 | FY25 | TTM (Dec-25) |
+|---|---|---|---|---|
+| Sales | 3,601 | 4,207 | 5,234 | 5,804 |
+| Operating Profit | 395 | 493 | 602 | 690 |
+| OPM % | 11% | 12% | 12% | 12% |
+| Other Income | 17 | 28 | 45 | 52 |
+| Interest | 90 | 94 | 99 | 121 |
+| Depreciation | 43 | 44 | 56 | 69 |
+| PBT | 280 | 382 | 491 | 552 |
+| Tax % | 26% | 35% | 29% | — |
+| PAT | 207 | 248 | 348 | 388 |
+| EPS (Rs) | 70.17 | 78.50 | 103.26 | 107.12 |
+| CFO | 182 | 205 | **1** | — |
+| FCF | 133 | 115 | **-159** | — |
+| CFO / OP | 65% | 56% | **25%** | — |
+| Borrowings | 477 | 396 | 735 (Sep25: 960) | — |
+| Debtor days | 91 | 90 | 102 | — |
+| ROCE | 22% | 24% | 23% | — |
+
+Order book at 31-Mar-25: **Rs 53,994 cr** — ~10x annual revenue, including MDO mining (AR25 p.10–11, Chairman's letter; also notes p.182 — remaining performance obligations Rs 53,994 cr). 3-yr Sales CAGR ~25%, PAT CAGR ~32%.
+
+---
+
+## STEP 2 — 12-Point Annual Report Analysis
+
+**(1) What the company does (plain English).** Power Mech is a Hyderabad-based engineering & construction contractor founded in 1999 by S. Kishore Babu (AR25 p.46). It started doing maintenance of coal/gas power plants, then expanded into Erection-Testing-Commissioning (ETC) of boilers/turbines/generators, Balance-of-Plant, civil works for power plants, long-term Operation & Maintenance (O&M), water/infrastructure (Jal Jeevan Mission, STPs, metro), and since 2020 into Mine Developer & Operator (MDO) coal-mining contracts (AR25 p.46–55). Essentially: a diversified power & infrastructure EPC + recurring O&M + mining-services play.
+
+**(2) Business segments & revenue mix.** The company reports as effectively a single composite contracting business (no separate Ind AS operating-segment note found in FY25 financials). Management/MD&A disclosure: O&M revenue ~Rs 1,746 cr = **~34% of topline** (AR25 p.48). Per the brief's FY25 mix: Civil ~46%, O&M ~33%, Erection ~17%, MDO ~2%, Electrical ~1%. The strategic intent is to grow the high-margin, annuity-like O&M share (AR25 p.10–11).
+
+**(3) Geography mix.** Predominantly domestic. International revenue ~Rs 232 cr in FY25 (~4–5% of sales) across nine countries — Saudi/Abu Dhabi, Oman, Kuwait, Qatar, Bangladesh, Nepal, Bhutan, Nigeria, Senegal, Israel (AR25 p.11). Earnings in foreign currency note: Abu Dhabi Rs 162 cr, Nigeria Rs 68 cr the largest (AR25 p.192, Note 38). Management guides 25–30% growth for international over next few years.
+
+**(4) Customer concentration.** Government/PSU-heavy. Clients: NTPC, BHEL, Coal India/CCL, SAIL, DVC, NLC, SCCL, KPCL, GMDC, SJVN, plus private utilities Adani Power, JSW, JSPL, Vedanta, Torrent (AR25 p.47–48). MD&A explicitly flags "Dependence on Government Projects … delays or policy changes can affect timelines and payments" (AR25 p.54) and "Client Concentration" as a risk category (AR25 p.55). Specific per-customer % not disclosed.
+
+**(5) Promoter / management & pledging.** Sajja Kishore Babu — Founder, Chairman & MD; Mechanical Engineering graduate (Nagarjuna University), 30+ years in power sector (AR25 p.34). Family on board: Mrs. Sajja Lakshmi, Sajja Rohit, Sajja Anita. Independent directors include Vivek Paranjpe (ex-Group President HR, RIL) and Bontha Prasada Rao (former CMD of BHEL) — credible bench (AR25 p.34–35). Promoter holding 58.41% (Mar-26), down from 64.2% (Mar-23) due to FY24 QIP dilution. **No promoter pledge reported** — AR25 (p.~) states the company has not raised loans on pledge of securities. MD remuneration Rs ~11.48 cr (Board total, AR25 p.103+ remuneration note).
+
+**(6) Capex cycle.** Stepping up sharply for MDO. Net fixed assets 189→231→323 cr; CWIP 3→11→**28** cr (Sep-25: 72 cr) — mine development underway. MDO commitments: Kotre Basantpur Pachmo (CCL/Coal India) Rs 9,294 cr/25 yr with Rs 366 cr planned infra investment; Tasra (SAIL) Rs 30,438 cr/28 yr with Rs 2,393 cr planned investment (AR25 p.51). Large equipment base incl. 300+ cranes (AR25 p.54). Capital commitments not provided for: Rs 85 cr (AR25 p.192, Note 35B).
+
+**(7) Working-capital trend.** Debtor days crept up 91→90→102 (AR25 p.55, Key Ratios). Working-capital days 75/86/74. The headline issue is the FY25 **CFO collapse to Rs 1 cr** (from Rs 182–205 cr) — driven by MDO mine-development WIP/advances and inventory build (inventory days 11→14), not a margin problem. Current ratio fell 2.04→1.80; debt/equity rose 0.21→0.33 (AR25 p.55).
+
+**(8) Debt & interest coverage.** Borrowings 477→396→735 cr (Sep-25: 960 cr), rising to fund MDO capex/WC. Interest coverage healthy at **5.98x** (FY25) vs 5.11x (FY24) (AR25 p.55). D/E still conservative at 0.33. Bank guarantees outstanding Rs 1,661 cr, fully **backed by pledged Fixed Deposit receipts** (AR25 p.192, Note 36) — i.e. cash-collateralised, low contingent risk.
+
+**(9) Key risks disclosed.** MD&A lists: high competition / margin pressure; dependence on government projects (payment delays); raw-material (steel/cement) cost volatility; regulatory/environmental (esp. mining); international/political-currency risk; manpower/labour; safety & compliance; technology obsolescence; client concentration (AR25 p.54–55). Also flags US tariff/trade issues under "Economic Slowdown" (AR25 p.54).
+
+**(10) Related-party transactions.** Largely intra-group with controlled mining/project SPV subsidiaries. FY25-26 proposed RPTs: **Kalyaneswari Tasra Mining Pvt Ltd** (74% sub) civil contracting up to Rs 1,500 cr (= 38.21% of consolidated turnover) plus Rs 400 cr guarantees/loans; **KBP Mining Pvt Ltd** (74% sub) civil works up to Rs 300 cr (9.55%) (AR25 p.~ notice, RPT explanatory statement). These are the MDO mine SPVs — project-specific, arm's-length (cost-plus/market), board & audit-committee approved. Other subsidiaries: Power Mech Industri (Noida workshop, backward integration), Power Mech SSA Structures, Aashm Avenues, Hydro Magus, GTA Power Mech (Nigeria/Dubai JVs), MAS Power Mech Arabia, PM Green Energy. AOC-1 (AR25 p.~268) shows most subs small; Nigeria (Power Mech BR FZE) PAT Rs 30 cr, Kailash River Bed Minerals LLP PAT Rs 36 cr — profitable; mining SPVs (Tasra Rs 2.2 cr PAT, KBP Rs -0.4 cr) still ramping.
+
+**(11) Auditor changes / qualifications (3 yrs).** FY23 auditor **K.S. Rao & Co** (term ended at 25th AGM). From FY24 onwards **Brahmayya & Co** (FRN 000513S) appointed as statutory auditor (AR25 p.~ governance; FY24 AR notice). This is a routine rotation, not a contentious resignation. **All three years carry clean, unqualified "true and fair" opinions** (AR25 p.~127 audit report; FY23/FY24 audit reports). No qualifications, no Section 143(12) fraud reporting (FY23 AR p.~). Cost auditor M/s MPR & Associates.
+
+**(12) Strategy & guidance (Chairman/MD letter).** Themes (AR25 p.10–11): (a) execute the record Rs 53,994 cr order book — "10x annual revenue, runway for sustained multi-year growth"; (b) tilt mix toward **high-margin, annuity O&M** for stable cash flows; (c) scale GCC/West-Africa international 25–30%; (d) ride Jal Jeevan Mission (extended to 2028), FGD, renewables, water; (e) "financial prudence through cost control and **working-capital optimisation**" (explicit acknowledgement of the WC pressure); (f) evolve "from construction contractor into a trusted partner for cleaner/greener future." No hard numeric revenue guidance beyond the international growth band and order-book conversion.
+
+---
+
+## STEP 3 — 10-Point Forensic Red-Flag Scan
+
+| # | Check | Rating | One-line reason |
+|---|---|---|---|
+| 1 | CFO vs PAT divergence | **AMBER** | FY25 CFO Rs 1 cr vs PAT Rs 348 cr is jarring, BUT 3-yr CFO/OP was 65%/56%/25% — the FY25 dip is MDO mine-development WC/WIP & advances, not earnings manipulation. Must reverse in 1–2 yrs; watch closely. |
+| 2 | Receivables vs revenue | **AMBER** | Debtor days 91→90→**102**; receivables Rs ~1,040 cr (standalone, AR25 p.~). Rising faster than sales and PSU-skewed — monitor, not yet alarming. |
+| 3 | Inventory build | **GREEN** | Inventory days 11→14, modest for a project business; no channel-stuffing signature. |
+| 4 | Contingent liabilities vs net worth | **GREEN** | Tax/GST/VAT claims only ~Rs 12 cr; corporate guarantee to Tasra ~Rs 11 cr; bank guarantees Rs 1,661 cr fully **FD-pledge backed** (AR25 p.192). Trivial vs ~Rs 2,160 cr net worth. |
+| 5 | Promoter pledging | **GREEN** | No pledge reported; company has not raised loans on pledge of securities (AR25). |
+| 6 | Auditor qualifications | **GREEN** | Clean unqualified opinions all 3 yrs; FY23→FY24 auditor change (K.S. Rao → Brahmayya) was a routine term-end rotation. |
+| 7 | RPT size | **AMBER** | Proposed Tasra civil-contracting RPT up to Rs 1,500 cr = 38% of consol turnover. These are controlled MDO SPVs (project structuring), arm's-length and board-approved — but the sheer size warrants monitoring of pricing/margin leakage. |
+| 8 | Goodwill / intangibles | **GREEN** | No material goodwill or capitalised intangible build; growth is organic, not acquisition-driven. |
+| 9 | Equity dilution | **AMBER** | FY24 QIP (Reserves jumped Rs 1,260→1,822 cr) diluted promoters 64.2%→58.4%; FY25 1:1 bonus (equity capital 16→32). Dilution was for genuine MDO funding, not distress — but share count is up. |
+| 10 | Subsidiary losses | **GREEN** | AOC-1 shows most subs small; mining SPVs near breakeven while ramping (Tasra +Rs 2.2 cr, KBP -Rs 0.4 cr); Nigeria +Rs 30 cr, Kailash LLP +Rs 36 cr. No hidden loss-bleeding sink. |
+
+**Net read:** No accounting-fraud markers. The two genuine watch-items are (1) the WC/cash-conversion stress from the MDO ramp and (2) the scale of intra-group MDO RPTs. Both are structural/operational, not forensic.
+
+---
+
+## STEP 4 — Piotroski F-Score & DuPont
+
+### Piotroski F-Score (FY25, vs FY24)
+
+| # | Component | FY25 result | Pass? |
+|---|---|---|---|
+| 1 | Positive net income | PAT Rs 348 cr | ✅ |
+| 2 | Positive CFO | CFO Rs 1 cr (positive, barely) | ✅ |
+| 3 | ROA rising YoY | PAT/Assets 348/4,614 = 7.5% vs 248/3,568 = 7.0% | ✅ |
+| 4 | CFO > Net income (quality) | CFO Rs 1 cr < PAT Rs 348 cr | ❌ |
+| 5 | Lower leverage (LT debt / assets) YoY | Borrowings 396→735, D/E 0.21→0.33 (rose) | ❌ |
+| 6 | Current ratio rising YoY | 2.04 → 1.80 (fell) | ❌ |
+| 7 | No new shares issued | 1:1 bonus in FY25 (share count up) | ❌ |
+| 8 | Gross/operating margin rising YoY | OPM ~12.37% → 12.29% (flat-to-down) | ❌ |
+| 9 | Asset turnover rising YoY | 5,234/4,614 = 1.13 vs 4,207/3,568 = 1.18 (fell) | ❌ |
+
+**Piotroski F-Score = 3 / 9 (FY25).**
+
+This low score is almost entirely an artefact of the MDO investment year: items 4, 5, 6, 9 all fail because the company is spending cash and gearing up to build two coal mines (a deliberate growth capex cycle), and item 7 fails only due to a bonus issue (cosmetic). The underlying franchise (positive PAT, rising ROA) is intact. Expect the score to recover sharply once MDO WC normalises and mines turn cash-generative. Do **not** read this as a quality-deterioration signal in isolation.
+
+### DuPont (ROE = Net Margin × Asset Turnover × Equity Multiplier)
+
+| Component | FY23 | FY24 | FY25 |
+|---|---|---|---|
+| Net margin (PAT/Sales) | 5.7% | 5.9% | 6.6% |
+| Asset turnover (Sales/Assets) | 1.18 | 1.18 | 1.13 |
+| Equity multiplier (Assets/Equity) | 2.40 | 1.94 | 2.14 |
+| **ROE (product)** | **~16.3%** | **~13.5%** | **~16.1%** |
+| ROE (reported, AR/Screener) | ~16–17% | 14.2% | 16.3% |
+
+**Trend:** ROE held ~16% across the cycle. The story is **margin-led improvement** (net margin 5.7%→6.6% as O&M/recurring mix grows) partly offset by a small dip in asset turnover (MDO assets not yet revenue-productive). Leverage de-levered after the FY24 QIP (multiplier 2.40→1.94) then re-levered (→2.14) to fund mining capex. Quality of ROE is improving (more margin, less leverage-dependence) — a healthy DuPont signature for a contractor.
+
+---
+
+## STEP 5 — Bear Case (5 hard-hitting points)
+
+1. **Cash conversion has broken down.** FY25 CFO was Rs 1 cr against Rs 348 cr PAT and FCF was -Rs 159 cr. A contractor that doesn't convert profit to cash is funding growth with debt (borrowings 396→735→960 cr) — if the MDO WC unwind takes longer than guided, the balance sheet thins fast.
+
+2. **MDO execution & funding risk.** The Rs 9,294 cr (CCL) + Rs 30,438 cr (SAIL/Tasra) contracts are 25–28 year, capex-heavy mining ventures the company has never operated at scale. Land/environmental clearances, coal off-take pricing, and ~Rs 2,760 cr of planned investment carry execution, regulatory and financing risk; the SPVs are still near breakeven.
+
+3. **Government/PSU receivable risk.** Customer base is heavily NTPC/Coal India/SAIL/DVC/state utilities; debtor days already crept to 102. Management itself flags "Dependence on Government Projects" and "Client Concentration" (AR25 p.54–55). Budget cuts or payment delays from a few PSUs hit cash directly.
+
+4. **Structurally thin, competitive margins.** OPM stuck at ~11–12% in a fragmented contracting/O&M market (MD&A flags "High Competition … lower profit margins"). Even the "high-margin" O&M push only nudges blended margins; this is not a pricing-power business, and steel/cement cost spikes compress further.
+
+5. **Order-cancellation & valuation re-rating risk.** The reported WBSEDCL BESS order cancellation of ~Rs 1,563 cr (Mar-2026) shows order-book fragility — a 10x book is only worth its conversion rate. With the stock having ranged Rs 1,718–3,415 (a 2x swing) and P/E at ~24x TTM, a single growth/cash-flow disappointment could trigger a sharp de-rating from current levels.
+
+---
+
+## STEP 6 — Verdict
+
+### WATCH
+
+Power Mech is a well-managed, clean-accounting contractor (unqualified audits, no pledge, trivial contingents, credible board) with a genuine 10x order book and an improving O&M-led margin mix — the franchise quality is real and the DuPont trend is healthy. However, the FY25 cash-flow collapse (CFO Rs 1 cr, FCF -Rs 159 cr), rising debt, and a Piotroski of 3/9 are all symptoms of an unproven, capex-heavy MDO bet whose payoff is years away and whose RPT structuring is large — too much is riding on flawless mine execution and a working-capital reversal to underwrite the current ~24x P/E with conviction. It earns a WATCH (not a PASS, because nothing here is broken; not a BUY, because the cash-conversion thesis is unproven and the valuation leaves no margin of safety) — re-rate to BUY-WORTHY if 1–2 quarters show CFO normalising and MDO mines moving to production.
+
+### Follow-up questions for deeper dive
+1. What is the **quarterly trajectory of CFO and net working capital** through FY26 — is the FY25 dip reversing, or is the WC drag structural to MDO operations?
+2. **MDO ramp status:** has either Kotre Basantpur or Tasra reached first coal / commercial production, and what are the actual vs planned investment and IRR assumptions on these SPVs?
+3. What was the financial/margin impact of the **WBSEDCL BESS Rs 1,563 cr cancellation**, and how much of the Rs 53,994 cr order book is similarly cancellable or slow-moving (e.g. JJM extensions)?
+4. **Receivables ageing and PSU-specific exposure** — how concentrated are the Rs ~1,040 cr receivables, and what is overdue beyond 180 days?
+5. How is the rising debt (Sep-25 Rs 960 cr) being **termed-out and funded** — and is another equity raise likely to fund MDO capex (further dilution)?
+6. What are the **actual blended margins and contribution of O&M vs Civil vs MDO** segment-by-segment, and is the high-margin O&M mix-shift actually showing up in consolidated OPM?
+</script>
+<script type="text/markdown" id="raw-walk"># Power Mech Projects Ltd (NSE: POWERMECH) — Walk-the-Talk Credibility Analysis + Latest-Quarter Brief
+
+**Prepared:** 15 June 2026 | **Framework:** SOIC Concall-Analyzer — Mode C (Walk-the-Talk) + Mode A (Latest-Quarter Brief)
+**Coverage:** 10 earnings calls, Q3 FY24 (Feb-24) → Q4 FY26 (May-26)
+**Company:** Indian E&C — boiler/turbine/generator ETC, civil, O&M, Mine Developer-Operator (MDO), and via subsidiary PM Green, BESS/solar.
+
+> Verbatim management quotes appear in quotation marks with the call cited. Where a transcript is silent, "not disclosed" is stated. Numbers are as reported in the transcripts.
+
+---
+
+## PART 1 — Latest-Quarter Brief: Q4 FY26 (PM_May_26_CC, call held 22-May-2026)
+
+### 1. Headline numbers
+| Metric | Q4 FY26 | Q4 FY25 | YoY | FY26 (full year) | FY25 | YoY |
+|---|---|---|---|---|---|---|
+| Total revenue | Rs 2,121 cr | Rs 1,870 cr | +13% | Rs 6,107 cr | Rs 5,279 cr | +16% |
+| EBITDA | Rs 237 cr | Rs 233 cr | +2% | Rs 750 cr | Rs 649 cr | +16% |
+| EBITDA margin | 11.17% | 12.5% | -133 bps | 12.3% | 12.3% | flat |
+| PAT | Rs 153 cr | Rs 130 cr* | +18% | Rs 412 cr | Rs 348 cr* | +18% |
+| PAT margin | 7.27% | 7.0% | +27 bps | ~6.7% | ~6.6% | ~flat |
+
+*Q4 FY25 PAT cited as Rs 130 cr in the brief's context numbers; the company's own May-26 call referenced "INR153 crores... an 18% increase over Q4 FY25." FY26 PAT Rs 412 cr is the strongest annual print in the company's history.
+
+QoQ: Q3 FY26 PAT was Rs 100 cr; Q4 jumped to Rs 153 cr — the usual Q4 execution surge. Q4 EBITDA margin (11.17%) was the **weakest of the year**, management attributing it to "increase in the operating cost and the lower other income during the quarter."
+
+### 2. Segment performance (Q4 FY26 vs Q4 FY25, where given for FY26 full year)
+- **Mechanical/ETC + EPC**: strong — driven by ramp-up of Udupi FGD (Adani instructed completion by March) and the new Singareni BOP EPC.
+- **O&M**: the standout — FY26 backlog grew ~8%; O&M is the margin engine (15–16% EBITDA). New wins: Mumbai Monorail O&M (Rs 279 cr, first metro O&M), Hindustan Zinc, BALCO (under discussion).
+- **Civil**: largest backlog segment (~Rs 9,100 cr) but FY26 revenue muted by water-division stall.
+- **Mining (MDO)**: FY26 MDO revenue ~Rs 354 cr (KBP Rs 248 cr over 5 months from Nov-25; Tasra Rs 106 cr). March alone did Rs 117 cr from KBP (exceptional, not sustainable run-rate).
+- **Water (JJM)**: continued drag; ~Rs 700 cr of planned FY26 revenue not recognised due to fund/certification delays.
+- **International**: ~4–5% of revenue, now purely O&M/manpower (ETC exited). FY26 overseas revenue Rs 327 cr vs Rs 292 cr FY25.
+
+### 3. Demand commentary
+Management "still very bullish." Power-sector ordering on BHEL+L&T over ~2 years cited at ~Rs 2.8 lakh cr / ~54,740 MW; PMPL opportunity from this ~Rs 60,000 cr in ETC/civil/structural/BOP. Government coal-capacity plan raised: "80 GW can go up to nearly 100 GW in the coal-based power plants." New verticals being chased: NMDC iron-ore (Rs 70,000 cr capex, ~Rs 10,000 cr opportunity), steel (SAIL/ArcelorMittal/JSW; ~Rs 10 lakh cr over 5–6 yrs), metro O&M, coal gasification (early), nuclear (Kaiga).
+
+### 4. Margin drivers / pressures
+- **Drivers**: rising O&M mix (15–16% EBITDA), MDO ramp (target ~20% at PRC), EPC value-add (~40% in-house on Singareni BOP).
+- **Pressures**: water-division fixed overheads with no revenue; commodity inflation (steel/cement/diesel) on domestic civil/EPC — "to the extent PVC is covered... we'll get reimbursement"; one-time Labor Code provision of ~Rs 4.5 cr in Q4.
+- Guidance: FY27 EBITDA "to touch 12.5%... increase of 0.25% to 0.3%." MDO PRC margins pushed to FY29/FY30.
+
+### 5. Capex & balance sheet
+- Gross debt Rs 622 cr, **net debt Rs 163 cr** as on 31-Mar-26 (down from Rs 753 cr gross / Rs 239 cr net at Q1 FY26). Debt/equity 0.32x.
+- Operating cash flow turned strongly positive: **Rs 430 cr in FY26 vs Rs 0.74 cr (Rs 74 lakh) in FY25** — driven by receivables realisation.
+- Capex FY27 guide: ~Rs 400 cr at PMPL level (mostly Tasra washery, on internal accruals "without any debt") + Rs 400 cr at Tasra SPV (coal handling plant + railway siding). Washery total ~Rs 690–700 cr.
+
+### 6. Guidance (verbatim)
+- Revenue FY27: "we are projecting around 21% growth" (Aravind); target revenue not explicitly stated as a Rs figure for FY27, but FY28 order-inflow "same range, the INR 12,000 crores to INR 15,000 crores range."
+- Order inflow FY27: "the company is targeting order inflow of around INR 12,000 crores."
+- EBITDA: "we are expecting to touch EBITDA of 12.5%, including other income. There may be a increase of 0.25% to 0.3% in the EBITDA."
+- MDO: "INR 350 crores we are projecting for the FY27 and INR 500 crores for FY28 from KBP... Tasra... INR 150 crores revenue in FY27, and it will increase to INR 750 crores by FY28." Peak (FY29/FY30): "Around INR 2,100 crores to INR 2,200 crores."
+- "There's a clear visibility of growth till FY'30."
+
+### 7. New announcements / orders
+- FY26 order inflow Rs 7,210 cr vs Rs 10,000 cr target (72% achieved).
+- Singareni 800 MW BOP EPC from BHEL — Rs 2,550 cr (mech 1,550 / civil 720 / electrical 280), 38-month schedule, 10% advance, 5% retention.
+- Mumbai Monorail O&M — Rs 279 cr (first metro O&M).
+- **WBSEDCL cancelled the 250 MW / 1000 MWh BESS order (Rs 1,563 cr)** — see Part 2.
+- Adani thermal (Mahan 2&3, Mirzapur 1, Raipur — 6,400 MW, ~Rs 3,166 cr ongoing); Kaiga nuclear civil Rs 563 cr.
+
+### 8. Top-3 sharp analyst Q&A
+1. **Mohit Kumar (ICICI):** "we guided for INR 10,000 crores order inflow. And I think there is a substantial miss." Management: shortfall "primarily attributable to the cancellation of battery energy storage system order worth of INR 1,563 crores."
+2. **Rohan Advant (Prad Capital):** flagged that the Feb-26 call said FY28 MDO could be Rs 1,800–1,900 cr but May-26 says Rs 1,250 cr — "where's the gap now?" Management conceded conservative re-projection on washery/ramp risk; Q4's Rs 226 cr MDO is "not the sustainable monthly run rate."
+3. **Tushar Khandelwal (Nexus):** "I see a lot of challenges in the MDO segment... what is the underlying change... from which we are seeming this confident?" Management: O&M high-margin focus + EPC ramp + MDO production ramp underpin the 21% FY27 growth claim.
+
+### 9. Key takeaway (2 sentences)
+Power Mech delivered a record FY26 (revenue Rs 6,107 cr, PAT Rs 412 cr) with materially improved cash flow (OCF Rs 430 cr) and net debt down to Rs 163 cr, but for the **third consecutive year missed its headline order-inflow target** (Rs 7,210 cr vs Rs 10,000 cr), worsened by the embarrassing WBSEDCL BESS cancellation that the company had been promoting as a growth engine just one quarter earlier. Execution and balance-sheet discipline are genuinely good; the chronic gap is between management's forward "opportunity-size" rhetoric (Rs 60,000–1,40,000 cr "tracked") and what actually converts.
+
+---
+
+## PART 2 — Walk-the-Talk Credibility Scorecard
+
+Each promise is traced from its first statement to the later-quarter outcome. Score: **+1 = beat/delivered, 0 = partial/mixed, -1 = missed.**
+
+| # | Promise (quarter made + verbatim quote) | What actually happened (later quarter + number) | Score |
+|---|---|---|---|
+| 1 | **FY25 revenue growth 30–35%.** Q3 FY24 / Feb-24: "FY '25, we should be able to achieve 30% to 35% year-on-year growth." (Reiterated Q4 FY24 / May-24 as "30%", target ~Rs 5,500 cr.) | FY25 actual revenue Rs 5,279 cr — **~25% growth**, not 30–35%. Guidance was progressively cut: 30–35% (Feb-24) → 30%/Rs 5,500cr (May-24) → 25–30% (Aug-24) → Rs 5,000–5,200cr (Feb-25). | -1 |
+| 2 | **FY25 order inflow Rs 10,000–12,000 cr.** Q4 FY24 / May-24: "we have set a target of INR12,000 crores for financial year 2024-25." (Aug-24 cut to Rs 11,000 cr; Nov-24 Rs 12,000 cr.) | FY25 actual order inflow **Rs 6,437 cr** (per May-25 call) — a ~46% miss vs the Rs 12,000 cr target. Mid-year (Feb-25) already cut to Rs 7,000–8,000 cr. | -1 |
+| 3 | **FY26 revenue Rs 6,500–7,500 cr.** Q3 FY25 / Feb-25: "earlier we have target of INR 7,500 crores for '26... we expect to reach between INR 7,000 crores to INR 7,500 crores in '26." (Cut Q4 FY25 / May-25 to "revenue target of INR6,500 crores.") | FY26 actual **Rs 6,107 cr.** Even the cut Rs 6,500 cr target was missed by ~Rs 400 cr; the original Rs 7,000–7,500 cr off by Rs 900cr–1,400cr. Re-cut to Rs 6,000–6,200 cr mid-FY26. | -1 |
+| 4 | **FY26 order inflow Rs 10,000 cr.** Q4 FY25 / May-25: "we are targeting to secure INR10,000 crores of new orders by March 26." (Reiterated every FY26 call.) | FY26 actual **Rs 7,210 cr** (May-26) — ~28% miss. Q3 FY26 / Feb-26 still claimed "progressing towards achieving INR 10,000 crore." | -1 |
+| 5 | **EBITDA margin expansion of 1–1.5% over 2–3 yrs.** Q3 FY25 / Feb-25: "projecting an increase of EBITDA margin with 1% to 1.5% over the next 3 to 4 years." (Many calls promised O&M/MDO mix lifting margins.) | FY24 12.37% → FY25 12.3% → FY26 12.3% — **margins flat-to-down for 2.5 years.** Repeated "establishment cost will normalize" never materialised. FY27 guide only +0.25–0.3%. | -1 |
+| 6 | **Tasra (SAIL) MDO ramp — 1.45–1.5 MT in FY25.** Q4 FY24 / May-24: "the target for next year is around 1.45 million to 1.5 million metric tons, which is pretty achievable." | Tasra FY25 revenue only ~Rs 84 cr (vs Rs 250 cr projected); washery offtake constraint cut volumes to ~50–60k T/month. FY26 Tasra revenue just Rs 106 cr. Persistent shortfall vs every projection. | -1 |
+| 7 | **KBP (CCL) MDO coal from Jul-24, then Q3 FY25.** Q3 FY24 / Feb-24: "coal mining will start from July '24." | KBP coal production repeatedly slipped: Jul-24 → Sep-24 → Dec-24 → Apr-25 → finally **first coal Nov-25** (Q3 FY26). ~16-month slip from original promise. | -1 |
+| 8 | **MDO peak revenue ~Rs 2,000 cr by FY28.** Q2 FY25 / Nov-24: "INR2,100 crores, sir" by FY28, "annual recurring revenue." (Repeated Feb-25, Aug-25.) | Peak Rs ~2,000–2,200 cr re-pushed to **FY29/FY30** (May-26). FY28 estimate cut from Rs 1,800–1,900 cr (Feb-26) to Rs 1,250 cr (May-26). Timeline slipped ~2 years. | -1 |
+| 9 | **Washery completion by Sep-26.** Q3 FY25 / Feb-25: "By September '26 we have to complete the washery." | Slipped to **December 2026** (Aug-25 onward; reaffirmed May-26: "By December 2026, we'll be ready with our washery"). ~3-month slip; still on a (revised) track. | 0 |
+| 10 | **Working capital / net current days to normalise on MDO stabilisation.** Q3 FY24 / Feb-24: "on stabilization of the MDO business from financial year '25 and '26 onwards, we can expect significant improvement in net working capital days." (Repeated nearly every call.) | Net current days **worsened**: 112 (FY24) → 142 (Q1FY25) → 147 → 155 → back to 128 (FY25) → 151 (Q2FY26). "Will normalise" repeated for 8+ quarters. Water receivables the recurring culprit. Only late FY26 OCF recovered. | -1 |
+| 11 | **Debt stays controlled / company "net debt-free."** Q3 FY24 / Feb-24: "we can proudly say that Power Mech is a net debt-free company." | Net debt rose to Rs 239 cr (Q1FY26) / Rs 360 cr (Q2FY26) as WC ballooned, then **recovered to Rs 163 cr by Mar-26**. D/E stayed ≤0.39x throughout. Net-debt-free claim broke, but leverage stayed modest and recovered. | 0 |
+| 12 | **FGD (Adani ~Rs 5,000–6,000 cr) will execute / "stands."** Q3 FY24 / Feb-24 & Q2 FY25 / Nov-24: "till anything has to come very firmly from the judicial side, we will take it that these things will stand." | **Rs 4,264 cr of FGD orders removed from the order book** (Q4 FY25 / May-25) as non-moving; only Udupi (~Rs 936 cr) survived. A clear de-recognition of orders management had defended for a year. | -1 |
+| 13 | **International / overseas O&M growth 30–35% CAGR.** Q2 FY25 / Nov-24: "overseas O&M growing at a rate of 30%, 35% CAGR" with "17% to 19%" margins. | Overseas revenue Rs 292 cr (FY25) → Rs 327 cr (FY26) = **~12% growth**, well short of 30–35%. ETC abroad fully exited (Bangladesh repatriation issues). O&M margins did hold up. | -1 |
+| 14 | **BESS / green energy a new growth engine (PM Green).** Q4 FY25 / May-25: "battery energy storage, the government's plan is to ramp up the capacity to 50,000 megawatts... we want to see as a developer." Q3 FY26 / Feb-26: 250 MW/1000 MWh WB BESS "a key breakthrough... overall revenue of INR 1,563 crore." | **WBSEDCL annulled the Rs 1,563 cr BESS order (Mar-26).** Management had touted BESS/PM Green as a diversification growth driver in Feb-26; one quarter later it was the single biggest cause of the FY26 order-inflow miss. Net BESS order book contribution: zero. | -1 |
+| 15 | **O&M order-book / order-inflow build (~Rs 2,000 cr/yr).** Q4 FY24 / May-24: "O&M we can say around INR2,000 crores we can keep it." | Largely delivered: O&M backlog jumped from Rs 600 cr (FY23) to Rs 2,197 cr (FY24) and O&M revenue Rs 1,109 cr (FY24) → Rs 1,746 cr (FY25), +36%. Big wins (Talwandi Rs 951 cr, Mumbai Monorail Rs 279 cr). O&M is the genuine bright spot. | +1 |
+| 16 | **Execution capacity scale-up to Rs 1,800–2,000 cr/quarter.** Q3 FY25 / Feb-25: "we can execute up to INR 1,800 crores to even we can scale up to INR 2,000 crores of revenue." | Delivered: Q4 FY26 revenue Rs 2,121 cr — the run-rate target was hit. Execution capability (manpower 32k→48k, OCF recovery) is credible. | +1 |
+| 17 | **Power-sector / BOP EPC entry.** Q2 FY25 / Nov-24 onward: management repeatedly flagged BOP "opportunity of about INR10,000 crores." | Delivered (partially): won Singareni BOP EPC Rs 2,550 cr from BHEL (FY26) — a genuine capability step-up — but the broader Rs 10,000 cr BOP basket converted only this one package; missed large NTPC BOP tenders (Nabinagar, Gadarwara) on prequalification. | 0 |
+| 18 | **Revenue conversion ~38–40% of opening order book annually.** Q4 FY24 / May-24: "execution and conversion in the range of 38% to 40% of the opening order book." | Broadly met: on ~Rs 14,387 cr opening (ex-MDO) FY26, Rs 6,107 cr revenue ≈ 42% conversion. The conversion-ratio claim has been consistently honoured. | +1 |
+
+### Aggregate score
++1 entries: 4 (#15, #16, #18, and #17 counts 0) — corrected tally below.
+
+- **+1 (delivered/beat):** #15, #16, #18 → **+3**
+- **0 (partial):** #9, #11, #17 → **0**
+- **-1 (miss):** #1, #2, #3, #4, #5, #6, #7, #8, #10, #12, #13, #14 → **-12**
+
+**Net aggregate = +3 + 0 − 12 = −9 (out of 18 tracked promises).**
+
+### Management Credibility Rating: **LOW–MEDIUM (net −9; rated LOW on guidance, MEDIUM on execution/balance sheet)**
+
+The honest verdict is **LOW** on forward guidance credibility and **MEDIUM** on operational delivery — a split personality. The aggregate −9 is dominated by a clear, repeated pattern of optimistic targets that were serially cut and missed. What rescues the company from an outright "LOW everything" is that the *delivered* items (#15, #16, #18 + recovering cash flow/debt) are exactly the things that protect downside: O&M growth, execution capacity, conversion discipline, and a balance sheet that never blew out.
+
+### Explicit patterns of optimism-without-delivery (flagged aggressively)
+1. **Revenue guidance cut every single year.** FY25: 30–35% → 25% actual. FY26: Rs 7,500 cr → Rs 6,500 cr → Rs 6,107 cr actual. The "30–35%" Feb-24 number was never close to being achieved.
+2. **Order-inflow target missed three years running.** FY24 Rs 8,759 cr vs Rs 10,000 cr target; FY25 Rs 6,437 cr vs Rs 12,000 cr; FY26 Rs 7,210 cr vs Rs 10,000 cr. Management leans on giant "opportunity-size" numbers (Rs 60k–1,40k cr "tracked") that systematically over-promise conversion.
+3. **"Working capital will normalise on MDO stabilisation" repeated for ~8 quarters** (Feb-24 through FY26) while net current days actually deteriorated; the real fix (late-FY26) came from water receivables collection, not MDO.
+4. **MDO ramp and peak-revenue timelines slipped ~1.5–2 years** on every milestone (first coal, peak capacity, washery, FY28 revenue). The MDO thesis — the core long-term margin story — has been the least reliable.
+5. **BESS over-promised then evaporated.** Touted as a growth engine in Feb-26; the WBSEDCL Rs 1,563 cr order was annulled in Mar-26, single-handedly causing the FY26 inflow miss. Management's "cautiously optimistic" framing in Feb-26 looks, in hindsight, like premature promotion.
+6. **FGD: a year of "it stands" reassurance ended in Rs 4,264 cr of orders being quietly removed** from the book — a textbook case of defending a dead order until forced to de-recognise it.
+
+---
+
+## PART 3 — Confidence-Language Audit
+
+| # | Verbatim guidance statement (call cited) | Conviction tag | Note / warning |
+|---|---|---|---|
+| 1 | "FY '25, we should be able to achieve 30% to 35% year-on-year growth." (Q3 FY24 / Feb-24) | **HIGH** ("we should be able to achieve") | HIGH-conviction language on a number that was missed badly (~25% actual). Over-confident. |
+| 2 | "we are confident of achieving revenue growth in the range of 25% to 30% for FY '25." (Q1 FY25 / Aug-24) | **MEDIUM** ("we are confident") | Already a quiet downgrade from 30–35%; even this top end (30%) was not met. |
+| 3 | "you have very high visibility on this INR5,500 crores number. Chances of disappointment are extremely low. Am I right?" — "Yes." (Q2 FY25 / Nov-24) | **HIGH** ("extremely low... Yes") | **Red flag.** Unequivocal HIGH conviction on Rs 5,500 cr; actual FY25 Rs 5,279 cr. Saying "chances of disappointment are extremely low" and then missing is the most damaging credibility item in the set. |
+| 4 | "we are targeting to secure INR10,000 crores of new orders by March 26." (Q4 FY25 / May-25) | **MEDIUM** ("targeting") | Appropriately hedged language — but reiterated as if firm through three FY26 calls; ended at Rs 7,210 cr. |
+| 5 | "INR2,100 crores, sir... annual recurring revenue for the next 25 years" [MDO peak by FY28] (Q2 FY25 / Nov-24) | **HIGH** (flat assertion, no hedge) | HIGH conviction on both the number and the FY28 timing; both later pushed to FY29/FY30 and the FY28 figure cut to Rs 1,250 cr. Material claim, over-confident language. |
+| 6 | "on stabilization of the MDO business from financial year '25 and '26 onwards, we can expect significant improvement in net working capital days." (Q3 FY24 / Feb-24, repeated) | **MEDIUM** ("we can expect") | Hedged, but repeated so many times for a result that kept worsening that the repetition itself became a warning sign. |
+| 7 | "we are cautiously optimistic about this segment [BESS]... investment of around 16% to 18% IRR we are anticipating." (Q3 FY26 / Feb-26) | **LOW–MEDIUM** ("cautiously optimistic... anticipating") | **Warning:** appropriately LOW-conviction — yet management simultaneously booked the Rs 1,563 cr BESS order into the order backlog and presented it as "a key breakthrough." Low-conviction language paired with a material order-book entry that was then cancelled. |
+| 8 | "By September '26 we have to complete the washery." (Q3 FY25 / Feb-25) | **HIGH** ("we have to complete") | HIGH conviction; slipped to December 2026. Minor slip, but illustrates the habit of stating soft milestones with hard language. |
+| 9 | "we are confident of achieving the FY 26 revenue of INR 6000, on that 20%-25% growth we can project for FY27." (Q3 FY26 / Feb-26) | **MEDIUM** ("confident... we can project") | The Rs 6,000 cr was hit (Rs 6,107 cr) — a case where the *re-cut* number was credible. Pattern: near-term, post-cut guidance is reliable; original far-dated guidance is not. |
+| 10 | "There's a clear visibility of growth till FY'30." (Q4 FY26 / May-26) | **HIGH** ("clear visibility") | **Warning:** a sweeping HIGH-conviction multi-year claim from a management team with a documented record of cutting every annual number. Treat with scepticism. |
+| 11 | "we are projecting around 21% growth" [FY27 revenue] (Q4 FY26 / May-26) | **MEDIUM** ("we are projecting") | Reasonably hedged; given the FY26 base reset, this is more defensible than past far-dated claims. Watch order inflow as the leading indicator. |
+
+**Overall language warning:** Power Mech's most material misses (#3 Rs 5,500 cr "disappointment extremely low," #5 MDO Rs 2,100 cr by FY28, #1 30–35% growth) were all delivered in **HIGH-conviction language**. Conversely, when management hedged ("targeting," "we can expect"), outcomes were also weak — so the conviction tag has had **no predictive value**; HIGH-conviction statements missed just as often as LOW. The only reliably-met guidance has been *near-term, already-downgraded* numbers.
+
+---
+
+## PART 4 — Tone shift across calls (FY24 → FY26)
+
+Across the ten calls the **headline tone stayed relentlessly bullish** — "bullish," "opportunity size," "huge investments," and ever-larger tracked-pipeline numbers (Rs 15,000 cr in Feb-24 escalating to Rs 1,30,000–1,40,000 cr by Feb-26) recur in every transcript, largely unchanged in confidence even as actual order inflow and revenue repeatedly undershot. What **did** shift was the *substance beneath the optimism*: through FY24–FY25 the narrative leaned heavily on FGD, water (JJM) and aggressive MDO ramp timelines, all of which deteriorated (FGD de-recognised, water stalled on fund delays, MDO slipped ~2 years) — so the storyline visibly **rotated toward O&M, BOP EPC and new diversifications** (nuclear, BESS, metro O&M, steel/NMDC mining) as the older drivers disappointed. By the latest calls (Feb-26 / May-26) the tone became subtly **more defensive and caveated** — the May-26 call uniquely added macro-risk language ("global macroeconomic environment continues to remain volatile... supply shortages, inflationary pressures") and openly conceded the BESS cancellation and serial order-inflow misses, while the BESS episode forced a rare admission that a touted "growth engine" had evaporated. Net: management's *confidence in tone* never dimmed, but the *credibility of the specific promises* eroded steadily, and the most recent commentary shows the first genuine notes of humility (conservative MDO re-projection, hedged FY27 numbers) after three years of cut-and-miss.
+</script>
+<script type="text/markdown" id="raw-grow"># Power Mech Projects — Growth Triggers 1-Pager
+*As of 15 Jun 2026 | CMP: ₹~2,780 | Mcap: ₹~7,840 cr | TTM P/E ~24x | Source: Screener.in + concalls/IP*
+
+## Business in one line
+India's largest power O&M services provider and a diversified E&C contractor (boiler/turbine/generator erection & commissioning, civil/EPC, and Balance-of-Plant) that has pivoted into long-life, high-margin contract mining (MDO) for coal and is scaling annuity O&M alongside a record power-capex order book.
+
+## The Growth Triggers (5-7)
+
+### Trigger 1: Two signed MDO coal-mining contracts (Tasra + KBP) ramping to peak — the structural margin/annuity engine [HIGH]
+- What: Two long-dated Mine-Developer-Operator contracts — Tasra coking coal (SAIL) ₹30,383 cr over 28 yrs and Kotre Basantpur Pachmo / KBP (CCL/Coal India) ₹9,294 cr over 25 yrs — both now operational, ramping production toward peak (KBP 5 MT by FY30, Tasra 4 MT by FY29) at structurally higher EBITDA margins than legacy contracting.
+- Evidence: "KBP mine, client is lifting the material beyond the contract capacity. INR 350 crores we are projecting for the FY27 and INR 500 crores for FY28 from KBP... Tasra... by mid of Q4 FY27 we'll start our production... INR 150 crores in FY27, and it will increase to INR 750 crores by FY28. MDO mix will be 7% in overall revenue for FY27... jump to 13% in FY28" (Q4 FY26 call). Contract values per Aug-25 IP slide 25: "Include MDO contract of Rs. 9,294 crores... Rs. 30,383 crores."
+- Quantum: MDO revenue ~₹354 cr FY26 → ~₹500 cr FY27 → ~₹1,250 cr FY28; at full capacity (FY29/30) ~₹2,100–2,200 cr/yr. Blended MDO EBITDA 15% now → ~20-21% at peak (~+1% margin/yr). Drives group EBITDA margin from 12.3% toward 14%+ by FY30.
+- Timeline: Revenue inflection FY27-FY28; peak rate capacity FY29 (Tasra/SAIL) and FY30 (KBP).
+
+### Trigger 2: Record power-capex order book & inflow guidance ramp (₹55,151 cr backlog; FY27 target ₹12,000 cr) [HIGH]
+- What: Total order backlog (incl. MDO) of ₹55,151 cr; executable book ex-MDO ₹15,899 cr (~2.5 yrs revenue). Thermal capex supercycle (Adani, NTPC, JSW, BHEL) underpins a step-up in inflow guidance from FY26's ₹7,210 cr to a ₹12,000 cr FY27 target.
+- Evidence: "the total order backlog (including MDO) as on 31st March 2026 was Rs. 55,151 crore... Excluding MDO order, the executable book stands at around INR 15,899 crores... Looking ahead to FY27, the company is targeting order inflow of around INR 12,000 crores" (Q4 FY26 call); identified opportunity pipeline "about INR 70,000 crores" with ~15% hit ratio (Q4 FY26 call).
+- Quantum: Backlog supports ~21% revenue growth guidance for FY27 (management); ₹6,062 cr FY26 → ~₹7,300 cr+ FY27. Power-sector item-rate + BOP opportunity pool sized at "plus INR 60,000 crore."
+- Timeline: FY27-FY30 ("clear visibility of growth till FY30").
+
+### Trigger 3: Entry into Balance-of-Plant (BOP) EPC — scope/margin up-shift [HIGH]
+- What: First integrated BOP EPC win — 1×800 MW Singareni STPP from BHEL (~₹2,550 cr), moving Power Mech up the value chain from execution sub-packages to integrated EPC delivery, with ~40% in-house value-add leveraging existing civil/mechanical/commissioning strengths.
+- Evidence: "the award of a large BOP EPC package for the 800-megawatt Singareni Thermal project from BHEL. This project marks an important milestone in expanding our capabilities from the execution packages to integrated EPC delivery" (Q4 FY26 call). Breakup (Q3 FY26 call): "mechanical is INR 1,550 crore, civil is about INR 720 crore, electrical is INR 280 crore," 38-month schedule, 10% advance, 5% retention.
+- Quantum: ₹2,550 cr order; billing started Feb-26. Targeting 1-2 more BOP wins in FY27 from a pipeline of "two-three projects... worth INR 15,000 crores."
+- Timeline: Execution FY26-FY29; incremental BOP wins FY27.
+
+### Trigger 4: O&M expansion — largest player, annuity recurring revenue [HIGH]
+- What: India's largest power O&M provider (~20% market share, 36.25 GW under O&M/AMC, ~18,000 skilled O&M staff). New unit commissioning of 8,000-10,000 MW/yr feeds a steady stream of long-tenure, high-margin (15-16%) annuity contracts; recent wins from SJVN, Vedanta, GMDC, Hindustan Zinc.
+- Evidence: "O&M continues to be an interesting opportunity for us, and that is a margin driven... about 4,100 MW of ordering has been taken up in the O&M in the year 2025-26" (Q4 FY26 call); "add-on opportunity of about INR 1,200 crores to INR 1,500 crores, & that will be... every year added" (Q3 FY26 call). Active discussions: BALCO ~₹1,500 cr, Butibori ~₹700 cr.
+- Quantum: O&M EBITDA 15-16% (vs <10% for construction); ~₹1,200-1,500 cr incremental O&M opportunity per year; O&M backlog ~₹2,500 cr.
+- Timeline: Recurring FY27 onward.
+
+### Trigger 5: FGD / emission-norm erection orders [OPTIONALITY]
+- What: FGD/SCR emission-equipment erection was once a large pipeline, but regulatory deferral collapsed it — Power Mech already reclassified ₹4,264 cr of FGD orders out of the book as non-moving; only ~₹936 cr (Udupi) remains active. A re-acceleration would be upside but management is not banking on it.
+- Evidence: "we have reclassified nonmoving category to the extent of INR 4,264 crores worth of FGD packages, and we removed it from the order book" (Q1 FY26 call); "Investment is going to come down with the recent Supreme Court order" (Q1 FY26 call); "Only INR 936 crore of Udupi project only running in the FGD" (Q3 FY26 call).
+- Quantum: ~₹936 cr live; up to ~₹4,000+ cr latent if norms are re-enforced (not in guidance).
+- Timeline: Indeterminate — policy dependent.
+
+### Trigger 6: Metro / urban-mobility O&M + new EPC verticals (mine-handling, steel, nuclear, railways) [MEDIUM]
+- What: New O&M vertical — entered metro O&M via Mumbai Monorail/Light Metro (₹279 cr), opening a large outsourcing pool as metro route-km doubles (1,095 → 2,000 km). Plus adjacent EPC optionality: NMDC mine-handling EPC (₹8,000-10,000 cr pipeline with Thyssenkrupp), steel-plant works, nuclear civil (₹563 cr Kaiga 2×700 MW), and railway electrification+signalling packages.
+- Evidence: "a major breakthrough has been in entering into O&M business in the Metro sector, INR 279 crores... it can be a huge opportunity... for the changeover from the present system... to outsourcing by the metro companies" (Q4 FY26 call); NMDC: "Couple of projects... worth about INR 8,000 crores to INR 10,000 crores" (Q4 FY26 call).
+- Quantum: Metro O&M ₹279 cr won (L1 on Bangalore Metro + Monorail per Q4 call); NMDC EPC ₹8,000-10,000 cr pipeline (bidding stage, not won).
+- Timeline: Metro O&M FY27; EPC adjacencies FY27-FY28 (bid-dependent).
+
+### Trigger 7: Green energy / BESS via PM Green [OPTIONALITY]
+- What: Standalone utility-scale battery storage was positioned as a future growth engine via 100% subsidiary PM Green, but the flagship win was annulled — WBSEDCL cancelled the 250 MW/1,000 MWh BESS Letter of Award in Mar-26, cutting the order book by ₹1,563 cr and causing the FY26 inflow miss (₹7,210 cr vs ₹10,000 cr target). Treat as optionality only.
+- Evidence: "the unexpected cancellation of the BESS order of Rs. 1,563 crore by WBSEDCL... total order inflow of Rs. 7,210 crore and was lower than expectations" (May-26 IP commentary); "there was an issue with the West Bengal Electricity Board and then it had to be cancelled. Otherwise, our numbers would have been much better" (Q4 FY26 call). Re-tender possible: "they will again be recalling the tender... this year, we may look at that order" (Q4 FY26 call).
+- Quantum: ₹1,563 cr cancelled (₹103 cr/yr × 15 yrs, ~₹800 cr capex, 16-18% IRR target). Zero committed today; small 16 MW Bihar solar is the only live green asset.
+- Timeline: Uncertain — depends on WBSEDCL re-tender.
+
+## Trigger Scoreboard
+| # | Trigger | Conviction | Quantum (₹ cr) | Timeline | Status |
+|---|---------|-----------|----------------|----------|--------|
+| 1 | MDO mining ramp (Tasra + KBP) | HIGH | ₹39,677 cr lifetime; rev ₹500→₹1,250→~₹2,100/yr | FY27-FY30 | Both contracts signed & operational; KBP producing, Tasra washery ~Dec-26 |
+| 2 | Record order book & inflow guidance | HIGH | ₹55,151 cr backlog; FY27 inflow target ₹12,000 cr | FY27-FY30 | Backlog confirmed; ~21% rev growth guided |
+| 3 | BOP EPC entry (Singareni/BHEL) | HIGH | ₹2,550 cr won; ₹15,000 cr bid pipeline | FY26-FY29 | Order signed, billing started Feb-26 |
+| 4 | O&M expansion (annuity) | HIGH | ₹1,200-1,500 cr/yr add-on; 15-16% margin | FY27+ | Largest player; ongoing wins (SJVN, Vedanta) |
+| 5 | FGD / emission-norm orders | OPTIONALITY | ~₹936 cr live; ~₹4,000+ cr latent | Policy-dependent | ₹4,264 cr reclassified out; deferred by SC order |
+| 6 | Metro O&M + EPC adjacencies | MEDIUM | ₹279 cr won; ₹8,000-10,000 cr NMDC pipeline | FY27-FY28 | Metro O&M won; NMDC at bid stage |
+| 7 | Green / BESS (PM Green) | OPTIONALITY | ₹1,563 cr cancelled; ₹0 committed | Uncertain | WBSEDCL LoA annulled Mar-26; re-tender possible |
+
+## What can break the thesis (top 3 risks)
+1. **MDO execution/ramp risk:** Revenue and margin uplift hinge on production ramp at Tasra (washery commissioning Dec-26, first washed coal Q4 FY27) and client offtake at KBP. Any washery delay, monsoon disruption, or slower-than-guided offtake pushes the margin inflection right (guidance already cut from ~₹1,800-1,900 cr FY28 in Feb-26 to ₹1,250 cr in May-26).
+2. **Order-inflow / thermal-capex concentration:** FY26 inflow missed (₹7,210 cr vs ₹10,000 cr target) and the ₹12,000 cr FY27 goal leans heavily on Adani, BHEL, JSW thermal ordering and a ~15% hit ratio on a ₹70,000 cr pipeline; BHEL's changed packaging philosophy and price competition could compress wins and margins.
+3. **Working-capital / receivable & low core margins:** Core construction EBITDA is <8-10%; the Water (JJM/UP) division is stalled on fund/certification delays (~₹700-900 cr stuck, ₹90 cr receivable + ₹128 cr uncertified), and a contractor-labour business carries chronic WC and labour-code cost pressure. New-vertical setbacks (BESS cancellation) show optionality can reverse.
+
+## Verdict
+The investment case stands on four HIGH-conviction, signed/contracted triggers — the two long-life MDO mining contracts (₹39,677 cr lifetime, now operational and ramping), a record ₹55,151 cr order book with credible ~21% revenue and ₹12,000 cr inflow guidance, the new BOP EPC vertical (₹2,550 cr BHEL order already billing), and a market-leading annuity O&M franchise. These alone justify the thesis and drive the margin mix from ~12.3% toward 14%+ by FY30 without needing the optional legs. FGD re-acceleration and BESS/green are pure upside — the latter notably impaired after WBSEDCL annulled the ₹1,563 cr BESS award in Mar-26 — and metro O&M/EPC adjacencies (MEDIUM) add a real but bid-dependent second growth wave.
+</script>
+<script>
+const D = {"fin": {"cols": ["FY23", "FY24", "FY25", "TTM"], "rows": [["Sales", "3,601", "4,207", "5,234", "5,804"], ["Operating Profit", "395", "493", "602", "690"], ["OPM %", "11%", "12%", "12%", "12%"], ["PBT", "280", "382", "491", "552"], ["PAT", "207", "248", "348", "388"], ["EPS (₹)", "70.2", "78.5", "103.3", "107.1"], ["CFO", "182", "205", "1", "—"], ["FCF", "133", "115", "-159", "—"], ["CFO / OP", "65%", "56%", "25%", "—"], ["Borrowings", "477", "396", "735", "960 (Sep25)"], ["Debtor days", "91", "90", "102", "—"], ["ROCE", "22%", "24%", "23%", "—"]]}, "ar12": [["1. What it does", "Hyderabad E&C contractor (1999): power-plant erection (ETC of boilers/turbines/generators), BOP, civil/EPC, long-term O&M, water/metro infra, and since 2020 Mine-Developer-Operator (MDO) coal mining."], ["2. Segments (FY25 mix)", "Civil ~46% · O&M ~33% · Erection ~17% · MDO ~2% · Electrical ~1%. Strategic tilt toward annuity O&M (~₹1,746 cr, ~34% of topline)."], ["3. Geography", "Predominantly domestic; international ~4–5% (₹232 cr) across 9+ countries (Abu Dhabi, Oman, Kuwait, Nigeria, Nepal, Bhutan…)."], ["4. Customers", "Govt/PSU-heavy: NTPC, BHEL, Coal India/CCL, SAIL, DVC, NLC + private Adani, JSW, JSPL, Vedanta. Per-customer % not disclosed; concentration flagged as a risk."], ["5. Promoter / mgmt", "S. Kishore Babu (Founder, Chairman & MD, 30+ yrs). Independent directors incl. ex-BHEL CMD B.P. Rao & ex-RIL HR head V. Paranjpe. Holding 58.4% (down from 64% post-FY24 QIP). No pledge."], ["6. Capex cycle", "Stepping up for MDO: CWIP 3→11→28 cr (Sep25 72). Planned MDO infra ₹366 cr (KBP) + ₹2,393 cr (Tasra). 300+ cranes equipment base."], ["7. Working capital", "Debtor days 91→90→102. FY25 CFO collapsed to ₹1 cr on MDO WIP/advances build. Current ratio 2.04→1.80; D/E 0.21→0.33."], ["8. Debt & coverage", "Borrowings 477→396→735 cr (Sep25 960). Interest coverage healthy 5.98x. Bank guarantees ₹1,661 cr fully FD-pledge backed."], ["9. Key risks (per MD&A)", "Competition/margin pressure; govt-project payment delays; steel/cement cost volatility; mining regulatory/environmental; FX; labour; client concentration."], ["10. Related-party txns", "Intra-group MDO SPVs: Tasra civil-contracting up to ₹1,500 cr (38% of consol turnover) + KBP ₹300 cr. Arm's-length, board-approved, but large — monitor."], ["11. Auditor", "Clean unqualified opinions all 3 yrs. FY23→FY24 rotation K.S. Rao & Co → Brahmayya & Co (routine term-end change, not contentious)."], ["12. Strategy / guidance", "Execute the ~10x order book; grow high-margin annuity O&M; scale GCC/W-Africa 25–30%; explicit focus on 'working-capital optimisation'."]], "redflags": [["1", "CFO vs PAT divergence", "AMBER", "FY25 CFO ₹1 cr vs PAT ₹348 cr — but 3-yr CFO/OP 65/56/25%; MDO mine WC, not manipulation."], ["2", "Receivables vs revenue", "AMBER", "Debtor days 91→90→102; PSU-skewed. Monitor, not alarming."], ["3", "Inventory build", "GREEN", "Inventory days 11→14; no channel-stuffing signature."], ["4", "Contingent liab. vs net worth", "GREEN", "Tax claims ~₹12 cr; bank guarantees ₹1,661 cr fully FD-backed; trivial vs ₹2,160 cr net worth."], ["5", "Promoter pledging", "GREEN", "No pledge reported."], ["6", "Auditor qualifications", "GREEN", "Clean all 3 yrs; auditor change was routine rotation."], ["7", "RPT size", "AMBER", "Tasra civil RPT up to ₹1,500 cr = 38% of consol turnover; controlled SPV, board-approved."], ["8", "Goodwill / intangibles", "GREEN", "No material goodwill; growth organic."], ["9", "Equity dilution", "AMBER", "FY24 QIP diluted promoters 64→58%; FY25 1:1 bonus (cosmetic)."], ["10", "Subsidiary losses", "GREEN", "Subs small; mining SPVs near breakeven while ramping; Nigeria +₹30 cr."]], "piotroski": [["1. Positive net income", "✓"], ["2. Positive CFO", "✓"], ["3. ROA rising YoY", "✓"], ["4. CFO > Net income", "✗"], ["5. Lower leverage YoY", "✗"], ["6. Current ratio rising", "✗"], ["7. No new shares", "✗"], ["8. Op. margin rising", "✗"], ["9. Asset turnover rising", "✗"]], "piotroski_score": 3, "dupont": {"labels": ["FY23", "FY24", "FY25"], "net_margin": [5.7, 5.9, 6.6], "asset_turn": [1.18, 1.18, 1.13], "equity_mult": [2.4, 1.94, 2.14], "roe": [16.3, 13.5, 16.1]}, "quarters": ["Jun23", "Sep23", "Dec23", "Mar24", "Jun24", "Sep24", "Dec24", "Mar25", "Jun25", "Sep25", "Dec25", "Mar26"], "q_sales": [865, 932, 1108, 1302, 1007, 1035, 1338, 1853, 1293, 1238, 1420, 2121], "q_ebitda": [99, 111, 133, 150, 113, 123, 151, 214, 170, 146, 160, 237], "q_pat": [51, 51, 62, 84, 62, 70, 87, 130, 81, 78, 100, 153], "headline": [["Total revenue", "₹2,121 cr", "₹1,870 cr", "+13%", "up"], ["EBITDA", "₹237 cr", "₹233 cr", "+2%", "up"], ["EBITDA margin", "11.2%", "12.5%", "-133 bps", "down"], ["PAT", "₹153 cr", "₹130 cr", "+18%", "up"], ["FY26 revenue", "₹6,107 cr", "₹5,279 cr", "+16%", "up"], ["FY26 PAT", "₹412 cr", "₹348 cr", "+18%", "up"]], "guidance": [["\"FY25… 30% to 35% YoY growth\" (Feb-24)", "HIGH", "Missed — ~25% actual. Over-confident."], ["\"confident of 25–30% for FY25\" (Aug-24)", "MEDIUM", "Quiet downgrade; even 30% not met."], ["\"₹5,500 cr… chances of disappointment extremely low\" (Nov-24)", "HIGH", "Red flag — actual ₹5,279 cr. Most damaging item."], ["\"targeting ₹10,000 cr new orders by Mar-26\" (May-25)", "MEDIUM", "Ended ₹7,210 cr."], ["\"₹2,100 cr… MDO peak by FY28\" (Nov-24)", "HIGH", "Pushed to FY29/30; FY28 cut to ₹1,250 cr."], ["\"significant improvement in net WC days\" (Feb-24)", "MEDIUM", "Repeated 8+ qtrs while days worsened."], ["\"cautiously optimistic about BESS\" (Feb-26)", "LOW", "Booked ₹1,563 cr order then cancelled Mar-26."], ["\"By Sept-26 we have to complete the washery\" (Feb-25)", "HIGH", "Slipped to Dec-26."], ["\"confident of FY26 ₹6,000 cr\" (Feb-26)", "MEDIUM", "Hit (₹6,107 cr) — re-cut number was credible."], ["\"clear visibility of growth till FY30\" (May-26)", "HIGH", "Sweeping claim from a cut-every-year team."], ["\"projecting around 21% growth\" FY27 (May-26)", "MEDIUM", "Defensible post-reset; watch order inflow."]], "wtt": [["FY25 revenue 30–35%", "Cut to 25% actual", "-1"], ["FY25 order inflow ₹10–12k cr", "₹6,437 cr (~46% miss)", "-1"], ["FY26 revenue ₹6.5–7.5k cr", "₹6,107 cr (missed even cut target)", "-1"], ["FY26 order inflow ₹10k cr", "₹7,210 cr (~28% miss)", "-1"], ["EBITDA +1–1.5% over 3 yrs", "Flat-to-down 2.5 yrs", "-1"], ["Tasra 1.45–1.5 MT in FY25", "Only ~₹84 cr; offtake constrained", "-1"], ["KBP first coal Jul-24", "Slipped to Nov-25 (~16 mo)", "-1"], ["MDO peak ₹2,000 cr by FY28", "Re-pushed to FY29/30", "-1"], ["Washery done by Sep-26", "Slipped to Dec-26", "0"], ["WC days normalise on MDO", "Worsened for 8+ qtrs", "-1"], ["Net debt-free", "Rose to ₹360 cr, recovered to ₹163 cr", "0"], ["FGD (Adani) 'will stand'", "₹4,264 cr de-recognised May-25", "-1"], ["Overseas O&M 30–35% CAGR", "~12% growth", "-1"], ["BESS new growth engine", "WBSEDCL annulled ₹1,563 cr Mar-26", "-1"], ["O&M build ~₹2,000 cr/yr", "Delivered: backlog 600→2,197 cr", "+1"], ["Scale to ₹1,800–2,000 cr/qtr", "Delivered: Q4FY26 ₹2,121 cr", "+1"], ["Power/BOP EPC entry", "Partial: won Singareni ₹2,550 cr; missed NTPC", "0"], ["Convert 38–40% of opening book", "Met: ~42% conversion FY26", "+1"]], "wtt_counts": {"delivered": 3, "partial": 3, "missed": 12}, "wtt_net": -9, "triggers": [["1", "MDO mining ramp (Tasra + KBP)", "HIGH", "₹39,677 cr lifetime; rev ₹500→1,250→~2,100/yr", "FY27–FY30", "Signed & operational; KBP producing"], ["2", "Record order book & inflow guidance", "HIGH", "₹55,151 cr backlog; FY27 inflow target ₹12,000 cr", "FY27–FY30", "Backlog confirmed; ~21% growth guided"], ["3", "BOP EPC entry (Singareni/BHEL)", "HIGH", "₹2,550 cr won; ₹15,000 cr bid pipeline", "FY26–FY29", "Signed; billing started Feb-26"], ["4", "O&M expansion (annuity)", "HIGH", "₹1,200–1,500 cr/yr add-on; 15–16% margin", "FY27+", "Largest player; ongoing wins"], ["5", "FGD / emission-norm orders", "OPTIONALITY", "~₹936 cr live; ~₹4,000+ cr latent", "Policy-dependent", "₹4,264 cr reclassified out"], ["6", "Metro O&M + EPC adjacencies", "MEDIUM", "₹279 cr won; ₹8–10k cr NMDC pipeline", "FY27–FY28", "Metro O&M won; NMDC bidding"], ["7", "Green / BESS (PM Green)", "OPTIONALITY", "₹1,563 cr cancelled; ₹0 committed", "Uncertain", "WBSEDCL annulled Mar-26"]], "trig_chart": {"labels": ["MDO lifetime", "Order backlog", "BOP EPC", "O&M add-on/yr", "FGD live", "NMDC pipeline", "BESS (cancelled)"], "values": [39677, 55151, 2550, 1350, 936, 9000, 1563], "conv": ["HIGH", "HIGH", "HIGH", "HIGH", "OPTIONALITY", "MEDIUM", "OPTIONALITY"]}, "bearcase": ["Cash conversion broke down — FY25 CFO ₹1 cr vs ₹348 cr PAT, FCF -₹159 cr; growth funded by rising debt.", "MDO execution & funding risk — 25–28 yr capex-heavy mining ventures never operated at scale; ~₹2,760 cr planned investment.", "Govt/PSU receivable risk — debtor days at 102; heavy NTPC/Coal India/SAIL/DVC exposure.", "Structurally thin margins ~11–12% in a fragmented, competitive contracting/O&M market.", "Order-cancellation & valuation re-rating risk — ₹1,563 cr BESS cancelled; stock swung ₹1,718–3,415 in a year at ~24x P/E."], "thesis_risks": ["MDO execution/ramp risk — washery commissioning Dec-26; FY28 MDO guidance already cut ₹1,800–1,900 cr → ₹1,250 cr.", "Order-inflow / thermal-capex concentration — FY26 missed (₹7,210 vs ₹10,000 cr); ₹12,000 cr FY27 goal leans on Adani/BHEL/JSW.", "Working-capital / low core margins — core EPC EBITDA <8–10%; Water/JJM division stalled (~₹700–900 cr stuck)."]};
+const el=(t,c,h)=>{const e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e;};
+function table(container, head, rows){
+  const t=document.createElement('table');
+  if(head){const tr=document.createElement('tr');head.forEach(h=>{const th=document.createElement('th');th.innerHTML=h;tr.appendChild(th);});const thead=document.createElement('thead');thead.appendChild(tr);t.appendChild(thead);}
+  const tb=document.createElement('tbody');
+  rows.forEach(r=>{const tr=document.createElement('tr');r.forEach(c=>{const td=document.createElement('td');if(c&&c.cls)td.className=c.cls;td.innerHTML=(c&&c.h!=null)?c.h:(c==null?'':c);tr.appendChild(td);});tb.appendChild(tr);});
+  t.appendChild(tb);document.getElementById(container).appendChild(t);
+}
+// financials
+table('finTable',['Metric',...D.fin.cols], D.fin.rows.map(r=>r.map((c,i)=>i===0?c:{cls:'num',h:c})));
+// 12 point
+table('ar12Table',['Point','Finding'], D.ar12);
+// red flags
+const rfCls={GREEN:'g',AMBER:'a',RED:'r'};
+const pillCls={GREEN:'p-green',AMBER:'p-amber',RED:'p-red'};
+table('redflagTable',['#','Check','Rating','Reason'], D.redflags.map(r=>[r[0],r[1],{cls:rfCls[r[2]],h:'<span class="pill '+pillCls[r[2]]+'">'+r[2]+'</span>'},r[3]]));
+// piotroski list
+const pl=document.getElementById('pioList');
+D.piotroski.forEach(p=>{const d=el('div','',(p[1]==='✓'?'<span class="arrow-up">✓</span> ':'<span class="arrow-down">✗</span> ')+p[0]);d.style.fontSize='13px';d.style.margin='3px 0';pl.appendChild(d);});
+// headline
+const arrow=d=>d==='up'?'<span class="arrow-up">▲</span>':'<span class="arrow-down">▼</span>';
+table('headlineTable',['Metric','Latest','Prior yr','Change',''], D.headline.map(r=>[r[0],{cls:'num',h:r[1]},{cls:'num',h:r[2]},{cls:'num',h:r[3]},arrow(r[4])]));
+// guidance
+const gC={HIGH:'g',MEDIUM:'a',LOW:'r'};const gP={HIGH:'p-green',MEDIUM:'p-amber',LOW:'p-red'};
+table('guidanceTable',['Guidance statement (verbatim, call cited)','Conviction','Note'], D.guidance.map(r=>[r[0],{cls:gC[r[1]],h:'<span class="pill '+gP[r[1]]+'">'+r[1]+'</span>'},r[2]]));
+// wtt table
+const sCls=s=>s==='+1'?'g':(s==='0'?'a':'r');
+table('wttTable',['Promise','Outcome','Score'], D.wtt.map(r=>[r[0],r[1],{cls:sCls(r[2]),h:'<b>'+r[2]+'</b>'}]));
+// triggers
+const tC={HIGH:'g',MEDIUM:'a',OPTIONALITY:'gr'};const tP={HIGH:'p-green',MEDIUM:'p-amber',OPTIONALITY:'p-grey'};
+table('triggerTable',['#','Trigger','Conviction','Quantum (₹ cr)','Timeline','Status'], D.triggers.map(r=>[r[0],r[1],{cls:tC[r[2]],h:'<span class="pill '+tP[r[2]]+'">'+r[2]+'</span>'},r[3],r[4],r[5]]));
+// lists
+D.bearcase.forEach(b=>document.getElementById('bearList').appendChild(el('li',null,b)));
+D.thesis_risks.forEach(b=>document.getElementById('riskList').appendChild(el('li',null,b)));
+
+// charts
+const C={green:'#16a34a',amber:'#d97706',red:'#dc2626',grey:'#6b7280',blue:'#2563eb',slate:'#334155'};
+new Chart(document.getElementById('dupontChart'),{type:'bar',data:{labels:D.dupont.labels,datasets:[
+ {label:'Net margin %',data:D.dupont.net_margin,backgroundColor:C.green},
+ {label:'Asset turnover',data:D.dupont.asset_turn,backgroundColor:C.amber},
+ {label:'Equity multiplier',data:D.dupont.equity_mult,backgroundColor:C.slate},
+ {label:'ROE %',data:D.dupont.roe,backgroundColor:C.blue},
+]},options:{responsive:true,plugins:{legend:{position:'bottom',labels:{boxWidth:12,font:{size:11}}}},scales:{y:{beginAtZero:true}}}});
+
+new Chart(document.getElementById('qChart'),{type:'line',data:{labels:D.quarters,datasets:[
+ {label:'Revenue',data:D.q_sales,borderColor:C.blue,backgroundColor:C.blue,tension:.3},
+ {label:'EBITDA',data:D.q_ebitda,borderColor:C.amber,backgroundColor:C.amber,tension:.3},
+ {label:'PAT',data:D.q_pat,borderColor:C.green,backgroundColor:C.green,tension:.3},
+]},options:{responsive:true,plugins:{legend:{position:'bottom',labels:{boxWidth:12,font:{size:11}}}},scales:{y:{beginAtZero:true,title:{display:true,text:'₹ cr'}}}}});
+
+new Chart(document.getElementById('wttChart'),{type:'bar',data:{labels:['Delivered (+1)','Partial (0)','Missed (−1)'],datasets:[{data:[D.wtt_counts.delivered,D.wtt_counts.partial,D.wtt_counts.missed],backgroundColor:[C.green,C.amber,C.red]}]},options:{indexAxis:'y',responsive:true,plugins:{legend:{display:false},title:{display:true,text:'Net score: −9 of 18'}},scales:{x:{beginAtZero:true,ticks:{stepSize:2}}}}});
+
+const tcMap={HIGH:C.green,MEDIUM:C.amber,OPTIONALITY:C.grey};
+new Chart(document.getElementById('trigChart'),{type:'bar',data:{labels:D.trig_chart.labels,datasets:[{data:D.trig_chart.values,backgroundColor:D.trig_chart.conv.map(c=>tcMap[c])}]},options:{indexAxis:'y',responsive:true,plugins:{legend:{display:false}},scales:{x:{beginAtZero:true,title:{display:true,text:'₹ cr (mixed basis)'}}}}});
+
+// raw markdown
+marked.setOptions({breaks:false});
+document.getElementById('md-quick').innerHTML=marked.parse(document.getElementById('raw-quick').textContent);
+document.getElementById('md-walk').innerHTML=marked.parse(document.getElementById('raw-walk').textContent);
+document.getElementById('md-grow').innerHTML=marked.parse(document.getElementById('raw-grow').textContent);
+</script>
+</div></body></html>
