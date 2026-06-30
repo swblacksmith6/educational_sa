@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gravita India Ltd — Investment Report</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
+<style>
+:root{--green:#16a34a;--amber:#d97706;--red:#dc2626;--grey:#6b7280;--bg:#f9fafb;--text:#111827;--line:#e5e7eb;}
+*{box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--text);background:var(--bg);margin:0;line-height:1.5;}
+.wrap{max-width:1100px;margin:0 auto;padding:0 18px 60px;}
+header{background:#fff;border-bottom:3px solid var(--green);padding:20px 0;margin-bottom:0;}
+.hbar{max-width:1100px;margin:0 auto;padding:0 18px;display:flex;flex-wrap:wrap;align-items:center;gap:14px;justify-content:space-between;}
+h1{font-size:22px;margin:0;}
+.sub{color:var(--grey);font-size:13px;margin-top:3px;}
+.metrics{display:flex;flex-wrap:wrap;gap:18px;font-size:13px;margin-top:6px;}
+.metrics b{font-size:15px;}
+.badge{padding:7px 14px;border-radius:6px;color:#fff;font-weight:700;font-size:14px;white-space:nowrap;}
+.b-green{background:var(--green)}.b-amber{background:var(--amber)}.b-red{background:var(--red)}
+nav.tabs{display:flex;flex-wrap:wrap;gap:4px;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:10;max-width:1100px;margin:0 auto;padding:0 10px;}
+nav.tabs button{border:none;background:none;padding:13px 16px;font-size:14px;font-weight:600;color:var(--grey);cursor:pointer;border-bottom:3px solid transparent;}
+nav.tabs button.active{color:var(--text);border-bottom-color:var(--green);}
+.tab{display:none;padding-top:22px;}
+.tab.active{display:block;}
+h2{font-size:18px;border-bottom:2px solid var(--line);padding-bottom:6px;margin-top:30px;}
+h3{font-size:15px;margin:18px 0 8px;}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:10px 0;background:#fff;}
+th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top;}
+th{background:#f3f4f6;font-weight:700;}
+tbody tr:nth-child(even){background:#fcfcfd;}
+.g{background:#dcfce7;}.a{background:#fef3c7;}.r{background:#fee2e2;}.gr{background:#f3f4f6;}
+.cell-g{color:var(--green);font-weight:700}.cell-a{color:var(--amber);font-weight:700}.cell-r{color:var(--red);font-weight:700}.cell-gr{color:var(--grey);font-weight:700}
+.cards{display:flex;flex-wrap:wrap;gap:14px;margin:16px 0;}
+.card{background:#fff;border:1px solid var(--line);border-radius:8px;padding:14px 16px;flex:1;min-width:165px;}
+.card .lbl{font-size:12px;color:var(--grey);text-transform:uppercase;letter-spacing:.4px;}
+.card .val{font-size:24px;font-weight:700;margin-top:4px;}
+.callout{border-left:4px solid var(--red);background:#fff5f5;padding:12px 16px;border-radius:0 6px 6px 0;margin:14px 0;}
+.callout.green{border-left-color:var(--green);background:#f0fdf4;}
+.callout.amber{border-left-color:var(--amber);background:#fffbeb;}
+.callout ol,.callout ul{margin:6px 0;padding-left:20px;}
+.bar-track{background:#e5e7eb;border-radius:6px;height:26px;width:100%;position:relative;overflow:hidden;max-width:480px;}
+.bar-fill{background:var(--green);height:100%;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;color:#fff;font-weight:700;font-size:13px;}
+.chart-box{background:#fff;border:1px solid var(--line);border-radius:8px;padding:14px;margin:14px 0;}
+.chart-box canvas{max-height:300px;}
+.cite{color:var(--grey);font-size:11px;}
+details{background:#fff;border:1px solid var(--line);border-radius:8px;margin:12px 0;}
+summary{cursor:pointer;padding:12px 16px;font-weight:600;}
+.md{padding:6px 22px 18px;border-top:1px solid var(--line);font-size:13px;}
+.md table{font-size:12px;}
+.pill{display:inline-block;padding:2px 9px;border-radius:20px;font-size:12px;font-weight:700;color:#fff;}
+.up{color:var(--green);font-weight:700}.down{color:var(--red);font-weight:700}
+footer{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);color:var(--grey);font-size:12px;}
+.lead{font-size:14px;background:#fff;border:1px solid var(--line);border-radius:8px;padding:14px 16px;}
+</style></head>
+<body>
+<header><div class="hbar">
+ <div>
+   <h1>Gravita India Ltd <span style="color:var(--grey);font-weight:400">· NSE: GRAVITA / BSE: 533282</span></h1>
+   <div class="sub">Multi-metal recycling &amp; value-added products · Report date: 30 Jun 2026</div>
+   <div class="metrics">
+     <span>CMP <b>&#8377;1,631</b></span><span>Mcap <b>&#8377;12,045 Cr</b></span>
+     <span>TTM P/E <b>31.8x</b></span><span>P/B <b>4.9x</b></span><span>Rating <b>AA-</b></span>
+   </div>
+ </div>
+ <div class="badge b-green">VERDICT: BUY-WORTHY</div>
+</div></header>
+
+<nav class="tabs" id="tabs">
+ <button class="active" data-t="overview">Overview</button>
+ <button data-t="scan">Quick Scan</button>
+ <button data-t="concall">Concall / Walk-the-Talk</button>
+ <button data-t="triggers">Growth Triggers</button>
+ <button data-t="valuation">Valuation</button>
+ <button data-t="raw">Raw Markdown</button>
+</nav>
+
+<div class="wrap">
+
+<!-- OVERVIEW -->
+<section class="tab active" id="overview">
+ <div class="lead"><b>Business in one line:</b> India's largest organised lead recycler, now diversifying into a multi-metal (aluminium, plastic, rubber, copper, lithium) recycling and value-added-products platform riding the formalisation of India's scrap economy — net-debt-free, AA- rated, targeting 8 lakh MTPA by FY29.</div>
+
+ <div class="cards">
+   <div class="card"><div class="lbl">Verdict</div><div class="val" style="color:var(--green)">BUY-WORTHY</div><div class="cite">deep-dive next; valuation is the gate</div></div>
+   <div class="card"><div class="lbl">Piotroski F-Score</div><div class="val">~6.5<span style="font-size:14px;color:var(--grey)">/9</span></div></div>
+   <div class="card"><div class="lbl">Mgmt Credibility</div><div class="val" style="color:var(--amber)">MED-HIGH</div><div class="cite">Walk-the-Talk FY26</div></div>
+   <div class="card"><div class="lbl">Triggers</div><div class="val">2<span style="font-size:13px;color:var(--grey)"> HIGH · </span>4<span style="font-size:13px;color:var(--grey)"> MED · </span>1<span style="font-size:13px;color:var(--grey)"> OPT</span></div></div>
+ </div>
+
+ <h2>Risk / Reward (FY27E)</h2>
+ <div class="cards">
+   <div class="card" style="border-top:4px solid var(--red)"><div class="lbl">Bear</div><div class="val" style="color:var(--red)">&#8377;1,063</div><div class="cite">&minus;35%</div></div>
+   <div class="card" style="border-top:4px solid var(--amber)"><div class="lbl">Base</div><div class="val" style="color:var(--amber)">&#8377;1,884</div><div class="cite">+16%</div></div>
+   <div class="card" style="border-top:4px solid var(--green)"><div class="lbl">Bull</div><div class="val" style="color:var(--green)">&#8377;2,625</div><div class="cite">+61%</div></div>
+ </div>
+
+ <div class="chart-box"><h3 style="margin-top:0">Revenue &amp; PAT trend (&#8377; Cr)</h3><canvas id="cAnnual"></canvas></div>
+ <div class="chart-box"><h3 style="margin-top:0">Return on Invested Capital (%)</h3><canvas id="cRoic"></canvas></div>
+
+ <div class="callout green"><b>Why it clears the bar:</b> 25% revenue / 49% EBITDA / 31% PAT 5-yr CAGR (FY21-26), 24%+ ROIC, net-debt-free post FY25 QIP, AA- rated, zero-pledge promoter at 59.27%, secular formalisation tailwind (EPR, BWMR, scrappage, GST), credible Vision-2030 roadmap.</div>
+ <div class="callout amber"><b>What to watch:</b> Premium 31.8x multiple already prices much of the growth; FY26 volume grew only 5% vs the 25% aspiration; simultaneous copper/lithium/rubber/steel build-out carries execution + goodwill risk; one standing (technical) qualified-audit item.</div>
+</section>
+
+<!-- QUICK SCAN -->
+<section class="tab" id="scan">
+ <h2>12-Point Annual Report Analysis</h2>
+ <table><tbody>
+ <tr><th style="width:230px">What the company does</th><td>India's largest organised lead recycler; multi-metal recycling + value-added products. Founded 1992 by Rajat Agrawal (Jaipur).</td></tr>
+ <tr><th>Segments / mix</th><td>Lead (flagship ~70%+ volume), Aluminium, Plastic, Rubber, Turnkey, Copper (RMIL, Mar 2026), Lithium-ion. Value-added ~42% (target 45-50%).</td></tr>
+ <tr><th>Geography</th><td>Asia (India, Sri Lanka), Africa (Ghana, Senegal, Mozambique, Tanzania, Togo), Europe (Romania), Americas (Dominican Rep). 400+ customers, 37 countries.</td></tr>
+ <tr><th>Customer concentration</th><td>Low — 400+ customers; 250+ domestic across 22 states. No single-customer dependence.</td></tr>
+ <tr><th>Promoter / management</th><td><b>59.27%</b> promoter holding, fully demat, <b>zero pledge</b>. 30+ yr avg mgmt experience; 50% independent board.</td></tr>
+ <tr><th>Capex cycle</th><td>Expansion phase. ~&#8377;372 Cr capex FY26; ~&#8377;1,700 Cr through FY29. Capacity toward 8,00,000+ MTPA by FY29.</td></tr>
+ <tr><th>Working capital</th><td>Improving — higher domestic scrap, efficient inventory, back-to-back hedging. Guided 85-90 days.</td></tr>
+ <tr><th>Debt / coverage</th><td><b>Net debt-free</b> post &#8377;1,000 Cr FY25 QIP (3.5x oversubscribed). AA- (ICRA, India Ratings).</td></tr>
+ <tr><th>Key risks</th><td>Commodity (LME) + FX volatility, scrap availability, import-licence dependence, acquisition integration.</td></tr>
+ <tr><th>Related-party txns</th><td>No materially significant RPTs; AOC-2 clean.</td></tr>
+ <tr><th>Auditor</th><td>Walker Chandiok &amp; Co (Grant Thornton). <span class="cell-r">Qualified opinion</span> on FY24 SAR/treasury-share gain (&#8377;20.67 Cr comparability).</td></tr>
+ <tr><th>Strategy (Vision 2030)</th><td>20-25% volume CAGR, sustain ROIC ~25%, 30-35% profit growth, VAP 45-50%, non-lead 35-40%, diversify into copper/rubber/steel.</td></tr>
+ </tbody></table>
+
+ <h2>10-Point Forensic Red-Flag Scan</h2>
+ <table>
+ <thead><tr><th>#</th><th>Check</th><th>Rating</th><th>Note</th></tr></thead>
+ <tbody>
+ <tr><td>1</td><td>CFO vs PAT divergence</td><td class="g cell-g">GREEN</td><td>Net debt-free; CFO broadly tracks PAT</td></tr>
+ <tr><td>2</td><td>Receivables &gt; revenue growth</td><td class="g cell-g">GREEN</td><td>WC cycle improving</td></tr>
+ <tr><td>3</td><td>Inventory &gt; revenue growth</td><td class="a cell-a">AMBER</td><td>Commodity inventory; hedged back-to-back</td></tr>
+ <tr><td>4</td><td>Contingent liab. vs net worth</td><td class="g cell-g">GREEN</td><td>&#8377;155.85 Cr (~8% of NW); incl. &#8377;70.1 Cr customs matter</td></tr>
+ <tr><td>5</td><td>Promoter pledging</td><td class="g cell-g">GREEN</td><td>Zero pledge</td></tr>
+ <tr><td>6</td><td>Auditor qualifications</td><td class="r cell-r">RED</td><td>Qualified opinion — SAR/treasury (&#8377;20.67 Cr, technical)</td></tr>
+ <tr><td>7</td><td>Related-party txn size</td><td class="g cell-g">GREEN</td><td>No material RPTs</td></tr>
+ <tr><td>8</td><td>Goodwill / intangible bloat</td><td class="a cell-a">AMBER</td><td>RMIL &#8377;562 Cr + Europe tyre — watch goodwill</td></tr>
+ <tr><td>9</td><td>Frequent equity dilution</td><td class="a cell-a">AMBER</td><td>&#8377;1,000 Cr QIP FY25 (one-time, growth)</td></tr>
+ <tr><td>10</td><td>Subsidiary losses absorbed</td><td class="a cell-a">AMBER</td><td>Large overseas sub base — monitor new geos</td></tr>
+ </tbody></table>
+
+ <h2>Piotroski F-Score</h2>
+ <div class="bar-track"><div class="bar-fill" style="width:72%">~6.5 / 9</div></div>
+ <p class="cite">Positive net income, positive CFO, rising ROA, lower leverage post-QIP, higher current ratio. Docked for FY25 share issuance and moderating asset turnover during capex build.</p>
+
+ <h2>DuPont / ROE</h2>
+ <p>ROIC stepped down from ~31% (FY24) to ~24-27% (FY25-26) as the QIP-enlarged equity base and capex-in-progress dilute near-term returns. ROE = net margin (~7-8%) &times; asset turnover (moderating) &times; leverage (falling, net-debt-free) &rArr; high-teens ROE, down from low-20s pre-QIP. Thesis: volume + value-added mix re-accelerate returns toward 25%+ ROIC.</p>
+
+ <h2>Bear Case</h2>
+ <div class="callout"><ol>
+ <li><b>Premium valuation</b> — 31.8x P/E, 4.9x book for a recycler whose ROIC is <i>declining</i> (31%&rarr;24%) leaves no margin of safety.</li>
+ <li><b>Commodity + FX cyclicality</b> — earnings ride LME lead/aluminium and the rupee; hedging smooths but a spread squeeze hits fast.</li>
+ <li><b>Acquisition-led diversification risk</b> — copper, Europe tyre, lithium, steel stretch management; integration + goodwill risk.</li>
+ <li><b>Accounting/governance blemish</b> — standing qualified audit opinion at a governance-marketed company.</li>
+ <li><b>Capital intensity &amp; dilution history</b> — 8 lakh MTPA needs sustained capex; FY25 QIP shows the model can require external equity.</li>
+ </ol></div>
+</section>
+
+<!-- CONCALL -->
+<section class="tab" id="concall">
+ <h2>FY26 Headline Numbers (consolidated)</h2>
+ <table>
+ <thead><tr><th>Metric</th><th>FY26</th><th>YoY</th><th>Q4FY26</th><th>YoY</th></tr></thead>
+ <tbody>
+ <tr><td>Revenue</td><td>&#8377;4,265 Cr</td><td class="up">+10% &#9650;</td><td>&#8377;1,172.76 Cr</td><td class="up">+13% &#9650;</td></tr>
+ <tr><td>Adj. EBITDA</td><td>&#8377;452.48 Cr</td><td class="up">+12% &#9650;</td><td>&#8377;112.91 Cr</td><td class="up">+4% &#9650;</td></tr>
+ <tr><td>PAT</td><td>&#8377;378.80 Cr</td><td class="up">+21% &#9650;</td><td>&#8377;91.88 Cr</td><td class="down">&minus;3% &#9660;</td></tr>
+ <tr><td>EBITDA margin</td><td>10.6%</td><td>&mdash;</td><td>9.63%</td><td>&mdash;</td></tr>
+ <tr><td>PAT margin</td><td>8.88%</td><td>&mdash;</td><td>7.83%</td><td>&mdash;</td></tr>
+ <tr><td>Volume</td><td>56,208 MT</td><td class="up">+5%</td><td>&mdash;</td><td>&mdash;</td></tr>
+ </tbody></table>
+ <p class="cite">Lead EBITDA/ton FY26 ~&#8377;23,043; Plastic &#8377;16,043; Aluminium &#8377;12,328. Source: Q4FY26 concall, 08 May 2026.</p>
+
+ <h2>Guidance Statements (confidence-tagged)</h2>
+ <table>
+ <thead><tr><th>Statement</th><th>Conviction</th></tr></thead>
+ <tbody>
+ <tr><td>"scaling…to over 8 lakh metric per annum by FY '29"</td><td class="a cell-a">MEDIUM</td></tr>
+ <tr><td>Copper Mandvi plant "commence within the next 12 months"</td><td class="a cell-a">MEDIUM</td></tr>
+ <tr><td>"in the next three years, we are very confident" of growth</td><td class="g cell-g">MED-HIGH</td></tr>
+ <tr><td>"tax rate going forward should be 17%-18%"</td><td class="a cell-a">MEDIUM</td></tr>
+ <tr><td>Working capital "close to 85 to 90 days going forward"</td><td class="a cell-a">MEDIUM</td></tr>
+ <tr><td>"25% volume CAGR" (every call) &mdash; delivered +5% FY26</td><td class="r cell-r">WATCH</td></tr>
+ </tbody></table>
+
+ <h2>Walk-the-Talk Scorecard (Q1&rarr;Q4 FY26)</h2>
+ <table>
+ <thead><tr><th>Forward claim</th><th>Outcome</th><th>Score</th></tr></thead>
+ <tbody>
+ <tr><td>Lead EBITDA "sustainable &#8377;19-20/kg"</td><td>Delivered ~&#8377;23/kg — beat own guidance</td><td class="g cell-g">+1</td></tr>
+ <tr><td>Lithium plant commissioned by Q4FY26</td><td>Done Jan 2026</td><td class="g cell-g">+1</td></tr>
+ <tr><td>Mundra lead +80,000 MTPA by Q4FY26</td><td>Done Feb 2026 (&rarr;145,100)</td><td class="g cell-g">+1</td></tr>
+ <tr><td>RMIL copper acquisition / diversification</td><td>Closed Mar 2026, 99.44% / &#8377;560 Cr</td><td class="g cell-g">+1</td></tr>
+ <tr><td>Margin guidance held vs commodity</td><td>Spread intact</td><td class="g cell-g">+1</td></tr>
+ <tr><td>45,000t Jaipur lead in Q4FY26</td><td>Slipped to Q1FY27</td><td class="gr cell-gr">0/&minus;1</td></tr>
+ <tr><td>"7 lakh MTPA by FY28"</td><td>Reframed to 8 lakh by FY29</td><td class="gr cell-gr">0</td></tr>
+ <tr><td>Capex "~&#8377;1,200-1,225 Cr"</td><td>Revised up to &#8377;1,700 Cr (copper)</td><td class="gr cell-gr">0</td></tr>
+ <tr><td>Value-added &rarr; 50%</td><td>At 42%, progressing</td><td class="gr cell-gr">0</td></tr>
+ <tr><td><b>"25% volume CAGR" (every call)</b></td><td>FY26 volume only <b>+5%</b></td><td class="r cell-r">&minus;1</td></tr>
+ </tbody></table>
+ <div class="callout amber"><b>Credibility: MEDIUM-HIGH.</b> Conservative &amp; reliable on margins (under-promise &#8377;19-20/kg, over-deliver &#8377;23/kg) and strong on capacity/acquisition/ESG execution. The recurring gap is the 25% volume-growth narrative — repeated every call while FY26 volume grew only 5%, softened by reframing as a multi-year CAGR. Take them at their word on margins/projects; discount headline volume claims.</div>
+</section>
+
+<!-- TRIGGERS -->
+<section class="tab" id="triggers">
+ <h2>Trigger Scoreboard</h2>
+ <table>
+ <thead><tr><th>#</th><th>Trigger</th><th>Conviction</th><th>Quantum</th><th>Timeline</th><th>Status</th></tr></thead>
+ <tbody>
+ <tr><td>1</td><td>Copper (RMIL + Mandvi)</td><td class="g cell-g">HIGH</td><td>+&#8377;1,040 Cr rev; margin lift</td><td>FY27</td><td>Acquired &#10003;, plant building</td></tr>
+ <tr><td>2</td><td>Lead capacity 4.57&rarr;8 LTPA</td><td class="g cell-g">HIGH/MED</td><td>~75% volume headroom</td><td>FY27-29</td><td>Commissioning; minor slip</td></tr>
+ <tr><td>3</td><td>Value-added mix &rarr;50%</td><td class="a cell-a">MEDIUM</td><td>+250-300 bps GM</td><td>FY27-29</td><td>42% now, on track</td></tr>
+ <tr><td>4</td><td>Formalisation tailwind</td><td class="a cell-a">MEDIUM</td><td>Structural ROIC/WC</td><td>Multi-year</td><td>Playing out</td></tr>
+ <tr><td>5</td><td>Aluminium / MCX hedging</td><td class="a cell-a">MEDIUM</td><td>Segment recovery</td><td>FY27</td><td>Awaiting exchange</td></tr>
+ <tr><td>6</td><td>Rubber (Europe+Mundra)</td><td class="a cell-a">MEDIUM</td><td>New line</td><td>H1FY27</td><td>Commissioning</td></tr>
+ <tr><td>7</td><td>Lithium-ion</td><td class="gr cell-gr">OPTIONALITY</td><td>Long-dated option</td><td>FY28+</td><td>Pilot live</td></tr>
+ </tbody></table>
+
+ <h3>Top HIGH-conviction triggers</h3>
+ <div class="callout green"><b>Trigger 1 — Copper (RMIL):</b> Acquired 99.44% of Rashtriya Metal Industries (31,200 MTPA, 40% exports, ~&#8377;1,040 Cr FY26 revenue) for &#8377;560 Cr; building captive Mandvi plant (29,400 MTPA, ~&#8377;160 Cr, 12 months). Backward integration targets RMIL margin lift from ~8% toward 10%+.<br><br><b>Trigger 2 — Lead capacity ramp:</b> Mundra expanded +80,300 to 145,100 MTPA (Feb 2026); total ~4.57 lakh MTPA toward 8+ lakh by FY29 — ~75% volume headroom at ~&#8377;23,000/ton EBITDA.</div>
+
+ <h2>What can break the thesis</h2>
+ <div class="callout"><ol>
+ <li><b>Valuation reset</b> — at 31.8x P/E, any volume disappointment (FY26 +5% vs 25% aspiration) or margin compression de-rates sharply.</li>
+ <li><b>Commodity/FX cycle</b> — lead &amp; aluminium spreads and the rupee drive earnings; a sustained squeeze hits EBITDA despite hedging.</li>
+ <li><b>Diversification execution</b> — simultaneous copper/lithium/rubber/steel build-out risks integration slip, goodwill, capex overrun (already revised &#8377;1,200&rarr;&#8377;1,700 Cr).</li>
+ </ol></div>
+ <div class="callout green"><b>Verdict:</b> The two HIGH-conviction triggers (closed RMIL copper acquisition + commissioning lead-capacity ramp) justify the growth thesis on their own; lithium is pure optionality. The thesis is sound — the live question is price.</div>
+</section>
+
+<!-- VALUATION (separate tab) -->
+<section class="tab" id="valuation">
+ <div class="lead"><b>Sector:</b> Metals Recycling &amp; Value-Added Products · <b>Primary ratio:</b> P/E (cross-check EV/EBITDA) · <b>Horizon:</b> FY27E · CMP &#8377;1,631 (Screener.in/NSE, 30 Jun 2026)</div>
+
+ <div class="chart-box"><h3 style="margin-top:0">Scenario target prices vs CMP (&#8377;)</h3><canvas id="cVal"></canvas></div>
+
+ <h2>Section A — Fundamental Build (FY27E)</h2>
+ <table>
+ <thead><tr><th>Scenario</th><th>Fwd Revenue</th><th>PAT margin</th><th>Fwd PAT</th><th>Fwd EPS</th><th>Exit P/E</th><th>Target</th><th>Gap to CMP</th></tr></thead>
+ <tbody>
+ <tr class="r"><td><b>Bear</b></td><td>&#8377;5,100 Cr</td><td>7.0%</td><td>&#8377;357 Cr</td><td>&#8377;48.3</td><td>22x</td><td><b>&#8377;1,063</b></td><td class="cell-r">&minus;35%</td></tr>
+ <tr class="a"><td><b>Base</b></td><td>&#8377;5,800 Cr</td><td>8.0%</td><td>&#8377;464 Cr</td><td>&#8377;62.8</td><td>30x</td><td><b>&#8377;1,884</b></td><td class="cell-a">+16%</td></tr>
+ <tr class="g"><td><b>Bull</b></td><td>&#8377;6,300 Cr</td><td>8.8%</td><td>&#8377;554 Cr</td><td>&#8377;75.0</td><td>35x</td><td><b>&#8377;2,625</b></td><td class="cell-g">+61%</td></tr>
+ </tbody></table>
+ <div class="callout amber"><b>EV/EBITDA cross-check (Base):</b> FY27E EBITDA ~&#8377;597 Cr &times; 18x &minus; net debt &asymp; <b>&#8377;1,441/share (&minus;12%)</b>. The enterprise cross-check is <i>less</i> generous than the P/E build — a flag that the stock is already close to fully valued and the bull case leans on the premium multiple holding.</div>
+
+ <h2>Section B — Multiple Re-rating (hold Base EPS &#8377;62.8)</h2>
+ <table>
+ <thead><tr><th>Scenario</th><th>P/E</th><th>Basis</th><th>Target</th><th>Gap to CMP</th></tr></thead>
+ <tbody>
+ <tr class="r"><td>De-rate</td><td>22x</td><td>growth-scare / sector de-rate</td><td>&#8377;1,382</td><td class="cell-r">&minus;15%</td></tr>
+ <tr class="a"><td>Hold</td><td>30x</td><td>~current multiple</td><td>&#8377;1,884</td><td class="cell-a">+16%</td></tr>
+ <tr class="g"><td>Re-rate</td><td>35x</td><td>premium-band top, guidance hit</td><td>&#8377;2,198</td><td class="cell-g">+35%</td></tr>
+ </tbody></table>
+
+ <h2>Assumption Ledger — FY27E (Base)</h2>
+ <table>
+ <thead><tr><th>Driver</th><th>FY26</th><th>FY27E Base</th><th>Source / rationale</th></tr></thead>
+ <tbody>
+ <tr><td>Core volume</td><td>56,208 MT (+5%)</td><td>+12-13%</td><td>Capacity ramp; Mundra 145,100 MTPA live</td></tr>
+ <tr><td>RMIL copper (full-yr)</td><td>~1 month</td><td>+&#8377;1,040 Cr</td><td>RMIL FY26 rev &#8377;1,040 Cr (Q4FY26 concall)</td></tr>
+ <tr><td><b>Revenue</b></td><td>&#8377;4,265 Cr</td><td><b>&#8377;5,800 Cr</b></td><td>organic +13% + full-yr RMIL</td></tr>
+ <tr><td>EBITDA margin</td><td>10.6%</td><td>10.3%</td><td>RMIL (~8%) dilutes; VAP mix offsets</td></tr>
+ <tr><td>PAT margin</td><td>8.88%</td><td>~8.0%</td><td>RMIL dilution + some interest</td></tr>
+ <tr><td><b>PAT</b></td><td>&#8377;378.8 Cr</td><td><b>~&#8377;464 Cr (+22%)</b></td><td>margin &times; revenue</td></tr>
+ <tr><td>Shares (diluted)</td><td>7.39 Cr</td><td>7.39 Cr</td><td>no equity raise flagged</td></tr>
+ <tr><td><b>EPS</b></td><td>&#8377;51.3</td><td><b>&#8377;62.8</b></td><td>PAT &divide; shares</td></tr>
+ </tbody></table>
+ <p class="cite">Soft-guidance treatment: "25% volume CAGR" (MED-HIGH tag, delivered +5% FY26) used only in the Bull case, not Base.</p>
+
+ <h2>SOTP</h2>
+ <p>Limited applicability — integrated single-theme recycler. Light view: core recycling (lead/Al/plastic, ~&#8377;420 Cr EBITDA) carries the premium multiple; RMIL copper (~&#8377;82 Cr EBITDA, ~8% margin) merits a lower metals multiple until backward integration lifts returns — so the blended fair multiple sits <i>below</i> the pure-core multiple, reinforcing the Base 30x (not 35x+) exit.</p>
+
+ <h2>Scenario Scoreboard &amp; Verdict</h2>
+ <table>
+ <thead><tr><th>Scenario</th><th>Method</th><th>Target</th><th>Gap</th><th>What has to be true</th></tr></thead>
+ <tbody>
+ <tr class="r"><td>Bear</td><td>Build + de-rate 22x</td><td>&#8377;1,063</td><td class="cell-r">&minus;35%</td><td>Volume stuck ~5%, commodity/FX squeeze, margin to 7%</td></tr>
+ <tr class="a"><td>Base</td><td>Build at ~30x</td><td>&#8377;1,884</td><td class="cell-a">+16%</td><td>RMIL consolidates, +13% organic, margins hold ~8% PAT</td></tr>
+ <tr class="g"><td>Bull</td><td>Build + re-rate 35x</td><td>&#8377;2,625</td><td class="cell-g">+61%</td><td>Volume re-accelerates 20%+, VAP/copper synergies, re-rating</td></tr>
+ <tr class="gr"><td>EV/EBITDA</td><td>18x cross-check</td><td>&#8377;1,441</td><td class="cell-gr">&minus;12%</td><td>enterprise-basis fair value</td></tr>
+ </tbody></table>
+ <div class="callout"><b>Verdict.</b> Risk/reward is &minus;35% (Bear) to +61% (Bull) with a Base of +16% — a positively skewed <i>range</i> but a thin Base margin of safety. Quality is high (net-debt-free, 24%+ ROIC, AA-, real tailwind), yet at ~32x P/E the price discounts much of the near-term growth and the EV/EBITDA cross-check (&minus;12%) warns the equity multiple is doing the work. Biggest swing factor: <b>volume re-accelerating from FY26's +5% toward guided double-digits.</b> Most probable: <b>Base</b>. A patient buyer is better served accumulating toward the &#8377;1,350-1,450 zone than chasing at CMP. <i>Research only. Not investment advice.</i></div>
+</section>
+
+<!-- RAW -->
+<section class="tab" id="raw">
+ <h2>Full source markdown</h2>
+ <details><summary>Full Quick Scan markdown</summary><div class="md" id="md-scan"></div></details>
+ <details><summary>Full Concall / Walk-the-Talk markdown</summary><div class="md" id="md-concall"></div></details>
+ <details><summary>Full Growth Triggers markdown</summary><div class="md" id="md-triggers"></div></details>
+ <details><summary>Full Valuation markdown</summary><div class="md" id="md-valuation"></div></details>
+</section>
+
+<footer>
+ Generated 30 Jun 2026 · Sources: GRAVITA FY25 Annual Report, Q1-Q4 FY26 concall transcripts, Investor Presentation 07 May 2026, credit-rating letters, Screener.in/NSE (CMP). Pipeline: company-quick-scan &rarr; concall-analyzer &rarr; growth-triggers-onepager &rarr; scenario-valuation &rarr; investment-report-html.<br><br>
+ <b>Research only. Not investment advice.</b>
+</footer>
+</div>
+
+<script id="payload" type="application/json">{"annual": {"years": ["FY22", "FY23", "FY24", "FY25", "FY26"], "revenue": [2216, 2801, 3161, 3869, 4265], "pat": [139, 201, 239, 313, 378.8], "patMargin": [6.27, 7.18, 7.56, 8.09, 8.88]}, "roic": {"years": ["FY21", "FY22", "FY23", "FY24", "FY25", "FY26"], "vals": [19, 26, 30, 31, 27, 24]}, "val": {"labels": ["Bear", "CMP", "Base", "Bull"], "targets": [1063, 1631, 1884, 2625]}}</script>
+<script id="rawmd" type="application/json">{"scan": "# Gravita India Ltd \u2014 Company Quick Scan (SOIC 30-Min Deep Dive)\n\n**Ticker:** NSE: GRAVITA / BSE: 533282 | **Date:** 30 Jun 2026\n**CMP:** \u20b91,631 | **Market Cap:** \u20b912,045 Cr | **TTM P/E:** 31.8x | **P/B:** 4.9x *(Screener.in, 30 Jun 2026)*\n**Sources read:** FY25 Annual Report, Q4/FY26 Investor Presentation (07 May 2026), latest credit-rating letters\n\n---\n\n## Step 1 \u2014 Annual Report Located\nMost recent full AR: **FY2024-25** (AGM notice + AR filed 13 Aug 2025). FY26 audited results and Q4FY26 investor presentation (07 May 2026) used for the latest year. Figures cited from these primary filings.\n\n---\n\n## Step 2 \u2014 12-Point Annual Report Analysis\n\n**1. What the company does.** Gravita is India's largest organised lead recycler and a multi-metal recycling and value-added-products company. It collects scrap (lead-acid batteries, aluminium, plastic, rubber/tyres, and now copper) through a global procurement network, recycles it, and sells refined metals, alloys and value-added products. Founded 1992 by first-generation entrepreneur Rajat Agrawal (Jaipur).\n\n**2. Business segments & revenue mix.** Verticals: **Lead** (flagship, ~70%+ of volume), **Aluminium**, **Plastic**, **Rubber/tyre**, plus newer **Turnkey recycling solutions**, **Copper** (via RMIL acquisition, Mar 2026) and **Lithium-ion** (6,000 MTPA Mundra plant commissioned FY26). Value-added products are ~42-45% of mix; management targets ~45-50%. Non-lead businesses targeted at 35-40%.\n\n**3. Geography mix.** Operations across Asia (India, Sri Lanka), Africa (Ghana, Senegal, Mozambique, Tanzania, Togo), Europe (Romania), and Americas (Dominican Republic). India + overseas revenue roughly split, with India share rising as Mundra/Sarigam capacity ramps. Sells to 400+ customers across 37 countries.\n\n**4. Customer concentration.** Diversified \u2014 400+ customers, 250+ domestic across 22 states, 50+ overseas across 25 countries. No single-customer dependence disclosed. Low concentration risk.\n\n**5. Promoter / management.** Promoter holding **59.27%** (FY25), **fully demat, zero pledge**. Led by Rajat Agrawal (Chairman & MD), Yogesh Malhotra (WTD & CEO), Sunil Kansal (WTD & CFO). Avg management experience 30+ years; 50% independent board; ESG committee created.\n\n**6. Capex cycle.** Active **expansion phase**. ~\u20b9372 Cr capex in FY26; planned capex ramps to FY29 (Vision 2030). Capacity expanding from ~1.46 lakh MTPA (existing verticals, FY25) toward **8,00,000+ MTPA by FY29**. Mundra lead capacity expanded by 80,300 to 1,45,100 MTPA; Li-ion plant commissioned.\n\n**7. Working capital.** Improving cycle \u2014 driven by higher domestic scrap sourcing, efficient inventory management, and back-to-back hedging. Management repeatedly cites a shortening working-capital cycle and improving circularity.\n\n**8. Debt / interest coverage.** **Net debt-free** as of FY25 after a \u20b91,000 Cr QIP (oversubscribed 3.5x). External credit rating **AA-** (ICRA & India Ratings); subsidiary RMIL upgraded to **IVR AA/Stable** (Jun 2026). Comfortable coverage.\n\n**9. Key risks (management-disclosed).** Commodity price volatility (lead/LME), FX, scrap availability, regulatory/import-licence dependence, acquisition integration.\n\n**10. Related-party transactions.** No materially significant RPTs requiring shareholder approval; AOC-2 disclosures clean.\n\n**11. Auditor changes / qualifications.** Statutory auditor: **Walker Chandiok & Co (Grant Thornton)** \u2014 no auditor change. **However, a QUALIFIED OPINION exists** relating to the FY24 treasury-share/SAR-scheme gain (\u20b920.67 Cr that should have flowed through employee benefit expense); carried into FY25 as a comparability qualification. No impact on Other Equity. See red-flag #6.\n\n**12. Strategy / guidance (Vision 2030).** ~20-25% volume CAGR, sustain ROIC ~25%, ~30-35% profitability growth, value-added products 45-50%, non-lead 35-40%, renewable power 25-30%. Diversification into copper, rubber and steel.\n\n---\n\n## Step 3 \u2014 10-Point Forensic Red-Flag Scan\n\n| # | Check | Rating | Note |\n|---|-------|--------|------|\n| 1 | CFO vs PAT divergence | \ud83d\udfe2 GREEN | Net debt-free; healthy operating cash generation, CFO broadly tracks PAT |\n| 2 | Receivables > revenue growth | \ud83d\udfe2 GREEN | Working-capital cycle improving |\n| 3 | Inventory > revenue growth | \ud83d\udfe1 AMBER | Commodity inventory exposure; hedged back-to-back |\n| 4 | Contingent liabilities vs net worth | \ud83d\udfe2 GREEN | \u20b9155.85 Cr (FY25) vs net worth ~\u20b91,900 Cr (~8%); incl. \u20b970.1 Cr customs pre-import matter under appeal |\n| 5 | Promoter pledging | \ud83d\udfe2 GREEN | Zero pledge |\n| 6 | Auditor qualifications | \ud83d\udd34 RED | **Qualified opinion** on SAR/treasury-share gain (\u20b920.67 Cr, FY24 comparability) |\n| 7 | Related-party transaction size | \ud83d\udfe2 GREEN | No material RPTs |\n| 8 | Goodwill / intangible bloat | \ud83d\udfe1 AMBER | Acquisitions (RMIL \u20b9562 Cr, Europe tyre) \u2014 watch goodwill build-up |\n| 9 | Frequent equity dilution | \ud83d\udfe1 AMBER | \u20b91,000 Cr QIP FY25 (one-time, growth-funding, achieved net-debt-free) |\n| 10 | Subsidiary losses absorbed quietly | \ud83d\udfe1 AMBER | Large overseas subsidiary base; monitor profitability of new geographies |\n\n**Net:** One RED (an accounting-presentation qualification, non-cash, no Other-Equity impact \u2014 technical rather than a cash/fraud flag), four AMBER tied to the growth/acquisition phase. No cash-flow, pledging, or RPT concerns.\n\n---\n\n## Step 4 \u2014 Piotroski F-Score & DuPont\n\n**Piotroski F-Score: ~6-7/9** (estimate). Positive net income \u2713, positive CFO \u2713, rising ROA \u2713 (until FY25 QIP-driven base inflation), lower leverage post-QIP \u2713, higher current ratio \u2713. Points docked for FY25 share issuance (QIP) and a moderating asset turnover during the expansion build.\n\n**DuPont (ROE decomposition):**\n- ROIC has stepped down from ~31% (FY24) to ~24-27% (FY25-26) \u2014 still well above cost of capital, but the QIP-enlarged equity base and capex-in-progress dilute near-term returns.\n- ROE = Net margin (~7-8%) \u00d7 Asset turnover (moderating during capex) \u00d7 Leverage (falling, now net-debt-free) \u21d2 ROE in the high-teens, down from low-20s pre-QIP.\n- Trajectory: returns are temporarily diluted by the equity raise and capacity under construction; the Vision-2030 thesis is that volume + value-added mix re-accelerate returns back toward 25%+ ROIC.\n\n---\n\n## Step 5 \u2014 Bear Case (strongest argument against owning)\n\n1. **Premium valuation.** 31.8x TTM P/E and 4.9x book for a commodity-recycling business whose ROIC is *declining* (31%\u219224%) leaves no margin of safety if growth slips.\n2. **Commodity + FX cyclicality.** Earnings ride LME lead/aluminium prices and the rupee; hedging smooths but does not eliminate the cycle. A spread compression hits margins fast.\n3. **Acquisition-led diversification risk.** Copper (RMIL \u20b9562 Cr), Europe tyre, lithium and proposed steel stretch management across many new verticals and geographies \u2014 integration and execution risk, plus goodwill.\n4. **Accounting/governance blemish.** A standing qualified audit opinion (SAR/treasury) is a yellow flag on financial-reporting discipline at a company that markets itself on governance.\n5. **Capital intensity & dilution history.** 8 lakh MTPA by FY29 needs sustained capex; the FY25 \u20b91,000 Cr QIP shows the model can require external equity, diluting per-share compounding.\n\n---\n\n## Step 6 \u2014 Verdict\n\n### \ud83d\udfe2 BUY-WORTHY (deep-dive next) \u2014 with valuation as the gating concern\n\nGravita is a structurally advantaged, net-debt-free compounder riding a genuine formalisation-of-recycling tailwind (EPR, BWMR, vehicle scrappage, GST), with a 25% 5-yr revenue CAGR, 49% EBITDA / 31% PAT 5-yr CAGR (FY21-26, per Q4FY26 concall), 24%+ ROIC, AA- rating, zero-pledge promoter at 59%, and a credible Vision-2030 roadmap. The quality clears the bar for a full deep dive. The two things to underwrite before buying are **(a)** whether the rich 31.8x multiple already prices the growth, and **(b)** execution on the copper/lithium/steel diversification. The lone RED flag is a technical accounting-presentation qualification, not a cash or fraud signal.\n\n---\n\n## Follow-up questions for the deep dive\n- What is the normalised, post-RMIL consolidated margin and ROIC once acquisitions are fully integrated?\n- How sustainable is the value-added-product mix shift to 45-50%, and its margin uplift?\n- What capex and incremental equity will FY27-29 require, and what is the funding plan (debt vs equity)?\n- Lead-spread and FX sensitivity of EBITDA \u2014 how much is truly hedged vs. directional?\n- Resolution timeline/quantum on the \u20b970.1 Cr customs pre-import dispute and the SAR qualification.\n", "concall": "# Gravita India \u2014 Concall Analysis (Walk-the-Talk + Q4FY26 Brief)\n\n**Transcripts analysed:** Q1FY26 (Jul 2025), Q2FY26 (Nov 2025), Q3FY26 (Jan 2026), Q4FY26 (08 May 2026)\n**Management:** Yogesh Malhotra (WTD & CEO), Sunil Kansal (WTD & CFO), Naveen Sharma (ED)\n\n---\n\n## Part 1 \u2014 Q4FY26 Concall Brief (9 sections)\n\n**1. Headline numbers (consolidated, FY26 / Q4FY26).**\n- FY26 Revenue **\u20b94,265 Cr** (+10% YoY); Adjusted EBITDA **\u20b9452.48 Cr** (+12% YoY), margin 10.6%; PAT **\u20b9378.80 Cr** (+21% YoY), margin 8.88%.\n- Q4FY26 Revenue **\u20b91,172.76 Cr** (+13% YoY, +15% QoQ); Adj EBITDA **\u20b9112.91 Cr** (+4% YoY), margin 9.63%; PAT **\u20b991.88 Cr**, margin 7.83%.\n- 5-yr CAGR (FY21-26): Revenue 25%, EBITDA 49%, PAT 31%.\n\n**2. Segment performance.** FY26 total volume +5% to 56,208 MT. Lead sales +7% to 48,889 MT (capacity additions + stabilisation). Aluminium *declined* \u2014 \"inability to hedge and a selective sales strategy\"; expected to recover once MCX hedging (ADC12) goes live. EBITDA/ton FY26: Lead \u20b923,043, Plastic \u20b916,043, Aluminium \u20b912,328.\n\n**3. Demand commentary.** Industry undergoing formalisation (informal\u2192formal), tightening regulation improving domestic scrap availability and compliance-led sourcing. Healthy order book.\n\n**4. Margin drivers / pressures.** Drivers: higher value-added mix (42% of revenue), domestic scrap, operating leverage. Pressure: aluminium hedging gap; some product-mix softness in Q4 (\"EBITDA per ton came down to some extent\").\n\n**5. Capex & balance sheet.** FY26 capex \u20b9372 Cr. Total capex earmarked **\u20b91,700 Cr through FY29** (\u20b9815 Cr existing businesses, balance for lithium/copper/steel). Net-debt-free; CFO flagged \"may take limited debt.\" Steady-state tax rate guided **17-18%**.\n\n**6. Guidance (verbatim, tagged).**\n- *\"We continue to work towards our medium-term target of scaling this up to over 8 lakh metric per annum by FY '29\"* \u2014 **MEDIUM**\n- *\"Commercial operations [copper Mandvi plant] are expected to commence within the next 12 months\"* \u2014 **MEDIUM**\n- *\"overall, in the next three years, we are very confident\"* (of growth) \u2014 **MEDIUM-HIGH**\n- *\"tax rate for going forward should be in the range of 17%-18%\"* \u2014 **MEDIUM**\n- Working-capital days *\"should be close to 85 to 90 days going forward\"* \u2014 **MEDIUM**\n\n**7. New announcements.** Acquired **99.44% of Rashtriya Metal Industries Ltd (RMIL)** for \u20b9560 Cr (copper, 31,200 MTPA, 40% exports). New **copper recycling plant at Mandvi** (29,400 MTPA Phase 1, ~\u20b9160 Cr, 12 months). Li-ion 6,000 MTPA pilot commissioned (Jan 2026). Mundra lead +80,300 to 145,100 MTPA (Feb 2026). ESG rating 65 (NSC).\n\n**8. Analyst Q&A \u2014 sharpest exchanges.**\n- *Q (Emkay): Is lead capacity being rationalised given copper capex?* \u2192 *\"No, we are not changing the capacity of lead\u2026 earlier the plan was 700,000 tons but now we are taking it to 800,000 tons. The additional capacity is coming up in copper.\"*\n- *Q: Commissioning of the 45,000t lead capacity slated for Q4?* \u2192 *\"It is going to happen in this Q1 only in Jaipur\u2026 waiting for the government approvals\"* (a slip from Q4FY26).\n- *Q: RMIL margins ~8% vs Gravita ~10% \u2014 can they be raised?* \u2192 *\"in RMIL\u2026 definitely we would plan to increase this\"* via backward integration (own copper plant).\n\n**9. Key takeaway.** FY26 was a year of strong profit growth (PAT +21%) and aggressive diversification (copper, lithium) even as headline *volume* growth (+5%) badly lagged the 25% aspiration. Margins again beat the company's own conservative \u20b919-20/kg lead guidance (~\u20b923/kg actual); the story is increasingly about value-added mix and new verticals rather than raw lead tonnage.\n\n---\n\n## Part 2 \u2014 Walk-the-Talk Credibility Scorecard (Q1\u2192Q4 FY26)\n\n| Forward claim (when made) | Outcome by Q4FY26 | Score |\n|---|---|---|\n| Lead EBITDA \"sustainable \u20b919-20/kg\" (Q1) | Delivered ~\u20b923/kg consistently \u2014 **beat own guidance every quarter** | **+1** |\n| Lithium-ion plant commissioned by Q4FY26 (Q2) | Commissioned Jan 2026 \u2713 | **+1** |\n| Mundra lead +80,000 MTPA by Q4FY26 (Q3) | Done Feb 2026, to 145,100 MTPA \u2713 | **+1** |\n| RMIL copper acquisition / diversification | Closed Mar 2026, 99.44% for \u20b9560 Cr \u2713 | **+1** |\n| Margin guidance held despite commodity moves | Spread intact, margins stable-to-up | **+1** |\n| \"45,000t Jaipur lead capacity in Q4FY26\" (Q3) | Slipped to Q1FY27 (govt approvals) | **0/\u22121** |\n| Capacity \"7 lakh MTPA by FY28\" (Q1-Q3) | Reframed to \"8 lakh by FY29\" \u2014 timeline pushed (offset by added copper) | **0** |\n| Capex \"~\u20b91,200-1,225 Cr\" (Q1-Q3) | Revised up to \u20b91,700 Cr (copper-driven) | **0** |\n| Value-added products \u2192 50% | At 42% (FY26), progressing | **0** |\n| **\"25% volume CAGR\" (every quarter)** | FY26 volume only **+5%** (Q1 +12%); reframed as 3-yr target | **\u22121** |\n\n**Aggregate: ~ +3 net (mix of clear beats and notable near-term misses).**\n\n### Management Credibility Rating: **MEDIUM-HIGH**\n\n**Pattern observed:** Management is **conservative and reliable on margins** (under-promises \u20b919-20/kg, over-delivers \u20b923/kg) and **executes on capacity, acquisitions and ESG milestones**. The recurring credibility gap is the **25% volume-growth narrative**, repeated on every call while actual FY26 volume grew only 5% \u2014 softened by reframing it as a multi-year CAGR. Capex and capacity targets have also been revised upward/outward, though these are growth-driven (copper) rather than shortfalls. Net: trustworthy operators worth taking at their word on margins and project delivery, but discount the headline volume-growth claims and watch the slipping near-term capacity timelines.\n\n---\n\n## Confidence-Language Audit (FY26 calls)\n- **HIGH conviction** used appropriately for completed actions (\"we have acquired\", \"we commissioned\").\n- **MEDIUM** dominates forward guidance (\"we expect\", \"we are confident\", \"targeting\") \u2014 reasonable.\n- \u26a0\ufe0f **Watch:** The most material recurring claim (25% volume growth) sits at MEDIUM-HIGH conviction but has the weakest delivery \u2014 the classic \"repeated optimism without near-term delivery\" pattern, partially mitigated by honest acknowledgement of the single-digit prints.\n\n## What was dodged / not fully answered\n- Persistent analyst pressure to **upgrade the lead margin guidance** (peers already have) \u2014 management deflects, \"wait six more months.\"\n- Precise FY27 volume guidance \u2014 declined, deferred to \"H1 next year once India plants ramp.\"\n", "triggers": "# Gravita India \u2014 Growth Triggers 1-Pager\n*As of 30 Jun 2026 | CMP: \u20b91,631 | Mcap: \u20b912,045 Cr | Source: Screener.in*\n\n## Business in one line\nIndia's largest organised lead recycler, now diversifying into a multi-metal (aluminium, plastic, rubber, copper, lithium) recycling and value-added-products platform riding the formalisation of India's scrap economy \u2014 net-debt-free, AA- rated, targeting 8 lakh MTPA by FY29.\n\n---\n\n## The Growth Triggers\n\n### Trigger 1: Copper entry via RMIL acquisition + Mandvi plant [HIGH]\n- **What:** Acquired 99.44% of Rashtriya Metal Industries Ltd (copper/alloys, 31,200 MTPA, 40% exports) for \u20b9560 Cr; building a captive copper recycling plant at Mandvi (29,400 MTPA Phase-1).\n- **Evidence:** Q4FY26 concall (08 May 2026): *\"Gravita has entered the copper segment through the acquisition of 99.44% stake in RMIL for INR 560 crores\u2026 RMIL reported revenue of ~\u20b91,040 Cr and EBITDA of ~\u20b982 Cr for FY26.\"* Mandvi: *\"capex of INR 160 crores\u2026 commercial operations expected within the next 12 months.\"*\n- **Quantum:** RMIL adds ~\u20b91,040 Cr revenue immediately; backward integration via Mandvi targets RMIL EBITDA margin lift from ~8% toward Gravita's ~10%+.\n- **Timeline:** RMIL consolidating from FY27; Mandvi by FY27.\n\n### Trigger 2: Lead capacity ramp \u2014 4.57 \u2192 8+ lakh MTPA [HIGH on commissioned, MEDIUM on pipeline]\n- **What:** Mundra lead capacity expanded +80,300 to 145,100 MTPA (Feb 2026); total installed now ~4.57 lakh MTPA, target 8+ lakh MTPA by FY29.\n- **Evidence:** Q4FY26 concall: *\"total install capacity now at about 4.57 lakh metric ton per annum\u2026 medium-term target of scaling this up to over 8 lakh metric per annum by FY '29.\"*\n- **Quantum:** ~75% volume headroom over 3 years; at ~\u20b923,000/ton lead EBITDA, material EBITDA accretion as utilisation ramps.\n- **Timeline:** FY27-FY29 (note: 45,000t Jaipur line slipped to Q1FY27).\n\n### Trigger 3: Value-added product mix to 50% [MEDIUM]\n- **What:** Shift mix from 42% (FY26) toward 45-50% value-added (customised alloys, red lead, lead sheets, copper foils, TPO).\n- **Evidence:** Q4FY26: *\"Value-added products contributed 42%\u2026 target is a 50% contribution.\"* Q2FY26: *\"value-added products give you a 2.5% to 3% additional gross margin.\"*\n- **Quantum:** ~250-300 bps gross-margin uplift on the converted volume.\n- **Timeline:** Progressive through FY27-FY29.\n\n### Trigger 4: Formalisation of scrap economy (EPR / BWMR / scrappage / GST) [MEDIUM]\n- **What:** Regulation shifting scrap from informal to formal players \u2014 more domestic scrap availability, lower working capital, better utilisation for organised recyclers like Gravita.\n- **Evidence:** Q4FY26: *\"the industry is undergoing supply chain formalization and enhanced compliance lead sourcing.\"* IP \"Paradigm Shift\" \u2014 BWMR, EPR, Vehicle Scrappage Policy, GST.\n- **Quantum:** Structural \u2014 improves scrap cost, WC cycle (guided 85-90 days) and ROIC durability.\n- **Timeline:** Multi-year secular.\n\n### Trigger 5: Aluminium recovery on MCX ADC12 hedging [MEDIUM]\n- **What:** Aluminium volumes fell in FY26 due to inability to hedge; expected to recover once MCX ADC12 contract enables back-to-back hedging.\n- **Evidence:** Q4FY26: *\"aluminum segment witnessed a declining trend\u2026 volumes are expected to pick up once the hedging mechanism is live on MCX.\"*\n- **Quantum:** Restores a depressed segment; EBITDA/ton ~\u20b912,000-15,000.\n- **Timeline:** FY27, contingent on exchange launch.\n\n### Trigger 6: Rubber/tyre recycling (Europe + Mundra) [MEDIUM]\n- **What:** Romania tyre plant ramping; Mundra rubber project commissioning.\n- **Evidence:** Q3FY26: *\"Mundra rubber project slated for commissioning in Q1 FY '27, with revenues expected from Q2 FY '27.\"*\n- **Quantum:** New revenue line; early-stage.\n- **Timeline:** Revenue from H1FY27.\n\n### Trigger 7: Lithium-ion battery recycling [OPTIONALITY]\n- **What:** 6,000 MTPA pilot commissioned at Mundra (Jan 2026, \u20b914 Cr); scale-up as EV battery feedstock builds.\n- **Evidence:** Q4FY26: *\"commissioned a 6,000 metric ton per annum pilot lithium-ion battery recycling facility\u2026 expected to scale up gradually as operations stabilize.\"*\n- **Quantum:** Immaterial today; large long-dated EV-recycling option.\n- **Timeline:** FY28+ optionality. *Not a reason to own today.*\n\n---\n\n## Trigger Scoreboard\n\n| # | Trigger | Conviction | Quantum | Timeline | Status |\n|---|---------|------------|---------|----------|--------|\n| 1 | Copper (RMIL + Mandvi) | HIGH | +\u20b91,040 Cr rev; margin lift | FY27 | Acquired \u2713, plant building |\n| 2 | Lead capacity 4.57\u21928 LTPA | HIGH/MEDIUM | ~75% volume headroom | FY27-29 | Commissioning; minor slip |\n| 3 | Value-added mix \u219250% | MEDIUM | +250-300 bps GM | FY27-29 | 42% now, on track |\n| 4 | Formalisation tailwind | MEDIUM | Structural ROIC/WC | Multi-year | Playing out |\n| 5 | Aluminium / MCX hedging | MEDIUM | Segment recovery | FY27 | Awaiting exchange |\n| 6 | Rubber (Europe+Mundra) | MEDIUM | New line | H1FY27 | Commissioning |\n| 7 | Lithium-ion | OPTIONALITY | Long-dated option | FY28+ | Pilot live |\n\n---\n\n## What can break the thesis (top 3 risks)\n1. **Valuation reset** \u2014 at 31.8x TTM P/E, any disappointment on volume (FY26 grew only 5% vs 25% aspiration) or margin compression de-rates the stock sharply.\n2. **Commodity/FX cycle** \u2014 lead & aluminium spreads and the rupee drive earnings; a sustained spread squeeze hits EBITDA despite hedging.\n3. **Diversification execution** \u2014 simultaneous copper, lithium, rubber and steel build-out across geographies risks integration slip, goodwill, and capex overrun (capex already revised \u20b91,200\u2192\u20b91,700 Cr).\n\n---\n\n## Verdict\nThe two HIGH-conviction triggers \u2014 the closed RMIL copper acquisition and the already-commissioning lead-capacity ramp \u2014 together justify the growth thesis on their own, supported by a genuine, data-backed formalisation tailwind and a margin-accretive value-added mix shift. Lithium is pure optionality and should not anchor the case. The thesis is sound; the live question is price \u2014 at 31.8x, much of the near-term growth is already in the stock, so entry discipline (see valuation) matters more than thesis conviction here.\n", "valuation": "# Gravita India Ltd (GRAVITA) \u2014 Scenario Valuation\n*As of 30 Jun 2026 | CMP: \u20b91,631 (Screener.in / NSE, 30 Jun 2026) | Mcap: \u20b912,045 Cr | Sector: Metals Recycling & Value-Added Products | Primary ratio: P/E (cross-check: EV/EBITDA)*\n\n## Snapshot\nIndia's largest organised lead recycler diversifying into copper, lithium, rubber and aluminium. Risk/reward on FY27 estimates is **Bear \u221235% / Base +16% / Bull +61%** \u2014 a favourably skewed *range*, but the Base case offers only modest upside and an EV/EBITDA cross-check flags the stock as close to fully valued. **Entry price, not thesis, is the deciding variable.**\n\n---\n\n## 1. Anchor Facts\n\n| Item | Value | Source |\n|---|---|---|\n| CMP | \u20b91,631 | Screener.in / NSE, 30 Jun 2026 |\n| Market cap | \u20b912,045 Cr | Screener.in |\n| Shares outstanding (diluted) | ~7.39 Cr | FY25 AR (7.38 Cr post-QIP) |\n| FY26 Revenue | \u20b94,265 Cr | Q4FY26 concall (08 May 2026) |\n| FY26 Adj. EBITDA | \u20b9452.48 Cr (10.6%) | Q4FY26 concall |\n| FY26 PAT | \u20b9378.80 Cr (8.88%) | Q4FY26 concall |\n| FY26 EPS | ~\u20b951.3 | PAT \u00f7 shares |\n| Current TTM P/E | 31.8x | Screener.in |\n| Current P/B | 4.9x | Screener.in |\n| Current EV/EBITDA | ~26x | Mcap \u00f7 FY26 EBITDA (net-debt ~nil) |\n| Net debt | ~nil (net-debt-free; \"may take limited debt\") | FY25 AR / Q3FY26 concall |\n| Credit rating | AA- (ICRA, India Ratings) | IP |\n\n**Multiple framing:** The stock is a structurally high-multiple compounder (TTM P/E ~32x; it has historically traded in a premium 30-45x band). Base exit multiple set at **30x** (slight de-rate to ~current), Bear **22x** (growth-scare de-rate), Bull **35x** (guidance-hit re-rate).\n\n---\n\n## 2. Assumption Ledger \u2014 FY27E (Base column, deltas drive Bull/Bear)\n\n| Driver | FY26 actual | FY27E Base | Source / rationale | Bull / Bear sensitivity |\n|---|---|---|---|---|\n| Lead & core volume | 56,208 MT (+5%) | +12-13% | Capacity 4.57\u2192 ramp; Mundra 145,100 MTPA live (Q4FY26) | Bull: 20% (Vision-2030 path); Bear: +5% (FY26 repeat) |\n| RMIL copper (full-yr consol) | ~1 month only | +\u20b91,040 Cr | RMIL FY26 rev \u20b91,040 Cr (Q4FY26 concall) | Bull: synergy upside; Bear: integration drag |\n| **Revenue (derived)** | \u20b94,265 Cr | **\u20b95,800 Cr** | organic +13% + full-yr RMIL | Bull \u20b96,300 Cr; Bear \u20b95,100 Cr |\n| EBITDA margin | 10.6% | 10.3% | RMIL (~8%) dilutes blend; VAP mix offsets | Bull 11.0%; Bear 9.0% |\n| Value-added mix | 42% | ~44% | \"target 50%\u2026 2.5-3% extra GM\" (Q2/Q4FY26) | lever within margin |\n| PAT margin | 8.88% | ~8.0% | RMIL dilution + some interest | Bull 8.8%; Bear 7.0% |\n| **PAT (derived)** | \u20b9378.8 Cr | **~\u20b9464 Cr** (+22%) | margin \u00d7 revenue | Bull ~\u20b9554 Cr; Bear ~\u20b9357 Cr |\n| Shares (diluted) | 7.39 Cr | 7.39 Cr | no equity raise flagged (\"limited debt\") | dilution risk if QIP repeats |\n| **EPS (derived)** | \u20b951.3 | **\u20b962.8** | PAT \u00f7 shares | Bull \u20b975.0; Bear \u20b948.3 |\n| Tax rate | \u2014 | 17-18% | *\"tax rate going forward 17%-18%\"* (Q4FY26) | \u2014 |\n\n*Soft-guidance treatment: management's \"25% volume CAGR\" is tagged MEDIUM-HIGH but delivered only +5% in FY26 \u2014 so it is used only in the **Bull** case, not Base.*\n\n---\n\n## 3. Section A \u2014 Fundamental Build (Bear / Base / Bull, FY27E)\n\n| Scenario | Fwd Revenue | PAT margin | Fwd PAT | Fwd EPS | Exit P/E | Target | Gap to CMP |\n|---|---|---|---|---|---|---|---|\n| **Bear** | \u20b95,100 Cr | 7.0% | \u20b9357 Cr | \u20b948.3 | 22x | **\u20b91,063** | **\u221235%** |\n| **Base** | \u20b95,800 Cr | 8.0% | \u20b9464 Cr | \u20b962.8 | 30x | **\u20b91,884** | **+16%** |\n| **Bull** | \u20b96,300 Cr | 8.8% | \u20b9554 Cr | \u20b975.0 | 35x | **\u20b92,625** | **+61%** |\n\n**EV/EBITDA cross-check (Base):** FY27E EBITDA ~\u20b9597 Cr \u00d7 18x \u2212 net debt \u2248 **\u20b91,441/share (\u221212%)**. The cross-check is *less* generous than the P/E build \u2014 a flag that on an enterprise basis the stock is already close to fully valued. The bull P/E case relies partly on the premium multiple holding.\n\n---\n\n## 4. Section B \u2014 Multiple Re-rating (hold Base EPS \u20b962.8, vary only the multiple)\n\n| Multiple scenario | P/E | Basis | Target | Gap to CMP |\n|---|---|---|---|---|\n| De-rate | 22x | growth-scare / sector de-rate | \u20b91,382 | \u221215% |\n| Hold | 30x | ~current multiple | \u20b91,884 | +16% |\n| Re-rate | 35x | premium-band top, guidance hit | \u20b92,198 | +35% |\n\nEven holding earnings flat at the Base estimate, the entire outcome swings on the multiple \u2014 confirming this is a **multiple-sensitive premium stock**: if the market merely de-rates the same earnings to 22x, the stock falls ~15% despite +22% PAT growth.\n\n---\n\n## 5. Part Evaluation (SOTP)\n**Limited applicability** \u2014 Gravita is an integrated, single-theme recycling business; segments (lead, aluminium, plastic, copper) share procurement, logistics and customers and are best valued as one entity (Section A). A light parts view: core recycling (lead/Al/plastic, ~\u20b9420 Cr EBITDA) carries the premium multiple, while RMIL copper (~\u20b982 Cr EBITDA, ~8% margin) would fetch a lower metals multiple until backward integration lifts its returns \u2014 i.e. blended fair multiple should sit *below* the pure-core multiple, reinforcing the Base 30x (not 35x+) exit assumption.\n\n---\n\n## 6. Scenario Scoreboard & Verdict\n\n| Scenario | Method | Target | Gap | What has to be true |\n|---|---|---|---|---|\n| Bear | Build + de-rate (22x) | \u20b91,063 | **\u221235%** | Volume stuck at ~5%, commodity/FX squeeze, margin to 7%, multiple de-rates |\n| Base | Build at ~30x | \u20b91,884 | **+16%** | RMIL consolidates, +13% organic, margins hold ~8% PAT, multiple roughly held |\n| Bull | Build + re-rate (35x) | \u20b92,625 | **+61%** | Volume re-accelerates toward 20%+, VAP/copper synergies, premium re-rating |\n| EV/EBITDA cross-check | 18x EBITDA | \u20b91,441 | \u221212% | enterprise-basis fair value |\n\n**Verdict.** Risk/reward is **\u221235% (Bear) to +61% (Bull)** with a Base of **+16%** \u2014 a positively skewed *range* but a thin Base margin of safety. The business quality is high (net-debt-free, 24%+ ROIC, AA-, real tailwind), yet at ~32x TTM P/E the price already discounts much of the near-term growth, and the EV/EBITDA cross-check (\u221212%) warns that the equity multiple is doing a lot of the work. The single biggest swing factor is **volume growth re-accelerating from FY26's disappointing +5% toward the guided double-digits** \u2014 that, not margins, is what separates Bull from Bear. **Most probable: Base (modest upside).** A patient buyer is better served accumulating on de-rating toward the \u20b91,350-1,450 zone (where EV/EBITDA and Section-B de-rate converge) than chasing at CMP.\n\n*Research only. Not investment advice.*\n\n---\n\n## Sources\n- Q4 & FY26 Earnings Concall Transcript, 08 May 2026 (revenue, EBITDA, PAT, capex, RMIL, tax guidance).\n- Q1-Q3 FY26 concall transcripts (volume/margin guidance, capacity timelines).\n- Investor Presentation, 07 May 2026 (financial history, ROIC, capacity, Vision 2030, RMIL).\n- FY25 Annual Report (shares outstanding, net-debt-free, promoter holding, contingent liabilities, audit qualification).\n- Credit-rating letters (AA- / RMIL IVR AA upgrade, Jun 2026).\n- CMP / Mcap / P/E / P/B: Screener.in & NSE, 30 Jun 2026.\n"}</script>
+<script>
+const D = JSON.parse(document.getElementById('payload').textContent);
+const RAW = JSON.parse(document.getElementById('rawmd').textContent);
+// tabs
+document.querySelectorAll('nav.tabs button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('nav.tabs button').forEach(x=>x.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active');
+  document.getElementById(b.dataset.t).classList.add('active');
+  window.scrollTo(0,0);
+});
+// render raw markdown
+for(const k of ['scan','concall','triggers','valuation']){
+  document.getElementById('md-'+k).innerHTML = marked.parse(RAW[k]);
+}
+// charts
+const gridc='#eef0f2';
+new Chart(document.getElementById('cAnnual'),{type:'bar',
+ data:{labels:D.annual.years,datasets:[
+   {label:'Revenue (₹ Cr)',data:D.annual.revenue,backgroundColor:'#93c5fd',yAxisID:'y'},
+   {label:'PAT (₹ Cr)',data:D.annual.pat,type:'line',borderColor:'#16a34a',backgroundColor:'#16a34a',yAxisID:'y1',tension:.3}
+ ]},
+ options:{responsive:true,plugins:{legend:{position:'bottom'}},scales:{
+   y:{position:'left',grid:{color:gridc},title:{display:true,text:'Revenue'}},
+   y1:{position:'right',grid:{drawOnChartArea:false},title:{display:true,text:'PAT'}}}}});
+new Chart(document.getElementById('cRoic'),{type:'line',
+ data:{labels:D.roic.years,datasets:[{label:'ROIC %',data:D.roic.vals,borderColor:'#d97706',backgroundColor:'#d97706',tension:.3,fill:false}]},
+ options:{responsive:true,plugins:{legend:{display:false}},scales:{y:{grid:{color:gridc},suggestedMin:0,suggestedMax:35,ticks:{callback:v=>v+'%'}}}}});
+new Chart(document.getElementById('cVal'),{type:'bar',
+ data:{labels:D.val.labels,datasets:[{label:'₹ / share',data:D.val.targets,
+   backgroundColor:['#dc2626','#6b7280','#d97706','#16a34a']}]},
+ options:{indexAxis:'y',responsive:true,plugins:{legend:{display:false}},scales:{x:{grid:{color:gridc},title:{display:true,text:'₹ per share'}}}}});
+</script>
+</body></html>
